@@ -51,7 +51,7 @@ export const Table = compose(
 const col = (idx, key, obj, children) => {
   if (!is(Array, children))
     children = children ? [children] : [];
-  const c = find(x => x.key === key, children) || { props: {} };
+  const c = find(x => x.key === key, children) || find(x => isNil(x.key), children) || { props: {} };
   const p = c.props;
 
   let v = obj[key];

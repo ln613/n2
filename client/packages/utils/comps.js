@@ -99,6 +99,8 @@ var col = function col(idx, key, obj, children) {
   if (!(0, _ramda.is)(Array, children)) children = children ? [children] : [];
   var c = (0, _ramda.find)(function (x) {
     return x.key === key;
+  }, children) || (0, _ramda.find)(function (x) {
+    return (0, _ramda.isNil)(x.key);
   }, children) || { props: {} };
   var p = c.props;
 
