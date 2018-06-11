@@ -15,8 +15,8 @@ const Team = ({ tournament, team, players, putTeam, postTeam, id }) =>
     <TextBox name="team.id" disabled />
     <TextBox name="team.name" />
     <DoubleSelect name="team.players" options={players} buttonStyle="ui button" />
-    {/* <div>Substitutes:</div>
-    {(team.players || []).map((p, i) => <CheckBox name="team.subs" index={i} label={getNameById(p.id)(players)} />)} */}
+    <div>Substitutes:</div>
+    {(team.players || []).map((p, i) => <CheckBox name={`team.players[${i}].isSub`} index={i} label={getNameById(p.id)(players)} />)}
     <hr />
     <Button primary onClick={() => id[0] != '+' ? putTeam(toTeam(team, players), { id1: tournament.id, id: team.id }) : postTeam(toTeam(team, players), { id1: tournament.id })}>Save</Button>
   </div>
@@ -33,5 +33,5 @@ export default compose(
 const toTeam = (t, ps) => ({
   id: t.id,
   name: t.name,
-  players: (t.players || []).map((p, i) => is(Object, p) ? p : {id: +p, rating: getPropById('rating')(+p)(ps) }) //, isSub: t.subs[i] })
+  players: (t.players || []).map((p, i) => is(Object, p) ? p : {id: +p, rating: getPropById('rating')(+p)(ps) })
 })
