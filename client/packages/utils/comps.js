@@ -105,14 +105,14 @@ var col = function col(idx, key, obj, children) {
   var p = c.props;
 
   var v = obj[key];
-  var cls = '';
-  if (p.center) cls += 'tac';
-  if (p.right) cls += 'tar';
+  var cls = p.class || '';
+  if (p.center) cls += ' tac';
+  if (p.right) cls += ' tar';
 
   return _react2.default.createElement(
     'td',
     { key: 'td' + (key + idx), 'class': cls },
-    p.children ? p.children(obj) : _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: v } })
+    p.children ? p.children(obj, obj[key]) : _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: v } })
   );
 };
 

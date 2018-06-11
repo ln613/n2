@@ -55,13 +55,13 @@ const col = (idx, key, obj, children) => {
   const p = c.props;
 
   let v = obj[key];
-  let cls = '';
-  if (p.center) cls += 'tac';
-  if (p.right) cls += 'tar';
+  let cls = p.class || '';
+  if (p.center) cls += ' tac';
+  if (p.right) cls += ' tar';
 
   return (
     <td key={`td${key + idx}`} class={cls}>
-      {p.children ? p.children(obj) : <div dangerouslySetInnerHTML={{ __html: v }} />}
+      {p.children ? p.children(obj, obj[key]) : <div dangerouslySetInnerHTML={{ __html: v }} />}
     </td>
   );
 }
