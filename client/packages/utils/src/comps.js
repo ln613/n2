@@ -185,6 +185,7 @@ const _DoubleSelect = ({ name, src, dst, srcTitle, dstTitle, size, buttonStyle, 
   </div>
 
 const getSelectedValue = x => is(Object, x) ? (x.value || x.id) : x;
+const joinOptions = (l, r) => innerJoin((a, b) => (r ? not : identity)(a.value == getSelectedValue(b)), options, l);
 
 export const DoubleSelect = compose(
   withForm,
@@ -192,16 +193,16 @@ export const DoubleSelect = compose(
     const [fn, n] = name.split('.');
     const f = form;
     const selectedOptions = (f && f[fn] && f[fn][n]) || [];
-    const src = innerJoin((a, b) => a.value != getSelectedValue(b), options, selectedOptions);
-    const dst = innerJoin((a, b) => a.value == getSelectedValue(b), options, selectedOptions);
-    const srcSelected = (f && f[fn] && f[fn][n + '_src']) || [];
-    const dstSelected = (f && f[fn] && f[fn][n + '_dst']) || [];
+    const src = joinOptions(selectedOptions, true);
+    const dst = joinOptions(selectedOptions);
+    const srcSelected = joinOptions(f && f[fn] && f[fn][n + '_src'] || []);
+    const dstSelected = joinOptions(f && f[fn] && f[fn][n + '_dst'] || []);
     const onAdd = () => {
-      setForm(name, dst.map(x => x.value.toString()).concat(srcSelected));
+      setForm(name, dst.concat(srcSelected));
       setForm(name + '_src', []);
     };
     const onRemove = () => {
-      setForm(name, difference(dst.map(x => x.value.toString()), dstSelected));
+      setForm(name, difference(dst, dstSelected));
       setForm(name + '_dst', []);
     };
     return { src, dst, onAdd, onRemove };

@@ -169,7 +169,7 @@ var isLose = function isLose(r) {
 var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t, ps) {
   var teams = (t.teams || []).map(function (x) {
     return _extends({}, x, { text: x.name, value: x.id, players: x.players.map(function (p) {
-        return _extends({}, (0, _.findById)(p.id)(ps), { initRating: p.rating });
+        return _extends({}, (0, _.findById)(p.id)(ps), { initRating: p.rating, isSub: p.isSub });
       }) });
   });
   var games = (t.games || []).map(function (x) {

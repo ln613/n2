@@ -99,7 +99,7 @@ const tournament = createSelector(
   _tournament,
   players,
   (t, ps) => {
-    const teams = (t.teams || []).map(x => ({ ...x, text: x.name, value: x.id, players: x.players.map(p => ({ ...findById(p.id)(ps), initRating: p.rating })) }));
+    const teams = (t.teams || []).map(x => ({ ...x, text: x.name, value: x.id, players: x.players.map(p => ({ ...findById(p.id)(ps), initRating: p.rating, isSub: p.isSub })) }));
     const games = (t.games || []).map(x => ({ ...x, player1: getPlayer(1, x, ps), player2: getPlayer(2, x, ps), result: getResult(x) }));
     const schedules = (t.schedules || []).map(s => ({
         ...s,

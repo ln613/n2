@@ -18,7 +18,7 @@ const Team = ({ tournament, team, players, putTeam, postTeam, id }) =>
     <div>Substitutes:</div>
     {(team.players || []).map((p, i) => <CheckBox name={`team.players[${i}].isSub`} index={i} label={getNameById(p.id)(players)} />)}
     <hr />
-    <Button primary onClick={() => id[0] != '+' ? putTeam(toTeam(team, players), { id1: tournament.id, id: team.id }) : postTeam(toTeam(team, players), { id1: tournament.id })}>Save</Button>
+    <Button primary onClick={() => id[0] != '+' ? putTeam(team, { id1: tournament.id, id: team.id }) : postTeam(team, { id1: tournament.id })}>Save</Button>
   </div>
 
 export default compose(
@@ -30,8 +30,8 @@ export default compose(
   withSuccess('team', () => alert('Saved'), () => alert('Error happened!'))
 )(Team)
 
-const toTeam = (t, ps) => ({
-  id: t.id,
-  name: t.name,
-  players: (t.players || []).map((p, i) => is(Object, p) ? p : {id: +p, rating: getPropById('rating')(+p)(ps) })
-})
+// const toTeam = (t, ps) => ({
+//   id: t.id,
+//   name: t.name,
+//   players: (t.players || []).map((p, i) => is(Object, p) ? p : {id: +p, rating: getPropById('rating')(+p)(ps) })
+// })
