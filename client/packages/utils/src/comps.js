@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose, withProps } from 'recompose';
 import { withRouter } from "react-router-dom";
-import { is, find, isNil, difference, innerJoin, view, lensPath } from 'ramda';
+import { is, find, isNil, difference, innerJoin, view, lensPath, not, identity } from 'ramda';
 import { toTitleCase, tap } from '.';
 import { filterSelector } from './selectors';
 import { Input, Dropdown, Checkbox } from 'semantic-ui-react';
@@ -185,7 +185,7 @@ const _DoubleSelect = ({ name, src, dst, srcTitle, dstTitle, size, buttonStyle, 
   </div>
 
 const getSelectedValue = x => is(Object, x) ? (x.value || x.id) : x;
-const joinOptions = (l, r) => innerJoin((a, b) => (r ? not : identity)(a.value == getSelectedValue(b)), options, l);
+const joinOptions = (o, l, r) => innerJoin((a, b) => (r ? not : identity)(a.value == getSelectedValue(b)), o, l);
 
 export const DoubleSelect = compose(
   withForm,
@@ -193,10 +193,10 @@ export const DoubleSelect = compose(
     const [fn, n] = name.split('.');
     const f = form;
     const selectedOptions = (f && f[fn] && f[fn][n]) || [];
-    const src = joinOptions(selectedOptions, true);
-    const dst = joinOptions(selectedOptions);
-    const srcSelected = joinOptions(f && f[fn] && f[fn][n + '_src'] || []);
-    const dstSelected = joinOptions(f && f[fn] && f[fn][n + '_dst'] || []);
+    const src = joinOptions(options, selectedOptions, true);
+    const dst = joinOptions(options, selectedOptions);
+    const srcSelected = joinOptions(options, f && f[fn] && f[fn][n + '_src'] || []);
+    const dstSelected = joinOptions(options, f && f[fn] && f[fn][n + '_dst'] || []);
     const onAdd = () => {
       setForm(name, dst.concat(srcSelected));
       setForm(name + '_src', []);

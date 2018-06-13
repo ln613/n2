@@ -330,10 +330,10 @@ var _DoubleSelect = function _DoubleSelect(_ref4) {
 var getSelectedValue = function getSelectedValue(x) {
   return (0, _ramda.is)(Object, x) ? x.value || x.id : x;
 };
-var joinOptions = function joinOptions(l, r) {
+var joinOptions = function joinOptions(o, l, r) {
   return (0, _ramda.innerJoin)(function (a, b) {
-    return (r ? not : identity)(a.value == getSelectedValue(b));
-  }, options, l);
+    return (r ? _ramda.not : _ramda.identity)(a.value == getSelectedValue(b));
+  }, o, l);
 };
 
 var DoubleSelect = exports.DoubleSelect = (0, _recompose.compose)(withForm, (0, _recompose.withProps)(function (_ref5) {
@@ -349,10 +349,10 @@ var DoubleSelect = exports.DoubleSelect = (0, _recompose.compose)(withForm, (0, 
 
   var f = form;
   var selectedOptions = f && f[fn] && f[fn][n] || [];
-  var src = joinOptions(selectedOptions, true);
-  var dst = joinOptions(selectedOptions);
-  var srcSelected = joinOptions(f && f[fn] && f[fn][n + '_src'] || []);
-  var dstSelected = joinOptions(f && f[fn] && f[fn][n + '_dst'] || []);
+  var src = joinOptions(options, selectedOptions, true);
+  var dst = joinOptions(options, selectedOptions);
+  var srcSelected = joinOptions(options, f && f[fn] && f[fn][n + '_src'] || []);
+  var dstSelected = joinOptions(options, f && f[fn] && f[fn][n + '_dst'] || []);
   var onAdd = function onAdd() {
     setForm(name, dst.concat(srcSelected));
     setForm(name + '_src', []);

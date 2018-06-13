@@ -15,6 +15,7 @@ const Team = ({ tournament, team, players, putTeam, postTeam, id }) =>
     <TextBox name="team.id" disabled />
     <TextBox name="team.name" />
     <DoubleSelect name="team.players" options={players} buttonStyle="ui button" />
+    <br />
     <div>Substitutes:</div>
     {(team.players || []).map((p, i) => <CheckBox name={`team.players[${i}].isSub`} index={i} label={getNameById(p.id)(players)} />)}
     <hr />
