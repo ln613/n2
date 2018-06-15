@@ -9,6 +9,7 @@ import Product from './Product';
 import Tournaments from './Tournaments';
 import Tournament from './Tournament';
 import Players from './Players';
+import Player from './Player';
 import Teams from './Teams';
 import Team from './Team';
 import Schedules from './Schedules';
@@ -33,6 +34,7 @@ const App = () =>
           <Route exact path='/tournaments' component={Tournaments} />
           <Route path='/tournaments/:id' component={Tournament} />
           <Route exact path='/players' component={Players} />
+          <Route path='/players/:id' component={Player} />
           <Route path='/teams/:id' component={Teams} />
           <Route path='/team/:id1/:id' component={Team} />
           <Route path='/schedules/:id' component={Schedules} />

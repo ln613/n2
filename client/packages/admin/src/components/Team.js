@@ -5,7 +5,7 @@ import { connect } from 'no-redux';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { teamSelector } from 'utils/selectors';
-import { Table, TextBox, DoubleSelect, CheckBox } from 'utils/comps';
+import { Table, TextBox, DoubleSelect, Select, CheckBox } from 'utils/comps';
 import { tap, withLoad, withEdit, withSuccess, withParams, getPropById, getNameById } from 'utils';
 
 const Team = ({ tournament, team, players, putTeam, postTeam, id }) =>
@@ -14,10 +14,15 @@ const Team = ({ tournament, team, players, putTeam, postTeam, id }) =>
     <hr />
     <TextBox name="team.id" disabled />
     <TextBox name="team.name" />
-    <DoubleSelect name="team.players" options={players} buttonStyle="ui button" />
-    <br />
-    <div>Substitutes:</div>
-    {(team.players || []).map((p, i) => <CheckBox name={`team.players[${i}].isSub`} index={i} label={getNameById(p.id)(players)} />)}
+    <br/>
+    Players:
+    {(team.players || []).map((p, i) =>
+      <div class="f">
+        <Select name={`team.players[${i}].id`} index={i} options={players} />
+        <CheckBox name={`team.players[${i}].isSub`} index={i} label="Is Substitute?" />
+      </div>
+    )}
+    {/* <DoubleSelect name="team.players" options={players} buttonStyle="ui button" /> */}
     <hr />
     <Button primary onClick={() => id[0] != '+' ? putTeam(team, { id1: tournament.id, id: team.id }) : postTeam(team, { id1: tournament.id })}>Save</Button>
   </div>
