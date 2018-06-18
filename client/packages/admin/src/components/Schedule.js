@@ -1,12 +1,12 @@
 import React from 'react';
-import { compose, withProps } from 'recompose';
-import { pick, find, is, range } from 'ramda';
+import { compose } from 'recompose';
+import { range } from 'ramda';
 import { connect } from 'no-redux';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { scheduleSelector } from 'utils/selectors';
-import { Table, TextBox, DoubleSelect, Select } from 'utils/comps';
-import { tap, withLoad, withEdit, withSuccess, withParams, getPropById } from 'utils';
+import { TextBox, Select } from 'utils/comps';
+import { withLoad, withEdit, withSuccess, withParams } from 'utils';
 import { withRouter } from "react-router-dom";
 
 const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id }) =>

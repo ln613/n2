@@ -3,7 +3,7 @@ import { compose, withProps } from 'recompose';
 import { pick } from 'ramda';
 import { connect } from 'no-redux';
 import actions from 'utils/actions';
-import { withLoad, tap, withParams, withNewId, findById } from 'utils';
+import { withLoad, withParams, withNewId, findById } from 'utils';
 import { tournamentSelector } from 'utils/selectors';
 import { Table } from 'utils/comps';
 import { withRouter } from "react-router-dom";

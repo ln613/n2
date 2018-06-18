@@ -1,12 +1,11 @@
 import React from 'react';
-import { compose, withProps } from 'recompose';
-import { pick, find, is } from 'ramda';
+import { compose } from 'recompose';
 import { connect } from 'no-redux';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { teamSelector } from 'utils/selectors';
-import { Table, TextBox, DoubleSelect, Select, CheckBox } from 'utils/comps';
-import { tap, withLoad, withEdit, withSuccess, withParams, getPropById, getNameById } from 'utils';
+import { TextBox, Select, CheckBox } from 'utils/comps';
+import { withLoad, withEdit, withSuccess, withParams } from 'utils';
 
 const Team = ({ tournament, team, players, putTeam, postTeam, id }) =>
   <div>

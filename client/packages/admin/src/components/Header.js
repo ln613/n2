@@ -1,7 +1,6 @@
 import React from 'react';
 import actions from 'utils/actions';
 import { connect } from 'no-redux';
-import { tap } from 'utils';
 
 const Header = ({ getLogout }) =>
   <div class="f jcsb">

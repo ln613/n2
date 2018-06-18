@@ -1,12 +1,12 @@
 import React from 'react';
 import { compose, withProps } from 'recompose';
-import { pick, find, is, range } from 'ramda';
+import { range } from 'ramda';
 import { connect } from 'no-redux';
-import { Button, Input } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { gameSelector } from 'utils/selectors';
-import { Table, TextBox, DoubleSelect, Select, CheckBox } from 'utils/comps';
-import { tap, withLoad, withEdit, withSuccess, withParams, getPropById, findById, getNameById } from 'utils';
+import { TextBox, Select, CheckBox } from 'utils/comps';
+import { withLoad, withEdit, withSuccess, withParams, getPropById, findById, getNameById } from 'utils';
 
 const Game = ({ tournament, game, games, schedule, match, players, putGame, postGame, id }) =>
   <div>
@@ -53,6 +53,6 @@ export default compose(
   withSuccess('game', () => alert('Saved'), () => alert('Error happened!'))
 )(Game)
 
-const gg = (g, x) => +(g && g[x] || 0);
+const gg = (g, x) => +((g && g[x]) || 0);
 
 const toGame = (g, s, m) => ({ ...g, date: s.date, t1: m.home, t2: m.away });

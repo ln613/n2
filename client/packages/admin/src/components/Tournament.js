@@ -1,12 +1,11 @@
 import React from 'react';
-import { compose, withProps } from 'recompose';
-import { pick, find } from 'ramda';
+import { compose } from 'recompose';
 import { connect } from 'no-redux';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { tourSelector } from 'utils/selectors';
-import { Table, TextBox } from 'utils/comps';
-import { tap, withLoad, withEdit, withSuccess, withParams } from 'utils';
+import { TextBox } from 'utils/comps';
+import { withEdit, withSuccess, withParams } from 'utils';
 import { withRouter } from "react-router-dom";
 
 const Tournament = ({ tournament, history, postTour, patchTour }) =>

@@ -1,12 +1,11 @@
 import React from 'react';
-import { compose, withProps } from 'recompose';
-import { pick, find } from 'ramda';
+import { compose } from 'recompose';
 import { connect } from 'no-redux';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { productsSelector } from 'utils/selectors';
-import { Table, TextBox, Select } from 'utils/comps';
-import { tap, withLoad, withEdit, cdurl, getPropById } from 'utils';
+import { TextBox, Select } from 'utils/comps';
+import { withLoad, withEdit, cdurl, getPropById } from 'utils';
 
 const Product = ({ product, putProduct, postNewProduct, lookup, cats }) =>
   <div>
@@ -21,7 +20,7 @@ const Product = ({ product, putProduct, postNewProduct, lookup, cats }) =>
     <TextBox name="product.sale" />
     <TextBox name="product.desc" fluid />
     <TextBox name="product.desc_ch" fluid />
-    <img src={cdurl(lookup, 'products', product.id)} />  
+    <img src={cdurl(lookup, 'products', product.id)} alt={product.name} />  
     <hr />
     <Button primary onClick={() => +product.id ? putProduct(product) : postNewProduct(product)}>Save</Button>
   </div>
