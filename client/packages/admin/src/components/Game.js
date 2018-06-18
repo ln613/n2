@@ -12,7 +12,7 @@ const Game = ({ tournament, game, games, schedule, match, players, putGame, post
   <div>
     <h1>Match - {tournament.name} - {schedule.date}</h1>
     <hr />
-    <TextBox name="game.id" disabled />
+    <TextBox name="game.id" disabled class="mr16"/>
     <CheckBox name="game.isDouble" label="Is Double?"/>
     <div class="f aic">
       <div>  

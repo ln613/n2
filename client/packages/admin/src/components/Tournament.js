@@ -4,7 +4,7 @@ import { connect } from 'no-redux';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { tourSelector } from 'utils/selectors';
-import { TextBox } from 'utils/comps';
+import { TextBox, CheckBox } from 'utils/comps';
 import { withEdit, withSuccess, withParams } from 'utils';
 import { withRouter } from "react-router-dom";
 
@@ -14,13 +14,17 @@ const Tournament = ({ tournament, history, postTour, patchTour }) =>
     <hr />
     {+tournament.id ?
     <div>  
-      <Button primary onClick={() => history.push(`/teams/${tournament.id}`)}>Teams</Button>
+      {tournament.isSingle
+        ? <Button primary onClick={() => history.push(`/teams/${tournament.id}`)}>Teams</Button>
+        : <Button primary onClick={() => history.push(`/teams/${tournament.id}`)}>Players</Button>
+      }
       <Button primary onClick={() => history.push(`/schedules/${tournament.id}`)}>Schedules</Button>
       <Button primary onClick={() => history.push(`/games/${tournament.id}`)}>Games</Button>
     </div>  
     : null}  
     <TextBox name="tournament.id" disabled />
     <TextBox name="tournament.name" fluid />
+    <CheckBox name="tournament.isSingle" label="Is Single?" />
     <hr />
     <Button primary onClick={() => +tournament.id ? patchTour(tournament) : postTour(tournament)}>Save</Button>
   </div>
