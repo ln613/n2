@@ -16,7 +16,7 @@ const Team = ({ tournament, team, players, putTeam, postTeam, id }) =>
     <br/>
     Players:
     {(team.players || []).map((p, i) =>
-      <div class="f">
+      <div class="f aic">
         <Select name={`team.players[${i}].id`} index={i} options={players} />
         <CheckBox name={`team.players[${i}].isSub`} index={i} label="Is Substitute?" />
       </div>
