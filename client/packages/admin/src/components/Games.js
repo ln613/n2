@@ -26,7 +26,7 @@ export default compose(
   withLoad('tournament', 'T', true),
   withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
   withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),
-  withProps(p => ({ games: p.tournament.games.filter(x => (x.schedule == p.S || x.date == p.schedule.date) && (x.match == p.M || (x.t1 == p.match.home && x.t2 == p.match.away) )) })),
+  withProps(p => ({ games: p.tournament.games.filter(x => (x.schedule === p.S || x.date === p.schedule.date) && (x.match === p.M || (x.t1 === p.match.home && x.t2 === p.match.away) )) })),
   withNewId('tournament.games'),
   withRouter
 )(Games)

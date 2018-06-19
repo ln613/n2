@@ -39,7 +39,7 @@ const Game = ({ tournament, game, games, schedule, match, players, putGame, post
       </div>  
     </div>
     <hr />
-    <Button primary onClick={() => id[0] == '+' ? postGame(toGame(game, schedule, match), { id1: tournament.id }) : putGame(game, { id1: tournament.id, id: game.id })}>Save</Button>
+    <Button primary onClick={() => id[0] === '+' ? postGame(toGame(game, schedule, match), { id1: tournament.id }) : putGame(game, { id1: tournament.id, id: game.id })}>Save</Button>
   </div>
 
 export default compose(

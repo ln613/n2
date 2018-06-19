@@ -69,7 +69,7 @@ const filteredProducts = createSelector(
 
 const players = createSelector(
   _players,
-  ps => ps.map(p => ({ ...p, name: p.firstName + ' ' + p.lastName })).map(p => ({ ...p, text: p.name, value: p.id }))
+  ps => sortWith([ascend(prop('name'))])(ps.map(p => ({ ...p, name: p.firstName + ' ' + p.lastName })).map(p => ({ ...p, text: p.name, value: p.id })))
 );
 
 const filteredPlayers = createSelector(
@@ -80,7 +80,7 @@ const filteredPlayers = createSelector(
 
 const dsPlayers = createSelector(
   filteredPlayers,
-  ps => sortWith([ascend(prop('name'))])(ps.map(p => ({ ...p, text: `${p.name} (${p.rating})`, value: p.id })))
+  ps => ps.map(p => ({ ...p, text: `${p.name} (${p.rating})` }))
 );
 
 const teams = createSelector(
@@ -229,7 +229,7 @@ export const langSelector = mapStateWithSelectors({ lang });
 export const catsSelector = mapStateWithSelectors({ cats, cat: form('cat'), lang });
 export const productsSelector = mapStateWithSelectors({ products: filteredProducts, productFilter: filter('product'), lookup, lang, product: form('product'), cats: catsDD });
 export const ratingsSelector = mapStateWithSelectors({ cats, form, lang });
-export const playersSelector = mapStateWithSelectors({ players: filteredPlayers, lookup, dsPlayers });
+export const playersSelector = mapStateWithSelectors({ players, lookup, player: form('player') });
 export const tournamentsSelector = mapStateWithSelectors({ tournaments: tournamentsWithYears, lookup });
 export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players });
 export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), tournaments });

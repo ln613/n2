@@ -23,7 +23,7 @@ const Team = ({ tournament, team, players, putTeam, postTeam, id }) =>
     )}
     {/* <DoubleSelect name="team.players" options={players} buttonStyle="ui button" /> */}
     <hr />
-    <Button primary onClick={() => id[0] != '+' ? putTeam(team, { id1: tournament.id, id: team.id }) : postTeam(team, { id1: tournament.id })}>Save</Button>
+    <Button primary onClick={() => id[0] !== '+' ? putTeam(team, { id1: tournament.id, id: team.id }) : postTeam(team, { id1: tournament.id })}>Save</Button>
   </div>
 
 export default compose(

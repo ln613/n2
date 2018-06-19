@@ -3,7 +3,7 @@ import { compose } from 'recompose';
 import { connect } from 'no-redux';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
-import { playerSelector } from 'utils/selectors';
+import { playersSelector } from 'utils/selectors';
 import { TextBox } from 'utils/comps';
 import { withEdit, withSuccess, withLoad } from 'utils';
 
@@ -21,7 +21,7 @@ const Player = ({ player, putPlayer, postPlayer }) =>
   </div>
 
 export default compose(
-  connect(playerSelector, actions),
+  connect(playersSelector, actions),
   withLoad('players'),
   withEdit('player'),
   withSuccess('player', () => alert('Saved'), () => alert('Error happened!'))

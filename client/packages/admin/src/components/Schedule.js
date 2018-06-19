@@ -26,7 +26,7 @@ const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id
       </div>
     )}
     <hr />
-    <Button primary onClick={() => id[0] == '+' ? postSchedule(schedule, { id1: tournament.id }) : putSchedule(schedule, { id1: tournament.id, id: schedule.id })}>Save</Button>
+    <Button primary onClick={() => id[0] === '+' ? postSchedule(schedule, { id1: tournament.id }) : putSchedule(schedule, { id1: tournament.id, id: schedule.id })}>Save</Button>
   </div>
 
 export default compose(

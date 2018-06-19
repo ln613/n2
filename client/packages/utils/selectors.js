@@ -118,11 +118,11 @@ var filteredProducts = (0, _noRedux.createSelector)(productsWithCat, filter('pro
 });
 
 var players = (0, _noRedux.createSelector)(_players, function (ps) {
-  return ps.map(function (p) {
+  return (0, _ramda.sortWith)([(0, _ramda.ascend)((0, _ramda.prop)('name'))])(ps.map(function (p) {
     return _extends({}, p, { name: p.firstName + ' ' + p.lastName });
   }).map(function (p) {
     return _extends({}, p, { text: p.name, value: p.id });
-  });
+  }));
 });
 
 var filteredPlayers = (0, _noRedux.createSelector)(players, form('player'), function (ps, f) {
@@ -132,9 +132,9 @@ var filteredPlayers = (0, _noRedux.createSelector)(players, form('player'), func
 });
 
 var dsPlayers = (0, _noRedux.createSelector)(filteredPlayers, function (ps) {
-  return (0, _ramda.sortWith)([(0, _ramda.ascend)((0, _ramda.prop)('name'))])(ps.map(function (p) {
-    return _extends({}, p, { text: p.name + ' (' + p.rating + ')', value: p.id });
-  }));
+  return ps.map(function (p) {
+    return _extends({}, p, { text: p.name + ' (' + p.rating + ')' });
+  });
 });
 
 var teams = (0, _noRedux.createSelector)(_tournament, function (t) {
@@ -358,7 +358,7 @@ var langSelector = exports.langSelector = (0, _noRedux.mapStateWithSelectors)({ 
 var catsSelector = exports.catsSelector = (0, _noRedux.mapStateWithSelectors)({ cats: cats, cat: form('cat'), lang: lang });
 var productsSelector = exports.productsSelector = (0, _noRedux.mapStateWithSelectors)({ products: filteredProducts, productFilter: filter('product'), lookup: lookup, lang: lang, product: form('product'), cats: catsDD });
 var ratingsSelector = exports.ratingsSelector = (0, _noRedux.mapStateWithSelectors)({ cats: cats, form: form, lang: lang });
-var playersSelector = exports.playersSelector = (0, _noRedux.mapStateWithSelectors)({ players: filteredPlayers, lookup: lookup, dsPlayers: dsPlayers });
+var playersSelector = exports.playersSelector = (0, _noRedux.mapStateWithSelectors)({ players: players, lookup: lookup, player: form('player') });
 var tournamentsSelector = exports.tournamentsSelector = (0, _noRedux.mapStateWithSelectors)({ tournaments: tournamentsWithYears, lookup: lookup });
 var tournamentSelector = exports.tournamentSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, lookup: lookup, players: players });
 var tourSelector = exports.tourSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: form('tournament'), tournaments: tournaments });
