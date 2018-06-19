@@ -156,10 +156,13 @@ var getResult = function getResult(g) {
     return gg(g.g1, n) < gg(g.g2, n);
   }).length;
 };
-var getPlayer = function getPlayer(n, g, ps) {
+var getPlayerName = function getPlayerName(n, g, ps) {
   return (0, _.getNameById)(g['p' + n])(ps) + (g.isDouble ? ' / ' + (0, _.getNameById)(g['p' + (n + 2)])(ps) : '');
 };
-var isWin = function isWin(r) {
+var getPlayer = function getPlayer(pid, tid, ts) {
+  return (0, _.findById)(pid)((0, _.findById)(tid)(ts).players);
+};
+var isWin = function isWin(g) {
   return r[0] > r[2];
 };
 var isLose = function isLose(r) {
@@ -167,13 +170,22 @@ var isLose = function isLose(r) {
 };
 
 var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t, ps) {
-  var teams = (t.teams || []).map(function (x) {
-    return _extends({}, x, { text: x.name, value: x.id, players: x.players.map(function (p) {
+  var teams = (t.teams || []).map(function (t) {
+    return _extends({}, t, { text: t.name, value: t.id, players: t.players.map(function (p) {
         return _extends({}, (0, _.findById)(p.id)(ps), { initRating: p.rating, isSub: p.isSub });
       }) });
   });
-  var games = (t.games || []).map(function (x) {
-    return _extends({}, x, { player1: getPlayer(1, x, ps), player2: getPlayer(2, x, ps), result: getResult(x) });
+  var games = (t.games || []).map(function (g) {
+    var result = getResult(g);
+    return _extends({}, g, {
+      p1: getPlayer(g.p1, g.t1, teams),
+      p2: getPlayer(g.p2, g.t2, teams),
+      p3: getPlayer(g.p3, g.t1, teams),
+      p4: getPlayer(g.p4, g.t2, teams),
+      player1: getPlayerName(1, g, ps),
+      player2: getPlayerName(2, g, ps),
+      result: result
+    });
   });
   var schedules = (t.schedules || []).map(function (s) {
     return _extends({}, s, {
