@@ -7,7 +7,7 @@ import { teamSelector } from 'utils/selectors';
 import { TextBox, Select, CheckBox } from 'utils/comps';
 import { withLoad, withEdit, withSuccess, withParams } from 'utils';
 
-const Team = ({ tournament, team, players, putTeam, postTeam, id }) =>
+const Team = ({ tournament, team, players, putTeam, postTeam, id, setForm }) =>
   <div>
     <h1>Team - {team.name}</h1>
     <hr />
@@ -21,7 +21,7 @@ const Team = ({ tournament, team, players, putTeam, postTeam, id }) =>
         <CheckBox name={`team.players[${i}].isSub`} index={i} label="Is Substitute?" />
       </div>
     )}
-    {/* <DoubleSelect name="team.players" options={players} buttonStyle="ui button" /> */}
+    <Button secondary onClick={() => setForm({}, { path: 'team.players[]' })}>Add Player</Button>
     <hr />
     <Button primary onClick={() => id[0] !== '+' ? putTeam(team, { id1: tournament.id, id: team.id }) : postTeam(team, { id1: tournament.id })}>Save</Button>
   </div>
