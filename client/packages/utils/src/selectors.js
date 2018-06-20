@@ -88,12 +88,14 @@ const teams = createSelector(
   t => t.teams || []
 );
 
+const pn = (n, g) => g['p' + n];
 const findGames = (s, m, gs) => gs.filter(g => g.t1 == m.home && g.t2 == m.away);
 const gg = (g, x) => +(g && g[x] || 0);
 const getResult = g => g.result || (range(0, 5).filter(n => gg(g.g1, n) > gg(g.g2, n)).length + ':' + range(0, 5).filter(n => gg(g.g1, n) < gg(g.g2, n)).length);
-const getPlayerName = (n, g, ps) => getNameById(g['p' + n])(ps) + (g.isDouble ? ' / ' + getNameById(g['p' + (n + 2)])(ps) : '');
+const getPlayerName = (n, g, ps) => getNameById(pn(n, g))(ps) + (g.isDouble ? ' / ' + getNameById(pn(n + 2, g))(ps) : '');
 const getPlayer = (pid, tid, ts) => findById(pid)(findById(tid)(ts).players);
-const subs = g => g.isDouble ? (g.p1.isSub || g.p3.isSub) : (g.p1.isSub && !g.p2.isSub);
+const subs = (n, g) => (pn(n, g) || {}).isSub ? 1 : 0;
+const totalSubs = g => subs(1, g) + subs(3, g) - subs(2, g) - subs(4, g);
 const isWin = r => r[0] > r[2];
 const isLose = r => r[0] < r[2];
 
