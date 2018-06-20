@@ -162,7 +162,10 @@ var getPlayerName = function getPlayerName(n, g, ps) {
 var getPlayer = function getPlayer(pid, tid, ts) {
   return (0, _.findById)(pid)((0, _.findById)(tid)(ts).players);
 };
-var isWin = function isWin(g) {
+var homeSub = function homeSub(g) {
+  return g.isDouble ? 1 : g.p1.isSub && !g.p2.isSub;
+};
+var isWin = function isWin(r) {
   return r[0] > r[2];
 };
 var isLose = function isLose(r) {
@@ -177,14 +180,16 @@ var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t,
   });
   var games = (t.games || []).map(function (g) {
     var result = getResult(g);
+    var p1 = getPlayer(g.p1, g.t1, teams);
+    var p2 = getPlayer(g.p2, g.t2, teams);
+    var p3 = getPlayer(g.p3, g.t1, teams);
+    var p4 = getPlayer(g.p4, g.t2, teams);
+    var game = _extends({}, g, { p1: p1, p2: p2, p3: p3, p4: p4, result: result });
     return _extends({}, g, {
-      p1: getPlayer(g.p1, g.t1, teams),
-      p2: getPlayer(g.p2, g.t2, teams),
-      p3: getPlayer(g.p3, g.t1, teams),
-      p4: getPlayer(g.p4, g.t2, teams),
       player1: getPlayerName(1, g, ps),
       player2: getPlayerName(2, g, ps),
-      result: result
+      result: result,
+      isWin: isWin(result) && p1
     });
   });
   var schedules = (t.schedules || []).map(function (s) {

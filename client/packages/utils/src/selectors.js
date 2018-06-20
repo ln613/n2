@@ -93,7 +93,7 @@ const gg = (g, x) => +(g && g[x] || 0);
 const getResult = g => g.result || (range(0, 5).filter(n => gg(g.g1, n) > gg(g.g2, n)).length + ':' + range(0, 5).filter(n => gg(g.g1, n) < gg(g.g2, n)).length);
 const getPlayerName = (n, g, ps) => getNameById(g['p' + n])(ps) + (g.isDouble ? ' / ' + getNameById(g['p' + (n + 2)])(ps) : '');
 const getPlayer = (pid, tid, ts) => findById(pid)(findById(tid)(ts).players);
-const homeSub = g =>
+const subs = g => g.isDouble ? (g.p1.isSub || g.p3.isSub) : (g.p1.isSub && !g.p2.isSub);
 const isWin = r => r[0] > r[2];
 const isLose = r => r[0] < r[2];
 
@@ -108,8 +108,8 @@ const tournament = createSelector(
       const p2 = getPlayer(g.p2, g.t2, teams);
       const p3 = getPlayer(g.p3, g.t1, teams);
       const p4 = getPlayer(g.p4, g.t2, teams);
-    return {
-        ...g,
+      const game = {...g, p1, p2, p3, p4, result};
+      return game;
         player1: getPlayerName(1, g, ps),
         player2: getPlayerName(2, g, ps),
         result,
