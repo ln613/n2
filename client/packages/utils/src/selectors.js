@@ -123,8 +123,8 @@ const tournament = createSelector(
       matches: range(1, 9)
         .map(n => findById(n)(s.matches) || {})
         .map(m => {
-          const rs = findGames(s, m, games).map(x => x.result);
-          const wn = rs.filter(isWin).length;
+          const gs = findGames(s, m, games);
+          const wn = gs.filter(g => g.isWin).length;
           const ln = rs.length - wn;
           return {...m, result: wn + ':' + ln };
         })

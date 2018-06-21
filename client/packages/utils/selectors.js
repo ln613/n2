@@ -199,10 +199,10 @@ var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t,
       matches: (0, _ramda.range)(1, 9).map(function (n) {
         return (0, _.findById)(n)(s.matches) || {};
       }).map(function (m) {
-        var rs = findGames(s, m, games).map(function (x) {
-          return x.result;
-        });
-        var wn = rs.filter(isWin).length;
+        var gs = findGames(s, m, games);
+        var wn = gs.filter(function (g) {
+          return g.isWin;
+        }).length;
         var ln = rs.length - wn;
         return _extends({}, m, { result: wn + ':' + ln });
       })
