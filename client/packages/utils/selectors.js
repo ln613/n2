@@ -177,6 +177,7 @@ var isWin = function isWin(g) {
 };
 
 var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t, ps) {
+  if (ps.length === 0) return t;
   var teams = (t.teams || []).map(function (t) {
     return _extends({}, t, { text: t.name, value: t.id, players: t.players.map(function (p) {
         return _extends({}, (0, _.findById)(p.id)(ps), { initRating: p.rating, isSub: p.isSub });

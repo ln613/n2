@@ -105,6 +105,7 @@ const tournament = createSelector(
   _tournament,
   players,
   (t, ps) => {
+    if (ps.length === 0) return t;
     const teams = (t.teams || []).map(t => ({ ...t, text: t.name, value: t.id, players: t.players.map(p => ({ ...findById(p.id)(ps), initRating: p.rating, isSub: p.isSub })) }));
     const games = (t.games || []).map(g => {
       const result = getResult(g);
