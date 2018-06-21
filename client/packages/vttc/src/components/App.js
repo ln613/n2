@@ -23,8 +23,8 @@ import { lookupSelector } from 'utils/selectors';
 
 const App = p =>
   <div class="ui">
-    <Header />
-    <Menu />
+    {/* <Header />
+    <Menu /> */}
 
     <Switch>
       <Route exact path='/' component={Home} />
