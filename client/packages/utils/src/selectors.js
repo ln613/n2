@@ -125,7 +125,7 @@ const tournament = createSelector(
         .map(m => {
           const gs = findGames(s, m, games);
           const wn = gs.filter(g => g.isWin).length;
-          const ln = rs.length - wn;
+          const ln = gs.length - wn;
           return {...m, result: wn + ':' + ln };
         })
     }));

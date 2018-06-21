@@ -203,7 +203,7 @@ var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t,
         var wn = gs.filter(function (g) {
           return g.isWin;
         }).length;
-        var ln = rs.length - wn;
+        var ln = gs.length - wn;
         return _extends({}, m, { result: wn + ':' + ln });
       })
     });
