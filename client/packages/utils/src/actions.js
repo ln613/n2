@@ -70,6 +70,9 @@ export const actionData = {
   form: {
     path: 'form.{path}'
   },
+  formTeamPlayers: {
+    path: 'form.team.players[]'
+  },
   filter: {},
   lang: {},
 }
