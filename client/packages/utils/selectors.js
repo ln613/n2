@@ -277,7 +277,7 @@ var standing = (0, _noRedux.createSelector)(tournament, teams, function (tt, ts)
     });
     var wn = ws.length;
     var ln = ms.length - wn;
-    var ps = (0, _ramda.sum)(ws.map(function (m) {
+    var ps = (0, _ramda.sum)(ms.map(function (m) {
       return +m.result[m.home == t.id ? 0 : 2];
     }));
     return { team: t.name, total: ms.length, w: wn, l: ln, points: ps };
