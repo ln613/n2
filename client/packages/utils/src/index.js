@@ -1,4 +1,4 @@
-import { tap as _tap, prop, find, pipe, isNil, is, isEmpty, view as _view, lensPath, reduce, max, last, differenceWith } from 'ramda';
+import { tap as _tap, prop, find, pipe, isNil, is, isEmpty, view as _view, lensPath, reduce, max, last, differenceWith, anyPass } from 'ramda';
 import { connect } from 'no-redux';
 import { compose, lifecycle, withProps, withHandlers } from 'recompose';
 import { successSelector } from './selectors';

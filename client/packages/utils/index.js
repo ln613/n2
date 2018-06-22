@@ -166,7 +166,7 @@ var replaceParam = exports.replaceParam = function replaceParam(s, ps) {
   }, s, Object.keys(ps));
 };
 
-var isPrimitiveType = exports.isPrimitiveType = anyPass([(0, _ramda.is)(Number), (0, _ramda.is)(String), (0, _ramda.is)(Boolean)]);
+var isPrimitiveType = exports.isPrimitiveType = (0, _ramda.anyPass)([(0, _ramda.is)(Number), (0, _ramda.is)(String), (0, _ramda.is)(Boolean)]);
 
 var diff = exports.diff = function diff(p) {
   return (0, _ramda.differenceWith)(function (a, b) {
