@@ -1,7 +1,6 @@
 import { reduce, prop, sortWith, ascend, descend, unnest, find, isEmpty, groupBy, join, sum, range, pipe, map, uniqBy, anyPass, both } from 'ramda';
 import { createSelector, mapStateWithSelectors } from 'no-redux';
-import { findById, getNameById, toDate, addIndex, tap } from '.';
-import { Z_TEXT } from 'zlib';
+import { findById, getNameById, toDate, addIndex, diff, tap } from '.';
 
 const _form = s => s.form || {};
 const _filter = s => s.filter || {};
@@ -190,14 +189,11 @@ const standing = createSelector(
   }))
 );
 
-const isHomePlayer = p => g => g.p1 == p || g.p3 == p;
-const isAwayPlayer = p => g => g.p2 == p || g.p4 == p;
-const isHomeWin = g => g.result[0] > g.result[2];
-const isAwayWin = g => g.result[2] > g.result[0];
-const isPlayerWin = p => anyPass([
-  both(isHomePlayer(p), isHomeWin),
-  both(isAwayPlayer(p), isAwayWin)
-])
+const isSamePlayer = (p1, p2) => p1 && p2 && p1.id === p2.id;
+const isHomePlayer = p => g => isSamePlayer(g.p1, p) || isSamePlayer(g.p3, p);
+const isAwayPlayer = p => g => isSamePlayer(g.p2, p) || isSamePlayer(g.p4, p);
+const isPlayerInGame = anyPass([isHomePlayer, isAwayPlayer]);
+const isPlayerWin = p => g => (isHomePlayer(p)(g) && g.isWin) || (isAwayPlayer(p)(g) && !g.isWin);
 
 const stats = createSelector(
   tournament,
@@ -206,21 +202,23 @@ const stats = createSelector(
     unnest,
     uniqBy(x => x.id),
     ps => ps.map(p => {
-      const gs = (t.games || []).filter(g => [g.p1, g.p2, g.p3, g.p4].some(x => x == p.id));
+      const gs = (t.games || []).filter(isPlayerInGame(p));
       const sgs = gs.filter(g => !g.isDouble);
       const dgs = gs.filter(g => g.isDouble);
       const total = sgs.length;
-      const wins = sgs.filter(g => isPlayerWin(p.id)(g));
-      const loses = sgs.filter(g => !isPlayerWin(p.id)(g));
-      const gw = sum(wins.filter(isHomeWin).map(g => +g.result[0])) + sum(wins.filter(isAwayWin).map(g => +g.result[2]));
-      const gl = sum(loses.filter(isHomeWin).map(g => +g.result[2])) + sum(loses.filter(isAwayWin).map(g => +g.result[0]));
+      const wins = sgs.filter(isPlayerWin(p));
+      const loses = diff(sgs, wins);
+      const gw = sum(sgs.map(g => +g.result[isHomePlayer(p)(g) ? 0 : 2]));
+      const gl = sum(sgs.map(g => +g.result[isHomePlayer(p)(g) ? 2 : 0]));
       const w = wins.length;
       const l = loses.length;
-      const diff = w - l;
+      const d = w - l;
       const wpc = ((total && (w / total)) * 100).toFixed(1) + '%';
-      const dw = dgs.filter(g => isPlayerWin(p.id)(g)).length;
-      const dl = dgs.filter(g => !isPlayerWin(p.id)(g)).length;
-      return { player: p.name, 'mp': total, w, l, '+/-': diff > 0 ? '+' + diff : diff, 'win %': wpc, gw, gl, dw, dl };
+      const dwins = dgs.filter(isPlayerWin(p));
+      const dloses = diff(dgs, dwins);
+      const dw = dwins.length;
+      const dl = dloses.length;
+      return { player: p.name, 'mp': total, w, l, '+/-': d > 0 ? '+' + d : d, 'win %': wpc, gw, gl, dw, dl };
     }),
     sortWith([descend(prop('+/-')), descend(prop('win %'))]),
     addIndex('rank')

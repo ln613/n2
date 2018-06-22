@@ -1,4 +1,4 @@
-import { tap as _tap, prop, find, pipe, isNil, is, isEmpty, view as _view, lensPath, reduce, max, last } from 'ramda';
+import { tap as _tap, prop, find, pipe, isNil, is, isEmpty, view as _view, lensPath, reduce, max, last, differenceWith } from 'ramda';
 import { connect } from 'no-redux';
 import { compose, lifecycle, withProps, withHandlers } from 'recompose';
 import { successSelector } from './selectors';
@@ -90,3 +90,7 @@ export const toDate = s => {
 export const addIndex = p => a => a.map((x, i) => ({ [p || 'id']: i + 1, ...x }));
 
 export const replaceParam = (s, ps) => reduce((p, c) => p.replace(new RegExp(`\{${c}\}`), ps[c]), s, Object.keys(ps));
+
+export const isPrimitiveType = anyPass([is(Number), is(String), is(Boolean)]);
+
+export const diff = p => differenceWith((a, b) => isPrimitiveType(a) ? a === b : a[p || 'id'] === b[p || 'id']);

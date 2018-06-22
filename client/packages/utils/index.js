@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.replaceParam = exports.addIndex = exports.toDate = exports.toTitleCase = exports.withNewId = exports.withParams = exports.withLang = exports.withListener = exports.withSuccess = exports.withNewValue = exports.withEdit = exports.withLoad = exports.view = exports.toLensPath = exports.getNameById = exports.getPropById = exports.findByName = exports.findById = exports.findByProp = exports.desc = exports.name = exports.ml = exports.admin = exports.api = exports.host = exports.isDev = exports.tap = exports.cdurl = undefined;
+exports.diff = exports.isPrimitiveType = exports.replaceParam = exports.addIndex = exports.toDate = exports.toTitleCase = exports.withNewId = exports.withParams = exports.withLang = exports.withListener = exports.withSuccess = exports.withNewValue = exports.withEdit = exports.withLoad = exports.view = exports.toLensPath = exports.getNameById = exports.getPropById = exports.findByName = exports.findById = exports.findByProp = exports.desc = exports.name = exports.ml = exports.admin = exports.api = exports.host = exports.isDev = exports.tap = exports.cdurl = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -164,4 +164,12 @@ var replaceParam = exports.replaceParam = function replaceParam(s, ps) {
   return (0, _ramda.reduce)(function (p, c) {
     return p.replace(new RegExp('{' + c + '}'), ps[c]);
   }, s, Object.keys(ps));
+};
+
+var isPrimitiveType = exports.isPrimitiveType = anyPass([(0, _ramda.is)(Number), (0, _ramda.is)(String), (0, _ramda.is)(Boolean)]);
+
+var diff = exports.diff = function diff(p) {
+  return (0, _ramda.differenceWith)(function (a, b) {
+    return isPrimitiveType(a) ? a === b : a[p || 'id'] === b[p || 'id'];
+  });
 };

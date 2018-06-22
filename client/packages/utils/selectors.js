@@ -13,8 +13,6 @@ var _noRedux = require('no-redux');
 
 var _ = require('.');
 
-var _zlib = require('zlib');
-
 var _form = function _form(s) {
   return s.form || {};
 };
@@ -284,24 +282,24 @@ var standing = (0, _noRedux.createSelector)(tournament, teams, function (tt, ts)
   }));
 });
 
+var isSamePlayer = function isSamePlayer(p1, p2) {
+  return p1 && p2 && p1.id === p2.id;
+};
 var isHomePlayer = function isHomePlayer(p) {
   return function (g) {
-    return g.p1 == p || g.p3 == p;
+    return isSamePlayer(g.p1, p) || isSamePlayer(g.p3, p);
   };
 };
 var isAwayPlayer = function isAwayPlayer(p) {
   return function (g) {
-    return g.p2 == p || g.p4 == p;
+    return isSamePlayer(g.p2, p) || isSamePlayer(g.p4, p);
   };
 };
-var isHomeWin = function isHomeWin(g) {
-  return g.result[0] > g.result[2];
-};
-var isAwayWin = function isAwayWin(g) {
-  return g.result[2] > g.result[0];
-};
+var isPlayerInGame = (0, _ramda.anyPass)([isHomePlayer, isAwayPlayer]);
 var isPlayerWin = function isPlayerWin(p) {
-  return (0, _ramda.anyPass)([(0, _ramda.both)(isHomePlayer(p), isHomeWin), (0, _ramda.both)(isAwayPlayer(p), isAwayWin)]);
+  return function (g) {
+    return isHomePlayer(p)(g) && g.isWin || isAwayPlayer(p)(g) && !g.isWin;
+  };
 };
 
 var stats = (0, _noRedux.createSelector)(tournament, function (t) {
@@ -311,11 +309,7 @@ var stats = (0, _noRedux.createSelector)(tournament, function (t) {
     return x.id;
   }), function (ps) {
     return ps.map(function (p) {
-      var gs = (t.games || []).filter(function (g) {
-        return [g.p1, g.p2, g.p3, g.p4].some(function (x) {
-          return x == p.id;
-        });
-      });
+      var gs = (t.games || []).filter(isPlayerInGame(p));
       var sgs = gs.filter(function (g) {
         return !g.isDouble;
       });
@@ -323,33 +317,23 @@ var stats = (0, _noRedux.createSelector)(tournament, function (t) {
         return g.isDouble;
       });
       var total = sgs.length;
-      var wins = sgs.filter(function (g) {
-        return isPlayerWin(p.id)(g);
-      });
-      var loses = sgs.filter(function (g) {
-        return !isPlayerWin(p.id)(g);
-      });
-      var gw = (0, _ramda.sum)(wins.filter(isHomeWin).map(function (g) {
-        return +g.result[0];
-      })) + (0, _ramda.sum)(wins.filter(isAwayWin).map(function (g) {
-        return +g.result[2];
+      var wins = sgs.filter(isPlayerWin(p));
+      var loses = (0, _.diff)(sgs, wins);
+      var gw = (0, _ramda.sum)(sgs.map(function (g) {
+        return +g.result[isHomePlayer(p)(g) ? 0 : 2];
       }));
-      var gl = (0, _ramda.sum)(loses.filter(isHomeWin).map(function (g) {
-        return +g.result[2];
-      })) + (0, _ramda.sum)(loses.filter(isAwayWin).map(function (g) {
-        return +g.result[0];
+      var gl = (0, _ramda.sum)(sgs.map(function (g) {
+        return +g.result[isHomePlayer(p)(g) ? 2 : 0];
       }));
       var w = wins.length;
       var l = loses.length;
-      var diff = w - l;
+      var d = w - l;
       var wpc = ((total && w / total) * 100).toFixed(1) + '%';
-      var dw = dgs.filter(function (g) {
-        return isPlayerWin(p.id)(g);
-      }).length;
-      var dl = dgs.filter(function (g) {
-        return !isPlayerWin(p.id)(g);
-      }).length;
-      return { player: p.name, 'mp': total, w: w, l: l, '+/-': diff > 0 ? '+' + diff : diff, 'win %': wpc, gw: gw, gl: gl, dw: dw, dl: dl };
+      var dwins = dgs.filter(isPlayerWin(p));
+      var dloses = (0, _.diff)(dgs, dwins);
+      var dw = dwins.length;
+      var dl = dloses.length;
+      return { player: p.name, 'mp': total, w: w, l: l, '+/-': d > 0 ? '+' + d : d, 'win %': wpc, gw: gw, gl: gl, dw: dw, dl: dl };
     });
   }, (0, _ramda.sortWith)([(0, _ramda.descend)((0, _ramda.prop)('+/-')), (0, _ramda.descend)((0, _ramda.prop)('win %'))]), (0, _.addIndex)('rank'))(t.teams || []);
 });
