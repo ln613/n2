@@ -1,11 +1,9 @@
 import React from 'react';
-import { range, is } from 'ramda';
 import { connect } from 'no-redux';
 import { compose } from 'recompose';
-import ImageSlider from './ImageSlider';
 import actions from 'utils/actions';
 import { lookupSelector } from 'utils/selectors';
-import { cdurl, withLoad, withLang } from 'utils';
+import { withLang } from 'utils';
 
 const CatMenu = ({ lookup, setFilter, n, d }) =>
     <div class="ui vertical menu">

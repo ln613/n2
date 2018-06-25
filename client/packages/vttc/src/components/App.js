@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'no-redux';
-import { compose } from 'recompose';
 import Header from './Header';
 import Menu from './Menu';
 import Home from './Home';
@@ -17,9 +15,6 @@ import Stats from './Stats';
 import Contact from './Contact';
 import Calendar from './Calendar';
 import { Switch, Route } from 'react-router';
-import { withLoad } from 'utils';
-import actions from 'utils/actions';
-import { lookupSelector } from 'utils/selectors';
 
 const App = p =>
   <div class="ui">

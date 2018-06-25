@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'no-redux';
 import { is } from 'ramda';
 import { Link } from 'react-router-dom';
-import { Button, Menu, Input, Card, Icon, Dropdown, Popup } from 'semantic-ui-react';
-import { lifecycle } from 'recompose';
+import { Menu, Input, Dropdown, Popup } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { langSelector } from 'utils/selectors';
 
@@ -16,7 +15,7 @@ const menu = ({ lang, setLang }) =>
       {menus.map((x, i) => {
         if (is(Array, x)) {
           return (
-            <Dropdown item simple text={x[0]}>
+            <Dropdown item simple text={x[0]} key={x[0]}>
               <Dropdown.Menu>
                 {x[1].map(y =>
                   <Dropdown.Item text={y[0]} icon={y[1]} />
@@ -37,6 +36,6 @@ const menu = ({ lang, setLang }) =>
     </Menu>
   </div>
 
-const popup = (t, img, f) => <Popup content={t} position="bottom center" trigger={<a class="cp" onClick={f}><img src={`images/${img}.png`} class="mr4" /></a>} />
+const popup = (t, img, f) => <Popup content={t} position="bottom center" trigger={<a class="cp" onClick={f}><img src={`images/${img}.png`} class="mr4" alt="" /></a>} />
 
 export default connect(langSelector, actions)(menu);

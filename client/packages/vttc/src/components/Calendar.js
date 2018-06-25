@@ -1,13 +1,9 @@
 import React from 'react';
-import { range, is, pick, splitEvery, fromPairs, mergeDeepLeft, unnest } from 'ramda';
+import { range, splitEvery, fromPairs, mergeDeepLeft } from 'ramda';
 import { connect } from 'no-redux';
 import { compose } from 'recompose';
-import ImageSlider from './ImageSlider';
-import actions from 'utils/actions';
 import { lookupSelector } from 'utils/selectors';
-import { cdurl, withLoad, withLang, getNameById, findById, tap } from 'utils';
-import { withRouter } from "react-router-dom";
-import { TextBox, Table } from 'utils/comps';
+import { Table } from 'utils/comps';
 import moment from 'moment';
 
 const names = ['Drop In', 'Training', 'League'];

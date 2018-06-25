@@ -1,12 +1,9 @@
 import React from 'react';
-import { range, is, pick } from 'ramda';
 import { connect } from 'no-redux';
 import { compose } from 'recompose';
-import ImageSlider from './ImageSlider';
 import actions from 'utils/actions';
 import { playersSelector } from 'utils/selectors';
-import { tap, cdurl, withLoad, withLang, getNameById, findById, withListener } from 'utils';
-import { withRouter } from "react-router-dom";
+import { withLoad } from 'utils';
 import { TextBox, Table } from 'utils/comps';
 
 const Rating = ({ lookup, players }) =>

@@ -189,10 +189,10 @@ const standing = createSelector(
   }))
 );
 
-const isSamePlayer = (p1, p2) => p1 && p2 && p1.id === p2.id;
-const isHomePlayer = p => g => isSamePlayer(g.p1, p) || isSamePlayer(g.p3, p);
-const isAwayPlayer = p => g => isSamePlayer(g.p2, p) || isSamePlayer(g.p4, p);
-const isPlayerInGame = anyPass([isHomePlayer, isAwayPlayer]);
+const isSamePlayer = (p1, p2) => p1 && p2 && p1.id === p2.id || false;
+const isHomePlayer = p => g => isSamePlayer(p, g.p1) || isSamePlayer(p, g.p3);
+const isAwayPlayer = p => g => isSamePlayer(p, g.p2) || isSamePlayer(p, g.p4);
+const isPlayerInGame = p => anyPass([isHomePlayer(p), isAwayPlayer(p)]);
 const isPlayerWin = p => g => (isHomePlayer(p)(g) && g.isWin) || (isAwayPlayer(p)(g) && !g.isWin);
 
 const stats = createSelector(
@@ -207,7 +207,7 @@ const stats = createSelector(
       const dgs = gs.filter(g => g.isDouble);
       const total = sgs.length;
       const wins = sgs.filter(isPlayerWin(p));
-      const loses = diff(sgs, wins);
+      const loses = diff()(sgs, wins);
       const gw = sum(sgs.map(g => +g.result[isHomePlayer(p)(g) ? 0 : 2]));
       const gl = sum(sgs.map(g => +g.result[isHomePlayer(p)(g) ? 2 : 0]));
       const w = wins.length;
@@ -215,7 +215,7 @@ const stats = createSelector(
       const d = w - l;
       const wpc = ((total && (w / total)) * 100).toFixed(1) + '%';
       const dwins = dgs.filter(isPlayerWin(p));
-      const dloses = diff(dgs, dwins);
+      const dloses = diff()(dgs, dwins);
       const dw = dwins.length;
       const dl = dloses.length;
       return { player: p.name, 'mp': total, w, l, '+/-': d > 0 ? '+' + d : d, 'win %': wpc, gw, gl, dw, dl };

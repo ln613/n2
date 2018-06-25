@@ -1,12 +1,5 @@
 import React from 'react';
-import { range, is } from 'ramda';
-import { Button, Menu, Input, Card, Icon, Dropdown, Image } from 'semantic-ui-react';
 import ImageSlider from './ImageSlider';
-import { connect } from 'no-redux';
-import { compose } from 'recompose';
-import actions from 'utils/actions';
-import { lookupSelector } from 'utils/selectors';
-import { withLoad } from 'utils';
 
 const cards = ['Products', 'News', 'Training', 'Tournaments', 'League'];
 

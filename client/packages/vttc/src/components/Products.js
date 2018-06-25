@@ -1,11 +1,9 @@
 import React from 'react';
-import { range, is } from 'ramda';
 import { connect } from 'no-redux';
 import { compose } from 'recompose';
-import ImageSlider from './ImageSlider';
 import actions from 'utils/actions';
 import { productsSelector } from 'utils/selectors';
-import { cdurl, withLoad, withLang, getNameById, findById } from 'utils';
+import { cdurl, withLoad, withLang, findById } from 'utils';
 import CatMenu from './CatMenu';
 import { withRouter } from "react-router-dom";
 
@@ -19,7 +17,7 @@ const Products = ({ products, productFilter, lookup, n, d, history }) =>
         {products.map((x, i) =>
           <div class="f w20 p8">  
             <div class="card fv cp" onClick={() => history.push('/products/' + x.id)}>
-              <img class="w100" src={cdurl(lookup, 'products', x.id)} />
+              <img class="w100" src={cdurl(lookup, 'products', x.id)} alt="" />
               <hr />
               <div class="p8 fg1">
                 <h3>{n(x)}</h3>

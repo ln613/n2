@@ -16,12 +16,12 @@ const r2 = r1.concat(r1);
 
 const Header = ({ lookup }) =>
   <div class="bgb f">  
-    <img src="images/banner.jpg" />
+    <img src="images/banner.jpg" alt="" />
     <div class="fg1 ph8 f marquee">
       <div class="f aic m1">
         {r2.map(x =>
           <Link to="/">
-            <img width="130" height="130" src={cdurl(lookup, 'header', x)} />  
+            <img width="130" height="130" src={cdurl(lookup, 'header', x)} alt="" />  
           </Link>
         )}
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'no-redux';
 import { withState, lifecycle, compose } from 'recompose';
-import { tap, cdurl } from 'utils';
+import { cdurl } from 'utils';
 import { range } from 'ramda';
 import actions from 'utils/actions';
 import { lookupSelector } from 'utils/selectors';
@@ -10,9 +10,9 @@ const sl = n => 'slider' + (n ? ('-' + n) : '');
 
 const ImageList = ({ n, name, index, lookup }) =>
   <div class="pr">
-    <img src={cdurl(lookup, sl(name), 1)} class="op0 w100" />
+    <img src={cdurl(lookup, sl(name), 1)} class="op0 w100" alt="" />
     {range(0, n).map((x, i) =>
-      <img src={cdurl(lookup, sl(name), i + 1)} class={`fade ${index === i ? 'show' : ''}`} />
+      <img src={cdurl(lookup, sl(name), i + 1)} class={`fade ${index === i ? 'show' : ''}`} alt="" />
     )}
   </div>
 

@@ -1,12 +1,10 @@
 import React from 'react';
-import { range, is, pick } from 'ramda';
 import { connect } from 'no-redux';
 import { compose } from 'recompose';
 import actions from 'utils/actions';
 import { standingSelector } from 'utils/selectors';
-import { cdurl, withLoad, withDetail, withParams, withListener, getNameById, findById, tap } from 'utils';
-import { withRouter } from 'react-router-dom';
-import { TextBox, Table } from 'utils/comps';
+import { withLoad, withParams } from 'utils';
+import { Table } from 'utils/comps';
 import TMenu from './TMenu';
 
 const Standing = ({ standing, tournament, id }) =>
@@ -23,6 +21,5 @@ const Standing = ({ standing, tournament, id }) =>
 export default compose(
   connect(standingSelector, actions),
   withParams,
-  withLoad('tournament', 'id'),
-  withListener('click', p => tap(p))
+  withLoad('tournament', 'id')
 )(Standing);

@@ -1,13 +1,10 @@
 import React from 'react';
-import { range, is, pick, find } from 'ramda';
 import { connect } from 'no-redux';
 import { compose, withProps } from 'recompose';
-import ImageSlider from './ImageSlider';
 import actions from 'utils/actions';
 import { historySelector } from 'utils/selectors';
-import { tap, cdurl, withLoad, withLang, getNameById, findById, withParams, withListener } from 'utils';
-import { withRouter } from "react-router-dom";
-import { TextBox, Table } from 'utils/comps';
+import { withLoad, findById, withParams } from 'utils';
+import { Table } from 'utils/comps';
 
 const History = ({ lookup, history, player }) =>
   <div class="p16 fv">

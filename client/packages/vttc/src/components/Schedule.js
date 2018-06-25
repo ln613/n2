@@ -1,12 +1,10 @@
 import React from 'react';
-import { range, is, pick } from 'ramda';
 import { connect } from 'no-redux';
 import { compose } from 'recompose';
 import actions from 'utils/actions';
 import { tournamentSelector } from 'utils/selectors';
-import { cdurl, withLoad, withDetail, withParams, withListener, getNameById, findById, tap } from 'utils';
-import { withRouter } from 'react-router-dom';
-import { TextBox, Table } from 'utils/comps';
+import { withLoad, withParams, getNameById } from 'utils';
+import { Table } from 'utils/comps';
 import TMenu from './TMenu';
 
 const Schedule = ({ tournament, id }) =>
@@ -18,7 +16,7 @@ const Schedule = ({ tournament, id }) =>
       {(tournament.schedules || []).map(s =>
         <div class="pt8">
           <div class="pt8 fs24 darkgreen">{s.date}</div>
-          <Table name="schedule" data={(s.matches || []).filter(m => m && m.id).map(m => ({ 'Table': m.id, 'Home': getNameById(m.home)(tournament.teams), 'Result': m.result == '0:0' ? '' : m.result, 'Away': getNameById(m.away)(tournament.teams) }))} />
+          <Table name="schedule" data={(s.matches || []).filter(m => m && m.id).map(m => ({ 'Table': m.id, 'Home': getNameById(m.home)(tournament.teams), 'Result': m.result === '0:0' ? '' : m.result, 'Away': getNameById(m.away)(tournament.teams) }))} />
           {/* <Table name="week" data={w.matches} equalWidth>
             <td key="team1Points" hidden />  
             <td key="team2Points" hidden />  
