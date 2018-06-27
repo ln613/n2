@@ -61,7 +61,7 @@ var tournaments = function tournaments(s) {
 var _tournament = function _tournament(s) {
   return s.tournament || {};
 };
-var history = function history(s) {
+var _history = function _history(s) {
   return s.history || [];
 };
 
@@ -340,17 +340,32 @@ var stats = (0, _noRedux.createSelector)(tournament, function (t) {
   }, (0, _ramda.sortWith)([(0, _ramda.descend)((0, _ramda.prop)('+/-')), (0, _ramda.descend)((0, _ramda.prop)('win %'))]), (0, _.addIndex)('rank'))(t.teams || []);
 });
 
-var historyTable = (0, _noRedux.createSelector)(history, players, function (h, ps) {
-  return (0, _ramda.sortWith)([(0, _ramda.descend)((0, _ramda.prop)('date'))], h.map(function (x) {
+var history = (0, _noRedux.createSelector)(_history, players, function (h, ps) {
+  var gs = (0, _ramda.sortWith)([(0, _ramda.descend)((0, _ramda.prop)('date'))], h.map(function (x) {
     return x.games;
   })).map(function (g) {
     return {
       id: g.id,
       date: (0, _.toDate)(g.date),
+      month: (0, _.toMonth)(g.date),
       player1: (0, _.getNameById)(g.p1)(ps) + ' (' + g.p1Rating + ' ' + ((g.p1Diff > 0 ? '+ ' : '- ') + Math.abs(g.p1Diff)) + ' = ' + (g.p1Rating + g.p1Diff) + ')',
       player2: (0, _.getNameById)(g.p2)(ps) + ' (' + g.p2Rating + ' ' + ((g.p2Diff > 0 ? '+ ' : '- ') + Math.abs(g.p2Diff)) + ' = ' + (g.p2Rating + g.p2Diff) + ')',
       result: g.result
     };
+  });
+  (0, _ramda.groupWith)(function (a, b) {
+    return a.month === b.month;
+  }, gs).forEach(function (x) {
+    return x[0].isLastGameInMonth = true;
+  });
+  return gs;
+});
+
+var monthRatings = (0, _noRedux.createSelector)(history, function (h) {
+  return h.filter(function (x) {
+    return x.isLastGameInMonth;
+  }).map(function (x) {
+    return { text: x.month, value: x.rating };
   });
 });
 
@@ -366,9 +381,9 @@ var playersSelector = exports.playersSelector = (0, _noRedux.mapStateWithSelecto
 var tournamentsSelector = exports.tournamentsSelector = (0, _noRedux.mapStateWithSelectors)({ tournaments: tournamentsWithYears, lookup: lookup });
 var tournamentSelector = exports.tournamentSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, lookup: lookup, players: players });
 var tourSelector = exports.tourSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: form('tournament'), tournaments: tournaments });
-var historySelector = exports.historySelector = (0, _noRedux.mapStateWithSelectors)({ history: historyTable, lookup: lookup, players: players });
+var historySelector = exports.historySelector = (0, _noRedux.mapStateWithSelectors)({ history: history, lookup: lookup, players: players });
 var standingSelector = exports.standingSelector = (0, _noRedux.mapStateWithSelectors)({ standing: standing, tournament: tournament });
-var teamSelector = exports.teamSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, team: form('team'), players: players });
+var teamSelector = exports.teamSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, team: form('team'), players: players, monthRatings: monthRatings });
 var scheduleSelector = exports.scheduleSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, schedule: form('schedule') });
 var gameSelector = exports.gameSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, players: players, game: form('game') });
 var statsSelector = exports.statsSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, stats: stats });

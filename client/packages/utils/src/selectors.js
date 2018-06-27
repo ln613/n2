@@ -1,6 +1,6 @@
-import { reduce, prop, sortWith, ascend, descend, unnest, find, isEmpty, groupBy, join, sum, range, pipe, map, uniqBy, anyPass, both } from 'ramda';
+import { reduce, prop, sortWith, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, uniqBy, anyPass, both } from 'ramda';
 import { createSelector, mapStateWithSelectors } from 'no-redux';
-import { findById, getNameById, toDate, addIndex, diff, tap } from '.';
+import { findById, getNameById, toDate, toMonth, addIndex, diff, tap } from '.';
 
 const _form = s => s.form || {};
 const _filter = s => s.filter || {};
@@ -18,7 +18,7 @@ const products = s => s.products || [];
 const _players = s => s.players || [];
 const tournaments = s => s.tournaments || [];
 const _tournament = s => s.tournament || {};
-const history = s => s.history || [];
+const _history = s => s.history || [];
 
 const success = a => createSelector(
   isLoading,
@@ -225,16 +225,26 @@ const stats = createSelector(
   )(t.teams || [])
 );
 
-const historyTable = createSelector(
-  history,
+const history = createSelector(
+  _history,
   players,
-  (h, ps) => sortWith([descend(prop('date'))], h.map(x => x.games)).map(g => ({
-    id: g.id,
-    date: toDate(g.date),
-    player1: `${getNameById(g.p1)(ps)} (${g.p1Rating} ${(g.p1Diff > 0 ? '+ ' : '- ') + Math.abs(g.p1Diff)} = ${g.p1Rating + g.p1Diff})`,
-    player2: `${getNameById(g.p2)(ps)} (${g.p2Rating} ${(g.p2Diff > 0 ? '+ ' : '- ') + Math.abs(g.p2Diff)} = ${g.p2Rating + g.p2Diff})`,
-    result: g.result
-  }))
+  (h, ps) => {
+    const gs = sortWith([descend(prop('date'))], h.map(x => x.games)).map(g => ({
+      id: g.id,
+      date: toDate(g.date),
+      month: toMonth(g.date),
+      player1: `${getNameById(g.p1)(ps)} (${g.p1Rating} ${(g.p1Diff > 0 ? '+ ' : '- ') + Math.abs(g.p1Diff)} = ${g.p1Rating + g.p1Diff})`,
+      player2: `${getNameById(g.p2)(ps)} (${g.p2Rating} ${(g.p2Diff > 0 ? '+ ' : '- ') + Math.abs(g.p2Diff)} = ${g.p2Rating + g.p2Diff})`,
+      result: g.result
+    }));
+    groupWith((a, b) => a.month === b.month, gs).forEach(x => x[0].isLastGameInMonth = true);
+    return gs;
+  }
+);
+
+const monthRatings = createSelector(
+  history,
+  h => h.filter(x => x.isLastGameInMonth).map(x => ({ text: x.month, value: x.rating }))
 );
 
 export const successSelector = a => mapStateWithSelectors({ success: success(a) });
@@ -247,9 +257,9 @@ export const playersSelector = mapStateWithSelectors({ players, lookup, player: 
 export const tournamentsSelector = mapStateWithSelectors({ tournaments: tournamentsWithYears, lookup });
 export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players });
 export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), tournaments });
-export const historySelector = mapStateWithSelectors({ history: historyTable, lookup, players });
+export const historySelector = mapStateWithSelectors({ history, lookup, players });
 export const standingSelector = mapStateWithSelectors({ standing, tournament });
-export const teamSelector = mapStateWithSelectors({ tournament, team: form('team'), players });
+export const teamSelector = mapStateWithSelectors({ tournament, team: form('team'), players, monthRatings });
 export const scheduleSelector = mapStateWithSelectors({ tournament, schedule: form('schedule') });
 export const gameSelector = mapStateWithSelectors({ tournament, players, game: form('game') });
 export const statsSelector = mapStateWithSelectors({ tournament, stats });

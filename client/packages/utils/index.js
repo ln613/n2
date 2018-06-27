@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.diff = exports.isPrimitiveType = exports.replaceParam = exports.addIndex = exports.toDate = exports.toTitleCase = exports.withNewId = exports.withParams = exports.withLang = exports.withListener = exports.withSuccess = exports.withNewValue = exports.withEdit = exports.withLoad = exports.view = exports.toLensPath = exports.getNameById = exports.getPropById = exports.findByName = exports.findById = exports.findByProp = exports.desc = exports.name = exports.ml = exports.admin = exports.api = exports.host = exports.isDev = exports.tap = exports.cdurl = undefined;
+exports.diff = exports.isPrimitiveType = exports.replaceParam = exports.addIndex = exports.toMonth = exports.toDate = exports.toTitleCase = exports.withNewId = exports.withParams = exports.withLang = exports.withListener = exports.withSuccess = exports.withNewValue = exports.withEdit = exports.withLoad = exports.view = exports.toLensPath = exports.getNameById = exports.getPropById = exports.findByName = exports.findById = exports.findByProp = exports.desc = exports.name = exports.ml = exports.admin = exports.api = exports.host = exports.isDev = exports.tap = exports.cdurl = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -150,6 +150,11 @@ var toTitleCase = exports.toTitleCase = function toTitleCase(s) {
 var toDate = exports.toDate = function toDate(s) {
   var d = new Date(s);
   return d.getMonth() + 1 + '/' + d.getDate() + '/' + d.getFullYear();
+};
+
+var toMonth = exports.toMonth = function toMonth(s) {
+  var d = new Date(s);
+  return d.getFullYear() + '/' + (d.getMonth() + 1);
 };
 
 var addIndex = exports.addIndex = function addIndex(p) {
