@@ -17,10 +17,9 @@ const Team = ({ tournament, team, players, monthRatings, putTeam, postTeam, id, 
     Players:
     {(team.players || []).map((p, i) =>
       <div class="f aic mrc8" key={`players${i}`}>
-        <Select name={`team.players[${i}].id`} index={i} options={players} onChange={x => alert('h')} />
+        <Select name={`team.players[${i}].id`} index={i} options={players} />
         <CheckBox name={`team.players[${i}].isSub`} index={i} label="Is Substitute?" />
-        <div>Tournament Rating: {p.rating}</div>
-        <Select name={`team.players[${i}].rating`} index={i} options={monthRatings} />
+        <TextBox name={`team.players[${i}].rating`} index={i} label="Rating" />
       </div>
     )}
     <Button secondary onClick={() => setFormTeamPlayers({})}>Add Player</Button>
