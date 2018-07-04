@@ -71,4 +71,17 @@ e.gotoLogin = res => {
   res.redirect('/login');
 }
 
+const rrCycle = (x, r) => x > r ? x - r : x;
+
+e.rrSchedule = x => {
+  const l = R.sortWith(R.descend([R.prop('rating')]), x);
+  const t1 = R.range(1, l.length);
+  const t2 = R.range(0, l.length / 2);
+  return t1.map(r => {
+    const l1 = t1.map(n => l[rrCycle(n + r - 1, r)]);
+    const l2 = R.insert(0, l[0], l1);
+    return t2.map(n => ({ home: l[n].id, away: l[l.length - n - 1].id }));
+  })
+}
+
 module.exports = e;
