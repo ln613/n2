@@ -13,7 +13,7 @@ const Tournaments = ({ tournaments, history, newId }) =>
   <div>
     <div class="f">
       <h1 class="fg1">Tournaments</h1>
-      <Button primary onClick={() => history.push(`/tournaments/${newId}`)}>Add</Button>
+      <Button primary onClick={() => history.push(`/tournaments/+${newId}`)}>Add</Button>
     </div>
     <hr/>
     <Table name="tournaments" data={sortWith([descend(prop('id'))], tournaments.map(x => ({ 'id': x.id, 'name': x.name })))} link />
