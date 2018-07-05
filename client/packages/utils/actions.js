@@ -81,6 +81,9 @@ var actionData = exports.actionData = {
   formTeamPlayers: {
     path: 'form.team.players[]'
   },
+  formTournamentPlayers: {
+    path: 'form.tournament.players[]'
+  },
   filter: {},
   lang: {}
 };

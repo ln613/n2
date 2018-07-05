@@ -57,43 +57,43 @@ app.get('/api/:doc', (req, res) => {
 
 // admin --------------------
 
-app.get('/login', nocache, (req, res) => {
-  res.sendFile(path.join(__dirname, 'login.html'));
-});
+// app.get('/login', nocache, (req, res) => {
+//   res.sendFile(path.join(__dirname, 'login.html'));
+// });
 
-app.post('/login', (req, res) => {
-  if (username != req.body.username || password != req.body.password) {
-    gotoLogin(res);
-  } else {
-    const token = jwt.sign({}, secret, { expiresIn: '24h' });
-    res.cookie('vttc_token', token);
-    res.redirect('/admin');
-  }
-});
+// app.post('/login', (req, res) => {
+//   if (username != req.body.username || password != req.body.password) {
+//     gotoLogin(res);
+//   } else {
+//     const token = jwt.sign({}, secret, { expiresIn: '24h' });
+//     res.cookie('vttc_token', token);
+//     res.redirect('/admin');
+//   }
+// });
 
-app.get('/logout', (req, res) => {
-  gotoLogin(res);
-});
+// app.get('/logout', (req, res) => {
+//   gotoLogin(res);
+// });
 
-app.use('/admin', (req, res, next) => {
-  if (config) {
-    next();
-  } else {
-    const token = req.cookies.vttc_token;
-    if (token) {
-      jwt.verify(token, secret, (err, decoded) => {
-        if (err) {
-          gotoLogin(res);
-        } else {
-          req.decoded = decoded;
-          next();
-        }
-      });
-    } else {
-      gotoLogin(res);
-    }
-  }  
-});
+// app.use('/admin', (req, res, next) => {
+//   if (config) {
+//     next();
+//   } else {
+//     const token = req.cookies.vttc_token;
+//     if (token) {
+//       jwt.verify(token, secret, (err, decoded) => {
+//         if (err) {
+//           gotoLogin(res);
+//         } else {
+//           req.decoded = decoded;
+//           next();
+//         }
+//       });
+//     } else {
+//       gotoLogin(res);
+//     }
+//   }  
+// });
 
 app.get('/admin/initdata', (req, res) => {
   done(api.initdata(), res);

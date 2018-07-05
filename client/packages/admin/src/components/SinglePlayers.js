@@ -5,26 +5,29 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { teamSelector } from 'utils/selectors';
 import { TextBox, Select, CheckBox } from 'utils/comps';
-import { withLoad, withEdit, withSuccess, withParams } from 'utils';
+import { withLoad, withEditList, withSuccess, withParams } from 'utils';
 
-const SinglePlayers = ({ tournament, players, putTeam, postTeam, id }) =>
+const SinglePlayers = ({ tournament, players, putTeam, postTeam, setFormTournamentPlayers, id }) =>
   <div>
     <h1>Players - {tournament.name}</h1>
     <hr />
-    {(team.players || []).map((p, i) =>
-      <div class="f aic">
-        <Select name={`team.players[${i}].id`} index={i} options={players} />
+    {(tournament.players || []).map((p, i) =>
+      <div class="f aic mrc8" key={`players${i}`}>
+        <Select name={`players[${i}].id`} index={i} options={players} />
+        <CheckBox name={`players[${i}].isSub`} index={i} label="Is Substitute?" />
+        <TextBox name={`players[${i}].rating`} index={i} label="Rating" />
       </div>
     )}
+    <Button secondary onClick={() => setFormTournamentPlayers({})}>Add Player</Button>
     <hr />
-    <Button primary onClick={() => id[0] != '+' ? putTeam(team, { id1: tournament.id, id: team.id }) : postTeam(team, { id1: tournament.id })}>Save</Button>
+    <Button primary onClick={() => id[0] != '+' ? putTeam(tournament, { id: tournament.id }) : postTeam(tournament, { id: tournament.id })}>Save</Button>
   </div>
 
 export default compose(
   connect(teamSelector, actions),
   withParams,
   withLoad('players'),
-  withLoad('tournament', 'id1'),
-  withEdit('team', 'tournament.teams', {players:[]}),
+  withLoad('tournament'),
+  withEditList('tournament.players'),
   withSuccess('team', () => alert('Saved'), () => alert('Error happened!'))
 )(SinglePlayers)

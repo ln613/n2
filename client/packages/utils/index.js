@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.diff = exports.isPrimitiveType = exports.replaceParam = exports.addIndex = exports.toMonth = exports.toDate = exports.toTitleCase = exports.withNewId = exports.withParams = exports.withLang = exports.withListener = exports.withSuccess = exports.withNewValue = exports.withEdit = exports.withLoad = exports.view = exports.toLensPath = exports.getNameById = exports.getPropById = exports.findByName = exports.findById = exports.findByProp = exports.desc = exports.name = exports.ml = exports.admin = exports.api = exports.host = exports.isDev = exports.tap = exports.cdurl = undefined;
+exports.diff = exports.isPrimitiveType = exports.replaceParam = exports.addIndex = exports.toMonth = exports.toDate = exports.toTitleCase = exports.withNewId = exports.withParams = exports.withLang = exports.withListener = exports.withSuccess = exports.withNewValue = exports.withEditList = exports.withEdit = exports.withLoad = exports.view = exports.toLensPath = exports.getNameById = exports.getPropById = exports.findByName = exports.findById = exports.findByProp = exports.desc = exports.name = exports.ml = exports.admin = exports.api = exports.host = exports.isDev = exports.tap = exports.cdurl = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -88,6 +88,16 @@ var withEdit = exports.withEdit = function withEdit(p, l, o) {
         return x.id == id;
       }, (0, _ramda.view)((0, _ramda.lensPath)(list), this.props) || []);
       this.props.setForm(v || _extends({ id: id }, o || {}), { path: p });
+    }
+  });
+};
+
+var withEditList = exports.withEditList = function withEditList(p) {
+  return (0, _recompose.lifecycle)({
+    componentWillMount: function componentWillMount() {
+      var list = toLensPath(p);
+      var v = (0, _ramda.view)((0, _ramda.lensPath)(list), this.props);
+      this.props.setForm(v, { path: list });
     }
   });
 };

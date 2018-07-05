@@ -12,6 +12,7 @@ import Players from './Players';
 import Player from './Player';
 import Teams from './Teams';
 import Team from './Team';
+import SinglePlayers from './SinglePlayers';
 import Schedules from './Schedules';
 import Schedule from './Schedule';
 import Games from './Games';
@@ -37,6 +38,7 @@ const App = () =>
           <Route path='/players/:id' component={Player} />
           <Route path='/teams/:id' component={Teams} />
           <Route path='/team/:id1/:id' component={Team} />
+          <Route path='/singleplayers/:id' component={SinglePlayers} />
           <Route path='/schedules/:id' component={Schedules} />
           <Route path='/schedule/:id1/:id' component={Schedule} />
           <Route path='/games/:T/:S/:M' component={Games} />

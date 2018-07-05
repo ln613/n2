@@ -44,6 +44,14 @@ export const withEdit = (p, l, o) => lifecycle({
   }
 });
 
+export const withEditList = p => lifecycle({
+  componentWillMount() {
+    const list = toLensPath(p);
+    const v = _view(lensPath(list), this.props);
+    this.props.setForm(v, { path: list });
+  }
+});
+
 export const withNewValue = (p, v, f) => lifecycle({
   componentWillReceiveProps(np) {
     const nv = np[p];
