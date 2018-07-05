@@ -8,7 +8,7 @@ import { TextBox, CheckBox } from 'utils/comps';
 import { withEdit, withSuccess, withParams } from 'utils';
 import { withRouter } from "react-router-dom";
 
-const Tournament = ({ tournament, history, postTour, patchTour }) =>
+const Tournament = ({ tournament, history, postTour, patchTour, id }) =>
   <div>
     <h1>Tournament - {+tournament.id ? tournament.name : 'Add New'}</h1>
     <hr />
@@ -26,7 +26,7 @@ const Tournament = ({ tournament, history, postTour, patchTour }) =>
     <TextBox name="tournament.name" fluid />
     <CheckBox name="tournament.isSingle" label="Is Single?" />
     <hr />
-    <Button primary onClick={() => +tournament.id ? patchTour(tournament) : postTour(tournament)}>Save</Button>
+    <Button primary onClick={() => id[0] !== '+' ? patchTour(tournament) : postTour(tournament)}>Save</Button>
   </div>
 
 export default compose(

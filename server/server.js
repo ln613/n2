@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const api = require('./api');
-const { tap, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin } = require('./utils');
+const { tap, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule } = require('./utils');
 
 const app = express();
 
@@ -25,6 +25,10 @@ app.use((req, res, next) => {
 
 // get --------------------
 
+app.get('/api/ut', (req, res) => {
+  res.json(rrSchedule([{id:1,rating:1},{id:2,rating:2},{id:3,rating:3},{id:4,rating:4},{id:5,rating:5},{id:6,rating:6}]));
+});
+  
 app.get('/api/lookup', (req, res) => {
   send(
     Promise.all([api.cdVersion(), api.get('cats')])
@@ -111,6 +115,14 @@ app.get('/admin/cd/list', (req, res) => {
   send(api.cdList(), res);
 });
 
+app.get('/admin/genrr/:id', (req, res) => {
+  const {id} = req.params.id;
+  const p = api.getById('tournament', id)
+    .then(r => rrSchedule(r.players))
+    .then(r => api.update('tournament', { id, matches: r }));
+  send(p, res);
+});
+  
 app.get('/admin/count/:doc', (req, res) => {
   send(api.count(req.params.doc), res);
 });
@@ -126,7 +138,7 @@ app.put('/admin/:doc/:id/:list', (req, res) => {
 });
 
 app.post('/admin/:doc', (req, res) => {
-  send(api.add(req.params.doc, req.body), res);
+  send(api.add(req.params.doc, tap(req.body)), res);
 });
 
 app.put('/admin/:doc', (req, res) => {
