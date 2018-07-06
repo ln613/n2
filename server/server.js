@@ -45,9 +45,9 @@ app.get('/api/idname/:doc', (req, res) => {
   send(api.getIdName(req.params.doc), res);
 });
 
-app.get('/api/:doc/:prop/:val', (req, res) => {
-  const { doc, prop, val } = req.params;
-  send(api.search(doc, prop, val), res);
+app.get('/api/:doc/:prop/:val/:fields', (req, res) => {
+  const { doc, prop, val, fields } = req.params;
+  send(api.search(doc, prop, val, fields), res);
 });
 
 app.get('/api/:doc/:id', (req, res) => {

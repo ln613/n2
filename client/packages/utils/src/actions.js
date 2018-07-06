@@ -17,7 +17,7 @@ export const actionData = {
     methods: ['post', 'put', 'patch', 'delete']
   },
   tournaments: {
-    url: api + 'idname/tournaments'
+    url: api + 'tournaments/_/_/isSingle'
   },
   tour: {
     url: admin + 'tournaments',
@@ -55,6 +55,11 @@ export const actionData = {
     url: admin + 'tournaments/{id1}/schedules',
     path: 'tournament.schedules[id]',
     methods: ['post', 'put', 'patch', 'delete']
+  },
+  genrr: {
+    url: admin + 'genrr/{id}',
+    path: 'tournament.schedules',
+    method: 'post'
   },
   games: {
     url: api + 'games'

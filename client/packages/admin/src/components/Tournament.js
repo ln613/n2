@@ -8,7 +8,7 @@ import { TextBox, CheckBox } from 'utils/comps';
 import { withEdit, withSuccess, withParams } from 'utils';
 import { withRouter } from "react-router-dom";
 
-const Tournament = ({ tournament, history, postTour, patchTour, id }) =>
+const Tournament = ({ tournament, history, postTour, patchTour, postGenrr, id }) =>
   <div>
     <h1>Tournament - {+tournament.id ? tournament.name : 'Add New'}</h1>
     <hr />
@@ -20,6 +20,10 @@ const Tournament = ({ tournament, history, postTour, patchTour, id }) =>
       }
       <Button primary onClick={() => history.push(`/schedules/${tournament.id}`)}>Schedules</Button>
       <Button primary onClick={() => history.push(`/games/${tournament.id}`)}>Games</Button>
+      {tournament.isSingle
+        ? <Button primary onClick={() => history.push(`/singleplayers/${tournament.id}`)}>Players</Button>
+        : null
+      }
     </div>  
     : null}  
     <TextBox name="tournament.id" disabled />

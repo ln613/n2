@@ -1,7 +1,7 @@
 const fs = require('fs');
 const mongodb = require('mongodb');
 const cd = require('cloudinary');
-const { sortWith, ascend, descend, prop } = require('ramda');
+const { sortWith, ascend, descend, prop, fromPairs, merge } = require('ramda');
 const { tap, config } = require('./utils');
 
 let db = null;
@@ -36,9 +36,14 @@ e.get = doc => db.collection(doc).find({}, { _id: 0 }).toArray()
 
 e.getIdName = doc => db.collection(doc).find({}, { _id: 0, id: 1, name: 1 }).toArray()
 
+e.getIdName = doc => db.collection(doc).find({}, { _id: 0, id: 1, name: 1 }).toArray()
+
 e.getById = (doc, id) => db.collection(doc).findOne({ id: +id }, { _id: 0 })
 
-e.search = (doc, prop, val) => db.collection(doc).find({ [prop]: new RegExp(val, 'i')}, { _id: 0 }).toArray()
+e.search = (doc, prop, val, fields) => db.collection(doc).find(
+    (prop || prop === '_') ? {} : { [prop]: isNaN(+val) ? new RegExp(val, 'i') : +val},
+    merge({ _id: 0, id: 1, name: 1 }, fields ? fromPairs(fields.split(',').map(x => [x, 1])) : {})
+).toArray()
 
 e.add = (doc, obj) => db.collection(doc).insert(obj);
 
