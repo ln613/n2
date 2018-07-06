@@ -21,7 +21,7 @@ const Tournament = ({ tournament, history, postTour, patchTour, postGenrr, id })
       <Button primary onClick={() => history.push(`/schedules/${tournament.id}`)}>Schedules</Button>
       <Button primary onClick={() => history.push(`/games/${tournament.id}`)}>Games</Button>
       {tournament.isSingle
-        ? <Button primary onClick={() => history.push(`/singleplayers/${tournament.id}`)}>Players</Button>
+        ? <Button primary onClick={() => postGenrr()}>Players</Button>
         : null
       }
     </div>  
