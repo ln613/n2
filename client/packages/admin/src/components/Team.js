@@ -31,7 +31,7 @@ export default compose(
   connect(teamSelector, actions),
   withParams,
   withLoad('players'),
-  withLoad('tournament', 'id1'),
+  withLoad('tournament', ['id', 'id1']),
   withEdit('team', 'tournament.teams', {players:[]}),
   withSuccess('team', () => alert('Saved'), () => alert('Error happened!'))
 )(Team)

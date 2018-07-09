@@ -3,6 +3,7 @@ const mongodb = require('mongodb');
 const cd = require('cloudinary');
 const { sortWith, ascend, descend, prop, fromPairs, merge } = require('ramda');
 const { tap, config } = require('./utils');
+const moment = require('moment');
 
 let db = null;
 if (config) cd.config({ cloud_name: 'vttc', api_key: config.cloudinary_key, api_secret: config.cloudinary_secret });
@@ -68,5 +69,15 @@ e.getPlayerGames = id => db.collection('tournaments').aggregate([
   { $match: { $or: [ { "games.p1": +id }, { "games.p2": +id } ] } },
   { $project: { games: 1, _id: 0 } }
 ]).toArray()
+
+e.getPlayerRating = (id, date) => db.collection('tournaments').aggregate([
+  { $unwind: '$games' },
+  { $match: { $or: [ { 'gmes.p1': id }, { 'games.p2': id } ] } },
+  { $match: { 'games.date': { $lte: tap(date) === '_' ? moment().format('YYYY-MM-DD') : date } } },
+  { $sort: { 'games.date': -1, 'games.id': -1 } },
+  { $limit: 1 },
+  { $replaceRoot: { newRoot: '$games'} },
+  { $project: { rating: { $cond: [{ $eq: ['p1', id] }, '$p1Rating', '$p2Rating'] } } }
+]).toArray().then(x => x[0].rating)
 
 module.exports = e;

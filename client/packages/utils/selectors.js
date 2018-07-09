@@ -191,7 +191,7 @@ var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t,
     game.isWin = isWin(game);
     return game;
   });
-  var schedules = (t.schedules || []).map(function (s) {
+  var schedules = (0, _.tap)(t.schedules || []).map(function (s) {
     return _extends({}, s, {
       date: (0, _.toDate)(s.date),
       matches: (0, _ramda.range)(1, 9).map(function (n) {
@@ -380,7 +380,7 @@ var ratingsSelector = exports.ratingsSelector = (0, _noRedux.mapStateWithSelecto
 var playersSelector = exports.playersSelector = (0, _noRedux.mapStateWithSelectors)({ players: players, lookup: lookup, player: form('player') });
 var tournamentsSelector = exports.tournamentsSelector = (0, _noRedux.mapStateWithSelectors)({ tournaments: tournamentsWithYears, lookup: lookup });
 var tournamentSelector = exports.tournamentSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, lookup: lookup, players: players });
-var tourSelector = exports.tourSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: form('tournament'), tournaments: tournaments });
+var tourSelector = exports.tourSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: form('tournament'), tournaments: tournaments, players: players });
 var historySelector = exports.historySelector = (0, _noRedux.mapStateWithSelectors)({ history: history, lookup: lookup, players: players });
 var standingSelector = exports.standingSelector = (0, _noRedux.mapStateWithSelectors)({ standing: standing, tournament: tournament });
 var teamSelector = exports.teamSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, team: form('team'), players: players, monthRatings: monthRatings });

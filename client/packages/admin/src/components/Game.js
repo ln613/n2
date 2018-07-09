@@ -46,7 +46,7 @@ export default compose(
   connect(gameSelector, actions),
   withParams,
   withLoad('players'),
-  withLoad('tournament', 'T', true),
+  withLoad('tournament', ['id', 'T'], true),
   withEdit('game', 'tournament.games', { g1: [], g2: []}),
   withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
   withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),

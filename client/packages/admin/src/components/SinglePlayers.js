@@ -1,33 +1,36 @@
 import React from 'react';
-import { compose } from 'recompose';
+import { compose, withProps } from 'recompose';
 import { connect } from 'no-redux';
+import moment from 'moment';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
-import { tournamentSelector } from 'utils/selectors';
+import { tourSelector } from 'utils/selectors';
 import { TextBox, Select, CheckBox } from 'utils/comps';
 import { withLoad, withEditList, withSuccess, withParams } from 'utils';
 
-const SinglePlayers = ({ tournament, players, patchTournament, setFormTournamentPlayers, id }) =>
+const SinglePlayers = ({ tournament, date, players, patchTour, setFormTournamentPlayers, getPlayerRating, id }) =>
   <div>
     <h1>Players - {tournament.name}</h1>
     <hr />
     {(tournament.players || []).map((p, i) =>
       <div class="f aic mrc8" key={`players${i}`}>
-        <Select name={`players[${i}].id`} index={i} options={players} />
-        <CheckBox name={`players[${i}].isSub`} index={i} label="Is Substitute?" />
-        <TextBox name={`players[${i}].rating`} index={i} label="Rating" />
+        <Select name={`tournament.players[${i}].id`} index={i} options={players} />
+        <TextBox name={`tournament.players[${i}].rating`} index={i} label="Rating" />
+        <Button primary onClick={() => getPlayerRating({id: tournament.players[i].id, date})}>Get Tournament Rating</Button>
+        <Button primary onClick={() => getPlayerRating({id: tournament.players[i].id, date: '_'})}>Get Current Rating</Button>
       </div>
     )}
     <Button secondary onClick={() => setFormTournamentPlayers({})}>Add Player</Button>
     <hr />
-    <Button primary onClick={() => patchTournament(tournament.players, { id })}>Save</Button>
+    <Button primary onClick={() => patchTour(tournament, { id })}>Save</Button>
   </div>
 
 export default compose(
-  connect(tournamentSelector, actions),
+  connect(tourSelector, actions),
   withParams,
+  withProps(p => ({ date: moment(p.tournament.ratingDate).format('YYYY-MM-DD') })),
   withLoad('players'),
   withLoad('tournament'),
   withEditList('tournament.players'),
-  withSuccess('tournament', () => alert('Saved'), () => alert('Error happened!'))
+  withSuccess('tour', () => alert('Saved'), () => alert('Error happened!'))
 )(SinglePlayers)

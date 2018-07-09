@@ -153,7 +153,9 @@ var withInput = function withInput(isCheck) {
       var value = (0, _ramda.view)((0, _ramda.lensPath)(path), form);
       if (!(0, _ramda.isNil)(index) && (0, _ramda.is)(Array, value)) value = value[index];
       var onChange = function onChange(e, i, v) {
-        return setForm(name, getElemValue(e, i, v), index);
+        var val = getElemValue(e, i, v);
+        setForm(name, val, index);
+        if (args.onChange) args.onChange(val, index);
       };
       var o = _extends({}, args, { id: path.join('_'), name: name, value: value, label: label, onChange: onChange });
       if (!noLabel && !label && path.length > 1) o.label = path[1];

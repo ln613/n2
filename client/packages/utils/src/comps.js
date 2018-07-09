@@ -83,7 +83,11 @@ const withInput = isCheck => comp => ({ name, index, label, noLabel, form, setFo
   const path = name.replace(/\[/g, '.').replace(/\]/g, '').split('.');
   let value = view(lensPath(path), form);
   if (!isNil(index) && is(Array, value)) value = value[index];
-  const onChange = (e, i, v) => setForm(name, getElemValue(e, i, v), index);
+  const onChange = (e, i, v) => {
+    const val = getElemValue(e, i, v);
+    setForm(name, val, index);
+    if (args.onChange) args.onChange(val, index);
+  }
   const o = { ...args, id: path.join('_'), name, value, label, onChange };
   if (!noLabel && !label && path.length > 1) o.label = path[1];
   return comp(o);

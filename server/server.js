@@ -3,6 +3,7 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const moment = require('moment');
 const api = require('./api');
 const { tap, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule } = require('./utils');
 
@@ -39,6 +40,10 @@ app.get('/api/lookup', (req, res) => {
 
 app.get('/api/playergames/:id', (req, res) => {
   send(api.getPlayerGames(req.params.id), res);
+});
+
+app.get('/api/playerRating/:id/:date', (req, res) => {
+  send(api.getPlayerRating(+req.params.id, req.params.date), res);
 });
 
 app.get('/api/idname/:doc', (req, res) => {
@@ -116,10 +121,13 @@ app.get('/admin/cd/list', (req, res) => {
 });
 
 app.get('/admin/genrr/:id', (req, res) => {
-  const {id} = req.params.id;
-  const p = api.getById('tournament', id)
-    .then(r => rrSchedule(r.players))
-    .then(r => api.update('tournament', { id, matches: r }));
+  const id = req.params.id;
+  const t = api.getById('tournament', id);
+
+  const p = (t.players && !t.schedules)
+    ? rrSchedule(t.players).then(s => api.update('tournament', { id, schedules: s.map((x, i) => ({ id: i + 1, matches: x, date: momemt(t.startDate).add(i, 'week').format('MM/DD/YYYY') })) }))
+    : Promise.resolve({});
+
   send(p, res);
 });
   

@@ -11,13 +11,17 @@ export const actionData = {
   players: {
     url: api + 'players'
   },
+  playerRating: {
+    url: api + 'playerRating/{id}/{date}',
+    path: 'form.tournament.players[id].rating'
+  },
   player: {
     url: admin + 'players',
     path: 'players[id]',
     methods: ['post', 'put', 'patch', 'delete']
   },
   tournaments: {
-    url: api + 'tournaments/_/_/isSingle'
+    url: api + 'tournaments/_/_/isSingle,startDate,ratingDate,players'
   },
   tour: {
     url: admin + 'tournaments',
@@ -58,8 +62,7 @@ export const actionData = {
   },
   genrr: {
     url: admin + 'genrr/{id}',
-    path: 'tournament.schedules',
-    method: 'post'
+    path: 'tournament.schedules'
   },
   games: {
     url: api + 'games'

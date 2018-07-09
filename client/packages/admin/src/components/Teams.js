@@ -22,7 +22,7 @@ export default compose(
   connect(tournamentSelector, actions),
   withParams,
   withLoad('players'),
-  withLoad('tournament', 'id'),
+  withLoad('tournament'),
   withNewId('tournament.teams'),
   withRouter
 )(Teams)

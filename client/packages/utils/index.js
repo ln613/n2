@@ -72,7 +72,7 @@ var view = exports.view = function view(s, o) {
 var withLoad = exports.withLoad = function withLoad(p, v, force) {
   return (0, _recompose.lifecycle)({
     componentWillMount: function componentWillMount() {
-      var v1 = (0, _ramda.is)(Array, v) ? v[0] : 'id';
+      var v1 = (0, _ramda.is)(Array, v) ? v[0] : v || 'id';
       var v2 = (0, _ramda.is)(Array, v) ? v[1] : v || 'id';
       (force || (0, _ramda.isEmpty)(this.props[p])) && this.props['get' + p[0].toUpperCase() + p.slice(1)](_defineProperty({}, v1, this.props[v2]));
     }

@@ -32,7 +32,7 @@ const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id
 export default compose(
   connect(scheduleSelector, actions),
   withParams,
-  withLoad('tournament', 'id1', true),
+  withLoad('tournament', ['id', 'id1'], true),
   withEdit('schedule', 'tournament.schedules', { matches: [] }),
   withSuccess('schedule', () => alert('Saved'), () => alert('Error happened!')),
   withRouter

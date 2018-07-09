@@ -116,7 +116,7 @@ const tournament = createSelector(
       game.isWin = isWin(game);
       return game;
     });
-    const schedules = (t.schedules || []).map(s => ({
+    const schedules = (tap(t.schedules || [])).map(s => ({
       ...s,
       date: toDate(s.date),
       matches: range(1, 9)
@@ -256,7 +256,7 @@ export const ratingsSelector = mapStateWithSelectors({ cats, form, lang });
 export const playersSelector = mapStateWithSelectors({ players, lookup, player: form('player') });
 export const tournamentsSelector = mapStateWithSelectors({ tournaments: tournamentsWithYears, lookup });
 export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players });
-export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), tournaments });
+export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), tournaments, players });
 export const historySelector = mapStateWithSelectors({ history, lookup, players });
 export const standingSelector = mapStateWithSelectors({ standing, tournament });
 export const teamSelector = mapStateWithSelectors({ tournament, team: form('team'), players, monthRatings });

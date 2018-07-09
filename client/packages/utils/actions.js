@@ -19,13 +19,17 @@ var actionData = exports.actionData = {
   players: {
     url: _utils.api + 'players'
   },
+  playerRating: {
+    url: _utils.api + 'playerRating/{id}/{date}',
+    path: 'form.tournament.players[id].rating'
+  },
   player: {
     url: _utils.admin + 'players',
     path: 'players[id]',
     methods: ['post', 'put', 'patch', 'delete']
   },
   tournaments: {
-    url: _utils.api + 'tournaments/_/_/isSingle'
+    url: _utils.api + 'tournaments/_/_/isSingle,startDate,ratingDate,players'
   },
   tour: {
     url: _utils.admin + 'tournaments',
@@ -66,8 +70,7 @@ var actionData = exports.actionData = {
   },
   genrr: {
     url: _utils.admin + 'genrr/{id}',
-    path: 'tournament.schedules',
-    method: 'post'
+    path: 'tournament.schedules'
   },
   games: {
     url: _utils.api + 'games'

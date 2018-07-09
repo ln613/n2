@@ -29,7 +29,7 @@ export const view = (s, o) => _view(lensPath(toLensPath(s)), o);
 
 export const withLoad = (p, v, force) => lifecycle({
   componentWillMount() {
-    const v1 = is(Array, v) ? v[0] : 'id';
+    const v1 = is(Array, v) ? v[0] : (v || 'id');
     const v2 = is(Array, v) ? v[1] : (v || 'id');
     (force || isEmpty(this.props[p])) && this.props['get' + p[0].toUpperCase() + p.slice(1)]({ [v1]: this.props[v2] });
   }

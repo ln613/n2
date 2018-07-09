@@ -5,10 +5,10 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { tourSelector } from 'utils/selectors';
 import { TextBox, CheckBox } from 'utils/comps';
-import { withEdit, withSuccess, withParams } from 'utils';
+import { withEdit, withSuccess, withParams, tap } from 'utils';
 import { withRouter } from "react-router-dom";
 
-const Tournament = ({ tournament, history, postTour, patchTour, postGenrr, id }) =>
+const Tournament = ({ tournament, history, postTour, patchTour, getGenrr, id }) =>
   <div>
     <h1>Tournament - {+tournament.id ? tournament.name : 'Add New'}</h1>
     <hr />
@@ -21,7 +21,7 @@ const Tournament = ({ tournament, history, postTour, patchTour, postGenrr, id })
       <Button primary onClick={() => history.push(`/schedules/${tournament.id}`)}>Schedules</Button>
       <Button primary onClick={() => history.push(`/games/${tournament.id}`)}>Games</Button>
       {tournament.isSingle
-        ? <Button primary onClick={() => postGenrr()}>Players</Button>
+        ? <Button primary onClick={() => getGenrr({ id })}>Generate Schedule</Button>
         : null
       }
     </div>  
@@ -29,6 +29,8 @@ const Tournament = ({ tournament, history, postTour, patchTour, postGenrr, id })
     <TextBox name="tournament.id" disabled />
     <TextBox name="tournament.name" fluid />
     <CheckBox name="tournament.isSingle" label="Is Single?" />
+    <TextBox name="tournament.startDate" />
+    <TextBox name="tournament.ratingDate" />
     <hr />
     <Button primary onClick={() => id[0] !== '+' ? patchTour(tournament) : postTour(tournament)}>Save</Button>
   </div>
