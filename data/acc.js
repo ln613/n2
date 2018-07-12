@@ -1,10 +1,10 @@
 const fs = require('fs');
 const util = require('util');
 
-const players = JSON.parse(fs.readFileSync('player.json')).dataroot.PLAYERS_LIST;
-const ratings = JSON.parse(fs.readFileSync('rating.json')).dataroot.PLAYERS_RATING;
-const ts = JSON.parse(fs.readFileSync('Tournament.json')).dataroot.TournamentTable;
-const games = JSON.parse(fs.readFileSync('game.json')).dataroot.RATEGAMESLIST;
+const players = JSON.parse(fs.readFileSync('player.json'));
+const ratings = JSON.parse(fs.readFileSync('rating.json'));
+const ts = JSON.parse(fs.readFileSync('Tournament.json'));
+const games = JSON.parse(fs.readFileSync('game.json'));
 
 const o = {};
 
@@ -28,29 +28,42 @@ Object.keys(teams).forEach(d => teams[d].forEach(t => t.players = t.players.map(
 
 const schedules = require('./schedule');
 
-o.tournaments = ts.map(x => ({
-  id: +x.ID,
-  name: x.TournamentName,
-  teams: teams[x.ID] || [],
-  schedules: schedules[x.ID] || [],
-  games: games.filter(y => y.TOURNAMENT_ID == x.ID).map(y => {
-    const p1w = +y.PLAYER_A_WON_GAMES;
-    const p2w = +y.PLAYER_B_WON_GAMES;
-    const isP1 = p1w > p2w;
-    
-    return {
-      id: y.GAME_ID,
-      date: y.GAME_DATE,
-      p1: +y.PLAYER_A_ID,
-      p2: +y.PLAYER_B_ID,
-      p1Rating: isP1 ? +y.WINNER_RATING : +y.LOSER_RATING,
-      p2Rating: isP1 ? +y.LOSER_RATING : +y.WINNER_RATING,
-      p1Diff: isP1 ? +y.WINNER_RATING_G_L : +y.LOSER_RATING_G_L,
-      p2Diff: isP1 ? +y.LOSER_RATING_G_L : +y.WINNER_RATING_G_L,
-      result: y.PLAYER_A_WON_GAMES + ':' + y.PLAYER_B_WON_GAMES,
-      rated: y.GAME_RATED === '1'
-    };
-  })
-}));
+o.tournaments = ts.map(x => {
+  const tts = teams[x.ID] || [];
+
+  return {
+    id: +x.ID,
+    name: x.TournamentName,
+    teams: tts,
+    schedules: schedules[x.ID] || [],
+    games: games.filter(y => y.TOURNAMENT_ID == x.ID).map(y => {
+      const p1w = +y.PLAYER_A_WON_GAMES;
+      const p2w = +y.PLAYER_B_WON_GAMES;
+      const isP1 = p1w > p2w;
+      const p1 = +y.PLAYER_A_ID;
+      const p2 = +y.PLAYER_B_ID;
+
+      const r = {
+        id: y.GAME_ID,
+        date: y.GAME_DATE,
+        p1,
+        p2,
+        p1Rating: isP1 ? +y.WINNER_RATING : +y.LOSER_RATING,
+        p2Rating: isP1 ? +y.LOSER_RATING : +y.WINNER_RATING,
+        p1Diff: isP1 ? +y.WINNER_RATING_G_L : +y.LOSER_RATING_G_L,
+        p2Diff: isP1 ? +y.LOSER_RATING_G_L : +y.WINNER_RATING_G_L,
+        result: y.PLAYER_A_WON_GAMES + ':' + y.PLAYER_B_WON_GAMES,
+        rated: y.GAME_RATED === '1'
+      };
+
+      if (x.ID === 86) {console.log(r.p1, r.p2);
+        r.t1 = tts.find(z => z.players.some(p => p.id === r.p1)).id; 
+        r.t2 = tts.find(z => z.players.some(p => p.id === r.p2)).id; 
+      }
+
+      return r;
+    })
+  };
+});
 
 fs.writeFileSync('1.json', JSON.stringify(o, null, 2));

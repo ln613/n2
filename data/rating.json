@@ -1,3243 +1,3326 @@
-{
-  "dataroot": {
-    "-xmlns:od": "urn:schemas-microsoft-com:officedata",
-    "-generated": "2018-05-05T08:21:27",
-    "PLAYERS_RATING": [
-      {
-        "ROW_ID": "95",
-        "PLAYER_ID": "3",
-        "RATING": "588",
-        "LAST_UPDATE": "2014-02-21T00:00:00"
-      },
-      {
-        "ROW_ID": "96",
-        "PLAYER_ID": "4",
-        "RATING": "404",
-        "LAST_UPDATE": "2018-02-04T00:00:00"
-      },
-      {
-        "ROW_ID": "97",
-        "PLAYER_ID": "5",
-        "RATING": "455",
-        "LAST_UPDATE": "2018-02-02T00:00:00"
-      },
-      {
-        "ROW_ID": "98",
-        "PLAYER_ID": "6",
-        "RATING": "153",
-        "LAST_UPDATE": "2013-11-01T00:00:00"
-      },
-      {
-        "ROW_ID": "99",
-        "PLAYER_ID": "7",
-        "RATING": "1956",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "100",
-        "PLAYER_ID": "8",
-        "RATING": "691",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "101",
-        "PLAYER_ID": "9",
-        "RATING": "1249",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "102",
-        "PLAYER_ID": "10",
-        "RATING": "816",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "103",
-        "PLAYER_ID": "11",
-        "RATING": "403",
-        "LAST_UPDATE": "2014-03-30T00:00:00"
-      },
-      {
-        "ROW_ID": "104",
-        "PLAYER_ID": "12",
-        "RATING": "228",
-        "LAST_UPDATE": "2013-06-01T00:00:00"
-      },
-      {
-        "ROW_ID": "105",
-        "PLAYER_ID": "13",
-        "RATING": "325",
-        "LAST_UPDATE": "2014-10-31T00:00:00"
-      },
-      {
-        "ROW_ID": "106",
-        "PLAYER_ID": "14",
-        "RATING": "460",
-        "LAST_UPDATE": "2016-06-17T00:00:00"
-      },
-      {
-        "ROW_ID": "107",
-        "PLAYER_ID": "15",
-        "RATING": "1822",
-        "LAST_UPDATE": "2015-12-12T00:00:00"
-      },
-      {
-        "ROW_ID": "108",
-        "PLAYER_ID": "16",
-        "RATING": "962",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "109",
-        "PLAYER_ID": "17",
-        "RATING": "247",
-        "LAST_UPDATE": "2013-11-01T00:00:00"
-      },
-      {
-        "ROW_ID": "110",
-        "PLAYER_ID": "18",
-        "RATING": "411",
-        "LAST_UPDATE": "2013-11-01T00:00:00"
-      },
-      {
-        "ROW_ID": "111",
-        "PLAYER_ID": "19",
-        "RATING": "672",
-        "LAST_UPDATE": "2013-11-01T00:00:00"
-      },
-      {
-        "ROW_ID": "112",
-        "PLAYER_ID": "20",
-        "RATING": "438",
-        "LAST_UPDATE": "2018-01-12T00:00:00"
-      },
-      {
-        "ROW_ID": "113",
-        "PLAYER_ID": "21",
-        "RATING": "2288",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "114",
-        "PLAYER_ID": "22",
-        "RATING": "100",
-        "LAST_UPDATE": "2014-07-06T00:00:00"
-      },
-      {
-        "ROW_ID": "115",
-        "PLAYER_ID": "23",
-        "RATING": "1490",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "116",
-        "PLAYER_ID": "24",
-        "RATING": "722",
-        "LAST_UPDATE": "2015-04-18T00:00:00"
-      },
-      {
-        "ROW_ID": "117",
-        "PLAYER_ID": "25",
-        "RATING": "1180",
-        "LAST_UPDATE": "2016-11-27T00:00:00"
-      },
-      {
-        "ROW_ID": "118",
-        "PLAYER_ID": "26",
-        "RATING": "127",
-        "LAST_UPDATE": "2014-05-16T00:00:00"
-      },
-      {
-        "ROW_ID": "119",
-        "PLAYER_ID": "27",
-        "RATING": "1689",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "120",
-        "PLAYER_ID": "28",
-        "RATING": "725",
-        "LAST_UPDATE": "2016-09-30T00:00:00"
-      },
-      {
-        "ROW_ID": "121",
-        "PLAYER_ID": "29",
-        "RATING": "576",
-        "LAST_UPDATE": "2017-11-17T00:00:00"
-      },
-      {
-        "ROW_ID": "122",
-        "PLAYER_ID": "30",
-        "RATING": "105",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "123",
-        "PLAYER_ID": "31",
-        "RATING": "2091",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "124",
-        "PLAYER_ID": "32",
-        "RATING": "206",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "125",
-        "PLAYER_ID": "33",
-        "RATING": "541",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "126",
-        "PLAYER_ID": "34",
-        "RATING": "1094",
-        "LAST_UPDATE": "2016-03-27T00:00:00"
-      },
-      {
-        "ROW_ID": "127",
-        "PLAYER_ID": "35",
-        "RATING": "497",
-        "LAST_UPDATE": "2016-06-03T00:00:00"
-      },
-      {
-        "ROW_ID": "128",
-        "PLAYER_ID": "36",
-        "RATING": "1324",
-        "LAST_UPDATE": "2017-02-12T00:00:00",
-        "Remark": "correct for aug 24"
-      },
-      {
-        "ROW_ID": "129",
-        "PLAYER_ID": "37",
-        "RATING": "1756",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "130",
-        "PLAYER_ID": "38",
-        "RATING": "1857",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "131",
-        "PLAYER_ID": "39",
-        "RATING": "783",
-        "LAST_UPDATE": "2017-03-31T00:00:00"
-      },
-      {
-        "ROW_ID": "132",
-        "PLAYER_ID": "40",
-        "RATING": "425",
-        "LAST_UPDATE": "2018-02-02T00:00:00"
-      },
-      {
-        "ROW_ID": "133",
-        "PLAYER_ID": "41",
-        "RATING": "441",
-        "LAST_UPDATE": "2015-02-27T00:00:00"
-      },
-      {
-        "ROW_ID": "134",
-        "PLAYER_ID": "42",
-        "RATING": "213",
-        "LAST_UPDATE": "2013-11-01T00:00:00"
-      },
-      {
-        "ROW_ID": "135",
-        "PLAYER_ID": "43",
-        "RATING": "644",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "136",
-        "PLAYER_ID": "44",
-        "RATING": "1682",
-        "LAST_UPDATE": "2014-09-07T00:00:00"
-      },
-      {
-        "ROW_ID": "137",
-        "PLAYER_ID": "45",
-        "RATING": "315",
-        "LAST_UPDATE": "2013-11-01T00:00:00"
-      },
-      {
-        "ROW_ID": "138",
-        "PLAYER_ID": "46",
-        "RATING": "115",
-        "LAST_UPDATE": "2014-10-26T00:00:00"
-      },
-      {
-        "ROW_ID": "139",
-        "PLAYER_ID": "47",
-        "RATING": "161",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "140",
-        "PLAYER_ID": "48",
-        "RATING": "1051",
-        "LAST_UPDATE": "2016-06-12T00:00:00"
-      },
-      {
-        "ROW_ID": "141",
-        "PLAYER_ID": "49",
-        "RATING": "1098",
-        "LAST_UPDATE": "2018-01-07T00:00:00",
-        "Remark": "correct for aug 24"
-      },
-      {
-        "ROW_ID": "142",
-        "PLAYER_ID": "50",
-        "RATING": "306",
-        "LAST_UPDATE": "2014-05-16T00:00:00"
-      },
-      {
-        "ROW_ID": "143",
-        "PLAYER_ID": "51",
-        "RATING": "528",
-        "LAST_UPDATE": "2017-07-14T00:00:00"
-      },
-      {
-        "ROW_ID": "144",
-        "PLAYER_ID": "52",
-        "RATING": "1810",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "145",
-        "PLAYER_ID": "53",
-        "RATING": "1331",
-        "LAST_UPDATE": "2016-06-12T00:00:00"
-      },
-      {
-        "ROW_ID": "146",
-        "PLAYER_ID": "54",
-        "RATING": "586",
-        "LAST_UPDATE": "2018-01-12T00:00:00"
-      },
-      {
-        "ROW_ID": "147",
-        "PLAYER_ID": "55",
-        "RATING": "1342",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "148",
-        "PLAYER_ID": "56",
-        "RATING": "2394",
-        "LAST_UPDATE": "2018-02-02T00:00:00"
-      },
-      {
-        "ROW_ID": "149",
-        "PLAYER_ID": "57",
-        "RATING": "1601",
-        "LAST_UPDATE": "2013-12-31T00:00:00"
-      },
-      {
-        "ROW_ID": "150",
-        "PLAYER_ID": "58",
-        "RATING": "603",
-        "LAST_UPDATE": "2014-11-21T00:00:00"
-      },
-      {
-        "ROW_ID": "151",
-        "PLAYER_ID": "59",
-        "RATING": "944",
-        "LAST_UPDATE": "2018-02-04T00:00:00"
-      },
-      {
-        "ROW_ID": "152",
-        "PLAYER_ID": "60",
-        "RATING": "131",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "153",
-        "PLAYER_ID": "61",
-        "RATING": "1549",
-        "LAST_UPDATE": "2017-06-04T00:00:00",
-        "Remark": "correct for aug 24"
-      },
-      {
-        "ROW_ID": "154",
-        "PLAYER_ID": "62",
-        "RATING": "100",
-        "LAST_UPDATE": "2013-11-01T00:00:00"
-      },
-      {
-        "ROW_ID": "155",
-        "PLAYER_ID": "63",
-        "RATING": "456",
-        "LAST_UPDATE": "2015-07-17T00:00:00"
-      },
-      {
-        "ROW_ID": "156",
-        "PLAYER_ID": "64",
-        "RATING": "654",
-        "LAST_UPDATE": "2014-12-12T00:00:00"
-      },
-      {
-        "ROW_ID": "157",
-        "PLAYER_ID": "65",
-        "RATING": "424",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "158",
-        "PLAYER_ID": "66",
-        "RATING": "715",
-        "LAST_UPDATE": "2016-11-26T00:00:00"
-      },
-      {
-        "ROW_ID": "159",
-        "PLAYER_ID": "67",
-        "RATING": "345",
-        "LAST_UPDATE": "2015-03-06T00:00:00"
-      },
-      {
-        "ROW_ID": "160",
-        "PLAYER_ID": "68",
-        "RATING": "100",
-        "LAST_UPDATE": "2013-06-01T00:00:00"
-      },
-      {
-        "ROW_ID": "161",
-        "PLAYER_ID": "69",
-        "RATING": "1927",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "162",
-        "PLAYER_ID": "70",
-        "RATING": "911",
-        "LAST_UPDATE": "2014-08-08T00:00:00"
-      },
-      {
-        "ROW_ID": "163",
-        "PLAYER_ID": "71",
-        "RATING": "563",
-        "LAST_UPDATE": "2015-02-08T00:00:00"
-      },
-      {
-        "ROW_ID": "164",
-        "PLAYER_ID": "72",
-        "RATING": "768",
-        "LAST_UPDATE": "2013-11-01T00:00:00"
-      },
-      {
-        "ROW_ID": "165",
-        "PLAYER_ID": "73",
-        "RATING": "626",
-        "LAST_UPDATE": "2017-07-14T00:00:00"
-      },
-      {
-        "ROW_ID": "166",
-        "PLAYER_ID": "74",
-        "RATING": "652",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "167",
-        "PLAYER_ID": "75",
-        "RATING": "833",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "168",
-        "PLAYER_ID": "76",
-        "RATING": "739",
-        "LAST_UPDATE": "2018-01-05T00:00:00",
-        "Remark": "correct 7 for 2013 top 20"
-      },
-      {
-        "ROW_ID": "169",
-        "PLAYER_ID": "77",
-        "RATING": "430",
-        "LAST_UPDATE": "2017-03-10T00:00:00"
-      },
-      {
-        "ROW_ID": "170",
-        "PLAYER_ID": "78",
-        "RATING": "3037",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "171",
-        "PLAYER_ID": "79",
-        "RATING": "604",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "172",
-        "PLAYER_ID": "80",
-        "RATING": "2009",
-        "LAST_UPDATE": "2014-07-18T00:00:00"
-      },
-      {
-        "ROW_ID": "173",
-        "PLAYER_ID": "81",
-        "RATING": "1354",
-        "LAST_UPDATE": "2015-03-08T00:00:00"
-      },
-      {
-        "ROW_ID": "174",
-        "PLAYER_ID": "82",
-        "RATING": "100",
-        "LAST_UPDATE": "2013-08-15T00:00:00"
-      },
-      {
-        "ROW_ID": "175",
-        "PLAYER_ID": "83",
-        "RATING": "597",
-        "LAST_UPDATE": "2013-11-01T00:00:00"
-      },
-      {
-        "ROW_ID": "176",
-        "PLAYER_ID": "84",
-        "RATING": "100",
-        "LAST_UPDATE": "2013-11-01T00:00:00"
-      },
-      {
-        "ROW_ID": "177",
-        "PLAYER_ID": "85",
-        "RATING": "100",
-        "LAST_UPDATE": "2013-11-01T00:00:00"
-      },
-      {
-        "ROW_ID": "178",
-        "PLAYER_ID": "86",
-        "RATING": "202",
-        "LAST_UPDATE": "2015-06-07T00:00:00"
-      },
-      {
-        "ROW_ID": "179",
-        "PLAYER_ID": "87",
-        "RATING": "959",
-        "LAST_UPDATE": "2014-02-15T00:00:00"
-      },
-      {
-        "ROW_ID": "180",
-        "PLAYER_ID": "88",
-        "RATING": "745",
-        "LAST_UPDATE": "2014-02-15T00:00:00"
-      },
-      {
-        "ROW_ID": "181",
-        "PLAYER_ID": "89",
-        "RATING": "618",
-        "LAST_UPDATE": "2013-11-01T00:00:00"
-      },
-      {
-        "ROW_ID": "182",
-        "PLAYER_ID": "90",
-        "RATING": "521",
-        "LAST_UPDATE": "2014-10-10T00:00:00"
-      },
-      {
-        "ROW_ID": "183",
-        "PLAYER_ID": "91",
-        "RATING": "100",
-        "LAST_UPDATE": "2014-02-15T00:00:00"
-      },
-      {
-        "ROW_ID": "184",
-        "PLAYER_ID": "92",
-        "RATING": "615",
-        "LAST_UPDATE": "2014-03-07T00:00:00"
-      },
-      {
-        "ROW_ID": "185",
-        "PLAYER_ID": "93",
-        "RATING": "778",
-        "LAST_UPDATE": "2014-04-25T00:00:00"
-      },
-      {
-        "ROW_ID": "186",
-        "PLAYER_ID": "94",
-        "RATING": "605",
-        "LAST_UPDATE": "2018-02-02T00:00:00"
-      },
-      {
-        "ROW_ID": "187",
-        "PLAYER_ID": "95",
-        "RATING": "480",
-        "LAST_UPDATE": "2013-11-01T00:00:00"
-      },
-      {
-        "ROW_ID": "188",
-        "PLAYER_ID": "96",
-        "RATING": "1145",
-        "LAST_UPDATE": "2014-03-30T00:00:00"
-      },
-      {
-        "ROW_ID": "189",
-        "PLAYER_ID": "97",
-        "RATING": "1665",
-        "LAST_UPDATE": "2014-02-15T00:00:00"
-      },
-      {
-        "ROW_ID": "192",
-        "PLAYER_ID": "98",
-        "RATING": "1999",
-        "LAST_UPDATE": "2014-01-05T00:00:00"
-      },
-      {
-        "ROW_ID": "193",
-        "PLAYER_ID": "99",
-        "RATING": "1578",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "194",
-        "PLAYER_ID": "100",
-        "RATING": "1617",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "195",
-        "PLAYER_ID": "101",
-        "RATING": "1784",
-        "LAST_UPDATE": "2017-04-07T00:00:00"
-      },
-      {
-        "ROW_ID": "196",
-        "PLAYER_ID": "102",
-        "RATING": "1807",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "197",
-        "PLAYER_ID": "103",
-        "RATING": "1389",
-        "LAST_UPDATE": "2014-02-15T00:00:00"
-      },
-      {
-        "ROW_ID": "198",
-        "PLAYER_ID": "104",
-        "RATING": "1300",
-        "LAST_UPDATE": "2014-03-28T00:00:00"
-      },
-      {
-        "ROW_ID": "199",
-        "PLAYER_ID": "105",
-        "RATING": "1767",
-        "LAST_UPDATE": "2013-12-31T00:00:00"
-      },
-      {
-        "ROW_ID": "200",
-        "PLAYER_ID": "106",
-        "RATING": "1116",
-        "LAST_UPDATE": "2015-12-12T00:00:00"
-      },
-      {
-        "ROW_ID": "201",
-        "PLAYER_ID": "107",
-        "RATING": "950",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "202",
-        "PLAYER_ID": "108",
-        "RATING": "855",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "203",
-        "PLAYER_ID": "109",
-        "RATING": "906",
-        "LAST_UPDATE": "2015-12-11T00:00:00"
-      },
-      {
-        "ROW_ID": "204",
-        "PLAYER_ID": "110",
-        "RATING": "725",
-        "LAST_UPDATE": "2013-12-31T00:00:00"
-      },
-      {
-        "ROW_ID": "205",
-        "PLAYER_ID": "111",
-        "RATING": "956",
-        "LAST_UPDATE": "2014-09-07T00:00:00"
-      },
-      {
-        "ROW_ID": "206",
-        "PLAYER_ID": "112",
-        "RATING": "193",
-        "LAST_UPDATE": "2018-02-04T00:00:00"
-      },
-      {
-        "ROW_ID": "207",
-        "PLAYER_ID": "113",
-        "RATING": "529",
-        "LAST_UPDATE": "2014-04-25T00:00:00"
-      },
-      {
-        "ROW_ID": "208",
-        "PLAYER_ID": "114",
-        "RATING": "1104",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "209",
-        "PLAYER_ID": "115",
-        "RATING": "1396",
-        "LAST_UPDATE": "2015-07-10T00:00:00"
-      },
-      {
-        "ROW_ID": "210",
-        "PLAYER_ID": "116",
-        "RATING": "759",
-        "LAST_UPDATE": "2015-07-10T00:00:00"
-      },
-      {
-        "ROW_ID": "211",
-        "PLAYER_ID": "117",
-        "RATING": "961",
-        "LAST_UPDATE": "2017-08-27T00:00:00"
-      },
-      {
-        "ROW_ID": "212",
-        "PLAYER_ID": "118",
-        "RATING": "1002",
-        "LAST_UPDATE": "2016-04-08T00:00:00"
-      },
-      {
-        "ROW_ID": "213",
-        "PLAYER_ID": "120",
-        "RATING": "479",
-        "LAST_UPDATE": "2015-04-24T00:00:00"
-      },
-      {
-        "ROW_ID": "214",
-        "PLAYER_ID": "121",
-        "RATING": "175",
-        "LAST_UPDATE": "2014-04-25T00:00:00"
-      },
-      {
-        "ROW_ID": "215",
-        "PLAYER_ID": "122",
-        "RATING": "515",
-        "LAST_UPDATE": "2014-08-01T00:00:00"
-      },
-      {
-        "ROW_ID": "216",
-        "PLAYER_ID": "123",
-        "RATING": "102",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "217",
-        "PLAYER_ID": "124",
-        "RATING": "112",
-        "LAST_UPDATE": "2014-05-02T00:00:00"
-      },
-      {
-        "ROW_ID": "218",
-        "PLAYER_ID": "125",
-        "RATING": "909",
-        "LAST_UPDATE": "2015-06-19T00:00:00"
-      },
-      {
-        "ROW_ID": "219",
-        "PLAYER_ID": "126",
-        "RATING": "614",
-        "LAST_UPDATE": "2014-04-25T00:00:00"
-      },
-      {
-        "ROW_ID": "220",
-        "PLAYER_ID": "127",
-        "RATING": "2220",
-        "LAST_UPDATE": "2014-02-15T00:00:00"
-      },
-      {
-        "ROW_ID": "221",
-        "PLAYER_ID": "128",
-        "RATING": "591",
-        "LAST_UPDATE": "2014-02-15T00:00:00"
-      },
-      {
-        "ROW_ID": "222",
-        "PLAYER_ID": "129",
-        "RATING": "110",
-        "LAST_UPDATE": "2015-05-10T00:00:00"
-      },
-      {
-        "ROW_ID": "223",
-        "PLAYER_ID": "131",
-        "RATING": "466",
-        "LAST_UPDATE": "2014-04-04T00:00:00"
-      },
-      {
-        "ROW_ID": "224",
-        "PLAYER_ID": "132",
-        "RATING": "146",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "225",
-        "PLAYER_ID": "133",
-        "RATING": "100",
-        "LAST_UPDATE": "2013-12-31T00:00:00"
-      },
-      {
-        "ROW_ID": "226",
-        "PLAYER_ID": "134",
-        "RATING": "879",
-        "LAST_UPDATE": "2013-12-08T00:00:00"
-      },
-      {
-        "ROW_ID": "227",
-        "PLAYER_ID": "135",
-        "RATING": "1136",
-        "LAST_UPDATE": "2015-07-17T00:00:00"
-      },
-      {
-        "ROW_ID": "228",
-        "PLAYER_ID": "136",
-        "RATING": "593",
-        "LAST_UPDATE": "2014-02-21T00:00:00"
-      },
-      {
-        "ROW_ID": "229",
-        "PLAYER_ID": "137",
-        "RATING": "217",
-        "LAST_UPDATE": "2018-02-04T00:00:00"
-      },
-      {
-        "ROW_ID": "230",
-        "PLAYER_ID": "138",
-        "RATING": "2007",
-        "LAST_UPDATE": "2014-02-21T00:00:00"
-      },
-      {
-        "ROW_ID": "231",
-        "PLAYER_ID": "139",
-        "RATING": "298",
-        "LAST_UPDATE": "2016-07-08T00:00:00"
-      },
-      {
-        "ROW_ID": "232",
-        "PLAYER_ID": "140",
-        "RATING": "2018",
-        "LAST_UPDATE": "2014-07-25T00:00:00"
-      },
-      {
-        "ROW_ID": "233",
-        "PLAYER_ID": "141",
-        "RATING": "1641",
-        "LAST_UPDATE": "2014-03-28T00:00:00"
-      },
-      {
-        "ROW_ID": "234",
-        "PLAYER_ID": "142",
-        "RATING": "1597",
-        "LAST_UPDATE": "2014-04-04T00:00:00"
-      },
-      {
-        "ROW_ID": "235",
-        "PLAYER_ID": "143",
-        "RATING": "1886",
-        "LAST_UPDATE": "2014-04-04T00:00:00"
-      },
-      {
-        "ROW_ID": "236",
-        "PLAYER_ID": "144",
-        "RATING": "194",
-        "LAST_UPDATE": "2014-02-21T00:00:00"
-      },
-      {
-        "ROW_ID": "237",
-        "PLAYER_ID": "145",
-        "RATING": "822",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "238",
-        "PLAYER_ID": "146",
-        "RATING": "1904",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "239",
-        "PLAYER_ID": "147",
-        "RATING": "865",
-        "LAST_UPDATE": "2015-01-11T00:00:00"
-      },
-      {
-        "ROW_ID": "240",
-        "PLAYER_ID": "148",
-        "RATING": "2420",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "241",
-        "PLAYER_ID": "149",
-        "RATING": "412",
-        "LAST_UPDATE": "2016-01-15T00:00:00"
-      },
-      {
-        "ROW_ID": "242",
-        "PLAYER_ID": "150",
-        "RATING": "719",
-        "LAST_UPDATE": "2016-11-26T00:00:00"
-      },
-      {
-        "ROW_ID": "243",
-        "PLAYER_ID": "151",
-        "RATING": "1656",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "244",
-        "PLAYER_ID": "152",
-        "RATING": "344",
-        "LAST_UPDATE": "2014-03-14T00:00:00"
-      },
-      {
-        "ROW_ID": "245",
-        "PLAYER_ID": "153",
-        "RATING": "328",
-        "LAST_UPDATE": "2015-02-27T00:00:00"
-      },
-      {
-        "ROW_ID": "246",
-        "PLAYER_ID": "154",
-        "RATING": "526",
-        "LAST_UPDATE": "2016-08-12T00:00:00"
-      },
-      {
-        "ROW_ID": "247",
-        "PLAYER_ID": "155",
-        "RATING": "136",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "248",
-        "PLAYER_ID": "156",
-        "RATING": "237",
-        "LAST_UPDATE": "2015-05-03T00:00:00"
-      },
-      {
-        "ROW_ID": "249",
-        "PLAYER_ID": "157",
-        "RATING": "115",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "250",
-        "PLAYER_ID": "158",
-        "RATING": "145",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "251",
-        "PLAYER_ID": "159",
-        "RATING": "100",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "252",
-        "PLAYER_ID": "160",
-        "RATING": "128",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "253",
-        "PLAYER_ID": "161",
-        "RATING": "148",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "254",
-        "PLAYER_ID": "162",
-        "RATING": "155",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "255",
-        "PLAYER_ID": "163",
-        "RATING": "558",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "256",
-        "PLAYER_ID": "164",
-        "RATING": "100",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "257",
-        "PLAYER_ID": "165",
-        "RATING": "100",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "258",
-        "PLAYER_ID": "166",
-        "RATING": "351",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "259",
-        "PLAYER_ID": "167",
-        "RATING": "105",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "260",
-        "PLAYER_ID": "168",
-        "RATING": "283",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "261",
-        "PLAYER_ID": "169",
-        "RATING": "431",
-        "LAST_UPDATE": "2018-01-05T00:00:00"
-      },
-      {
-        "ROW_ID": "262",
-        "PLAYER_ID": "170",
-        "RATING": "201",
-        "LAST_UPDATE": "2016-06-10T00:00:00"
-      },
-      {
-        "ROW_ID": "263",
-        "PLAYER_ID": "171",
-        "RATING": "238",
-        "LAST_UPDATE": "2014-03-30T00:00:00"
-      },
-      {
-        "ROW_ID": "264",
-        "PLAYER_ID": "172",
-        "RATING": "613",
-        "LAST_UPDATE": "2017-02-12T00:00:00"
-      },
-      {
-        "ROW_ID": "265",
-        "PLAYER_ID": "173",
-        "RATING": "440",
-        "LAST_UPDATE": "2014-03-30T00:00:00"
-      },
-      {
-        "ROW_ID": "266",
-        "PLAYER_ID": "174",
-        "RATING": "432",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "267",
-        "PLAYER_ID": "175",
-        "RATING": "1208",
-        "LAST_UPDATE": "2015-12-12T00:00:00"
-      },
-      {
-        "ROW_ID": "268",
-        "PLAYER_ID": "176",
-        "RATING": "1185",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "269",
-        "PLAYER_ID": "177",
-        "RATING": "2301",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "270",
-        "PLAYER_ID": "178",
-        "RATING": "1103",
-        "LAST_UPDATE": "2016-03-11T00:00:00"
-      },
-      {
-        "ROW_ID": "271",
-        "PLAYER_ID": "179",
-        "RATING": "536",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "272",
-        "PLAYER_ID": "180",
-        "RATING": "1499",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "273",
-        "PLAYER_ID": "181",
-        "RATING": "1549",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "274",
-        "PLAYER_ID": "182",
-        "RATING": "2631",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "275",
-        "PLAYER_ID": "183",
-        "RATING": "1216",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "276",
-        "PLAYER_ID": "184",
-        "RATING": "2124",
-        "LAST_UPDATE": "2016-03-13T00:00:00"
-      },
-      {
-        "ROW_ID": "277",
-        "PLAYER_ID": "185",
-        "RATING": "1785",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "278",
-        "PLAYER_ID": "186",
-        "RATING": "2760",
-        "LAST_UPDATE": "2014-03-29T00:00:00"
-      },
-      {
-        "ROW_ID": "279",
-        "PLAYER_ID": "187",
-        "RATING": "2572",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "280",
-        "PLAYER_ID": "188",
-        "RATING": "1982",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "281",
-        "PLAYER_ID": "189",
-        "RATING": "1827",
-        "LAST_UPDATE": "2015-12-13T00:00:00"
-      },
-      {
-        "ROW_ID": "282",
-        "PLAYER_ID": "190",
-        "RATING": "1965",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "283",
-        "PLAYER_ID": "191",
-        "RATING": "1969",
-        "LAST_UPDATE": "2014-11-09T00:00:00"
-      },
-      {
-        "ROW_ID": "284",
-        "PLAYER_ID": "192",
-        "RATING": "1724",
-        "LAST_UPDATE": "2014-03-30T00:00:00"
-      },
-      {
-        "ROW_ID": "286",
-        "PLAYER_ID": "194",
-        "RATING": "1619",
-        "LAST_UPDATE": "2016-03-12T00:00:00"
-      },
-      {
-        "ROW_ID": "287",
-        "PLAYER_ID": "195",
-        "RATING": "1174",
-        "LAST_UPDATE": "2018-01-05T00:00:00"
-      },
-      {
-        "ROW_ID": "288",
-        "PLAYER_ID": "196",
-        "RATING": "1074",
-        "LAST_UPDATE": "2014-03-30T00:00:00"
-      },
-      {
-        "ROW_ID": "289",
-        "PLAYER_ID": "197",
-        "RATING": "1700",
-        "LAST_UPDATE": "2018-01-26T00:00:00"
-      },
-      {
-        "ROW_ID": "290",
-        "PLAYER_ID": "198",
-        "RATING": "1863",
-        "LAST_UPDATE": "2018-02-09T00:00:00",
-        "Remark": "correct for aug 24"
-      },
-      {
-        "ROW_ID": "291",
-        "PLAYER_ID": "199",
-        "RATING": "555",
-        "LAST_UPDATE": "2014-02-21T00:00:00"
-      },
-      {
-        "ROW_ID": "292",
-        "PLAYER_ID": "200",
-        "RATING": "206",
-        "LAST_UPDATE": "2015-01-16T00:00:00"
-      },
-      {
-        "ROW_ID": "293",
-        "PLAYER_ID": "201",
-        "RATING": "509",
-        "LAST_UPDATE": "2015-05-10T00:00:00",
-        "Remark": "adjust to 379 (06-2014)"
-      },
-      {
-        "ROW_ID": "294",
-        "PLAYER_ID": "202",
-        "RATING": "311",
-        "LAST_UPDATE": "2014-10-10T00:00:00"
-      },
-      {
-        "ROW_ID": "295",
-        "PLAYER_ID": "203",
-        "RATING": "1195",
-        "LAST_UPDATE": "2018-02-09T00:00:00",
-        "Remark": "adjust to 300 (06-2014)"
-      },
-      {
-        "ROW_ID": "296",
-        "PLAYER_ID": "204",
-        "RATING": "2162",
-        "LAST_UPDATE": "2015-01-23T00:00:00"
-      },
-      {
-        "ROW_ID": "297",
-        "PLAYER_ID": "205",
-        "RATING": "2444",
-        "LAST_UPDATE": "2014-06-13T00:00:00"
-      },
-      {
-        "ROW_ID": "298",
-        "PLAYER_ID": "206",
-        "RATING": "2153",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "299",
-        "PLAYER_ID": "207",
-        "RATING": "1768",
-        "LAST_UPDATE": "2015-12-13T00:00:00"
-      },
-      {
-        "ROW_ID": "300",
-        "PLAYER_ID": "208",
-        "RATING": "2242",
-        "LAST_UPDATE": "2014-08-08T00:00:00"
-      },
-      {
-        "ROW_ID": "301",
-        "PLAYER_ID": "209",
-        "RATING": "490",
-        "LAST_UPDATE": "2014-06-13T00:00:00"
-      },
-      {
-        "ROW_ID": "303",
-        "PLAYER_ID": "210",
-        "RATING": "466",
-        "LAST_UPDATE": "2014-12-12T00:00:00"
-      },
-      {
-        "ROW_ID": "302",
-        "PLAYER_ID": "211",
-        "RATING": "512",
-        "LAST_UPDATE": "2016-03-13T00:00:00"
-      },
-      {
-        "ROW_ID": "304",
-        "PLAYER_ID": "212",
-        "RATING": "299",
-        "LAST_UPDATE": "2014-07-13T00:00:00"
-      },
-      {
-        "ROW_ID": "305",
-        "PLAYER_ID": "213",
-        "RATING": "108",
-        "LAST_UPDATE": "2015-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "306",
-        "PLAYER_ID": "214",
-        "RATING": "396",
-        "LAST_UPDATE": "2018-02-02T00:00:00"
-      },
-      {
-        "ROW_ID": "307",
-        "PLAYER_ID": "215",
-        "RATING": "412",
-        "LAST_UPDATE": "2018-01-05T00:00:00"
-      },
-      {
-        "ROW_ID": "308",
-        "PLAYER_ID": "216",
-        "RATING": "785",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "309",
-        "PLAYER_ID": "217",
-        "RATING": "100",
-        "LAST_UPDATE": "2015-03-15T00:00:00"
-      },
-      {
-        "ROW_ID": "310",
-        "PLAYER_ID": "218",
-        "RATING": "100",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "311",
-        "PLAYER_ID": "219",
-        "RATING": "188",
-        "LAST_UPDATE": "2017-08-27T00:00:00"
-      },
-      {
-        "ROW_ID": "312",
-        "PLAYER_ID": "220",
-        "RATING": "376",
-        "LAST_UPDATE": "2018-01-05T00:00:00"
-      },
-      {
-        "ROW_ID": "313",
-        "PLAYER_ID": "221",
-        "RATING": "417",
-        "LAST_UPDATE": "2018-02-11T00:00:00"
-      },
-      {
-        "ROW_ID": "314",
-        "PLAYER_ID": "222",
-        "RATING": "136",
-        "LAST_UPDATE": "2014-10-05T00:00:00"
-      },
-      {
-        "ROW_ID": "315",
-        "PLAYER_ID": "223",
-        "RATING": "118",
-        "LAST_UPDATE": "2014-07-06T00:00:00"
-      },
-      {
-        "ROW_ID": "316",
-        "PLAYER_ID": "224",
-        "RATING": "271",
-        "LAST_UPDATE": "2017-08-11T00:00:00"
-      },
-      {
-        "ROW_ID": "317",
-        "PLAYER_ID": "225",
-        "RATING": "2004",
-        "LAST_UPDATE": "2014-07-18T00:00:00"
-      },
-      {
-        "ROW_ID": "318",
-        "PLAYER_ID": "227",
-        "RATING": "1314",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "319",
-        "PLAYER_ID": "228",
-        "RATING": "193",
-        "LAST_UPDATE": "2014-08-08T00:00:00"
-      },
-      {
-        "ROW_ID": "320",
-        "PLAYER_ID": "229",
-        "RATING": "858",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "321",
-        "PLAYER_ID": "230",
-        "RATING": "110",
-        "LAST_UPDATE": "2015-06-21T00:00:00"
-      },
-      {
-        "ROW_ID": "322",
-        "PLAYER_ID": "231",
-        "RATING": "338",
-        "LAST_UPDATE": "2015-05-15T00:00:00"
-      },
-      {
-        "ROW_ID": "323",
-        "PLAYER_ID": "232",
-        "RATING": "1904",
-        "LAST_UPDATE": "2014-09-19T00:00:00"
-      },
-      {
-        "ROW_ID": "324",
-        "PLAYER_ID": "233",
-        "RATING": "2389",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "325",
-        "PLAYER_ID": "234",
-        "RATING": "1920",
-        "LAST_UPDATE": "2014-09-07T00:00:00"
-      },
-      {
-        "ROW_ID": "326",
-        "PLAYER_ID": "235",
-        "RATING": "2514",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "327",
-        "PLAYER_ID": "236",
-        "RATING": "1615",
-        "LAST_UPDATE": "2015-04-18T00:00:00"
-      },
-      {
-        "ROW_ID": "328",
-        "PLAYER_ID": "237",
-        "RATING": "1919",
-        "LAST_UPDATE": "2015-04-18T00:00:00"
-      },
-      {
-        "ROW_ID": "329",
-        "PLAYER_ID": "238",
-        "RATING": "1858",
-        "LAST_UPDATE": "2015-04-19T00:00:00"
-      },
-      {
-        "ROW_ID": "330",
-        "PLAYER_ID": "239",
-        "RATING": "1793",
-        "LAST_UPDATE": "2014-09-07T00:00:00"
-      },
-      {
-        "ROW_ID": "331",
-        "PLAYER_ID": "240",
-        "RATING": "1216",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "332",
-        "PLAYER_ID": "241",
-        "RATING": "1217",
-        "LAST_UPDATE": "2015-08-02T00:00:00"
-      },
-      {
-        "ROW_ID": "333",
-        "PLAYER_ID": "242",
-        "RATING": "1200",
-        "LAST_UPDATE": "2014-09-07T00:00:00"
-      },
-      {
-        "ROW_ID": "334",
-        "PLAYER_ID": "243",
-        "RATING": "912",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "335",
-        "PLAYER_ID": "244",
-        "RATING": "258",
-        "LAST_UPDATE": "2016-03-12T00:00:00"
-      },
-      {
-        "ROW_ID": "336",
-        "PLAYER_ID": "245",
-        "RATING": "1140",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "337",
-        "PLAYER_ID": "246",
-        "RATING": "1005",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "338",
-        "PLAYER_ID": "247",
-        "RATING": "1028",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "339",
-        "PLAYER_ID": "248",
-        "RATING": "946",
-        "LAST_UPDATE": "2015-01-11T00:00:00"
-      },
-      {
-        "ROW_ID": "340",
-        "PLAYER_ID": "249",
-        "RATING": "710",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "341",
-        "PLAYER_ID": "250",
-        "RATING": "1493",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "342",
-        "PLAYER_ID": "251",
-        "RATING": "583",
-        "LAST_UPDATE": "2018-01-05T00:00:00"
-      },
-      {
-        "ROW_ID": "343",
-        "PLAYER_ID": "252",
-        "RATING": "761",
-        "LAST_UPDATE": "2014-09-07T00:00:00"
-      },
-      {
-        "ROW_ID": "344",
-        "PLAYER_ID": "253",
-        "RATING": "816",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "345",
-        "PLAYER_ID": "254",
-        "RATING": "1595",
-        "LAST_UPDATE": "2018-02-02T00:00:00"
-      },
-      {
-        "ROW_ID": "346",
-        "PLAYER_ID": "255",
-        "RATING": "939",
-        "LAST_UPDATE": "2014-09-07T00:00:00"
-      },
-      {
-        "ROW_ID": "347",
-        "PLAYER_ID": "256",
-        "RATING": "544",
-        "LAST_UPDATE": "2017-08-25T00:00:00"
-      },
-      {
-        "ROW_ID": "349",
-        "PLAYER_ID": "258",
-        "RATING": "357",
-        "LAST_UPDATE": "2016-11-26T00:00:00"
-      },
-      {
-        "ROW_ID": "350",
-        "PLAYER_ID": "259",
-        "RATING": "259",
-        "LAST_UPDATE": "2018-01-14T00:00:00"
-      },
-      {
-        "ROW_ID": "351",
-        "PLAYER_ID": "260",
-        "RATING": "156",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "352",
-        "PLAYER_ID": "261",
-        "RATING": "312",
-        "LAST_UPDATE": "2015-07-26T00:00:00"
-      },
-      {
-        "ROW_ID": "353",
-        "PLAYER_ID": "263",
-        "RATING": "421",
-        "LAST_UPDATE": "2017-08-25T00:00:00"
-      },
-      {
-        "ROW_ID": "354",
-        "PLAYER_ID": "264",
-        "RATING": "329",
-        "LAST_UPDATE": "2016-02-14T00:00:00"
-      },
-      {
-        "ROW_ID": "355",
-        "PLAYER_ID": "265",
-        "RATING": "1221",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "356",
-        "PLAYER_ID": "266",
-        "RATING": "216",
-        "LAST_UPDATE": "2014-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "357",
-        "PLAYER_ID": "267",
-        "RATING": "166",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "358",
-        "PLAYER_ID": "268",
-        "RATING": "255",
-        "LAST_UPDATE": "2018-02-04T00:00:00"
-      },
-      {
-        "ROW_ID": "359",
-        "PLAYER_ID": "269",
-        "RATING": "706",
-        "LAST_UPDATE": "2018-02-11T00:00:00"
-      },
-      {
-        "ROW_ID": "360",
-        "PLAYER_ID": "270",
-        "RATING": "888",
-        "LAST_UPDATE": "2016-04-22T00:00:00"
-      },
-      {
-        "ROW_ID": "361",
-        "PLAYER_ID": "271",
-        "RATING": "341",
-        "LAST_UPDATE": "2015-02-27T00:00:00"
-      },
-      {
-        "ROW_ID": "362",
-        "PLAYER_ID": "272",
-        "RATING": "911",
-        "LAST_UPDATE": "2015-01-11T00:00:00"
-      },
-      {
-        "ROW_ID": "363",
-        "PLAYER_ID": "273",
-        "RATING": "1274",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "364",
-        "PLAYER_ID": "274",
-        "RATING": "2064",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "365",
-        "PLAYER_ID": "275",
-        "RATING": "115",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "366",
-        "PLAYER_ID": "276",
-        "RATING": "287",
-        "LAST_UPDATE": "2016-01-17T00:00:00"
-      },
-      {
-        "ROW_ID": "367",
-        "PLAYER_ID": "277",
-        "RATING": "510",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "368",
-        "PLAYER_ID": "278",
-        "RATING": "175",
-        "LAST_UPDATE": "2015-06-28T00:00:00"
-      },
-      {
-        "ROW_ID": "369",
-        "PLAYER_ID": "279",
-        "RATING": "1093",
-        "LAST_UPDATE": "2015-06-19T00:00:00"
-      },
-      {
-        "ROW_ID": "370",
-        "PLAYER_ID": "280",
-        "RATING": "1002",
-        "LAST_UPDATE": "2015-07-17T00:00:00"
-      },
-      {
-        "ROW_ID": "371",
-        "PLAYER_ID": "281",
-        "RATING": "745",
-        "LAST_UPDATE": "2015-06-07T00:00:00"
-      },
-      {
-        "ROW_ID": "372",
-        "PLAYER_ID": "282",
-        "RATING": "647",
-        "LAST_UPDATE": "2018-02-02T00:00:00"
-      },
-      {
-        "ROW_ID": "373",
-        "PLAYER_ID": "283",
-        "RATING": "103",
-        "LAST_UPDATE": "2015-04-26T00:00:00"
-      },
-      {
-        "ROW_ID": "374",
-        "PLAYER_ID": "284",
-        "RATING": "100",
-        "LAST_UPDATE": "2018-02-11T00:00:00"
-      },
-      {
-        "ROW_ID": "375",
-        "PLAYER_ID": "285",
-        "RATING": "703",
-        "LAST_UPDATE": "2015-02-08T00:00:00"
-      },
-      {
-        "ROW_ID": "376",
-        "PLAYER_ID": "286",
-        "RATING": "1231",
-        "LAST_UPDATE": "2015-05-29T00:00:00"
-      },
-      {
-        "ROW_ID": "377",
-        "PLAYER_ID": "287",
-        "RATING": "1110",
-        "LAST_UPDATE": "2015-05-22T00:00:00"
-      },
-      {
-        "ROW_ID": "378",
-        "PLAYER_ID": "288",
-        "RATING": "149",
-        "LAST_UPDATE": "2015-03-01T00:00:00"
-      },
-      {
-        "ROW_ID": "379",
-        "PLAYER_ID": "289",
-        "RATING": "1108",
-        "LAST_UPDATE": "2015-03-08T00:00:00"
-      },
-      {
-        "ROW_ID": "380",
-        "PLAYER_ID": "290",
-        "RATING": "1071",
-        "LAST_UPDATE": "2015-07-12T00:00:00"
-      },
-      {
-        "ROW_ID": "381",
-        "PLAYER_ID": "291",
-        "RATING": "843",
-        "LAST_UPDATE": "2016-01-31T00:00:00"
-      },
-      {
-        "ROW_ID": "382",
-        "PLAYER_ID": "292",
-        "RATING": "322",
-        "LAST_UPDATE": "2015-05-24T00:00:00"
-      },
-      {
-        "ROW_ID": "383",
-        "PLAYER_ID": "293",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-06-19T00:00:00"
-      },
-      {
-        "ROW_ID": "384",
-        "PLAYER_ID": "294",
-        "RATING": "524",
-        "LAST_UPDATE": "2016-03-12T00:00:00"
-      },
-      {
-        "ROW_ID": "385",
-        "PLAYER_ID": "295",
-        "RATING": "761",
-        "LAST_UPDATE": "2015-04-18T00:00:00"
-      },
-      {
-        "ROW_ID": "386",
-        "PLAYER_ID": "296",
-        "RATING": "1218",
-        "LAST_UPDATE": "2015-04-26T00:00:00"
-      },
-      {
-        "ROW_ID": "387",
-        "PLAYER_ID": "297",
-        "RATING": "754",
-        "LAST_UPDATE": "2015-07-24T00:00:00"
-      },
-      {
-        "ROW_ID": "388",
-        "PLAYER_ID": "298",
-        "RATING": "1604",
-        "LAST_UPDATE": "2015-04-18T00:00:00"
-      },
-      {
-        "ROW_ID": "389",
-        "PLAYER_ID": "299",
-        "RATING": "1052",
-        "LAST_UPDATE": "2017-01-29T00:00:00"
-      },
-      {
-        "ROW_ID": "390",
-        "PLAYER_ID": "300",
-        "RATING": "1172",
-        "LAST_UPDATE": "2015-04-18T00:00:00"
-      },
-      {
-        "ROW_ID": "391",
-        "PLAYER_ID": "301",
-        "RATING": "1212",
-        "LAST_UPDATE": "2015-04-18T00:00:00"
-      },
-      {
-        "ROW_ID": "392",
-        "PLAYER_ID": "302",
-        "RATING": "100",
-        "LAST_UPDATE": "2015-12-13T00:00:00"
-      },
-      {
-        "ROW_ID": "393",
-        "PLAYER_ID": "303",
-        "RATING": "239",
-        "LAST_UPDATE": "2016-03-13T00:00:00"
-      },
-      {
-        "ROW_ID": "394",
-        "PLAYER_ID": "304",
-        "RATING": "249",
-        "LAST_UPDATE": "2017-04-07T00:00:00"
-      },
-      {
-        "ROW_ID": "395",
-        "PLAYER_ID": "305",
-        "RATING": "266",
-        "LAST_UPDATE": "2016-03-13T00:00:00"
-      },
-      {
-        "ROW_ID": "396",
-        "PLAYER_ID": "306",
-        "RATING": "133",
-        "LAST_UPDATE": "2016-03-13T00:00:00"
-      },
-      {
-        "ROW_ID": "397",
-        "PLAYER_ID": "307",
-        "RATING": "929",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "398",
-        "PLAYER_ID": "308",
-        "RATING": "1471",
-        "LAST_UPDATE": "2016-05-27T00:00:00"
-      },
-      {
-        "ROW_ID": "399",
-        "PLAYER_ID": "309",
-        "RATING": "1166",
-        "LAST_UPDATE": "2015-04-18T00:00:00"
-      },
-      {
-        "ROW_ID": "400",
-        "PLAYER_ID": "310",
-        "RATING": "100",
-        "LAST_UPDATE": "2015-04-19T00:00:00"
-      },
-      {
-        "ROW_ID": "401",
-        "PLAYER_ID": "311",
-        "RATING": "419",
-        "LAST_UPDATE": "2017-10-22T00:00:00"
-      },
-      {
-        "ROW_ID": "402",
-        "PLAYER_ID": "312",
-        "RATING": "377",
-        "LAST_UPDATE": "2017-07-30T00:00:00"
-      },
-      {
-        "ROW_ID": "403",
-        "PLAYER_ID": "313",
-        "RATING": "279",
-        "LAST_UPDATE": "2015-04-19T00:00:00"
-      },
-      {
-        "ROW_ID": "404",
-        "PLAYER_ID": "314",
-        "RATING": "915",
-        "LAST_UPDATE": "2015-04-19T00:00:00"
-      },
-      {
-        "ROW_ID": "405",
-        "PLAYER_ID": "315",
-        "RATING": "1678",
-        "LAST_UPDATE": "2017-04-21T00:00:00"
-      },
-      {
-        "ROW_ID": "406",
-        "PLAYER_ID": "316",
-        "RATING": "100",
-        "LAST_UPDATE": "2015-04-19T00:00:00"
-      },
-      {
-        "ROW_ID": "407",
-        "PLAYER_ID": "317",
-        "RATING": "258",
-        "LAST_UPDATE": "2017-08-13T00:00:00"
-      },
-      {
-        "ROW_ID": "408",
-        "PLAYER_ID": "318",
-        "RATING": "437",
-        "LAST_UPDATE": "2018-02-11T00:00:00"
-      },
-      {
-        "ROW_ID": "410",
-        "PLAYER_ID": "320",
-        "RATING": "1689",
-        "LAST_UPDATE": "2015-05-15T00:00:00"
-      },
-      {
-        "ROW_ID": "411",
-        "PLAYER_ID": "321",
-        "RATING": "311",
-        "LAST_UPDATE": "2016-07-15T00:00:00"
-      },
-      {
-        "ROW_ID": "412",
-        "PLAYER_ID": "322",
-        "RATING": "121",
-        "LAST_UPDATE": "2015-05-31T00:00:00"
-      },
-      {
-        "ROW_ID": "413",
-        "PLAYER_ID": "323",
-        "RATING": "291",
-        "LAST_UPDATE": "2015-06-14T00:00:00"
-      },
-      {
-        "ROW_ID": "414",
-        "PLAYER_ID": "324",
-        "RATING": "526",
-        "LAST_UPDATE": "2015-06-21T00:00:00"
-      },
-      {
-        "ROW_ID": "415",
-        "PLAYER_ID": "325",
-        "RATING": "727",
-        "LAST_UPDATE": "2018-02-02T00:00:00"
-      },
-      {
-        "ROW_ID": "416",
-        "PLAYER_ID": "326",
-        "RATING": "306",
-        "LAST_UPDATE": "2018-01-21T00:00:00"
-      },
-      {
-        "ROW_ID": "417",
-        "PLAYER_ID": "327",
-        "RATING": "823",
-        "LAST_UPDATE": "2016-10-30T00:00:00"
-      },
-      {
-        "ROW_ID": "418",
-        "PLAYER_ID": "328",
-        "RATING": "100",
-        "LAST_UPDATE": "2017-11-19T00:00:00"
-      },
-      {
-        "ROW_ID": "419",
-        "PLAYER_ID": "329",
-        "RATING": "304",
-        "LAST_UPDATE": "2015-09-06T00:00:00"
-      },
-      {
-        "ROW_ID": "420",
-        "PLAYER_ID": "330",
-        "RATING": "147",
-        "LAST_UPDATE": "2015-11-22T00:00:00"
-      },
-      {
-        "ROW_ID": "421",
-        "PLAYER_ID": "331",
-        "RATING": "490",
-        "LAST_UPDATE": "2015-09-20T00:00:00"
-      },
-      {
-        "ROW_ID": "422",
-        "PLAYER_ID": "332",
-        "RATING": "348",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "423",
-        "PLAYER_ID": "333",
-        "RATING": "166",
-        "LAST_UPDATE": "2015-09-27T00:00:00"
-      },
-      {
-        "ROW_ID": "424",
-        "PLAYER_ID": "334",
-        "RATING": "422",
-        "LAST_UPDATE": "2015-12-04T00:00:00"
-      },
-      {
-        "ROW_ID": "425",
-        "PLAYER_ID": "335",
-        "RATING": "592",
-        "LAST_UPDATE": "2016-08-12T00:00:00"
-      },
-      {
-        "ROW_ID": "426",
-        "PLAYER_ID": "336",
-        "RATING": "525",
-        "LAST_UPDATE": "2016-07-10T00:00:00"
-      },
-      {
-        "ROW_ID": "427",
-        "PLAYER_ID": "337",
-        "RATING": "100",
-        "LAST_UPDATE": "2015-10-18T00:00:00"
-      },
-      {
-        "ROW_ID": "428",
-        "PLAYER_ID": "338",
-        "RATING": "1764",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "429",
-        "PLAYER_ID": "339",
-        "RATING": "308",
-        "LAST_UPDATE": "2016-01-15T00:00:00"
-      },
-      {
-        "ROW_ID": "430",
-        "PLAYER_ID": "340",
-        "RATING": "488",
-        "LAST_UPDATE": "2017-04-21T00:00:00"
-      },
-      {
-        "ROW_ID": "431",
-        "PLAYER_ID": "341",
-        "RATING": "147",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "432",
-        "PLAYER_ID": "342",
-        "RATING": "132",
-        "LAST_UPDATE": "2016-01-29T00:00:00"
-      },
-      {
-        "ROW_ID": "433",
-        "PLAYER_ID": "343",
-        "RATING": "1292",
-        "LAST_UPDATE": "2015-11-29T00:00:00"
-      },
-      {
-        "ROW_ID": "434",
-        "PLAYER_ID": "344",
-        "RATING": "775",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "435",
-        "PLAYER_ID": "345",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-01-29T00:00:00"
-      },
-      {
-        "ROW_ID": "436",
-        "PLAYER_ID": "346",
-        "RATING": "320",
-        "LAST_UPDATE": "2016-07-10T00:00:00"
-      },
-      {
-        "ROW_ID": "437",
-        "PLAYER_ID": "347",
-        "RATING": "315",
-        "LAST_UPDATE": "2016-06-12T00:00:00"
-      },
-      {
-        "ROW_ID": "438",
-        "PLAYER_ID": "348",
-        "RATING": "152",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "439",
-        "PLAYER_ID": "349",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-01-24T00:00:00"
-      },
-      {
-        "ROW_ID": "440",
-        "PLAYER_ID": "350",
-        "RATING": "372",
-        "LAST_UPDATE": "2018-01-21T00:00:00"
-      },
-      {
-        "ROW_ID": "441",
-        "PLAYER_ID": "351",
-        "RATING": "172",
-        "LAST_UPDATE": "2017-02-26T00:00:00"
-      },
-      {
-        "ROW_ID": "442",
-        "PLAYER_ID": "352",
-        "RATING": "645",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "443",
-        "PLAYER_ID": "353",
-        "RATING": "194",
-        "LAST_UPDATE": "2015-11-29T00:00:00"
-      },
-      {
-        "ROW_ID": "444",
-        "PLAYER_ID": "354",
-        "RATING": "297",
-        "LAST_UPDATE": "2016-07-10T00:00:00"
-      },
-      {
-        "ROW_ID": "445",
-        "PLAYER_ID": "355",
-        "RATING": "1234",
-        "LAST_UPDATE": "2016-03-25T00:00:00"
-      },
-      {
-        "ROW_ID": "446",
-        "PLAYER_ID": "356",
-        "RATING": "602",
-        "LAST_UPDATE": "2015-12-04T00:00:00"
-      },
-      {
-        "ROW_ID": "447",
-        "PLAYER_ID": "357",
-        "RATING": "2206",
-        "LAST_UPDATE": "2015-11-13T00:00:00"
-      },
-      {
-        "ROW_ID": "448",
-        "PLAYER_ID": "358",
-        "RATING": "416",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "449",
-        "PLAYER_ID": "359",
-        "RATING": "426",
-        "LAST_UPDATE": "2017-12-03T00:00:00"
-      },
-      {
-        "ROW_ID": "450",
-        "PLAYER_ID": "360",
-        "RATING": "447",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "451",
-        "PLAYER_ID": "361",
-        "RATING": "1846",
-        "LAST_UPDATE": "2016-03-12T00:00:00"
-      },
-      {
-        "ROW_ID": "452",
-        "PLAYER_ID": "362",
-        "RATING": "948",
-        "LAST_UPDATE": "2016-01-22T00:00:00"
-      },
-      {
-        "ROW_ID": "453",
-        "PLAYER_ID": "363",
-        "RATING": "298",
-        "LAST_UPDATE": "2015-11-20T00:00:00"
-      },
-      {
-        "ROW_ID": "454",
-        "PLAYER_ID": "364",
-        "RATING": "2025",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "455",
-        "PLAYER_ID": "365",
-        "RATING": "130",
-        "LAST_UPDATE": "2016-10-16T00:00:00"
-      },
-      {
-        "ROW_ID": "456",
-        "PLAYER_ID": "366",
-        "RATING": "386",
-        "LAST_UPDATE": "2016-03-12T00:00:00"
-      },
-      {
-        "ROW_ID": "457",
-        "PLAYER_ID": "367",
-        "RATING": "1217",
-        "LAST_UPDATE": "2015-12-23T00:00:00"
-      },
-      {
-        "ROW_ID": "458",
-        "PLAYER_ID": "368",
-        "RATING": "1657",
-        "LAST_UPDATE": "2017-03-31T00:00:00"
-      },
-      {
-        "ROW_ID": "459",
-        "PLAYER_ID": "369",
-        "RATING": "353",
-        "LAST_UPDATE": "2015-12-12T00:00:00"
-      },
-      {
-        "ROW_ID": "460",
-        "PLAYER_ID": "370",
-        "RATING": "164",
-        "LAST_UPDATE": "2018-02-11T00:00:00"
-      },
-      {
-        "ROW_ID": "461",
-        "PLAYER_ID": "371",
-        "RATING": "2210",
-        "LAST_UPDATE": "2016-03-12T00:00:00"
-      },
-      {
-        "ROW_ID": "462",
-        "PLAYER_ID": "372",
-        "RATING": "1166",
-        "LAST_UPDATE": "2016-03-12T00:00:00"
-      },
-      {
-        "ROW_ID": "463",
-        "PLAYER_ID": "373",
-        "RATING": "1431",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "464",
-        "PLAYER_ID": "374",
-        "RATING": "2234",
-        "LAST_UPDATE": "2015-12-12T00:00:00"
-      },
-      {
-        "ROW_ID": "465",
-        "PLAYER_ID": "375",
-        "RATING": "1685",
-        "LAST_UPDATE": "2015-12-12T00:00:00"
-      },
-      {
-        "ROW_ID": "466",
-        "PLAYER_ID": "376",
-        "RATING": "1461",
-        "LAST_UPDATE": "2016-11-25T00:00:00"
-      },
-      {
-        "ROW_ID": "467",
-        "PLAYER_ID": "377",
-        "RATING": "1112",
-        "LAST_UPDATE": "2017-05-12T00:00:00"
-      },
-      {
-        "ROW_ID": "468",
-        "PLAYER_ID": "378",
-        "RATING": "842",
-        "LAST_UPDATE": "2015-12-12T00:00:00"
-      },
-      {
-        "ROW_ID": "469",
-        "PLAYER_ID": "379",
-        "RATING": "661",
-        "LAST_UPDATE": "2015-12-12T00:00:00"
-      },
-      {
-        "ROW_ID": "470",
-        "PLAYER_ID": "380",
-        "RATING": "1549",
-        "LAST_UPDATE": "2015-12-13T00:00:00"
-      },
-      {
-        "ROW_ID": "471",
-        "PLAYER_ID": "381",
-        "RATING": "1754",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "472",
-        "PLAYER_ID": "382",
-        "RATING": "213",
-        "LAST_UPDATE": "2015-12-20T00:00:00"
-      },
-      {
-        "ROW_ID": "473",
-        "PLAYER_ID": "383",
-        "RATING": "244",
-        "LAST_UPDATE": "2018-02-11T00:00:00"
-      },
-      {
-        "ROW_ID": "474",
-        "PLAYER_ID": "384",
-        "RATING": "102",
-        "LAST_UPDATE": "2015-12-13T00:00:00"
-      },
-      {
-        "ROW_ID": "475",
-        "PLAYER_ID": "385",
-        "RATING": "116",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "476",
-        "PLAYER_ID": "386",
-        "RATING": "1507",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "477",
-        "PLAYER_ID": "387",
-        "RATING": "305",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "478",
-        "PLAYER_ID": "388",
-        "RATING": "1790",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "479",
-        "PLAYER_ID": "389",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-06-26T00:00:00"
-      },
-      {
-        "ROW_ID": "480",
-        "PLAYER_ID": "390",
-        "RATING": "917",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "481",
-        "PLAYER_ID": "391",
-        "RATING": "956",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "482",
-        "PLAYER_ID": "392",
-        "RATING": "135",
-        "LAST_UPDATE": "2016-02-05T00:00:00"
-      },
-      {
-        "ROW_ID": "483",
-        "PLAYER_ID": "393",
-        "RATING": "816",
-        "LAST_UPDATE": "2016-02-26T00:00:00"
-      },
-      {
-        "ROW_ID": "484",
-        "PLAYER_ID": "394",
-        "RATING": "139",
-        "LAST_UPDATE": "2016-02-19T00:00:00"
-      },
-      {
-        "ROW_ID": "485",
-        "PLAYER_ID": "395",
-        "RATING": "200",
-        "LAST_UPDATE": "2017-01-29T00:00:00"
-      },
-      {
-        "ROW_ID": "486",
-        "PLAYER_ID": "396",
-        "RATING": "680",
-        "LAST_UPDATE": "2016-02-28T00:00:00"
-      },
-      {
-        "ROW_ID": "487",
-        "PLAYER_ID": "397",
-        "RATING": "177",
-        "LAST_UPDATE": "2017-01-29T00:00:00"
-      },
-      {
-        "ROW_ID": "488",
-        "PLAYER_ID": "398",
-        "RATING": "565",
-        "LAST_UPDATE": "2018-01-05T00:00:00"
-      },
-      {
-        "ROW_ID": "489",
-        "PLAYER_ID": "399",
-        "RATING": "1586",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "490",
-        "PLAYER_ID": "400",
-        "RATING": "487",
-        "LAST_UPDATE": "2016-03-13T00:00:00"
-      },
-      {
-        "ROW_ID": "491",
-        "PLAYER_ID": "401",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-03-04T00:00:00"
-      },
-      {
-        "ROW_ID": "492",
-        "PLAYER_ID": "402",
-        "RATING": "2304",
-        "LAST_UPDATE": "2017-03-10T00:00:00"
-      },
-      {
-        "ROW_ID": "493",
-        "PLAYER_ID": "403",
-        "RATING": "648",
-        "LAST_UPDATE": "2016-03-13T00:00:00"
-      },
-      {
-        "ROW_ID": "494",
-        "PLAYER_ID": "404",
-        "RATING": "636",
-        "LAST_UPDATE": "2016-03-13T00:00:00"
-      },
-      {
-        "ROW_ID": "495",
-        "PLAYER_ID": "405",
-        "RATING": "1890",
-        "LAST_UPDATE": "2017-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "496",
-        "PLAYER_ID": "406",
-        "RATING": "1566",
-        "LAST_UPDATE": "2016-03-11T00:00:00"
-      },
-      {
-        "ROW_ID": "497",
-        "PLAYER_ID": "407",
-        "RATING": "1330",
-        "LAST_UPDATE": "2016-11-06T00:00:00"
-      },
-      {
-        "ROW_ID": "498",
-        "PLAYER_ID": "408",
-        "RATING": "2570",
-        "LAST_UPDATE": "2016-11-18T00:00:00"
-      },
-      {
-        "ROW_ID": "499",
-        "PLAYER_ID": "409",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-03-11T00:00:00"
-      },
-      {
-        "ROW_ID": "500",
-        "PLAYER_ID": "410",
-        "RATING": "267",
-        "LAST_UPDATE": "2016-03-12T00:00:00"
-      },
-      {
-        "ROW_ID": "501",
-        "PLAYER_ID": "411",
-        "RATING": "2224",
-        "LAST_UPDATE": "2016-03-12T00:00:00"
-      },
-      {
-        "ROW_ID": "502",
-        "PLAYER_ID": "412",
-        "RATING": "1989",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "503",
-        "PLAYER_ID": "413",
-        "RATING": "105",
-        "LAST_UPDATE": "2016-03-13T00:00:00"
-      },
-      {
-        "ROW_ID": "504",
-        "PLAYER_ID": "414",
-        "RATING": "146",
-        "LAST_UPDATE": "2016-03-13T00:00:00"
-      },
-      {
-        "ROW_ID": "505",
-        "PLAYER_ID": "415",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-10-09T00:00:00"
-      },
-      {
-        "ROW_ID": "506",
-        "PLAYER_ID": "416",
-        "RATING": "373",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "507",
-        "PLAYER_ID": "417",
-        "RATING": "152",
-        "LAST_UPDATE": "2016-03-13T00:00:00"
-      },
-      {
-        "ROW_ID": "508",
-        "PLAYER_ID": "418",
-        "RATING": "148",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "509",
-        "PLAYER_ID": "419",
-        "RATING": "355",
-        "LAST_UPDATE": "2016-03-13T00:00:00"
-      },
-      {
-        "ROW_ID": "510",
-        "PLAYER_ID": "420",
-        "RATING": "488",
-        "LAST_UPDATE": "2016-03-13T00:00:00"
-      },
-      {
-        "ROW_ID": "511",
-        "PLAYER_ID": "421",
-        "RATING": "115",
-        "LAST_UPDATE": "2016-03-20T00:00:00"
-      },
-      {
-        "ROW_ID": "512",
-        "PLAYER_ID": "422",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-06-12T00:00:00"
-      },
-      {
-        "ROW_ID": "513",
-        "PLAYER_ID": "423",
-        "RATING": "510",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "514",
-        "PLAYER_ID": "424",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-03-25T00:00:00"
-      },
-      {
-        "ROW_ID": "515",
-        "PLAYER_ID": "425",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-04-01T00:00:00"
-      },
-      {
-        "ROW_ID": "516",
-        "PLAYER_ID": "426",
-        "RATING": "153",
-        "LAST_UPDATE": "2016-10-16T00:00:00"
-      },
-      {
-        "ROW_ID": "517",
-        "PLAYER_ID": "427",
-        "RATING": "1531",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "518",
-        "PLAYER_ID": "428",
-        "RATING": "785",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "519",
-        "PLAYER_ID": "429",
-        "RATING": "635",
-        "LAST_UPDATE": "2016-05-01T00:00:00"
-      },
-      {
-        "ROW_ID": "520",
-        "PLAYER_ID": "430",
-        "RATING": "443",
-        "LAST_UPDATE": "2016-06-24T00:00:00"
-      },
-      {
-        "ROW_ID": "521",
-        "PLAYER_ID": "431",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-07-29T00:00:00"
-      },
-      {
-        "ROW_ID": "522",
-        "PLAYER_ID": "432",
-        "RATING": "479",
-        "LAST_UPDATE": "2016-08-21T00:00:00"
-      },
-      {
-        "ROW_ID": "523",
-        "PLAYER_ID": "433",
-        "RATING": "311",
-        "LAST_UPDATE": "2016-08-21T00:00:00"
-      },
-      {
-        "ROW_ID": "524",
-        "PLAYER_ID": "434",
-        "RATING": "434",
-        "LAST_UPDATE": "2017-10-15T00:00:00"
-      },
-      {
-        "ROW_ID": "525",
-        "PLAYER_ID": "435",
-        "RATING": "100",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "526",
-        "PLAYER_ID": "436",
-        "RATING": "130",
-        "LAST_UPDATE": "2017-05-21T00:00:00"
-      },
-      {
-        "ROW_ID": "527",
-        "PLAYER_ID": "437",
-        "RATING": "310",
-        "LAST_UPDATE": "2016-10-02T00:00:00"
-      },
-      {
-        "ROW_ID": "528",
-        "PLAYER_ID": "438",
-        "RATING": "308",
-        "LAST_UPDATE": "2017-06-11T00:00:00"
-      },
-      {
-        "ROW_ID": "529",
-        "PLAYER_ID": "439",
-        "RATING": "2071",
-        "LAST_UPDATE": "2016-12-09T00:00:00"
-      },
-      {
-        "ROW_ID": "530",
-        "PLAYER_ID": "440",
-        "RATING": "2225",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "531",
-        "PLAYER_ID": "441",
-        "RATING": "745",
-        "LAST_UPDATE": "2017-05-19T00:00:00"
-      },
-      {
-        "ROW_ID": "532",
-        "PLAYER_ID": "442",
-        "RATING": "2414",
-        "LAST_UPDATE": "2016-11-04T00:00:00"
-      },
-      {
-        "ROW_ID": "533",
-        "PLAYER_ID": "443",
-        "RATING": "951",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "534",
-        "PLAYER_ID": "444",
-        "RATING": "814",
-        "LAST_UPDATE": "2017-05-19T00:00:00"
-      },
-      {
-        "ROW_ID": "535",
-        "PLAYER_ID": "445",
-        "RATING": "585",
-        "LAST_UPDATE": "2016-10-14T00:00:00"
-      },
-      {
-        "ROW_ID": "536",
-        "PLAYER_ID": "446",
-        "RATING": "2043",
-        "LAST_UPDATE": "2018-01-26T00:00:00"
-      },
-      {
-        "ROW_ID": "537",
-        "PLAYER_ID": "447",
-        "RATING": "2202",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "538",
-        "PLAYER_ID": "448",
-        "RATING": "1912",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "539",
-        "PLAYER_ID": "449",
-        "RATING": "1996",
-        "LAST_UPDATE": "2017-12-22T00:00:00"
-      },
-      {
-        "ROW_ID": "540",
-        "PLAYER_ID": "450",
-        "RATING": "1438",
-        "LAST_UPDATE": "2017-05-19T00:00:00"
-      },
-      {
-        "ROW_ID": "541",
-        "PLAYER_ID": "451",
-        "RATING": "1958",
-        "LAST_UPDATE": "2016-10-16T00:00:00"
-      },
-      {
-        "ROW_ID": "542",
-        "PLAYER_ID": "452",
-        "RATING": "2257",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "543",
-        "PLAYER_ID": "453",
-        "RATING": "120",
-        "LAST_UPDATE": "2016-11-06T00:00:00"
-      },
-      {
-        "ROW_ID": "544",
-        "PLAYER_ID": "454",
-        "RATING": "962",
-        "LAST_UPDATE": "2017-02-19T00:00:00"
-      },
-      {
-        "ROW_ID": "545",
-        "PLAYER_ID": "455",
-        "RATING": "1257",
-        "LAST_UPDATE": "2017-01-29T00:00:00"
-      },
-      {
-        "ROW_ID": "546",
-        "PLAYER_ID": "456",
-        "RATING": "1700",
-        "LAST_UPDATE": "2016-11-18T00:00:00"
-      },
-      {
-        "ROW_ID": "547",
-        "PLAYER_ID": "457",
-        "RATING": "240",
-        "LAST_UPDATE": "2018-01-14T00:00:00"
-      },
-      {
-        "ROW_ID": "548",
-        "PLAYER_ID": "458",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-11-26T00:00:00"
-      },
-      {
-        "ROW_ID": "549",
-        "PLAYER_ID": "459",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-11-26T00:00:00"
-      },
-      {
-        "ROW_ID": "550",
-        "PLAYER_ID": "460",
-        "RATING": "188",
-        "LAST_UPDATE": "2016-11-26T00:00:00"
-      },
-      {
-        "ROW_ID": "551",
-        "PLAYER_ID": "461",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-11-26T00:00:00"
-      },
-      {
-        "ROW_ID": "552",
-        "PLAYER_ID": "462",
-        "RATING": "754",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "553",
-        "PLAYER_ID": "463",
-        "RATING": "900",
-        "LAST_UPDATE": "2016-11-26T00:00:00"
-      },
-      {
-        "ROW_ID": "554",
-        "PLAYER_ID": "464",
-        "RATING": "2284",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "555",
-        "PLAYER_ID": "465",
-        "RATING": "854",
-        "LAST_UPDATE": "2017-05-12T00:00:00"
-      },
-      {
-        "ROW_ID": "556",
-        "PLAYER_ID": "466",
-        "RATING": "1405",
-        "LAST_UPDATE": "2016-11-26T00:00:00"
-      },
-      {
-        "ROW_ID": "557",
-        "PLAYER_ID": "467",
-        "RATING": "100",
-        "LAST_UPDATE": "2016-11-26T00:00:00"
-      },
-      {
-        "ROW_ID": "558",
-        "PLAYER_ID": "468",
-        "RATING": "1811",
-        "LAST_UPDATE": "2016-12-30T00:00:00"
-      },
-      {
-        "ROW_ID": "559",
-        "PLAYER_ID": "469",
-        "RATING": "1978",
-        "LAST_UPDATE": "2017-02-24T00:00:00"
-      },
-      {
-        "ROW_ID": "560",
-        "PLAYER_ID": "470",
-        "RATING": "569",
-        "LAST_UPDATE": "2017-08-18T00:00:00"
-      },
-      {
-        "ROW_ID": "561",
-        "PLAYER_ID": "471",
-        "RATING": "789",
-        "LAST_UPDATE": "2017-01-29T00:00:00"
-      },
-      {
-        "ROW_ID": "562",
-        "PLAYER_ID": "472",
-        "RATING": "325",
-        "LAST_UPDATE": "2018-01-21T00:00:00"
-      },
-      {
-        "ROW_ID": "563",
-        "PLAYER_ID": "473",
-        "RATING": "360",
-        "LAST_UPDATE": "2017-01-08T00:00:00"
-      },
-      {
-        "ROW_ID": "564",
-        "PLAYER_ID": "474",
-        "RATING": "815",
-        "LAST_UPDATE": "2018-02-04T00:00:00"
-      },
-      {
-        "ROW_ID": "565",
-        "PLAYER_ID": "475",
-        "RATING": "331",
-        "LAST_UPDATE": "2018-02-11T00:00:00"
-      },
-      {
-        "ROW_ID": "566",
-        "PLAYER_ID": "476",
-        "RATING": "1570",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "567",
-        "PLAYER_ID": "477",
-        "RATING": "175",
-        "LAST_UPDATE": "2017-04-16T00:00:00"
-      },
-      {
-        "ROW_ID": "568",
-        "PLAYER_ID": "478",
-        "RATING": "1593",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "569",
-        "PLAYER_ID": "479",
-        "RATING": "298",
-        "LAST_UPDATE": "2017-06-30T00:00:00"
-      },
-      {
-        "ROW_ID": "570",
-        "PLAYER_ID": "480",
-        "RATING": "435",
-        "LAST_UPDATE": "2017-05-21T00:00:00"
-      },
-      {
-        "ROW_ID": "571",
-        "PLAYER_ID": "481",
-        "RATING": "610",
-        "LAST_UPDATE": "2018-01-05T00:00:00"
-      },
-      {
-        "ROW_ID": "572",
-        "PLAYER_ID": "482",
-        "RATING": "1021",
-        "LAST_UPDATE": "2017-05-12T00:00:00"
-      },
-      {
-        "ROW_ID": "573",
-        "PLAYER_ID": "483",
-        "RATING": "1749",
-        "LAST_UPDATE": "2017-04-21T00:00:00"
-      },
-      {
-        "ROW_ID": "574",
-        "PLAYER_ID": "484",
-        "RATING": "100",
-        "LAST_UPDATE": "2017-04-23T00:00:00"
-      },
-      {
-        "ROW_ID": "575",
-        "PLAYER_ID": "485",
-        "RATING": "121",
-        "LAST_UPDATE": "2017-05-21T00:00:00"
-      },
-      {
-        "ROW_ID": "576",
-        "PLAYER_ID": "486",
-        "RATING": "100",
-        "LAST_UPDATE": "2017-05-14T00:00:00"
-      },
-      {
-        "ROW_ID": "577",
-        "PLAYER_ID": "487",
-        "RATING": "195",
-        "LAST_UPDATE": "2018-02-04T00:00:00"
-      },
-      {
-        "ROW_ID": "578",
-        "PLAYER_ID": "488",
-        "RATING": "463",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "579",
-        "PLAYER_ID": "489",
-        "RATING": "508",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "580",
-        "PLAYER_ID": "490",
-        "RATING": "349",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "581",
-        "PLAYER_ID": "491",
-        "RATING": "393",
-        "LAST_UPDATE": "2018-02-11T00:00:00"
-      },
-      {
-        "ROW_ID": "582",
-        "PLAYER_ID": "492",
-        "RATING": "100",
-        "LAST_UPDATE": "2018-02-11T00:00:00"
-      },
-      {
-        "ROW_ID": "583",
-        "PLAYER_ID": "493",
-        "RATING": "140",
-        "LAST_UPDATE": "2017-07-30T00:00:00"
-      },
-      {
-        "ROW_ID": "584",
-        "PLAYER_ID": "494",
-        "RATING": "1302",
-        "LAST_UPDATE": "2017-08-06T00:00:00"
-      },
-      {
-        "ROW_ID": "585",
-        "PLAYER_ID": "495",
-        "RATING": "900",
-        "LAST_UPDATE": "2017-09-01T00:00:00"
-      },
-      {
-        "ROW_ID": "586",
-        "PLAYER_ID": "496",
-        "RATING": "329",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "587",
-        "PLAYER_ID": "497",
-        "RATING": "157",
-        "LAST_UPDATE": "2018-02-11T00:00:00"
-      },
-      {
-        "ROW_ID": "588",
-        "PLAYER_ID": "498",
-        "RATING": "1221",
-        "LAST_UPDATE": "2018-01-05T00:00:00"
-      },
-      {
-        "ROW_ID": "589",
-        "PLAYER_ID": "499",
-        "RATING": "122",
-        "LAST_UPDATE": "2017-08-11T00:00:00"
-      },
-      {
-        "ROW_ID": "590",
-        "PLAYER_ID": "500",
-        "RATING": "754",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "591",
-        "PLAYER_ID": "501",
-        "RATING": "907",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "592",
-        "PLAYER_ID": "502",
-        "RATING": "100",
-        "LAST_UPDATE": "2017-08-13T00:00:00"
-      },
-      {
-        "ROW_ID": "593",
-        "PLAYER_ID": "503",
-        "RATING": "197",
-        "LAST_UPDATE": "2018-01-21T00:00:00"
-      },
-      {
-        "ROW_ID": "594",
-        "PLAYER_ID": "504",
-        "RATING": "100",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "595",
-        "PLAYER_ID": "505",
-        "RATING": "721",
-        "LAST_UPDATE": "2017-10-29T00:00:00"
-      },
-      {
-        "ROW_ID": "596",
-        "PLAYER_ID": "506",
-        "RATING": "218",
-        "LAST_UPDATE": "2017-11-05T00:00:00"
-      },
-      {
-        "ROW_ID": "597",
-        "PLAYER_ID": "507",
-        "RATING": "121",
-        "LAST_UPDATE": "2018-01-05T00:00:00"
-      },
-      {
-        "ROW_ID": "598",
-        "PLAYER_ID": "508",
-        "RATING": "100",
-        "LAST_UPDATE": "2017-09-22T00:00:00"
-      },
-      {
-        "ROW_ID": "599",
-        "PLAYER_ID": "509",
-        "RATING": "960",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "600",
-        "PLAYER_ID": "510",
-        "RATING": "1140",
-        "LAST_UPDATE": "2017-10-01T00:00:00"
-      },
-      {
-        "ROW_ID": "601",
-        "PLAYER_ID": "511",
-        "RATING": "163",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "602",
-        "PLAYER_ID": "512",
-        "RATING": "721",
-        "LAST_UPDATE": "2017-10-15T00:00:00"
-      },
-      {
-        "ROW_ID": "603",
-        "PLAYER_ID": "513",
-        "RATING": "100",
-        "LAST_UPDATE": "2017-10-29T00:00:00"
-      },
-      {
-        "ROW_ID": "604",
-        "PLAYER_ID": "514",
-        "RATING": "576",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "605",
-        "PLAYER_ID": "515",
-        "RATING": "127",
-        "LAST_UPDATE": "2017-11-05T00:00:00"
-      },
-      {
-        "ROW_ID": "606",
-        "PLAYER_ID": "516",
-        "RATING": "248",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "607",
-        "PLAYER_ID": "517",
-        "RATING": "1747",
-        "LAST_UPDATE": "2018-02-02T00:00:00"
-      },
-      {
-        "ROW_ID": "608",
-        "PLAYER_ID": "518",
-        "RATING": "1382",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "609",
-        "PLAYER_ID": "519",
-        "RATING": "902",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "610",
-        "PLAYER_ID": "520",
-        "RATING": "200",
-        "LAST_UPDATE": "2017-11-26T00:00:00"
-      },
-      {
-        "ROW_ID": "611",
-        "PLAYER_ID": "521",
-        "RATING": "2081",
-        "LAST_UPDATE": "2018-02-23T00:00:00"
-      },
-      {
-        "ROW_ID": "612",
-        "PLAYER_ID": "522",
-        "RATING": "2057",
-        "LAST_UPDATE": "2018-01-26T00:00:00"
-      },
-      {
-        "ROW_ID": "613",
-        "PLAYER_ID": "523",
-        "RATING": "162",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "614",
-        "PLAYER_ID": "524",
-        "RATING": "282",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "615",
-        "PLAYER_ID": "525",
-        "RATING": "1586",
-        "LAST_UPDATE": "2018-02-02T00:00:00"
-      },
-      {
-        "ROW_ID": "616",
-        "PLAYER_ID": "526",
-        "RATING": "413",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "617",
-        "PLAYER_ID": "527",
-        "RATING": "230",
-        "LAST_UPDATE": "2018-01-05T00:00:00"
-      },
-      {
-        "ROW_ID": "618",
-        "PLAYER_ID": "528",
-        "RATING": "142",
-        "LAST_UPDATE": "2018-01-05T00:00:00"
-      },
-      {
-        "ROW_ID": "619",
-        "PLAYER_ID": "529",
-        "RATING": "848",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "620",
-        "PLAYER_ID": "530",
-        "RATING": "1003",
-        "LAST_UPDATE": "2018-02-09T00:00:00"
-      },
-      {
-        "ROW_ID": "621",
-        "PLAYER_ID": "531",
-        "RATING": "100",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "622",
-        "PLAYER_ID": "532",
-        "RATING": "148",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "623",
-        "PLAYER_ID": "533",
-        "RATING": "100",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "624",
-        "PLAYER_ID": "534",
-        "RATING": "100",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "625",
-        "PLAYER_ID": "535",
-        "RATING": "1764",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "626",
-        "PLAYER_ID": "536",
-        "RATING": "240",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "627",
-        "PLAYER_ID": "537",
-        "RATING": "315",
-        "LAST_UPDATE": "2018-01-07T00:00:00"
-      },
-      {
-        "ROW_ID": "628",
-        "PLAYER_ID": "538",
-        "RATING": "119",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "629",
-        "PLAYER_ID": "539",
-        "RATING": "130",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "630",
-        "PLAYER_ID": "540",
-        "RATING": "100",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      },
-      {
-        "ROW_ID": "631",
-        "PLAYER_ID": "541",
-        "RATING": "100",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "632",
-        "PLAYER_ID": "542",
-        "RATING": "1330",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "633",
-        "PLAYER_ID": "543",
-        "RATING": "1671",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "634",
-        "PLAYER_ID": "544",
-        "RATING": "488",
-        "LAST_UPDATE": "2018-01-06T00:00:00"
-      },
-      {
-        "ROW_ID": "409",
-        "PLAYER_ID": "545",
-        "RATING": "2008",
-        "LAST_UPDATE": "2018-02-02T00:00:00"
-      },
-      {
-        "ROW_ID": "635",
-        "PLAYER_ID": "546",
-        "RATING": "100",
-        "LAST_UPDATE": "2018-02-04T00:00:00"
-      },
-      {
-        "ROW_ID": "636",
-        "PLAYER_ID": "547",
-        "RATING": "154",
-        "LAST_UPDATE": "2018-02-25T00:00:00"
-      }
-    ]
-  }
-}
+[
+ {
+   "ROW_ID": 95,
+   "PLAYER_ID": 3,
+   "RATING": 588,
+   "LAST_UPDATE": "21-Feb-14"
+ },
+ {
+   "ROW_ID": 96,
+   "PLAYER_ID": 4,
+   "RATING": 402,
+   "LAST_UPDATE": "27-May-18"
+ },
+ {
+   "ROW_ID": 97,
+   "PLAYER_ID": 5,
+   "RATING": 469,
+   "LAST_UPDATE": "08-Jul-18"
+ },
+ {
+   "ROW_ID": 98,
+   "PLAYER_ID": 6,
+   "RATING": 153,
+   "LAST_UPDATE": "01-Nov-13"
+ },
+ {
+   "ROW_ID": 99,
+   "PLAYER_ID": 7,
+   "RATING": 2000,
+   "LAST_UPDATE": "11-May-18"
+ },
+ {
+   "ROW_ID": 100,
+   "PLAYER_ID": 8,
+   "RATING": 561,
+   "LAST_UPDATE": "01-Jul-18"
+ },
+ {
+   "ROW_ID": 101,
+   "PLAYER_ID": 9,
+   "RATING": 1144,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 102,
+   "PLAYER_ID": 10,
+   "RATING": 816,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 103,
+   "PLAYER_ID": 11,
+   "RATING": 403,
+   "LAST_UPDATE": "30-Mar-14"
+ },
+ {
+   "ROW_ID": 104,
+   "PLAYER_ID": 12,
+   "RATING": 228,
+   "LAST_UPDATE": "01-Jun-13"
+ },
+ {
+   "ROW_ID": 105,
+   "PLAYER_ID": 13,
+   "RATING": 325,
+   "LAST_UPDATE": "31-Oct-14"
+ },
+ {
+   "ROW_ID": 106,
+   "PLAYER_ID": 14,
+   "RATING": 460,
+   "LAST_UPDATE": "17-Jun-16"
+ },
+ {
+   "ROW_ID": 107,
+   "PLAYER_ID": 15,
+   "RATING": 1822,
+   "LAST_UPDATE": "12-Dec-15"
+ },
+ {
+   "ROW_ID": 108,
+   "PLAYER_ID": 16,
+   "RATING": 923,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 109,
+   "PLAYER_ID": 17,
+   "RATING": 247,
+   "LAST_UPDATE": "01-Nov-13"
+ },
+ {
+   "ROW_ID": 110,
+   "PLAYER_ID": 18,
+   "RATING": 411,
+   "LAST_UPDATE": "01-Nov-13"
+ },
+ {
+   "ROW_ID": 111,
+   "PLAYER_ID": 19,
+   "RATING": 672,
+   "LAST_UPDATE": "01-Nov-13"
+ },
+ {
+   "ROW_ID": 112,
+   "PLAYER_ID": 20,
+   "RATING": 428,
+   "LAST_UPDATE": "13-Apr-18"
+ },
+ {
+   "ROW_ID": 113,
+   "PLAYER_ID": 21,
+   "RATING": 2288,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 114,
+   "PLAYER_ID": 22,
+   "RATING": 100,
+   "LAST_UPDATE": "06-Jul-14"
+ },
+ {
+   "ROW_ID": 115,
+   "PLAYER_ID": 23,
+   "RATING": 1429,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 116,
+   "PLAYER_ID": 24,
+   "RATING": 722,
+   "LAST_UPDATE": "18-Apr-15"
+ },
+ {
+   "ROW_ID": 117,
+   "PLAYER_ID": 25,
+   "RATING": 1180,
+   "LAST_UPDATE": "27-Nov-16"
+ },
+ {
+   "ROW_ID": 118,
+   "PLAYER_ID": 26,
+   "RATING": 127,
+   "LAST_UPDATE": "16-May-14"
+ },
+ {
+   "ROW_ID": 119,
+   "PLAYER_ID": 27,
+   "RATING": 1685,
+   "LAST_UPDATE": "16-Mar-18"
+ },
+ {
+   "ROW_ID": 120,
+   "PLAYER_ID": 28,
+   "RATING": 725,
+   "LAST_UPDATE": "30-Sep-16"
+ },
+ {
+   "ROW_ID": 121,
+   "PLAYER_ID": 29,
+   "RATING": 576,
+   "LAST_UPDATE": "17-Nov-17"
+ },
+ {
+   "ROW_ID": 122,
+   "PLAYER_ID": 30,
+   "RATING": 193,
+   "LAST_UPDATE": "01-Jul-18"
+ },
+ {
+   "ROW_ID": 123,
+   "PLAYER_ID": 31,
+   "RATING": 2146,
+   "LAST_UPDATE": "04-May-18"
+ },
+ {
+   "ROW_ID": 124,
+   "PLAYER_ID": 32,
+   "RATING": 166,
+   "LAST_UPDATE": "24-Jun-18"
+ },
+ {
+   "ROW_ID": 125,
+   "PLAYER_ID": 33,
+   "RATING": 541,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 126,
+   "PLAYER_ID": 34,
+   "RATING": 1094,
+   "LAST_UPDATE": "27-Mar-16"
+ },
+ {
+   "ROW_ID": 127,
+   "PLAYER_ID": 35,
+   "RATING": 497,
+   "LAST_UPDATE": "03-Jun-16"
+ },
+ {
+   "ROW_ID": 128,
+   "PLAYER_ID": 36,
+   "RATING": 1318,
+   "LAST_UPDATE": "13-Apr-18"
+ },
+ {
+   "ROW_ID": 129,
+   "PLAYER_ID": 37,
+   "RATING": 1820,
+   "LAST_UPDATE": "30-Mar-18"
+ },
+ {
+   "ROW_ID": 130,
+   "PLAYER_ID": 38,
+   "RATING": 1949,
+   "LAST_UPDATE": "11-May-18"
+ },
+ {
+   "ROW_ID": 131,
+   "PLAYER_ID": 39,
+   "RATING": 783,
+   "LAST_UPDATE": "31-Mar-17"
+ },
+ {
+   "ROW_ID": 132,
+   "PLAYER_ID": 40,
+   "RATING": 382,
+   "LAST_UPDATE": "03-Jun-18"
+ },
+ {
+   "ROW_ID": 133,
+   "PLAYER_ID": 41,
+   "RATING": 441,
+   "LAST_UPDATE": "27-Feb-15"
+ },
+ {
+   "ROW_ID": 134,
+   "PLAYER_ID": 42,
+   "RATING": 213,
+   "LAST_UPDATE": "01-Nov-13"
+ },
+ {
+   "ROW_ID": 135,
+   "PLAYER_ID": 43,
+   "RATING": 674,
+   "LAST_UPDATE": "15-Jun-18"
+ },
+ {
+   "ROW_ID": 136,
+   "PLAYER_ID": 44,
+   "RATING": 1682,
+   "LAST_UPDATE": "07-Sep-14"
+ },
+ {
+   "ROW_ID": 137,
+   "PLAYER_ID": 45,
+   "RATING": 315,
+   "LAST_UPDATE": "01-Nov-13"
+ },
+ {
+   "ROW_ID": 138,
+   "PLAYER_ID": 46,
+   "RATING": 115,
+   "LAST_UPDATE": "26-Oct-14"
+ },
+ {
+   "ROW_ID": 139,
+   "PLAYER_ID": 47,
+   "RATING": 100,
+   "LAST_UPDATE": "17-Jun-18"
+ },
+ {
+   "ROW_ID": 140,
+   "PLAYER_ID": 48,
+   "RATING": 1051,
+   "LAST_UPDATE": "12-Jun-16"
+ },
+ {
+   "ROW_ID": 141,
+   "PLAYER_ID": 49,
+   "RATING": 1098,
+   "LAST_UPDATE": "07-Jan-18"
+ },
+ {
+   "ROW_ID": 142,
+   "PLAYER_ID": 50,
+   "RATING": 306,
+   "LAST_UPDATE": "16-May-14"
+ },
+ {
+   "ROW_ID": 143,
+   "PLAYER_ID": 51,
+   "RATING": 528,
+   "LAST_UPDATE": "14-Jul-17"
+ },
+ {
+   "ROW_ID": 144,
+   "PLAYER_ID": 52,
+   "RATING": 1810,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 145,
+   "PLAYER_ID": 53,
+   "RATING": 1331,
+   "LAST_UPDATE": "12-Jun-16"
+ },
+ {
+   "ROW_ID": 146,
+   "PLAYER_ID": 54,
+   "RATING": 577,
+   "LAST_UPDATE": "20-May-18"
+ },
+ {
+   "ROW_ID": 147,
+   "PLAYER_ID": 55,
+   "RATING": 1475,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 148,
+   "PLAYER_ID": 56,
+   "RATING": 2444,
+   "LAST_UPDATE": "13-Apr-18"
+ },
+ {
+   "ROW_ID": 149,
+   "PLAYER_ID": 57,
+   "RATING": 1601,
+   "LAST_UPDATE": "31-Dec-13"
+ },
+ {
+   "ROW_ID": 150,
+   "PLAYER_ID": 58,
+   "RATING": 603,
+   "LAST_UPDATE": "21-Nov-14"
+ },
+ {
+   "ROW_ID": 151,
+   "PLAYER_ID": 59,
+   "RATING": 855,
+   "LAST_UPDATE": "08-Jun-18"
+ },
+ {
+   "ROW_ID": 152,
+   "PLAYER_ID": 60,
+   "RATING": 208,
+   "LAST_UPDATE": "08-Jul-18"
+ },
+ {
+   "ROW_ID": 153,
+   "PLAYER_ID": 61,
+   "RATING": 1549,
+   "LAST_UPDATE": "04-Jun-17"
+ },
+ {
+   "ROW_ID": 154,
+   "PLAYER_ID": 62,
+   "RATING": 100,
+   "LAST_UPDATE": "01-Nov-13"
+ },
+ {
+   "ROW_ID": 155,
+   "PLAYER_ID": 63,
+   "RATING": 456,
+   "LAST_UPDATE": "17-Jul-15"
+ },
+ {
+   "ROW_ID": 156,
+   "PLAYER_ID": 64,
+   "RATING": 654,
+   "LAST_UPDATE": "12-Dec-14"
+ },
+ {
+   "ROW_ID": 157,
+   "PLAYER_ID": 65,
+   "RATING": 400,
+   "LAST_UPDATE": "29-Jun-18"
+ },
+ {
+   "ROW_ID": 158,
+   "PLAYER_ID": 66,
+   "RATING": 715,
+   "LAST_UPDATE": "26-Nov-16"
+ },
+ {
+   "ROW_ID": 159,
+   "PLAYER_ID": 67,
+   "RATING": 345,
+   "LAST_UPDATE": "06-Mar-15"
+ },
+ {
+   "ROW_ID": 160,
+   "PLAYER_ID": 68,
+   "RATING": 100,
+   "LAST_UPDATE": "01-Jun-13"
+ },
+ {
+   "ROW_ID": 161,
+   "PLAYER_ID": 69,
+   "RATING": 1927,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 162,
+   "PLAYER_ID": 70,
+   "RATING": 911,
+   "LAST_UPDATE": "08-Aug-14"
+ },
+ {
+   "ROW_ID": 163,
+   "PLAYER_ID": 71,
+   "RATING": 563,
+   "LAST_UPDATE": "08-Feb-15"
+ },
+ {
+   "ROW_ID": 164,
+   "PLAYER_ID": 72,
+   "RATING": 768,
+   "LAST_UPDATE": "01-Nov-13"
+ },
+ {
+   "ROW_ID": 165,
+   "PLAYER_ID": 73,
+   "RATING": 626,
+   "LAST_UPDATE": "14-Jul-17"
+ },
+ {
+   "ROW_ID": 166,
+   "PLAYER_ID": 74,
+   "RATING": 679,
+   "LAST_UPDATE": "23-Mar-18"
+ },
+ {
+   "ROW_ID": 167,
+   "PLAYER_ID": 75,
+   "RATING": 935,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 168,
+   "PLAYER_ID": 76,
+   "RATING": 739,
+   "LAST_UPDATE": "05-Jan-18"
+ },
+ {
+   "ROW_ID": 169,
+   "PLAYER_ID": 77,
+   "RATING": 430,
+   "LAST_UPDATE": "10-Mar-17"
+ },
+ {
+   "ROW_ID": 170,
+   "PLAYER_ID": 78,
+   "RATING": 3081,
+   "LAST_UPDATE": "04-May-18"
+ },
+ {
+   "ROW_ID": 171,
+   "PLAYER_ID": 79,
+   "RATING": 604,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 172,
+   "PLAYER_ID": 80,
+   "RATING": 2009,
+   "LAST_UPDATE": "18-Jul-14"
+ },
+ {
+   "ROW_ID": 173,
+   "PLAYER_ID": 81,
+   "RATING": 1354,
+   "LAST_UPDATE": "08-Mar-15"
+ },
+ {
+   "ROW_ID": 174,
+   "PLAYER_ID": 82,
+   "RATING": 100,
+   "LAST_UPDATE": "15-Aug-13"
+ },
+ {
+   "ROW_ID": 175,
+   "PLAYER_ID": 83,
+   "RATING": 597,
+   "LAST_UPDATE": "01-Nov-13"
+ },
+ {
+   "ROW_ID": 176,
+   "PLAYER_ID": 84,
+   "RATING": 100,
+   "LAST_UPDATE": "01-Nov-13"
+ },
+ {
+   "ROW_ID": 177,
+   "PLAYER_ID": 85,
+   "RATING": 100,
+   "LAST_UPDATE": "01-Nov-13"
+ },
+ {
+   "ROW_ID": 178,
+   "PLAYER_ID": 86,
+   "RATING": 202,
+   "LAST_UPDATE": "07-Jun-15"
+ },
+ {
+   "ROW_ID": 179,
+   "PLAYER_ID": 87,
+   "RATING": 959,
+   "LAST_UPDATE": "15-Feb-14"
+ },
+ {
+   "ROW_ID": 180,
+   "PLAYER_ID": 88,
+   "RATING": 745,
+   "LAST_UPDATE": "15-Feb-14"
+ },
+ {
+   "ROW_ID": 181,
+   "PLAYER_ID": 89,
+   "RATING": 618,
+   "LAST_UPDATE": "01-Nov-13"
+ },
+ {
+   "ROW_ID": 182,
+   "PLAYER_ID": 90,
+   "RATING": 521,
+   "LAST_UPDATE": "10-Oct-14"
+ },
+ {
+   "ROW_ID": 183,
+   "PLAYER_ID": 91,
+   "RATING": 100,
+   "LAST_UPDATE": "15-Feb-14"
+ },
+ {
+   "ROW_ID": 184,
+   "PLAYER_ID": 92,
+   "RATING": 615,
+   "LAST_UPDATE": "07-Mar-14"
+ },
+ {
+   "ROW_ID": 185,
+   "PLAYER_ID": 93,
+   "RATING": 778,
+   "LAST_UPDATE": "25-Apr-14"
+ },
+ {
+   "ROW_ID": 186,
+   "PLAYER_ID": 94,
+   "RATING": 597,
+   "LAST_UPDATE": "23-Mar-18"
+ },
+ {
+   "ROW_ID": 187,
+   "PLAYER_ID": 95,
+   "RATING": 480,
+   "LAST_UPDATE": "01-Nov-13"
+ },
+ {
+   "ROW_ID": 188,
+   "PLAYER_ID": 96,
+   "RATING": 1145,
+   "LAST_UPDATE": "30-Mar-14"
+ },
+ {
+   "ROW_ID": 189,
+   "PLAYER_ID": 97,
+   "RATING": 1665,
+   "LAST_UPDATE": "15-Feb-14"
+ },
+ {
+   "ROW_ID": 192,
+   "PLAYER_ID": 98,
+   "RATING": 1999,
+   "LAST_UPDATE": "05-Jan-14"
+ },
+ {
+   "ROW_ID": 193,
+   "PLAYER_ID": 99,
+   "RATING": 1486,
+   "LAST_UPDATE": "06-Apr-18"
+ },
+ {
+   "ROW_ID": 194,
+   "PLAYER_ID": 100,
+   "RATING": 1674,
+   "LAST_UPDATE": "04-May-18"
+ },
+ {
+   "ROW_ID": 195,
+   "PLAYER_ID": 101,
+   "RATING": 1784,
+   "LAST_UPDATE": "07-Apr-17"
+ },
+ {
+   "ROW_ID": 196,
+   "PLAYER_ID": 102,
+   "RATING": 1816,
+   "LAST_UPDATE": "20-Apr-18"
+ },
+ {
+   "ROW_ID": 197,
+   "PLAYER_ID": 103,
+   "RATING": 1389,
+   "LAST_UPDATE": "15-Feb-14"
+ },
+ {
+   "ROW_ID": 198,
+   "PLAYER_ID": 104,
+   "RATING": 1300,
+   "LAST_UPDATE": "28-Mar-14"
+ },
+ {
+   "ROW_ID": 199,
+   "PLAYER_ID": 105,
+   "RATING": 1767,
+   "LAST_UPDATE": "31-Dec-13"
+ },
+ {
+   "ROW_ID": 200,
+   "PLAYER_ID": 106,
+   "RATING": 1116,
+   "LAST_UPDATE": "12-Dec-15"
+ },
+ {
+   "ROW_ID": 201,
+   "PLAYER_ID": 107,
+   "RATING": 950,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 202,
+   "PLAYER_ID": 108,
+   "RATING": 855,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 203,
+   "PLAYER_ID": 109,
+   "RATING": 906,
+   "LAST_UPDATE": "11-Dec-15"
+ },
+ {
+   "ROW_ID": 204,
+   "PLAYER_ID": 110,
+   "RATING": 725,
+   "LAST_UPDATE": "31-Dec-13"
+ },
+ {
+   "ROW_ID": 205,
+   "PLAYER_ID": 111,
+   "RATING": 956,
+   "LAST_UPDATE": "07-Sep-14"
+ },
+ {
+   "ROW_ID": 206,
+   "PLAYER_ID": 112,
+   "RATING": 351,
+   "LAST_UPDATE": "24-Jun-18"
+ },
+ {
+   "ROW_ID": 207,
+   "PLAYER_ID": 113,
+   "RATING": 529,
+   "LAST_UPDATE": "25-Apr-14"
+ },
+ {
+   "ROW_ID": 208,
+   "PLAYER_ID": 114,
+   "RATING": 1198,
+   "LAST_UPDATE": "22-Jun-18"
+ },
+ {
+   "ROW_ID": 209,
+   "PLAYER_ID": 115,
+   "RATING": 1396,
+   "LAST_UPDATE": "10-Jul-15"
+ },
+ {
+   "ROW_ID": 210,
+   "PLAYER_ID": 116,
+   "RATING": 759,
+   "LAST_UPDATE": "10-Jul-15"
+ },
+ {
+   "ROW_ID": 211,
+   "PLAYER_ID": 117,
+   "RATING": 961,
+   "LAST_UPDATE": "27-Aug-17"
+ },
+ {
+   "ROW_ID": 212,
+   "PLAYER_ID": 118,
+   "RATING": 964,
+   "LAST_UPDATE": "30-Mar-18"
+ },
+ {
+   "ROW_ID": 213,
+   "PLAYER_ID": 120,
+   "RATING": 479,
+   "LAST_UPDATE": "24-Apr-15"
+ },
+ {
+   "ROW_ID": 214,
+   "PLAYER_ID": 121,
+   "RATING": 175,
+   "LAST_UPDATE": "25-Apr-14"
+ },
+ {
+   "ROW_ID": 215,
+   "PLAYER_ID": 122,
+   "RATING": 515,
+   "LAST_UPDATE": "01-Aug-14"
+ },
+ {
+   "ROW_ID": 216,
+   "PLAYER_ID": 123,
+   "RATING": 102,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 217,
+   "PLAYER_ID": 124,
+   "RATING": 112,
+   "LAST_UPDATE": "02-May-14"
+ },
+ {
+   "ROW_ID": 218,
+   "PLAYER_ID": 125,
+   "RATING": 909,
+   "LAST_UPDATE": "19-Jun-15"
+ },
+ {
+   "ROW_ID": 219,
+   "PLAYER_ID": 126,
+   "RATING": 614,
+   "LAST_UPDATE": "25-Apr-14"
+ },
+ {
+   "ROW_ID": 220,
+   "PLAYER_ID": 127,
+   "RATING": 2220,
+   "LAST_UPDATE": "15-Feb-14"
+ },
+ {
+   "ROW_ID": 221,
+   "PLAYER_ID": 128,
+   "RATING": 591,
+   "LAST_UPDATE": "15-Feb-14"
+ },
+ {
+   "ROW_ID": 222,
+   "PLAYER_ID": 129,
+   "RATING": 110,
+   "LAST_UPDATE": "10-May-15"
+ },
+ {
+   "ROW_ID": 223,
+   "PLAYER_ID": 131,
+   "RATING": 466,
+   "LAST_UPDATE": "04-Apr-14"
+ },
+ {
+   "ROW_ID": 224,
+   "PLAYER_ID": 132,
+   "RATING": 146,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 225,
+   "PLAYER_ID": 133,
+   "RATING": 100,
+   "LAST_UPDATE": "31-Dec-13"
+ },
+ {
+   "ROW_ID": 226,
+   "PLAYER_ID": 134,
+   "RATING": 879,
+   "LAST_UPDATE": "08-Dec-13"
+ },
+ {
+   "ROW_ID": 227,
+   "PLAYER_ID": 135,
+   "RATING": 1136,
+   "LAST_UPDATE": "17-Jul-15"
+ },
+ {
+   "ROW_ID": 228,
+   "PLAYER_ID": 136,
+   "RATING": 593,
+   "LAST_UPDATE": "21-Feb-14"
+ },
+ {
+   "ROW_ID": 229,
+   "PLAYER_ID": 137,
+   "RATING": 185,
+   "LAST_UPDATE": "01-Jul-18"
+ },
+ {
+   "ROW_ID": 230,
+   "PLAYER_ID": 138,
+   "RATING": 2007,
+   "LAST_UPDATE": "21-Feb-14"
+ },
+ {
+   "ROW_ID": 231,
+   "PLAYER_ID": 139,
+   "RATING": 298,
+   "LAST_UPDATE": "08-Jul-16"
+ },
+ {
+   "ROW_ID": 232,
+   "PLAYER_ID": 140,
+   "RATING": 2018,
+   "LAST_UPDATE": "25-Jul-14"
+ },
+ {
+   "ROW_ID": 233,
+   "PLAYER_ID": 141,
+   "RATING": 1641,
+   "LAST_UPDATE": "28-Mar-14"
+ },
+ {
+   "ROW_ID": 234,
+   "PLAYER_ID": 142,
+   "RATING": 1597,
+   "LAST_UPDATE": "04-Apr-14"
+ },
+ {
+   "ROW_ID": 235,
+   "PLAYER_ID": 143,
+   "RATING": 1886,
+   "LAST_UPDATE": "04-Apr-14"
+ },
+ {
+   "ROW_ID": 236,
+   "PLAYER_ID": 144,
+   "RATING": 194,
+   "LAST_UPDATE": "21-Feb-14"
+ },
+ {
+   "ROW_ID": 237,
+   "PLAYER_ID": 145,
+   "RATING": 909,
+   "LAST_UPDATE": "04-May-18"
+ },
+ {
+   "ROW_ID": 238,
+   "PLAYER_ID": 146,
+   "RATING": 1904,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 239,
+   "PLAYER_ID": 147,
+   "RATING": 865,
+   "LAST_UPDATE": "11-Jan-15"
+ },
+ {
+   "ROW_ID": 240,
+   "PLAYER_ID": 148,
+   "RATING": 2434,
+   "LAST_UPDATE": "11-May-18"
+ },
+ {
+   "ROW_ID": 241,
+   "PLAYER_ID": 149,
+   "RATING": 412,
+   "LAST_UPDATE": "15-Jan-16"
+ },
+ {
+   "ROW_ID": 242,
+   "PLAYER_ID": 150,
+   "RATING": 719,
+   "LAST_UPDATE": "26-Nov-16"
+ },
+ {
+   "ROW_ID": 243,
+   "PLAYER_ID": 151,
+   "RATING": 1447,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 244,
+   "PLAYER_ID": 152,
+   "RATING": 344,
+   "LAST_UPDATE": "14-Mar-14"
+ },
+ {
+   "ROW_ID": 245,
+   "PLAYER_ID": 153,
+   "RATING": 328,
+   "LAST_UPDATE": "27-Feb-15"
+ },
+ {
+   "ROW_ID": 246,
+   "PLAYER_ID": 154,
+   "RATING": 526,
+   "LAST_UPDATE": "12-Aug-16"
+ },
+ {
+   "ROW_ID": 247,
+   "PLAYER_ID": 155,
+   "RATING": 136,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 248,
+   "PLAYER_ID": 156,
+   "RATING": 237,
+   "LAST_UPDATE": "03-May-15"
+ },
+ {
+   "ROW_ID": 249,
+   "PLAYER_ID": 157,
+   "RATING": 115,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 250,
+   "PLAYER_ID": 158,
+   "RATING": 145,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 251,
+   "PLAYER_ID": 159,
+   "RATING": 100,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 252,
+   "PLAYER_ID": 160,
+   "RATING": 128,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 253,
+   "PLAYER_ID": 161,
+   "RATING": 148,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 254,
+   "PLAYER_ID": 162,
+   "RATING": 155,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 255,
+   "PLAYER_ID": 163,
+   "RATING": 558,
+   "LAST_UPDATE": "07-Jan-18"
+ },
+ {
+   "ROW_ID": 256,
+   "PLAYER_ID": 164,
+   "RATING": 100,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 257,
+   "PLAYER_ID": 165,
+   "RATING": 100,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 258,
+   "PLAYER_ID": 166,
+   "RATING": 351,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 259,
+   "PLAYER_ID": 167,
+   "RATING": 105,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 260,
+   "PLAYER_ID": 168,
+   "RATING": 283,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 261,
+   "PLAYER_ID": 169,
+   "RATING": 431,
+   "LAST_UPDATE": "05-Jan-18"
+ },
+ {
+   "ROW_ID": 262,
+   "PLAYER_ID": 170,
+   "RATING": 201,
+   "LAST_UPDATE": "10-Jun-16"
+ },
+ {
+   "ROW_ID": 263,
+   "PLAYER_ID": 171,
+   "RATING": 238,
+   "LAST_UPDATE": "30-Mar-14"
+ },
+ {
+   "ROW_ID": 264,
+   "PLAYER_ID": 172,
+   "RATING": 613,
+   "LAST_UPDATE": "12-Feb-17"
+ },
+ {
+   "ROW_ID": 265,
+   "PLAYER_ID": 173,
+   "RATING": 440,
+   "LAST_UPDATE": "30-Mar-14"
+ },
+ {
+   "ROW_ID": 266,
+   "PLAYER_ID": 174,
+   "RATING": 432,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 267,
+   "PLAYER_ID": 175,
+   "RATING": 1208,
+   "LAST_UPDATE": "12-Dec-15"
+ },
+ {
+   "ROW_ID": 268,
+   "PLAYER_ID": 176,
+   "RATING": 1185,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 269,
+   "PLAYER_ID": 177,
+   "RATING": 2309,
+   "LAST_UPDATE": "02-Mar-18"
+ },
+ {
+   "ROW_ID": 270,
+   "PLAYER_ID": 178,
+   "RATING": 1103,
+   "LAST_UPDATE": "11-Mar-16"
+ },
+ {
+   "ROW_ID": 271,
+   "PLAYER_ID": 179,
+   "RATING": 536,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 272,
+   "PLAYER_ID": 180,
+   "RATING": 1499,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 273,
+   "PLAYER_ID": 181,
+   "RATING": 1549,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 274,
+   "PLAYER_ID": 182,
+   "RATING": 2631,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 275,
+   "PLAYER_ID": 183,
+   "RATING": 1216,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 276,
+   "PLAYER_ID": 184,
+   "RATING": 2124,
+   "LAST_UPDATE": "13-Mar-16"
+ },
+ {
+   "ROW_ID": 277,
+   "PLAYER_ID": 185,
+   "RATING": 1785,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 278,
+   "PLAYER_ID": 186,
+   "RATING": 2760,
+   "LAST_UPDATE": "29-Mar-14"
+ },
+ {
+   "ROW_ID": 279,
+   "PLAYER_ID": 187,
+   "RATING": 2572,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 280,
+   "PLAYER_ID": 188,
+   "RATING": 2027,
+   "LAST_UPDATE": "23-Mar-18"
+ },
+ {
+   "ROW_ID": 281,
+   "PLAYER_ID": 189,
+   "RATING": 1827,
+   "LAST_UPDATE": "13-Dec-15"
+ },
+ {
+   "ROW_ID": 282,
+   "PLAYER_ID": 190,
+   "RATING": 1965,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 283,
+   "PLAYER_ID": 191,
+   "RATING": 1969,
+   "LAST_UPDATE": "09-Nov-14"
+ },
+ {
+   "ROW_ID": 284,
+   "PLAYER_ID": 192,
+   "RATING": 1724,
+   "LAST_UPDATE": "30-Mar-14"
+ },
+ {
+   "ROW_ID": 286,
+   "PLAYER_ID": 194,
+   "RATING": 1619,
+   "LAST_UPDATE": "12-Mar-16"
+ },
+ {
+   "ROW_ID": 287,
+   "PLAYER_ID": 195,
+   "RATING": 1174,
+   "LAST_UPDATE": "05-Jan-18"
+ },
+ {
+   "ROW_ID": 288,
+   "PLAYER_ID": 196,
+   "RATING": 1074,
+   "LAST_UPDATE": "30-Mar-14"
+ },
+ {
+   "ROW_ID": 289,
+   "PLAYER_ID": 197,
+   "RATING": 1700,
+   "LAST_UPDATE": "26-Jan-18"
+ },
+ {
+   "ROW_ID": 290,
+   "PLAYER_ID": 198,
+   "RATING": 1863,
+   "LAST_UPDATE": "09-Feb-18"
+ },
+ {
+   "ROW_ID": 291,
+   "PLAYER_ID": 199,
+   "RATING": 555,
+   "LAST_UPDATE": "21-Feb-14"
+ },
+ {
+   "ROW_ID": 292,
+   "PLAYER_ID": 200,
+   "RATING": 206,
+   "LAST_UPDATE": "16-Jan-15"
+ },
+ {
+   "ROW_ID": 293,
+   "PLAYER_ID": 201,
+   "RATING": 509,
+   "LAST_UPDATE": "10-May-15"
+ },
+ {
+   "ROW_ID": 294,
+   "PLAYER_ID": 202,
+   "RATING": 311,
+   "LAST_UPDATE": "10-Oct-14"
+ },
+ {
+   "ROW_ID": 295,
+   "PLAYER_ID": 203,
+   "RATING": 1203,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 296,
+   "PLAYER_ID": 204,
+   "RATING": 2162,
+   "LAST_UPDATE": "23-Jan-15"
+ },
+ {
+   "ROW_ID": 297,
+   "PLAYER_ID": 205,
+   "RATING": 2444,
+   "LAST_UPDATE": "13-Jun-14"
+ },
+ {
+   "ROW_ID": 298,
+   "PLAYER_ID": 206,
+   "RATING": 2153,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 299,
+   "PLAYER_ID": 207,
+   "RATING": 1768,
+   "LAST_UPDATE": "13-Dec-15"
+ },
+ {
+   "ROW_ID": 300,
+   "PLAYER_ID": 208,
+   "RATING": 2242,
+   "LAST_UPDATE": "08-Aug-14"
+ },
+ {
+   "ROW_ID": 301,
+   "PLAYER_ID": 209,
+   "RATING": 490,
+   "LAST_UPDATE": "13-Jun-14"
+ },
+ {
+   "ROW_ID": 303,
+   "PLAYER_ID": 210,
+   "RATING": 466,
+   "LAST_UPDATE": "12-Dec-14"
+ },
+ {
+   "ROW_ID": 302,
+   "PLAYER_ID": 211,
+   "RATING": 512,
+   "LAST_UPDATE": "13-Mar-16"
+ },
+ {
+   "ROW_ID": 304,
+   "PLAYER_ID": 212,
+   "RATING": 299,
+   "LAST_UPDATE": "13-Jul-14"
+ },
+ {
+   "ROW_ID": 305,
+   "PLAYER_ID": 213,
+   "RATING": 108,
+   "LAST_UPDATE": "06-Sep-15"
+ },
+ {
+   "ROW_ID": 306,
+   "PLAYER_ID": 214,
+   "RATING": 399,
+   "LAST_UPDATE": "20-Apr-18"
+ },
+ {
+   "ROW_ID": 307,
+   "PLAYER_ID": 215,
+   "RATING": 412,
+   "LAST_UPDATE": "05-Jan-18"
+ },
+ {
+   "ROW_ID": 308,
+   "PLAYER_ID": 216,
+   "RATING": 695,
+   "LAST_UPDATE": "01-Jul-18"
+ },
+ {
+   "ROW_ID": 309,
+   "PLAYER_ID": 217,
+   "RATING": 100,
+   "LAST_UPDATE": "15-Mar-15"
+ },
+ {
+   "ROW_ID": 310,
+   "PLAYER_ID": 218,
+   "RATING": 100,
+   "LAST_UPDATE": "02-Mar-18"
+ },
+ {
+   "ROW_ID": 311,
+   "PLAYER_ID": 219,
+   "RATING": 188,
+   "LAST_UPDATE": "27-Aug-17"
+ },
+ {
+   "ROW_ID": 312,
+   "PLAYER_ID": 220,
+   "RATING": 376,
+   "LAST_UPDATE": "05-Jan-18"
+ },
+ {
+   "ROW_ID": 313,
+   "PLAYER_ID": 221,
+   "RATING": 397,
+   "LAST_UPDATE": "06-May-18"
+ },
+ {
+   "ROW_ID": 314,
+   "PLAYER_ID": 222,
+   "RATING": 136,
+   "LAST_UPDATE": "05-Oct-14"
+ },
+ {
+   "ROW_ID": 315,
+   "PLAYER_ID": 223,
+   "RATING": 118,
+   "LAST_UPDATE": "06-Jul-14"
+ },
+ {
+   "ROW_ID": 316,
+   "PLAYER_ID": 224,
+   "RATING": 1000,
+   "LAST_UPDATE": "11-Aug-17"
+ },
+ {
+   "ROW_ID": 317,
+   "PLAYER_ID": 225,
+   "RATING": 2004,
+   "LAST_UPDATE": "18-Jul-14"
+ },
+ {
+   "ROW_ID": 318,
+   "PLAYER_ID": 227,
+   "RATING": 1322,
+   "LAST_UPDATE": "22-Apr-18"
+ },
+ {
+   "ROW_ID": 319,
+   "PLAYER_ID": 228,
+   "RATING": 193,
+   "LAST_UPDATE": "08-Aug-14"
+ },
+ {
+   "ROW_ID": 320,
+   "PLAYER_ID": 229,
+   "RATING": 858,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 321,
+   "PLAYER_ID": 230,
+   "RATING": 110,
+   "LAST_UPDATE": "21-Jun-15"
+ },
+ {
+   "ROW_ID": 322,
+   "PLAYER_ID": 231,
+   "RATING": 338,
+   "LAST_UPDATE": "15-May-15"
+ },
+ {
+   "ROW_ID": 323,
+   "PLAYER_ID": 232,
+   "RATING": 1904,
+   "LAST_UPDATE": "19-Sep-14"
+ },
+ {
+   "ROW_ID": 324,
+   "PLAYER_ID": 233,
+   "RATING": 2328,
+   "LAST_UPDATE": "04-May-18"
+ },
+ {
+   "ROW_ID": 325,
+   "PLAYER_ID": 234,
+   "RATING": 1920,
+   "LAST_UPDATE": "07-Sep-14"
+ },
+ {
+   "ROW_ID": 326,
+   "PLAYER_ID": 235,
+   "RATING": 2514,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 327,
+   "PLAYER_ID": 236,
+   "RATING": 1615,
+   "LAST_UPDATE": "18-Apr-15"
+ },
+ {
+   "ROW_ID": 328,
+   "PLAYER_ID": 237,
+   "RATING": 1919,
+   "LAST_UPDATE": "18-Apr-15"
+ },
+ {
+   "ROW_ID": 329,
+   "PLAYER_ID": 238,
+   "RATING": 1858,
+   "LAST_UPDATE": "19-Apr-15"
+ },
+ {
+   "ROW_ID": 330,
+   "PLAYER_ID": 239,
+   "RATING": 1793,
+   "LAST_UPDATE": "07-Sep-14"
+ },
+ {
+   "ROW_ID": 331,
+   "PLAYER_ID": 240,
+   "RATING": 1216,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 332,
+   "PLAYER_ID": 241,
+   "RATING": 1217,
+   "LAST_UPDATE": "02-Aug-15"
+ },
+ {
+   "ROW_ID": 333,
+   "PLAYER_ID": 242,
+   "RATING": 1200,
+   "LAST_UPDATE": "07-Sep-14"
+ },
+ {
+   "ROW_ID": 334,
+   "PLAYER_ID": 243,
+   "RATING": 983,
+   "LAST_UPDATE": "29-Jun-18"
+ },
+ {
+   "ROW_ID": 335,
+   "PLAYER_ID": 244,
+   "RATING": 258,
+   "LAST_UPDATE": "12-Mar-16"
+ },
+ {
+   "ROW_ID": 336,
+   "PLAYER_ID": 245,
+   "RATING": 1140,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 337,
+   "PLAYER_ID": 246,
+   "RATING": 1005,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 338,
+   "PLAYER_ID": 247,
+   "RATING": 1028,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 339,
+   "PLAYER_ID": 248,
+   "RATING": 946,
+   "LAST_UPDATE": "11-Jan-15"
+ },
+ {
+   "ROW_ID": 340,
+   "PLAYER_ID": 249,
+   "RATING": 710,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 341,
+   "PLAYER_ID": 250,
+   "RATING": 1493,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 342,
+   "PLAYER_ID": 251,
+   "RATING": 580,
+   "LAST_UPDATE": "23-Mar-18"
+ },
+ {
+   "ROW_ID": 343,
+   "PLAYER_ID": 252,
+   "RATING": 761,
+   "LAST_UPDATE": "07-Sep-14"
+ },
+ {
+   "ROW_ID": 344,
+   "PLAYER_ID": 253,
+   "RATING": 956,
+   "LAST_UPDATE": "29-Jun-18"
+ },
+ {
+   "ROW_ID": 345,
+   "PLAYER_ID": 254,
+   "RATING": 1592,
+   "LAST_UPDATE": "20-Apr-18"
+ },
+ {
+   "ROW_ID": 346,
+   "PLAYER_ID": 255,
+   "RATING": 939,
+   "LAST_UPDATE": "07-Sep-14"
+ },
+ {
+   "ROW_ID": 347,
+   "PLAYER_ID": 256,
+   "RATING": 544,
+   "LAST_UPDATE": "25-Aug-17"
+ },
+ {
+   "ROW_ID": 349,
+   "PLAYER_ID": 258,
+   "RATING": 357,
+   "LAST_UPDATE": "26-Nov-16"
+ },
+ {
+   "ROW_ID": 350,
+   "PLAYER_ID": 259,
+   "RATING": 322,
+   "LAST_UPDATE": "06-May-18"
+ },
+ {
+   "ROW_ID": 351,
+   "PLAYER_ID": 260,
+   "RATING": 156,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 352,
+   "PLAYER_ID": 261,
+   "RATING": 312,
+   "LAST_UPDATE": "26-Jul-15"
+ },
+ {
+   "ROW_ID": 353,
+   "PLAYER_ID": 263,
+   "RATING": 421,
+   "LAST_UPDATE": "25-Aug-17"
+ },
+ {
+   "ROW_ID": 354,
+   "PLAYER_ID": 264,
+   "RATING": 329,
+   "LAST_UPDATE": "14-Feb-16"
+ },
+ {
+   "ROW_ID": 355,
+   "PLAYER_ID": 265,
+   "RATING": 1201,
+   "LAST_UPDATE": "29-Jun-18"
+ },
+ {
+   "ROW_ID": 356,
+   "PLAYER_ID": 266,
+   "RATING": 216,
+   "LAST_UPDATE": "06-Sep-14"
+ },
+ {
+   "ROW_ID": 357,
+   "PLAYER_ID": 267,
+   "RATING": 166,
+   "LAST_UPDATE": "07-Jan-18"
+ },
+ {
+   "ROW_ID": 358,
+   "PLAYER_ID": 268,
+   "RATING": 328,
+   "LAST_UPDATE": "17-Jun-18"
+ },
+ {
+   "ROW_ID": 359,
+   "PLAYER_ID": 269,
+   "RATING": 653,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 360,
+   "PLAYER_ID": 270,
+   "RATING": 888,
+   "LAST_UPDATE": "22-Apr-16"
+ },
+ {
+   "ROW_ID": 361,
+   "PLAYER_ID": 271,
+   "RATING": 341,
+   "LAST_UPDATE": "27-Feb-15"
+ },
+ {
+   "ROW_ID": 362,
+   "PLAYER_ID": 272,
+   "RATING": 911,
+   "LAST_UPDATE": "11-Jan-15"
+ },
+ {
+   "ROW_ID": 363,
+   "PLAYER_ID": 273,
+   "RATING": 1384,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 364,
+   "PLAYER_ID": 274,
+   "RATING": 2032,
+   "LAST_UPDATE": "27-Apr-18"
+ },
+ {
+   "ROW_ID": 365,
+   "PLAYER_ID": 275,
+   "RATING": 158,
+   "LAST_UPDATE": "08-Jul-18"
+ },
+ {
+   "ROW_ID": 366,
+   "PLAYER_ID": 276,
+   "RATING": 287,
+   "LAST_UPDATE": "17-Jan-16"
+ },
+ {
+   "ROW_ID": 367,
+   "PLAYER_ID": 277,
+   "RATING": 510,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 368,
+   "PLAYER_ID": 278,
+   "RATING": 175,
+   "LAST_UPDATE": "28-Jun-15"
+ },
+ {
+   "ROW_ID": 369,
+   "PLAYER_ID": 279,
+   "RATING": 1093,
+   "LAST_UPDATE": "19-Jun-15"
+ },
+ {
+   "ROW_ID": 370,
+   "PLAYER_ID": 280,
+   "RATING": 1002,
+   "LAST_UPDATE": "17-Jul-15"
+ },
+ {
+   "ROW_ID": 371,
+   "PLAYER_ID": 281,
+   "RATING": 745,
+   "LAST_UPDATE": "07-Jun-15"
+ },
+ {
+   "ROW_ID": 372,
+   "PLAYER_ID": 282,
+   "RATING": 580,
+   "LAST_UPDATE": "11-May-18"
+ },
+ {
+   "ROW_ID": 373,
+   "PLAYER_ID": 283,
+   "RATING": 103,
+   "LAST_UPDATE": "26-Apr-15"
+ },
+ {
+   "ROW_ID": 374,
+   "PLAYER_ID": 284,
+   "RATING": 136,
+   "LAST_UPDATE": "10-Jun-18"
+ },
+ {
+   "ROW_ID": 375,
+   "PLAYER_ID": 285,
+   "RATING": 703,
+   "LAST_UPDATE": "08-Feb-15"
+ },
+ {
+   "ROW_ID": 376,
+   "PLAYER_ID": 286,
+   "RATING": 1231,
+   "LAST_UPDATE": "29-May-15"
+ },
+ {
+   "ROW_ID": 377,
+   "PLAYER_ID": 287,
+   "RATING": 1110,
+   "LAST_UPDATE": "22-May-15"
+ },
+ {
+   "ROW_ID": 378,
+   "PLAYER_ID": 288,
+   "RATING": 149,
+   "LAST_UPDATE": "01-Mar-15"
+ },
+ {
+   "ROW_ID": 379,
+   "PLAYER_ID": 289,
+   "RATING": 1108,
+   "LAST_UPDATE": "08-Mar-15"
+ },
+ {
+   "ROW_ID": 380,
+   "PLAYER_ID": 290,
+   "RATING": 1071,
+   "LAST_UPDATE": "12-Jul-15"
+ },
+ {
+   "ROW_ID": 381,
+   "PLAYER_ID": 291,
+   "RATING": 843,
+   "LAST_UPDATE": "31-Jan-16"
+ },
+ {
+   "ROW_ID": 382,
+   "PLAYER_ID": 292,
+   "RATING": 322,
+   "LAST_UPDATE": "24-May-15"
+ },
+ {
+   "ROW_ID": 383,
+   "PLAYER_ID": 293,
+   "RATING": 100,
+   "LAST_UPDATE": "22-Apr-18"
+ },
+ {
+   "ROW_ID": 384,
+   "PLAYER_ID": 294,
+   "RATING": 524,
+   "LAST_UPDATE": "12-Mar-16"
+ },
+ {
+   "ROW_ID": 385,
+   "PLAYER_ID": 295,
+   "RATING": 761,
+   "LAST_UPDATE": "18-Apr-15"
+ },
+ {
+   "ROW_ID": 386,
+   "PLAYER_ID": 296,
+   "RATING": 1218,
+   "LAST_UPDATE": "26-Apr-15"
+ },
+ {
+   "ROW_ID": 387,
+   "PLAYER_ID": 297,
+   "RATING": 754,
+   "LAST_UPDATE": "24-Jul-15"
+ },
+ {
+   "ROW_ID": 388,
+   "PLAYER_ID": 298,
+   "RATING": 1604,
+   "LAST_UPDATE": "18-Apr-15"
+ },
+ {
+   "ROW_ID": 389,
+   "PLAYER_ID": 299,
+   "RATING": 1052,
+   "LAST_UPDATE": "29-Jan-17"
+ },
+ {
+   "ROW_ID": 390,
+   "PLAYER_ID": 300,
+   "RATING": 1172,
+   "LAST_UPDATE": "18-Apr-15"
+ },
+ {
+   "ROW_ID": 391,
+   "PLAYER_ID": 301,
+   "RATING": 1212,
+   "LAST_UPDATE": "18-Apr-15"
+ },
+ {
+   "ROW_ID": 392,
+   "PLAYER_ID": 302,
+   "RATING": 100,
+   "LAST_UPDATE": "13-Dec-15"
+ },
+ {
+   "ROW_ID": 393,
+   "PLAYER_ID": 303,
+   "RATING": 239,
+   "LAST_UPDATE": "13-Mar-16"
+ },
+ {
+   "ROW_ID": 394,
+   "PLAYER_ID": 304,
+   "RATING": 249,
+   "LAST_UPDATE": "07-Apr-17"
+ },
+ {
+   "ROW_ID": 395,
+   "PLAYER_ID": 305,
+   "RATING": 266,
+   "LAST_UPDATE": "13-Mar-16"
+ },
+ {
+   "ROW_ID": 396,
+   "PLAYER_ID": 306,
+   "RATING": 133,
+   "LAST_UPDATE": "13-Mar-16"
+ },
+ {
+   "ROW_ID": 397,
+   "PLAYER_ID": 307,
+   "RATING": 929,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 398,
+   "PLAYER_ID": 308,
+   "RATING": 1471,
+   "LAST_UPDATE": "27-May-16"
+ },
+ {
+   "ROW_ID": 399,
+   "PLAYER_ID": 309,
+   "RATING": 1166,
+   "LAST_UPDATE": "18-Apr-15"
+ },
+ {
+   "ROW_ID": 400,
+   "PLAYER_ID": 310,
+   "RATING": 100,
+   "LAST_UPDATE": "19-Apr-15"
+ },
+ {
+   "ROW_ID": 401,
+   "PLAYER_ID": 311,
+   "RATING": 419,
+   "LAST_UPDATE": "22-Oct-17"
+ },
+ {
+   "ROW_ID": 402,
+   "PLAYER_ID": 312,
+   "RATING": 377,
+   "LAST_UPDATE": "30-Jul-17"
+ },
+ {
+   "ROW_ID": 403,
+   "PLAYER_ID": 313,
+   "RATING": 279,
+   "LAST_UPDATE": "19-Apr-15"
+ },
+ {
+   "ROW_ID": 404,
+   "PLAYER_ID": 314,
+   "RATING": 915,
+   "LAST_UPDATE": "19-Apr-15"
+ },
+ {
+   "ROW_ID": 405,
+   "PLAYER_ID": 315,
+   "RATING": 1678,
+   "LAST_UPDATE": "21-Apr-17"
+ },
+ {
+   "ROW_ID": 406,
+   "PLAYER_ID": 316,
+   "RATING": 100,
+   "LAST_UPDATE": "19-Apr-15"
+ },
+ {
+   "ROW_ID": 407,
+   "PLAYER_ID": 317,
+   "RATING": 258,
+   "LAST_UPDATE": "13-Aug-17"
+ },
+ {
+   "ROW_ID": 408,
+   "PLAYER_ID": 318,
+   "RATING": 525,
+   "LAST_UPDATE": "10-Jun-18"
+ },
+ {
+   "ROW_ID": 410,
+   "PLAYER_ID": 320,
+   "RATING": 1689,
+   "LAST_UPDATE": "15-May-15"
+ },
+ {
+   "ROW_ID": 411,
+   "PLAYER_ID": 321,
+   "RATING": 311,
+   "LAST_UPDATE": "15-Jul-16"
+ },
+ {
+   "ROW_ID": 412,
+   "PLAYER_ID": 322,
+   "RATING": 121,
+   "LAST_UPDATE": "31-May-15"
+ },
+ {
+   "ROW_ID": 413,
+   "PLAYER_ID": 323,
+   "RATING": 291,
+   "LAST_UPDATE": "14-Jun-15"
+ },
+ {
+   "ROW_ID": 414,
+   "PLAYER_ID": 324,
+   "RATING": 526,
+   "LAST_UPDATE": "21-Jun-15"
+ },
+ {
+   "ROW_ID": 415,
+   "PLAYER_ID": 325,
+   "RATING": 725,
+   "LAST_UPDATE": "18-May-18"
+ },
+ {
+   "ROW_ID": 416,
+   "PLAYER_ID": 326,
+   "RATING": 306,
+   "LAST_UPDATE": "21-Jan-18"
+ },
+ {
+   "ROW_ID": 417,
+   "PLAYER_ID": 327,
+   "RATING": 823,
+   "LAST_UPDATE": "30-Oct-16"
+ },
+ {
+   "ROW_ID": 418,
+   "PLAYER_ID": 328,
+   "RATING": 100,
+   "LAST_UPDATE": "19-Nov-17"
+ },
+ {
+   "ROW_ID": 419,
+   "PLAYER_ID": 329,
+   "RATING": 304,
+   "LAST_UPDATE": "06-Sep-15"
+ },
+ {
+   "ROW_ID": 420,
+   "PLAYER_ID": 330,
+   "RATING": 147,
+   "LAST_UPDATE": "22-Nov-15"
+ },
+ {
+   "ROW_ID": 421,
+   "PLAYER_ID": 331,
+   "RATING": 490,
+   "LAST_UPDATE": "20-Sep-15"
+ },
+ {
+   "ROW_ID": 422,
+   "PLAYER_ID": 332,
+   "RATING": 391,
+   "LAST_UPDATE": "22-Apr-18"
+ },
+ {
+   "ROW_ID": 423,
+   "PLAYER_ID": 333,
+   "RATING": 166,
+   "LAST_UPDATE": "27-Sep-15"
+ },
+ {
+   "ROW_ID": 424,
+   "PLAYER_ID": 334,
+   "RATING": 422,
+   "LAST_UPDATE": "04-Dec-15"
+ },
+ {
+   "ROW_ID": 425,
+   "PLAYER_ID": 335,
+   "RATING": 592,
+   "LAST_UPDATE": "12-Aug-16"
+ },
+ {
+   "ROW_ID": 426,
+   "PLAYER_ID": 336,
+   "RATING": 525,
+   "LAST_UPDATE": "10-Jul-16"
+ },
+ {
+   "ROW_ID": 427,
+   "PLAYER_ID": 337,
+   "RATING": 100,
+   "LAST_UPDATE": "18-Oct-15"
+ },
+ {
+   "ROW_ID": 428,
+   "PLAYER_ID": 338,
+   "RATING": 1764,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 429,
+   "PLAYER_ID": 339,
+   "RATING": 308,
+   "LAST_UPDATE": "15-Jan-16"
+ },
+ {
+   "ROW_ID": 430,
+   "PLAYER_ID": 340,
+   "RATING": 488,
+   "LAST_UPDATE": "21-Apr-17"
+ },
+ {
+   "ROW_ID": 431,
+   "PLAYER_ID": 341,
+   "RATING": 137,
+   "LAST_UPDATE": "01-Jul-18"
+ },
+ {
+   "ROW_ID": 432,
+   "PLAYER_ID": 342,
+   "RATING": 132,
+   "LAST_UPDATE": "29-Jan-16"
+ },
+ {
+   "ROW_ID": 433,
+   "PLAYER_ID": 343,
+   "RATING": 1292,
+   "LAST_UPDATE": "29-Nov-15"
+ },
+ {
+   "ROW_ID": 434,
+   "PLAYER_ID": 344,
+   "RATING": 721,
+   "LAST_UPDATE": "29-Jun-18"
+ },
+ {
+   "ROW_ID": 435,
+   "PLAYER_ID": 345,
+   "RATING": 100,
+   "LAST_UPDATE": "29-Jan-16"
+ },
+ {
+   "ROW_ID": 436,
+   "PLAYER_ID": 346,
+   "RATING": 320,
+   "LAST_UPDATE": "10-Jul-16"
+ },
+ {
+   "ROW_ID": 437,
+   "PLAYER_ID": 347,
+   "RATING": 315,
+   "LAST_UPDATE": "12-Jun-16"
+ },
+ {
+   "ROW_ID": 438,
+   "PLAYER_ID": 348,
+   "RATING": 152,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 439,
+   "PLAYER_ID": 349,
+   "RATING": 100,
+   "LAST_UPDATE": "24-Jan-16"
+ },
+ {
+   "ROW_ID": 440,
+   "PLAYER_ID": 350,
+   "RATING": 343,
+   "LAST_UPDATE": "20-May-18"
+ },
+ {
+   "ROW_ID": 441,
+   "PLAYER_ID": 351,
+   "RATING": 172,
+   "LAST_UPDATE": "26-Feb-17"
+ },
+ {
+   "ROW_ID": 442,
+   "PLAYER_ID": 352,
+   "RATING": 832,
+   "LAST_UPDATE": "10-Jun-18"
+ },
+ {
+   "ROW_ID": 443,
+   "PLAYER_ID": 353,
+   "RATING": 194,
+   "LAST_UPDATE": "29-Nov-15"
+ },
+ {
+   "ROW_ID": 444,
+   "PLAYER_ID": 354,
+   "RATING": 297,
+   "LAST_UPDATE": "10-Jul-16"
+ },
+ {
+   "ROW_ID": 445,
+   "PLAYER_ID": 355,
+   "RATING": 1234,
+   "LAST_UPDATE": "25-Mar-16"
+ },
+ {
+   "ROW_ID": 446,
+   "PLAYER_ID": 356,
+   "RATING": 602,
+   "LAST_UPDATE": "04-Dec-15"
+ },
+ {
+   "ROW_ID": 447,
+   "PLAYER_ID": 357,
+   "RATING": 2206,
+   "LAST_UPDATE": "13-Nov-15"
+ },
+ {
+   "ROW_ID": 448,
+   "PLAYER_ID": 358,
+   "RATING": 416,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 449,
+   "PLAYER_ID": 359,
+   "RATING": 418,
+   "LAST_UPDATE": "01-Apr-18"
+ },
+ {
+   "ROW_ID": 450,
+   "PLAYER_ID": 360,
+   "RATING": 358,
+   "LAST_UPDATE": "27-Apr-18"
+ },
+ {
+   "ROW_ID": 451,
+   "PLAYER_ID": 361,
+   "RATING": 1846,
+   "LAST_UPDATE": "12-Mar-16"
+ },
+ {
+   "ROW_ID": 452,
+   "PLAYER_ID": 362,
+   "RATING": 948,
+   "LAST_UPDATE": "22-Jan-16"
+ },
+ {
+   "ROW_ID": 453,
+   "PLAYER_ID": 363,
+   "RATING": 298,
+   "LAST_UPDATE": "20-Nov-15"
+ },
+ {
+   "ROW_ID": 454,
+   "PLAYER_ID": 364,
+   "RATING": 2061,
+   "LAST_UPDATE": "04-May-18"
+ },
+ {
+   "ROW_ID": 455,
+   "PLAYER_ID": 365,
+   "RATING": 130,
+   "LAST_UPDATE": "16-Oct-16"
+ },
+ {
+   "ROW_ID": 456,
+   "PLAYER_ID": 366,
+   "RATING": 386,
+   "LAST_UPDATE": "12-Mar-16"
+ },
+ {
+   "ROW_ID": 457,
+   "PLAYER_ID": 367,
+   "RATING": 1217,
+   "LAST_UPDATE": "23-Dec-15"
+ },
+ {
+   "ROW_ID": 458,
+   "PLAYER_ID": 368,
+   "RATING": 1657,
+   "LAST_UPDATE": "31-Mar-17"
+ },
+ {
+   "ROW_ID": 459,
+   "PLAYER_ID": 369,
+   "RATING": 353,
+   "LAST_UPDATE": "12-Dec-15"
+ },
+ {
+   "ROW_ID": 460,
+   "PLAYER_ID": 370,
+   "RATING": 211,
+   "LAST_UPDATE": "08-Jul-18"
+ },
+ {
+   "ROW_ID": 461,
+   "PLAYER_ID": 371,
+   "RATING": 2210,
+   "LAST_UPDATE": "12-Mar-16"
+ },
+ {
+   "ROW_ID": 462,
+   "PLAYER_ID": 372,
+   "RATING": 1166,
+   "LAST_UPDATE": "12-Mar-16"
+ },
+ {
+   "ROW_ID": 463,
+   "PLAYER_ID": 373,
+   "RATING": 1431,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 464,
+   "PLAYER_ID": 374,
+   "RATING": 2234,
+   "LAST_UPDATE": "12-Dec-15"
+ },
+ {
+   "ROW_ID": 465,
+   "PLAYER_ID": 375,
+   "RATING": 1685,
+   "LAST_UPDATE": "12-Dec-15"
+ },
+ {
+   "ROW_ID": 466,
+   "PLAYER_ID": 376,
+   "RATING": 1461,
+   "LAST_UPDATE": "25-Nov-16"
+ },
+ {
+   "ROW_ID": 467,
+   "PLAYER_ID": 377,
+   "RATING": 1112,
+   "LAST_UPDATE": "12-May-17"
+ },
+ {
+   "ROW_ID": 468,
+   "PLAYER_ID": 378,
+   "RATING": 842,
+   "LAST_UPDATE": "12-Dec-15"
+ },
+ {
+   "ROW_ID": 469,
+   "PLAYER_ID": 379,
+   "RATING": 661,
+   "LAST_UPDATE": "12-Dec-15"
+ },
+ {
+   "ROW_ID": 470,
+   "PLAYER_ID": 380,
+   "RATING": 1549,
+   "LAST_UPDATE": "13-Dec-15"
+ },
+ {
+   "ROW_ID": 471,
+   "PLAYER_ID": 381,
+   "RATING": 1707,
+   "LAST_UPDATE": "13-Apr-18"
+ },
+ {
+   "ROW_ID": 472,
+   "PLAYER_ID": 382,
+   "RATING": 213,
+   "LAST_UPDATE": "20-Dec-15"
+ },
+ {
+   "ROW_ID": 473,
+   "PLAYER_ID": 383,
+   "RATING": 207,
+   "LAST_UPDATE": "24-Jun-18"
+ },
+ {
+   "ROW_ID": 474,
+   "PLAYER_ID": 384,
+   "RATING": 102,
+   "LAST_UPDATE": "13-Dec-15"
+ },
+ {
+   "ROW_ID": 475,
+   "PLAYER_ID": 385,
+   "RATING": 183,
+   "LAST_UPDATE": "24-Jun-18"
+ },
+ {
+   "ROW_ID": 476,
+   "PLAYER_ID": 386,
+   "RATING": 1570,
+   "LAST_UPDATE": "30-Mar-18"
+ },
+ {
+   "ROW_ID": 477,
+   "PLAYER_ID": 387,
+   "RATING": 305,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 478,
+   "PLAYER_ID": 388,
+   "RATING": 1654,
+   "LAST_UPDATE": "04-May-18"
+ },
+ {
+   "ROW_ID": 479,
+   "PLAYER_ID": 389,
+   "RATING": 100,
+   "LAST_UPDATE": "26-Jun-16"
+ },
+ {
+   "ROW_ID": 480,
+   "PLAYER_ID": 390,
+   "RATING": 974,
+   "LAST_UPDATE": "18-May-18"
+ },
+ {
+   "ROW_ID": 481,
+   "PLAYER_ID": 391,
+   "RATING": 1013,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 482,
+   "PLAYER_ID": 392,
+   "RATING": 135,
+   "LAST_UPDATE": "05-Feb-16"
+ },
+ {
+   "ROW_ID": 483,
+   "PLAYER_ID": 393,
+   "RATING": 816,
+   "LAST_UPDATE": "26-Feb-16"
+ },
+ {
+   "ROW_ID": 484,
+   "PLAYER_ID": 394,
+   "RATING": 139,
+   "LAST_UPDATE": "19-Feb-16"
+ },
+ {
+   "ROW_ID": 485,
+   "PLAYER_ID": 395,
+   "RATING": 200,
+   "LAST_UPDATE": "29-Jan-17"
+ },
+ {
+   "ROW_ID": 486,
+   "PLAYER_ID": 396,
+   "RATING": 680,
+   "LAST_UPDATE": "28-Feb-16"
+ },
+ {
+   "ROW_ID": 487,
+   "PLAYER_ID": 397,
+   "RATING": 177,
+   "LAST_UPDATE": "29-Jan-17"
+ },
+ {
+   "ROW_ID": 488,
+   "PLAYER_ID": 398,
+   "RATING": 565,
+   "LAST_UPDATE": "05-Jan-18"
+ },
+ {
+   "ROW_ID": 489,
+   "PLAYER_ID": 399,
+   "RATING": 1586,
+   "LAST_UPDATE": "07-Jan-18"
+ },
+ {
+   "ROW_ID": 490,
+   "PLAYER_ID": 400,
+   "RATING": 487,
+   "LAST_UPDATE": "13-Mar-16"
+ },
+ {
+   "ROW_ID": 491,
+   "PLAYER_ID": 401,
+   "RATING": 100,
+   "LAST_UPDATE": "04-Mar-16"
+ },
+ {
+   "ROW_ID": 492,
+   "PLAYER_ID": 402,
+   "RATING": 2304,
+   "LAST_UPDATE": "10-Mar-17"
+ },
+ {
+   "ROW_ID": 493,
+   "PLAYER_ID": 403,
+   "RATING": 648,
+   "LAST_UPDATE": "13-Mar-16"
+ },
+ {
+   "ROW_ID": 494,
+   "PLAYER_ID": 404,
+   "RATING": 636,
+   "LAST_UPDATE": "13-Mar-16"
+ },
+ {
+   "ROW_ID": 495,
+   "PLAYER_ID": 405,
+   "RATING": 1890,
+   "LAST_UPDATE": "06-Jan-17"
+ },
+ {
+   "ROW_ID": 496,
+   "PLAYER_ID": 406,
+   "RATING": 1566,
+   "LAST_UPDATE": "11-Mar-16"
+ },
+ {
+   "ROW_ID": 497,
+   "PLAYER_ID": 407,
+   "RATING": 1330,
+   "LAST_UPDATE": "06-Nov-16"
+ },
+ {
+   "ROW_ID": 498,
+   "PLAYER_ID": 408,
+   "RATING": 2570,
+   "LAST_UPDATE": "18-Nov-16"
+ },
+ {
+   "ROW_ID": 499,
+   "PLAYER_ID": 409,
+   "RATING": 100,
+   "LAST_UPDATE": "11-Mar-16"
+ },
+ {
+   "ROW_ID": 500,
+   "PLAYER_ID": 410,
+   "RATING": 267,
+   "LAST_UPDATE": "12-Mar-16"
+ },
+ {
+   "ROW_ID": 501,
+   "PLAYER_ID": 411,
+   "RATING": 2224,
+   "LAST_UPDATE": "12-Mar-16"
+ },
+ {
+   "ROW_ID": 502,
+   "PLAYER_ID": 412,
+   "RATING": 1989,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 503,
+   "PLAYER_ID": 413,
+   "RATING": 105,
+   "LAST_UPDATE": "13-Mar-16"
+ },
+ {
+   "ROW_ID": 504,
+   "PLAYER_ID": 414,
+   "RATING": 146,
+   "LAST_UPDATE": "13-Mar-16"
+ },
+ {
+   "ROW_ID": 505,
+   "PLAYER_ID": 415,
+   "RATING": 100,
+   "LAST_UPDATE": "09-Oct-16"
+ },
+ {
+   "ROW_ID": 506,
+   "PLAYER_ID": 416,
+   "RATING": 434,
+   "LAST_UPDATE": "24-Jun-18"
+ },
+ {
+   "ROW_ID": 507,
+   "PLAYER_ID": 417,
+   "RATING": 152,
+   "LAST_UPDATE": "13-Mar-16"
+ },
+ {
+   "ROW_ID": 508,
+   "PLAYER_ID": 418,
+   "RATING": 212,
+   "LAST_UPDATE": "03-Jun-18"
+ },
+ {
+   "ROW_ID": 509,
+   "PLAYER_ID": 419,
+   "RATING": 355,
+   "LAST_UPDATE": "13-Mar-16"
+ },
+ {
+   "ROW_ID": 510,
+   "PLAYER_ID": 420,
+   "RATING": 488,
+   "LAST_UPDATE": "13-Mar-16"
+ },
+ {
+   "ROW_ID": 511,
+   "PLAYER_ID": 421,
+   "RATING": 115,
+   "LAST_UPDATE": "20-Mar-16"
+ },
+ {
+   "ROW_ID": 512,
+   "PLAYER_ID": 422,
+   "RATING": 100,
+   "LAST_UPDATE": "12-Jun-16"
+ },
+ {
+   "ROW_ID": 513,
+   "PLAYER_ID": 423,
+   "RATING": 508,
+   "LAST_UPDATE": "01-Jul-18"
+ },
+ {
+   "ROW_ID": 514,
+   "PLAYER_ID": 424,
+   "RATING": 100,
+   "LAST_UPDATE": "25-Mar-16"
+ },
+ {
+   "ROW_ID": 515,
+   "PLAYER_ID": 425,
+   "RATING": 100,
+   "LAST_UPDATE": "01-Apr-16"
+ },
+ {
+   "ROW_ID": 516,
+   "PLAYER_ID": 426,
+   "RATING": 153,
+   "LAST_UPDATE": "16-Oct-16"
+ },
+ {
+   "ROW_ID": 517,
+   "PLAYER_ID": 427,
+   "RATING": 1461,
+   "LAST_UPDATE": "13-Apr-18"
+ },
+ {
+   "ROW_ID": 518,
+   "PLAYER_ID": 428,
+   "RATING": 1101,
+   "LAST_UPDATE": "29-Jun-18"
+ },
+ {
+   "ROW_ID": 519,
+   "PLAYER_ID": 429,
+   "RATING": 635,
+   "LAST_UPDATE": "01-May-16"
+ },
+ {
+   "ROW_ID": 520,
+   "PLAYER_ID": 430,
+   "RATING": 443,
+   "LAST_UPDATE": "24-Jun-16"
+ },
+ {
+   "ROW_ID": 521,
+   "PLAYER_ID": 431,
+   "RATING": 100,
+   "LAST_UPDATE": "29-Jul-16"
+ },
+ {
+   "ROW_ID": 522,
+   "PLAYER_ID": 432,
+   "RATING": 479,
+   "LAST_UPDATE": "21-Aug-16"
+ },
+ {
+   "ROW_ID": 523,
+   "PLAYER_ID": 433,
+   "RATING": 311,
+   "LAST_UPDATE": "21-Aug-16"
+ },
+ {
+   "ROW_ID": 524,
+   "PLAYER_ID": 434,
+   "RATING": 434,
+   "LAST_UPDATE": "15-Oct-17"
+ },
+ {
+   "ROW_ID": 525,
+   "PLAYER_ID": 435,
+   "RATING": 100,
+   "LAST_UPDATE": "01-Jul-18"
+ },
+ {
+   "ROW_ID": 526,
+   "PLAYER_ID": 436,
+   "RATING": 130,
+   "LAST_UPDATE": "21-May-17"
+ },
+ {
+   "ROW_ID": 527,
+   "PLAYER_ID": 437,
+   "RATING": 310,
+   "LAST_UPDATE": "02-Oct-16"
+ },
+ {
+   "ROW_ID": 528,
+   "PLAYER_ID": 438,
+   "RATING": 308,
+   "LAST_UPDATE": "11-Jun-17"
+ },
+ {
+   "ROW_ID": 529,
+   "PLAYER_ID": 439,
+   "RATING": 2071,
+   "LAST_UPDATE": "09-Dec-16"
+ },
+ {
+   "ROW_ID": 530,
+   "PLAYER_ID": 440,
+   "RATING": 2280,
+   "LAST_UPDATE": "11-May-18"
+ },
+ {
+   "ROW_ID": 531,
+   "PLAYER_ID": 441,
+   "RATING": 745,
+   "LAST_UPDATE": "19-May-17"
+ },
+ {
+   "ROW_ID": 532,
+   "PLAYER_ID": 442,
+   "RATING": 2414,
+   "LAST_UPDATE": "04-Nov-16"
+ },
+ {
+   "ROW_ID": 533,
+   "PLAYER_ID": 443,
+   "RATING": 957,
+   "LAST_UPDATE": "25-May-18"
+ },
+ {
+   "ROW_ID": 534,
+   "PLAYER_ID": 444,
+   "RATING": 814,
+   "LAST_UPDATE": "19-May-17"
+ },
+ {
+   "ROW_ID": 535,
+   "PLAYER_ID": 445,
+   "RATING": 585,
+   "LAST_UPDATE": "14-Oct-16"
+ },
+ {
+   "ROW_ID": 536,
+   "PLAYER_ID": 446,
+   "RATING": 2043,
+   "LAST_UPDATE": "26-Jan-18"
+ },
+ {
+   "ROW_ID": 537,
+   "PLAYER_ID": 447,
+   "RATING": 2202,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 538,
+   "PLAYER_ID": 448,
+   "RATING": 1912,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 539,
+   "PLAYER_ID": 449,
+   "RATING": 1943,
+   "LAST_UPDATE": "11-May-18"
+ },
+ {
+   "ROW_ID": 540,
+   "PLAYER_ID": 450,
+   "RATING": 1438,
+   "LAST_UPDATE": "19-May-17"
+ },
+ {
+   "ROW_ID": 541,
+   "PLAYER_ID": 451,
+   "RATING": 1958,
+   "LAST_UPDATE": "16-Oct-16"
+ },
+ {
+   "ROW_ID": 542,
+   "PLAYER_ID": 452,
+   "RATING": 2257,
+   "LAST_UPDATE": "07-Jan-18"
+ },
+ {
+   "ROW_ID": 543,
+   "PLAYER_ID": 453,
+   "RATING": 120,
+   "LAST_UPDATE": "06-Nov-16"
+ },
+ {
+   "ROW_ID": 544,
+   "PLAYER_ID": 454,
+   "RATING": 962,
+   "LAST_UPDATE": "19-Feb-17"
+ },
+ {
+   "ROW_ID": 545,
+   "PLAYER_ID": 455,
+   "RATING": 1257,
+   "LAST_UPDATE": "29-Jan-17"
+ },
+ {
+   "ROW_ID": 546,
+   "PLAYER_ID": 456,
+   "RATING": 1700,
+   "LAST_UPDATE": "18-Nov-16"
+ },
+ {
+   "ROW_ID": 547,
+   "PLAYER_ID": 457,
+   "RATING": 273,
+   "LAST_UPDATE": "10-Jun-18"
+ },
+ {
+   "ROW_ID": 548,
+   "PLAYER_ID": 458,
+   "RATING": 100,
+   "LAST_UPDATE": "26-Nov-16"
+ },
+ {
+   "ROW_ID": 549,
+   "PLAYER_ID": 459,
+   "RATING": 100,
+   "LAST_UPDATE": "26-Nov-16"
+ },
+ {
+   "ROW_ID": 550,
+   "PLAYER_ID": 460,
+   "RATING": 188,
+   "LAST_UPDATE": "26-Nov-16"
+ },
+ {
+   "ROW_ID": 551,
+   "PLAYER_ID": 461,
+   "RATING": 100,
+   "LAST_UPDATE": "26-Nov-16"
+ },
+ {
+   "ROW_ID": 552,
+   "PLAYER_ID": 462,
+   "RATING": 754,
+   "LAST_UPDATE": "07-Jan-18"
+ },
+ {
+   "ROW_ID": 553,
+   "PLAYER_ID": 463,
+   "RATING": 900,
+   "LAST_UPDATE": "26-Nov-16"
+ },
+ {
+   "ROW_ID": 554,
+   "PLAYER_ID": 464,
+   "RATING": 2340,
+   "LAST_UPDATE": "04-May-18"
+ },
+ {
+   "ROW_ID": 555,
+   "PLAYER_ID": 465,
+   "RATING": 854,
+   "LAST_UPDATE": "12-May-17"
+ },
+ {
+   "ROW_ID": 556,
+   "PLAYER_ID": 466,
+   "RATING": 1405,
+   "LAST_UPDATE": "26-Nov-16"
+ },
+ {
+   "ROW_ID": 557,
+   "PLAYER_ID": 467,
+   "RATING": 100,
+   "LAST_UPDATE": "26-Nov-16"
+ },
+ {
+   "ROW_ID": 558,
+   "PLAYER_ID": 468,
+   "RATING": 1811,
+   "LAST_UPDATE": "30-Dec-16"
+ },
+ {
+   "ROW_ID": 559,
+   "PLAYER_ID": 469,
+   "RATING": 1978,
+   "LAST_UPDATE": "24-Feb-17"
+ },
+ {
+   "ROW_ID": 560,
+   "PLAYER_ID": 470,
+   "RATING": 569,
+   "LAST_UPDATE": "18-Aug-17"
+ },
+ {
+   "ROW_ID": 561,
+   "PLAYER_ID": 471,
+   "RATING": 789,
+   "LAST_UPDATE": "29-Jan-17"
+ },
+ {
+   "ROW_ID": 562,
+   "PLAYER_ID": 472,
+   "RATING": 355,
+   "LAST_UPDATE": "17-Jun-18"
+ },
+ {
+   "ROW_ID": 563,
+   "PLAYER_ID": 473,
+   "RATING": 360,
+   "LAST_UPDATE": "08-Jan-17"
+ },
+ {
+   "ROW_ID": 564,
+   "PLAYER_ID": 474,
+   "RATING": 856,
+   "LAST_UPDATE": "17-Jun-18"
+ },
+ {
+   "ROW_ID": 565,
+   "PLAYER_ID": 475,
+   "RATING": 316,
+   "LAST_UPDATE": "24-Jun-18"
+ },
+ {
+   "ROW_ID": 566,
+   "PLAYER_ID": 476,
+   "RATING": 1570,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 567,
+   "PLAYER_ID": 477,
+   "RATING": 175,
+   "LAST_UPDATE": "16-Apr-17"
+ },
+ {
+   "ROW_ID": 568,
+   "PLAYER_ID": 478,
+   "RATING": 1593,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 569,
+   "PLAYER_ID": 479,
+   "RATING": 298,
+   "LAST_UPDATE": "30-Jun-17"
+ },
+ {
+   "ROW_ID": 570,
+   "PLAYER_ID": 480,
+   "RATING": 435,
+   "LAST_UPDATE": "21-May-17"
+ },
+ {
+   "ROW_ID": 571,
+   "PLAYER_ID": 481,
+   "RATING": 610,
+   "LAST_UPDATE": "05-Jan-18"
+ },
+ {
+   "ROW_ID": 572,
+   "PLAYER_ID": 482,
+   "RATING": 1021,
+   "LAST_UPDATE": "12-May-17"
+ },
+ {
+   "ROW_ID": 573,
+   "PLAYER_ID": 483,
+   "RATING": 1749,
+   "LAST_UPDATE": "21-Apr-17"
+ },
+ {
+   "ROW_ID": 574,
+   "PLAYER_ID": 484,
+   "RATING": 115,
+   "LAST_UPDATE": "13-May-18"
+ },
+ {
+   "ROW_ID": 575,
+   "PLAYER_ID": 485,
+   "RATING": 121,
+   "LAST_UPDATE": "21-May-17"
+ },
+ {
+   "ROW_ID": 576,
+   "PLAYER_ID": 486,
+   "RATING": 100,
+   "LAST_UPDATE": "14-May-17"
+ },
+ {
+   "ROW_ID": 577,
+   "PLAYER_ID": 487,
+   "RATING": 277,
+   "LAST_UPDATE": "10-Jun-18"
+ },
+ {
+   "ROW_ID": 578,
+   "PLAYER_ID": 488,
+   "RATING": 594,
+   "LAST_UPDATE": "24-Jun-18"
+ },
+ {
+   "ROW_ID": 579,
+   "PLAYER_ID": 489,
+   "RATING": 843,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 580,
+   "PLAYER_ID": 490,
+   "RATING": 441,
+   "LAST_UPDATE": "10-Jun-18"
+ },
+ {
+   "ROW_ID": 581,
+   "PLAYER_ID": 491,
+   "RATING": 366,
+   "LAST_UPDATE": "10-Jun-18"
+ },
+ {
+   "ROW_ID": 582,
+   "PLAYER_ID": 492,
+   "RATING": 100,
+   "LAST_UPDATE": "27-May-18"
+ },
+ {
+   "ROW_ID": 583,
+   "PLAYER_ID": 493,
+   "RATING": 215,
+   "LAST_UPDATE": "03-Jun-18"
+ },
+ {
+   "ROW_ID": 584,
+   "PLAYER_ID": 494,
+   "RATING": 1302,
+   "LAST_UPDATE": "06-Aug-17"
+ },
+ {
+   "ROW_ID": 585,
+   "PLAYER_ID": 495,
+   "RATING": 900,
+   "LAST_UPDATE": "01-Sep-17"
+ },
+ {
+   "ROW_ID": 586,
+   "PLAYER_ID": 496,
+   "RATING": 537,
+   "LAST_UPDATE": "03-Jun-18"
+ },
+ {
+   "ROW_ID": 587,
+   "PLAYER_ID": 497,
+   "RATING": 135,
+   "LAST_UPDATE": "17-Jun-18"
+ },
+ {
+   "ROW_ID": 588,
+   "PLAYER_ID": 498,
+   "RATING": 1221,
+   "LAST_UPDATE": "05-Jan-18"
+ },
+ {
+   "ROW_ID": 589,
+   "PLAYER_ID": 499,
+   "RATING": 122,
+   "LAST_UPDATE": "11-Aug-17"
+ },
+ {
+   "ROW_ID": 590,
+   "PLAYER_ID": 500,
+   "RATING": 834,
+   "LAST_UPDATE": "04-May-18"
+ },
+ {
+   "ROW_ID": 591,
+   "PLAYER_ID": 501,
+   "RATING": 919,
+   "LAST_UPDATE": "04-May-18"
+ },
+ {
+   "ROW_ID": 592,
+   "PLAYER_ID": 502,
+   "RATING": 100,
+   "LAST_UPDATE": "13-Aug-17"
+ },
+ {
+   "ROW_ID": 593,
+   "PLAYER_ID": 503,
+   "RATING": 197,
+   "LAST_UPDATE": "21-Jan-18"
+ },
+ {
+   "ROW_ID": 594,
+   "PLAYER_ID": 504,
+   "RATING": 136,
+   "LAST_UPDATE": "01-Jul-18"
+ },
+ {
+   "ROW_ID": 595,
+   "PLAYER_ID": 505,
+   "RATING": 721,
+   "LAST_UPDATE": "29-Oct-17"
+ },
+ {
+   "ROW_ID": 596,
+   "PLAYER_ID": 506,
+   "RATING": 218,
+   "LAST_UPDATE": "05-Nov-17"
+ },
+ {
+   "ROW_ID": 597,
+   "PLAYER_ID": 507,
+   "RATING": 293,
+   "LAST_UPDATE": "01-Jul-18"
+ },
+ {
+   "ROW_ID": 598,
+   "PLAYER_ID": 508,
+   "RATING": 100,
+   "LAST_UPDATE": "22-Sep-17"
+ },
+ {
+   "ROW_ID": 599,
+   "PLAYER_ID": 509,
+   "RATING": 960,
+   "LAST_UPDATE": "07-Jan-18"
+ },
+ {
+   "ROW_ID": 600,
+   "PLAYER_ID": 510,
+   "RATING": 1140,
+   "LAST_UPDATE": "01-Oct-17"
+ },
+ {
+   "ROW_ID": 601,
+   "PLAYER_ID": 511,
+   "RATING": 226,
+   "LAST_UPDATE": "20-Apr-18"
+ },
+ {
+   "ROW_ID": 602,
+   "PLAYER_ID": 512,
+   "RATING": 721,
+   "LAST_UPDATE": "15-Oct-17"
+ },
+ {
+   "ROW_ID": 603,
+   "PLAYER_ID": 513,
+   "RATING": 100,
+   "LAST_UPDATE": "29-Oct-17"
+ },
+ {
+   "ROW_ID": 604,
+   "PLAYER_ID": 514,
+   "RATING": 630,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 605,
+   "PLAYER_ID": 515,
+   "RATING": 127,
+   "LAST_UPDATE": "05-Nov-17"
+ },
+ {
+   "ROW_ID": 606,
+   "PLAYER_ID": 516,
+   "RATING": 248,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 607,
+   "PLAYER_ID": 517,
+   "RATING": 1889,
+   "LAST_UPDATE": "29-Jun-18"
+ },
+ {
+   "ROW_ID": 608,
+   "PLAYER_ID": 518,
+   "RATING": 1540,
+   "LAST_UPDATE": "22-Jun-18"
+ },
+ {
+   "ROW_ID": 609,
+   "PLAYER_ID": 519,
+   "RATING": 902,
+   "LAST_UPDATE": "07-Jan-18"
+ },
+ {
+   "ROW_ID": 610,
+   "PLAYER_ID": 520,
+   "RATING": 200,
+   "LAST_UPDATE": "26-Nov-17"
+ },
+ {
+   "ROW_ID": 611,
+   "PLAYER_ID": 521,
+   "RATING": 2081,
+   "LAST_UPDATE": "04-May-18"
+ },
+ {
+   "ROW_ID": 612,
+   "PLAYER_ID": 522,
+   "RATING": 2083,
+   "LAST_UPDATE": "22-Jun-18"
+ },
+ {
+   "ROW_ID": 613,
+   "PLAYER_ID": 523,
+   "RATING": 232,
+   "LAST_UPDATE": "24-Jun-18"
+ },
+ {
+   "ROW_ID": 614,
+   "PLAYER_ID": 524,
+   "RATING": 337,
+   "LAST_UPDATE": "01-Jul-18"
+ },
+ {
+   "ROW_ID": 615,
+   "PLAYER_ID": 525,
+   "RATING": 1514,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 616,
+   "PLAYER_ID": 526,
+   "RATING": 413,
+   "LAST_UPDATE": "07-Jan-18"
+ },
+ {
+   "ROW_ID": 617,
+   "PLAYER_ID": 527,
+   "RATING": 230,
+   "LAST_UPDATE": "05-Jan-18"
+ },
+ {
+   "ROW_ID": 618,
+   "PLAYER_ID": 528,
+   "RATING": 401,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 619,
+   "PLAYER_ID": 529,
+   "RATING": 848,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 620,
+   "PLAYER_ID": 530,
+   "RATING": 1003,
+   "LAST_UPDATE": "09-Feb-18"
+ },
+ {
+   "ROW_ID": 621,
+   "PLAYER_ID": 531,
+   "RATING": 100,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 622,
+   "PLAYER_ID": 532,
+   "RATING": 148,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 623,
+   "PLAYER_ID": 533,
+   "RATING": 100,
+   "LAST_UPDATE": "13-May-18"
+ },
+ {
+   "ROW_ID": 624,
+   "PLAYER_ID": 534,
+   "RATING": 100,
+   "LAST_UPDATE": "18-May-18"
+ },
+ {
+   "ROW_ID": 625,
+   "PLAYER_ID": 535,
+   "RATING": 1764,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 626,
+   "PLAYER_ID": 536,
+   "RATING": 240,
+   "LAST_UPDATE": "07-Jan-18"
+ },
+ {
+   "ROW_ID": 627,
+   "PLAYER_ID": 537,
+   "RATING": 315,
+   "LAST_UPDATE": "07-Jan-18"
+ },
+ {
+   "ROW_ID": 628,
+   "PLAYER_ID": 538,
+   "RATING": 119,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 629,
+   "PLAYER_ID": 539,
+   "RATING": 130,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 630,
+   "PLAYER_ID": 540,
+   "RATING": 100,
+   "LAST_UPDATE": "25-Feb-18"
+ },
+ {
+   "ROW_ID": 631,
+   "PLAYER_ID": 541,
+   "RATING": 100,
+   "LAST_UPDATE": "17-Jun-18"
+ },
+ {
+   "ROW_ID": 632,
+   "PLAYER_ID": 542,
+   "RATING": 1330,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 633,
+   "PLAYER_ID": 543,
+   "RATING": 1671,
+   "LAST_UPDATE": "06-Jan-18"
+ },
+ {
+   "ROW_ID": 634,
+   "PLAYER_ID": 544,
+   "RATING": 486,
+   "LAST_UPDATE": "01-Jun-18"
+ },
+ {
+   "ROW_ID": 409,
+   "PLAYER_ID": 545,
+   "RATING": 1975,
+   "LAST_UPDATE": "06-Apr-18"
+ },
+ {
+   "ROW_ID": 635,
+   "PLAYER_ID": 546,
+   "RATING": 100,
+   "LAST_UPDATE": "04-Feb-18"
+ },
+ {
+   "ROW_ID": 636,
+   "PLAYER_ID": 547,
+   "RATING": 224,
+   "LAST_UPDATE": "03-Jun-18"
+ },
+ {
+   "ROW_ID": 637,
+   "PLAYER_ID": 548,
+   "RATING": 100,
+   "LAST_UPDATE": "04-Mar-18"
+ },
+ {
+   "ROW_ID": 638,
+   "PLAYER_ID": 549,
+   "RATING": 1794,
+   "LAST_UPDATE": "09-Mar-18"
+ },
+ {
+   "ROW_ID": 639,
+   "PLAYER_ID": 550,
+   "RATING": 893,
+   "LAST_UPDATE": "16-Mar-18"
+ },
+ {
+   "ROW_ID": 640,
+   "PLAYER_ID": 551,
+   "RATING": 100,
+   "LAST_UPDATE": "18-Mar-18"
+ },
+ {
+   "ROW_ID": 641,
+   "PLAYER_ID": 552,
+   "RATING": 305,
+   "LAST_UPDATE": "18-Mar-18"
+ },
+ {
+   "ROW_ID": 642,
+   "PLAYER_ID": 553,
+   "RATING": 150,
+   "LAST_UPDATE": "01-Apr-18"
+ },
+ {
+   "ROW_ID": 643,
+   "PLAYER_ID": 554,
+   "RATING": 564,
+   "LAST_UPDATE": "06-Apr-18"
+ },
+ {
+   "ROW_ID": 644,
+   "PLAYER_ID": 555,
+   "RATING": 436,
+   "LAST_UPDATE": "13-Apr-18"
+ },
+ {
+   "ROW_ID": 645,
+   "PLAYER_ID": 556,
+   "RATING": 278,
+   "LAST_UPDATE": "01-Jun-18"
+ },
+ {
+   "ROW_ID": 646,
+   "PLAYER_ID": 557,
+   "RATING": 189,
+   "LAST_UPDATE": "15-Apr-18"
+ },
+ {
+   "ROW_ID": 647,
+   "PLAYER_ID": 558,
+   "RATING": 130,
+   "LAST_UPDATE": "15-Apr-18"
+ },
+ {
+   "ROW_ID": 648,
+   "PLAYER_ID": 559,
+   "RATING": 1493,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 649,
+   "PLAYER_ID": 560,
+   "RATING": 1326,
+   "LAST_UPDATE": "06-Jul-18"
+ },
+ {
+   "ROW_ID": 650,
+   "PLAYER_ID": 561,
+   "RATING": 100,
+   "LAST_UPDATE": "10-Jun-18"
+ },
+ {
+   "ROW_ID": 651,
+   "PLAYER_ID": 562,
+   "RATING": 680,
+   "LAST_UPDATE": "17-Jun-18"
+ },
+ {
+   "ROW_ID": 652,
+   "PLAYER_ID": 563,
+   "RATING": 678,
+   "LAST_UPDATE": "22-Jun-18"
+ }
+]

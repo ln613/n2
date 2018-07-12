@@ -92,7 +92,7 @@ const findGames = (s, m, gs) => gs.filter(g => g.t1 == m.home && g.t2 == m.away)
 const gg = (g, x) => +(g && g[x] || 0);
 const getResult = g => g.result || (range(0, 5).filter(n => gg(g.g1, n) > gg(g.g2, n)).length + ':' + range(0, 5).filter(n => gg(g.g1, n) < gg(g.g2, n)).length);
 const getPlayerName = (n, g, ps) => getNameById(pn(n, g))(ps) + (g.isDouble ? ' / ' + getNameById(pn(n + 2, g))(ps) : '');
-const getPlayer = (pid, tid, ts) => findById(pid)(findById(tid)(ts).players);
+const getPlayer = (pid, tid, ts) => findById(pid)(findById(tap(tid))(tap(ts)).players);
 const subs = (n, g) => (pn(n, g) || {}).isSub ? 1 : 0;
 const totalSubs = g => subs(1, g) + subs(3, g) - subs(2, g) - subs(4, g);
 const isWin = g => {
@@ -228,18 +228,24 @@ const stats = createSelector(
 const history = createSelector(
   _history,
   players,
-  (h, ps) => {
-    const gs = sortWith([descend(prop('date'))], h.map(x => x.games)).map(g => ({
+  (h, ps) => sortWith([descend(x => new Date(x.date)), descend(prop('id'))], h.map(x => {
+    const g = x.games;
+    let player1 = `${getNameById(g.p1)(ps)} (${g.p1Rating} ${(g.p1Diff > 0 ? '+ ' : '- ') + Math.abs(g.p1Diff)} = ${Math.max(100, g.p1Rating + g.p1Diff)})`;
+    let player2 = `${getNameById(g.p2)(ps)} (${g.p2Rating} ${(g.p2Diff > 0 ? '+ ' : '- ') + Math.abs(g.p2Diff)} = ${Math.max(100, g.p2Rating + g.p2Diff)})`;
+    if (g.p1 === +x.pid) player1 = '<b>' + player1 + '</b>';
+    else player2 = '<b>' + player2 + '</b>';
+
+    return tap({
       id: g.id,
       date: toDate(g.date),
+      tournament: x.name,
       month: toMonth(g.date),
-      player1: `${getNameById(g.p1)(ps)} (${g.p1Rating} ${(g.p1Diff > 0 ? '+ ' : '- ') + Math.abs(g.p1Diff)} = ${g.p1Rating + g.p1Diff})`,
-      player2: `${getNameById(g.p2)(ps)} (${g.p2Rating} ${(g.p2Diff > 0 ? '+ ' : '- ') + Math.abs(g.p2Diff)} = ${g.p2Rating + g.p2Diff})`,
-      result: g.result
-    }));
-    groupWith((a, b) => a.month === b.month, gs).forEach(x => x[0].isLastGameInMonth = true);
-    return gs;
-  }
+      player1,
+      result: g.result,
+      player2,
+    });
+  }))
+  //groupWith((a, b) => a.month === b.month, gs).forEach(x => x[0].isLastGameInMonth = true);
 );
 
 const monthRatings = createSelector(
@@ -252,7 +258,7 @@ export const lookupSelector = mapStateWithSelectors({ lookup, lang });
 export const langSelector = mapStateWithSelectors({ lang });
 export const catsSelector = mapStateWithSelectors({ cats, cat: form('cat'), lang });
 export const productsSelector = mapStateWithSelectors({ products: filteredProducts, productFilter: filter('product'), lookup, lang, product: form('product'), cats: catsDD });
-export const ratingsSelector = mapStateWithSelectors({ cats, form, lang });
+export const ratingSelector = mapStateWithSelectors({ players: filteredPlayers });
 export const playersSelector = mapStateWithSelectors({ players, lookup, player: form('player') });
 export const tournamentsSelector = mapStateWithSelectors({ tournaments: tournamentsWithYears, lookup });
 export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players });

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'no-redux';
 import { compose } from 'recompose';
 import actions from 'utils/actions';
-import { playersSelector } from 'utils/selectors';
+import { ratingSelector } from 'utils/selectors';
 import { withLoad } from 'utils';
 import { TextBox, Table } from 'utils/comps';
 
@@ -25,6 +25,6 @@ const Rating = ({ lookup, players }) =>
   </div>
 
 export default compose(
-  connect(playersSelector, actions),
+  connect(ratingSelector, actions),
   withLoad('players')
 )(Rating);

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.statsSelector = exports.gameSelector = exports.scheduleSelector = exports.teamSelector = exports.standingSelector = exports.historySelector = exports.tourSelector = exports.tournamentSelector = exports.tournamentsSelector = exports.playersSelector = exports.ratingsSelector = exports.productsSelector = exports.catsSelector = exports.langSelector = exports.lookupSelector = exports.successSelector = undefined;
+exports.statsSelector = exports.gameSelector = exports.scheduleSelector = exports.teamSelector = exports.standingSelector = exports.historySelector = exports.tourSelector = exports.tournamentSelector = exports.tournamentsSelector = exports.playersSelector = exports.ratingSelector = exports.productsSelector = exports.catsSelector = exports.langSelector = exports.lookupSelector = exports.successSelector = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -161,7 +161,7 @@ var getPlayerName = function getPlayerName(n, g, ps) {
   return (0, _.getNameById)(pn(n, g))(ps) + (g.isDouble ? ' / ' + (0, _.getNameById)(pn(n + 2, g))(ps) : '');
 };
 var getPlayer = function getPlayer(pid, tid, ts) {
-  return (0, _.findById)(pid)((0, _.findById)(tid)(ts).players);
+  return (0, _.findById)(pid)((0, _.findById)((0, _.tap)(tid))((0, _.tap)(ts)).players);
 };
 var subs = function subs(n, g) {
   return (pn(n, g) || {}).isSub ? 1 : 0;
@@ -341,25 +341,27 @@ var stats = (0, _noRedux.createSelector)(tournament, function (t) {
 });
 
 var history = (0, _noRedux.createSelector)(_history, players, function (h, ps) {
-  var gs = (0, _ramda.sortWith)([(0, _ramda.descend)((0, _ramda.prop)('date'))], h.map(function (x) {
-    return x.games;
-  })).map(function (g) {
-    return {
+  return (0, _ramda.sortWith)([(0, _ramda.descend)(function (x) {
+    return new Date(x.date);
+  }), (0, _ramda.descend)((0, _ramda.prop)('id'))], h.map(function (x) {
+    var g = x.games;
+    var player1 = (0, _.getNameById)(g.p1)(ps) + ' (' + g.p1Rating + ' ' + ((g.p1Diff > 0 ? '+ ' : '- ') + Math.abs(g.p1Diff)) + ' = ' + Math.max(100, g.p1Rating + g.p1Diff) + ')';
+    var player2 = (0, _.getNameById)(g.p2)(ps) + ' (' + g.p2Rating + ' ' + ((g.p2Diff > 0 ? '+ ' : '- ') + Math.abs(g.p2Diff)) + ' = ' + Math.max(100, g.p2Rating + g.p2Diff) + ')';
+    if (g.p1 === +x.pid) player1 = '<b>' + player1 + '</b>';else player2 = '<b>' + player2 + '</b>';
+
+    return (0, _.tap)({
       id: g.id,
       date: (0, _.toDate)(g.date),
+      tournament: x.name,
       month: (0, _.toMonth)(g.date),
-      player1: (0, _.getNameById)(g.p1)(ps) + ' (' + g.p1Rating + ' ' + ((g.p1Diff > 0 ? '+ ' : '- ') + Math.abs(g.p1Diff)) + ' = ' + (g.p1Rating + g.p1Diff) + ')',
-      player2: (0, _.getNameById)(g.p2)(ps) + ' (' + g.p2Rating + ' ' + ((g.p2Diff > 0 ? '+ ' : '- ') + Math.abs(g.p2Diff)) + ' = ' + (g.p2Rating + g.p2Diff) + ')',
-      result: g.result
-    };
-  });
-  (0, _ramda.groupWith)(function (a, b) {
-    return a.month === b.month;
-  }, gs).forEach(function (x) {
-    return x[0].isLastGameInMonth = true;
-  });
-  return gs;
-});
+      player1: player1,
+      result: g.result,
+      player2: player2
+    });
+  }));
+}
+//groupWith((a, b) => a.month === b.month, gs).forEach(x => x[0].isLastGameInMonth = true);
+);
 
 var monthRatings = (0, _noRedux.createSelector)(history, function (h) {
   return h.filter(function (x) {
@@ -376,7 +378,7 @@ var lookupSelector = exports.lookupSelector = (0, _noRedux.mapStateWithSelectors
 var langSelector = exports.langSelector = (0, _noRedux.mapStateWithSelectors)({ lang: lang });
 var catsSelector = exports.catsSelector = (0, _noRedux.mapStateWithSelectors)({ cats: cats, cat: form('cat'), lang: lang });
 var productsSelector = exports.productsSelector = (0, _noRedux.mapStateWithSelectors)({ products: filteredProducts, productFilter: filter('product'), lookup: lookup, lang: lang, product: form('product'), cats: catsDD });
-var ratingsSelector = exports.ratingsSelector = (0, _noRedux.mapStateWithSelectors)({ cats: cats, form: form, lang: lang });
+var ratingSelector = exports.ratingSelector = (0, _noRedux.mapStateWithSelectors)({ players: filteredPlayers });
 var playersSelector = exports.playersSelector = (0, _noRedux.mapStateWithSelectors)({ players: players, lookup: lookup, player: form('player') });
 var tournamentsSelector = exports.tournamentsSelector = (0, _noRedux.mapStateWithSelectors)({ tournaments: tournamentsWithYears, lookup: lookup });
 var tournamentSelector = exports.tournamentSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, lookup: lookup, players: players });
