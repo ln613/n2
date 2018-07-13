@@ -18,8 +18,8 @@ import { Switch, Route } from 'react-router';
 
 const App = p =>
   <div class="ui">
-    {/* <Header />
-    <Menu /> */}
+    <Header />
+    <Menu />
 
     <Switch>
       <Route exact path='/' component={Home} />
