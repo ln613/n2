@@ -6,7 +6,7 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { scheduleSelector } from 'utils/selectors';
 import { TextBox, Select } from 'utils/comps';
-import { withLoad, withEdit, withSuccess, withParams } from 'utils';
+import { withLoad, withEdit, withSuccess, withParams, tap } from 'utils';
 import { withRouter } from "react-router-dom";
 
 const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id }) =>
@@ -32,6 +32,7 @@ const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id
 export default compose(
   connect(scheduleSelector, actions),
   withParams,
+  withLoad('players'),
   withLoad('tournament', ['id', 'id1'], true),
   withEdit('schedule', 'tournament.schedules', { matches: [] }),
   withSuccess('schedule', () => alert('Saved'), () => alert('Error happened!')),

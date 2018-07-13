@@ -5,6 +5,8 @@ const { sortWith, ascend, descend, prop, fromPairs, merge } = require('ramda');
 const { tap, config } = require('./utils');
 const moment = require('moment');
 
+const allDocs = ['cats', 'players', 'products', 'tournaments'];
+
 let db = null;
 if (config) cd.config({ cloud_name: 'vttc', api_key: config.cloudinary_key, api_secret: config.cloudinary_secret });
 const e = {};
@@ -25,9 +27,11 @@ e.initdocs = docs => {
   );
 }
 
-e.initdata = () => e.initdocs(require('../data/db'))
+e.initdata = () => e.initdocs(JSON.parse(fs.readFileSync('./data/db.json')))
 
-e.initacc = () => e.initdocs(JSON.parse(fs.readFileSync('./data/1.json')))
+//e.initacc = () => e.initdocs(JSON.parse(fs.readFileSync('./data/1.json')))
+
+e.bak = () => Promise.all(allDocs.map(e.get)).then(l => fromPairs(l.map((d, i) => [allDocs[i], d]))).then(x => { fs.writeFile('./data/db.json', JSON.stringify(x)); return x; })
 
 e.list = () => Object.keys(db)
 
@@ -73,7 +77,7 @@ e.getPlayerGames = id => db.collection('tournaments').aggregate([
 e.getPlayerRating = (id, date) => db.collection('tournaments').aggregate([
   { $unwind: '$games' },
   { $match: { $or: [ { 'gmes.p1': id }, { 'games.p2': id } ] } },
-  { $match: { 'games.date': { $lte: tap(date) === '_' ? moment().format('YYYY-MM-DD') : date } } },
+  { $match: { 'games.date': { $lte: date === '_' ? moment().format('YYYY-MM-DD') : date } } },
   { $sort: { 'games.date': -1, 'games.id': -1 } },
   { $limit: 1 },
   { $replaceRoot: { newRoot: '$games'} },

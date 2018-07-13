@@ -6,7 +6,7 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { gameSelector } from 'utils/selectors';
 import { TextBox, Select, CheckBox } from 'utils/comps';
-import { withLoad, withEdit, withSuccess, withParams, getPropById, findById, getNameById } from 'utils';
+import { withLoad, withEdit, withSuccess, withParams, getPropById, findById, getNameById, tap } from 'utils';
 
 const Game = ({ tournament, game, games, schedule, match, players, putGame, postGame, id }) =>
   <div>
@@ -16,7 +16,7 @@ const Game = ({ tournament, game, games, schedule, match, players, putGame, post
     <CheckBox name="game.isDouble" label="Is Double?"/>
     <div class="f aic">
       <div>  
-        <div class="pr8 pb32">{getNameById(match.home)(tournament.teams)}</div>
+        <div class="pr8 pb32">{getNameById(tap(match).home)(tap(tournament.teams))}</div>
         <div class="pr8">{getNameById(match.away)(tournament.teams)}</div>
       </div>  
       <div>  

@@ -118,8 +118,6 @@ var filteredProducts = (0, _noRedux.createSelector)(productsWithCat, filter('pro
 var players = (0, _noRedux.createSelector)(_players, function (ps) {
   return (0, _ramda.sortWith)([(0, _ramda.ascend)((0, _ramda.prop)('name'))])(ps.map(function (p) {
     return _extends({}, p, { name: p.firstName + ' ' + p.lastName });
-  }).map(function (p) {
-    return _extends({}, p, { text: p.name, value: p.id });
   }));
 });
 
@@ -161,7 +159,7 @@ var getPlayerName = function getPlayerName(n, g, ps) {
   return (0, _.getNameById)(pn(n, g))(ps) + (g.isDouble ? ' / ' + (0, _.getNameById)(pn(n + 2, g))(ps) : '');
 };
 var getPlayer = function getPlayer(pid, tid, ts) {
-  return (0, _.findById)(pid)((0, _.findById)((0, _.tap)(tid))((0, _.tap)(ts)).players);
+  return (0, _.findById)(pid)((0, _.findById)(tid)(ts).players);
 };
 var subs = function subs(n, g) {
   return (pn(n, g) || {}).isSub ? 1 : 0;
@@ -187,15 +185,17 @@ var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t,
   });
   var games = (t.games || []).map(function (g) {
     var result = getResult(g);
-    var p1 = getPlayer(g.p1, g.t1, teams);
-    var p2 = getPlayer(g.p2, g.t2, teams);
-    var p3 = getPlayer(g.p3, g.t1, teams);
-    var p4 = getPlayer(g.p4, g.t2, teams);
-    var game = _extends({}, g, { p1: p1, p2: p2, p3: p3, p4: p4, result: result, player1: getPlayerName(1, g, ps), player2: getPlayerName(2, g, ps) });
+    //   const p1 = getPlayer(g.p1, g.t1, teams);
+    //   const p2 = getPlayer(g.p2, g.t2, teams);
+    //   const p3 = getPlayer(g.p3, g.t1, teams);
+    //   const p4 = getPlayer(g.p4, g.t2, teams);
+    var team1 = (0, _.getNameById)(g.t1)(teams);
+    var team2 = (0, _.getNameById)(g.t2)(teams);
+    var game = _extends({}, g, { result: result, player1: getPlayerName(1, g, ps), player2: getPlayerName(2, g, ps), team1: team1, team2: team2 });
     game.isWin = isWin(game);
     return game;
   });
-  var schedules = (0, _.tap)(t.schedules || []).map(function (s) {
+  var schedules = (t.schedules || []).map(function (s) {
     return _extends({}, s, {
       date: (0, _.toDate)(s.date),
       matches: (0, _ramda.range)(1, 9).map(function (n) {
@@ -353,7 +353,7 @@ var history = (0, _noRedux.createSelector)(_history, players, function (h, ps) {
     var player2 = (0, _.getNameById)(g.p2)(ps) + ' (' + g.p2Rating + ' ' + ((g.p2Diff > 0 ? '+ ' : '- ') + Math.abs(g.p2Diff)) + ' = ' + Math.max(100, g.p2Rating + g.p2Diff) + ')';
     if (g.p1 === +x.pid) player1 = '<b>' + player1 + '</b>';else player2 = '<b>' + player2 + '</b>';
 
-    return (0, _.tap)({
+    return {
       id: g.id,
       date: (0, _.toDate)(g.date),
       tournament: x.name,
@@ -361,7 +361,7 @@ var history = (0, _noRedux.createSelector)(_history, players, function (h, ps) {
       player1: player1,
       result: g.result,
       player2: player2
-    });
+    };
   }));
 }
 //groupWith((a, b) => a.month === b.month, gs).forEach(x => x[0].isLastGameInMonth = true);

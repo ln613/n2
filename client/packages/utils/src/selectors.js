@@ -68,7 +68,7 @@ const filteredProducts = createSelector(
 
 const players = createSelector(
   _players,
-  ps => sortWith([ascend(prop('name'))])(ps.map(p => ({ ...p, name: p.firstName + ' ' + p.lastName })).map(p => ({ ...p, text: p.name, value: p.id })))
+  ps => sortWith([ascend(prop('name'))])(ps.map(p => ({ ...p, name: p.firstName + ' ' + p.lastName })))
 );
 
 const filteredPlayers = createSelector(
@@ -92,7 +92,7 @@ const findGames = (s, m, gs) => gs.filter(g => (g.t1 === m.home && g.t2 === m.aw
 const gg = (g, x) => +(g && g[x] || 0);
 const getResult = g => g.result || (range(0, 5).filter(n => gg(g.g1, n) > gg(g.g2, n)).length + ':' + range(0, 5).filter(n => gg(g.g1, n) < gg(g.g2, n)).length);
 const getPlayerName = (n, g, ps) => getNameById(pn(n, g))(ps) + (g.isDouble ? ' / ' + getNameById(pn(n + 2, g))(ps) : '');
-const getPlayer = (pid, tid, ts) => findById(pid)(findById(tap(tid))(tap(ts)).players);
+const getPlayer = (pid, tid, ts) => findById(pid)(findById(tid)(ts).players);
 const subs = (n, g) => (pn(n, g) || {}).isSub ? 1 : 0;
 const totalSubs = g => subs(1, g) + subs(3, g) - subs(2, g) - subs(4, g);
 const isWin = g => {
@@ -108,15 +108,17 @@ const tournament = createSelector(
     const teams = (t.teams || []).map(t => ({ ...t, text: t.name, value: t.id, players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating)], t.players.map(p => ({ ...findById(p.id)(ps), tRating: p.rating, isSub: p.isSub }))) }));
     const games = (t.games || []).map(g => {
       const result = getResult(g);
-      const p1 = getPlayer(g.p1, g.t1, teams);
-      const p2 = getPlayer(g.p2, g.t2, teams);
-      const p3 = getPlayer(g.p3, g.t1, teams);
-      const p4 = getPlayer(g.p4, g.t2, teams);
-      const game = {...g, p1, p2, p3, p4, result, player1: getPlayerName(1, g, ps), player2: getPlayerName(2, g, ps)};
+    //   const p1 = getPlayer(g.p1, g.t1, teams);
+    //   const p2 = getPlayer(g.p2, g.t2, teams);
+    //   const p3 = getPlayer(g.p3, g.t1, teams);
+    //   const p4 = getPlayer(g.p4, g.t2, teams);
+      const team1 = getNameById(g.t1)(teams);
+      const team2 = getNameById(g.t2)(teams);
+      const game = {...g, result, player1: getPlayerName(1, g, ps), player2: getPlayerName(2, g, ps), team1, team2};
       game.isWin = isWin(game);
       return game;
     });
-    const schedules = (tap(t.schedules || [])).map(s => ({
+    const schedules = (t.schedules || []).map(s => ({
       ...s,
       date: toDate(s.date),
       matches: range(1, 9)
@@ -235,7 +237,7 @@ const history = createSelector(
     if (g.p1 === +x.pid) player1 = '<b>' + player1 + '</b>';
     else player2 = '<b>' + player2 + '</b>';
 
-    return tap({
+    return {
       id: g.id,
       date: toDate(g.date),
       tournament: x.name,
@@ -243,7 +245,7 @@ const history = createSelector(
       player1,
       result: g.result,
       player2,
-    });
+    };
   }))
   //groupWith((a, b) => a.month === b.month, gs).forEach(x => x[0].isLastGameInMonth = true);
 );

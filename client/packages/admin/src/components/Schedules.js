@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'recompose';
 import { connect } from 'no-redux';
 import actions from 'utils/actions';
-import { withLoad, withParams, withNewId } from 'utils';
+import { withLoad, withParams, withNewId, tap } from 'utils';
 import { tournamentSelector } from 'utils/selectors';
 import { Table } from 'utils/comps';
 import { withRouter } from "react-router-dom";
@@ -21,6 +21,7 @@ const Schedules = ({ tournament, history, id, newId }) =>
 export default compose(
   connect(tournamentSelector, actions),
   withParams,
+  withLoad('players'),
   withLoad('tournament', 'id', true),
   withNewId('tournament.schedules'),
   withRouter

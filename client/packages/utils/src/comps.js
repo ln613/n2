@@ -118,6 +118,7 @@ const select1 = p =>
   <div class="pv8">
     <Dropdown selection {...p} />
   </div>
+const withTextValue = withProps(p => ({...p, options: (p.options || []).map(o => !o.text && o.name ? {...o, text: o.name, value: o.id} : o)}));
 
 const checkBox = p =>
   <div class="pv8">
@@ -125,7 +126,7 @@ const checkBox = p =>
   </div>
 
 export const TextBox = withAll(textBox);
-export const Select = withAll(select1);
+export const Select = withAll(withTextValue(select1));
 export const CheckBox = withCheck(checkBox);
 
 

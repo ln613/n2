@@ -104,14 +104,18 @@ app.get('/api/:doc', (req, res) => {
 //   }  
 // });
 
-app.get('/admin/initdata', (req, res) => {
+app.copy('/admin/initdata', (req, res) => {
   done(api.initdata(), res);
 });
 
-app.get('/admin/initacc', (req, res) => {
-  done(api.initacc(), res);
-});
+// app.get('/admin/initacc', (req, res) => {
+//   done(api.initacc(), res);
+// });
 
+app.copy('/admin/bak', (req, res) => {
+  send(api.bak(), res);
+});
+  
 app.get('/admin/env', (req, res) => {
   res.send(Object.keys(process.env).map(k => k + ' - ' + process.env[k]).sort());
 });
@@ -146,7 +150,7 @@ app.put('/admin/:doc/:id/:list', (req, res) => {
 });
 
 app.post('/admin/:doc', (req, res) => {
-  send(api.add(req.params.doc, tap(req.body)), res);
+  send(api.add(req.params.doc, req.body), res);
 });
 
 app.put('/admin/:doc', (req, res) => {

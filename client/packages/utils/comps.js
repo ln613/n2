@@ -194,6 +194,11 @@ var select1 = function select1(p) {
     _react2.default.createElement(_semanticUiReact.Dropdown, _extends({ selection: true }, p))
   );
 };
+var withTextValue = (0, _recompose.withProps)(function (p) {
+  return _extends({}, p, { options: (p.options || []).map(function (o) {
+      return !o.text && o.name ? _extends({}, o, { text: o.name, value: o.id }) : o;
+    }) });
+});
 
 var checkBox = function checkBox(p) {
   return _react2.default.createElement(
@@ -204,7 +209,7 @@ var checkBox = function checkBox(p) {
 };
 
 var TextBox = exports.TextBox = withAll(textBox);
-var Select = exports.Select = withAll(select1);
+var Select = exports.Select = withAll(withTextValue(select1));
 var CheckBox = exports.CheckBox = withCheck(checkBox);
 
 var s1 = {
