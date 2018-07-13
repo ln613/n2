@@ -19,7 +19,7 @@ module.exports = {
   // ],
   '86': [
     { id: 1, name: 'Arbutus', players: ['1005 Chris Dai', '910 Charlie Dai', '893 Mike Broderick', '816 Jack Zhang', '670 +563'] },
-    { id: 2, name: 'Benie Babies', players: ['475 +318', '450 Stanley Joseph', '172 Jason Wong', '107 Michelle Kwan'] },
+    { id: 2, name: 'Benie Babies', players: ['-563 Otto Ng', '475 +318', '450 Stanley Joseph', '172 Jason Wong', '107 Michelle Kwan'] },
     { id: 3, name: 'BD', players: ['1554 Ben Yiu', '941 Donna Lee', '883 Ronald Lai'] },
     { id: 4, name: 'Burnaby North', players: ['1675 Fiona Fan', '586 Tommy Li', '488 Yanisa Tirapat'] },
     { id: 5, name: 'Good Life', players: ['1448 George Zhao', '1307 Peter Le', '1170 Glen Zhu'] },
@@ -29,6 +29,6 @@ module.exports = {
     { id: 9, name: 'Nittaku', players: ['1400 Ao Song', '1370 Quoc Shivajie'] },
     { id: 10, name: 'Teamo Ball', players: ['644 Laurent Goldstein', '563 Otto Ng', '394 Shahin Shahrad'] },
     { id: 11, name: 'The Long Shot', players: ['1497 Junru Shen', '1143 Kenneth Chan', '956 Daniel Tsui', '576 Charles Trinh'] },
-    { id: 12, name: 'VTTC', players: ['2075 +522', '1685 Henry Poon', '1549 Rose Huang', '1488 Grace Zhang', '1310 David Yue', '1098 Michael Man', '894 Winson Tsui', '727 Jennifer Jiang'] },
+    { id: 12, name: 'VTTC', players: ['-2075 +522', '1685 Henry Poon', '1549 Rose Huang', '1488 Grace Zhang', '1310 David Yue', '1098 Michael Man', '894 Winson Tsui', '727 Jennifer Jiang'] },
   ]
 }

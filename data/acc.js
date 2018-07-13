@@ -1,4 +1,5 @@
 const fs = require('fs');
+const R = require('ramda');
 const util = require('util');
 
 const players = JSON.parse(fs.readFileSync('player.json'));
@@ -18,8 +19,11 @@ o.players = players.map(x => ({
 
 const teams = require('./team');
 Object.keys(teams).forEach(d => teams[d].forEach(t => t.players = t.players.map(x => {
-  const ss = x.trim().split(' ');
-  const p = { rating: +ss[0] };
+  const isSub = x[0] === '-';
+  x = x.trim();
+  x = x[0] === '-' ? x.slice(1) : x;
+  const ss = x.split(' ');
+  const p = { rating: +ss[0], isSub };
   p.id = ss[1][0] === '+'
     ? +ss[1].slice(1)
     : ((o.players.find(y => y.firstName == ss[1] && y.lastName == ss[2]) || {}).id || 0);
@@ -30,12 +34,13 @@ const schedules = require('./schedule');
 
 o.tournaments = ts.map(x => {
   const tts = teams[x.ID] || [];
+  const ss = schedules[x.ID] || [];
 
   return {
     id: +x.ID,
     name: x.TournamentName,
     teams: tts,
-    schedules: schedules[x.ID] || [],
+    schedules: ss,
     games: games.filter(y => y.TOURNAMENT_ID == x.ID).map(y => {
       const p1w = +y.PLAYER_A_WON_GAMES;
       const p2w = +y.PLAYER_B_WON_GAMES;
@@ -56,9 +61,11 @@ o.tournaments = ts.map(x => {
         rated: y.GAME_RATED === '1'
       };
 
-      if (x.ID === 86) {console.log(r.p1, r.p2);
-        r.t1 = tts.find(z => z.players.some(p => p.id === r.p1)).id; 
-        r.t2 = tts.find(z => z.players.some(p => p.id === r.p2)).id; 
+      if (x.ID === 86) {
+        const ts1 = tts.filter(z => z.players.some(p => p.id === r.p1));
+        r.t1 = ts1.length > 1 ? (r.date === '01-Jun-18' ? 2 : 10) : ts1[0].id;
+        const ts2 = tts.filter(z => z.players.some(p => p.id === r.p2));
+        r.t2 = ts2.length > 1 ? (r.date === '01-Jun-18' ? 2 : 10) : ts2[0].id; 
       }
 
       return r;

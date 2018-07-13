@@ -88,7 +88,7 @@ const teams = createSelector(
 );
 
 const pn = (n, g) => g['p' + n];
-const findGames = (s, m, gs) => gs.filter(g => g.t1 == m.home && g.t2 == m.away);
+const findGames = (s, m, gs) => gs.filter(g => (g.t1 === m.home && g.t2 === m.away) || (g.t2 === m.home && g.t1 === m.away));
 const gg = (g, x) => +(g && g[x] || 0);
 const getResult = g => g.result || (range(0, 5).filter(n => gg(g.g1, n) > gg(g.g2, n)).length + ':' + range(0, 5).filter(n => gg(g.g1, n) < gg(g.g2, n)).length);
 const getPlayerName = (n, g, ps) => getNameById(pn(n, g))(ps) + (g.isDouble ? ' / ' + getNameById(pn(n + 2, g))(ps) : '');
@@ -105,7 +105,7 @@ const tournament = createSelector(
   players,
   (t, ps) => {
     if (ps.length === 0) return t;
-    const teams = (t.teams || []).map(t => ({ ...t, text: t.name, value: t.id, players: t.players.map(p => ({ ...findById(p.id)(ps), initRating: p.rating, isSub: p.isSub })) }));
+    const teams = (t.teams || []).map(t => ({ ...t, text: t.name, value: t.id, players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating)], t.players.map(p => ({ ...findById(p.id)(ps), tRating: p.rating, isSub: p.isSub }))) }));
     const games = (t.games || []).map(g => {
       const result = getResult(g);
       const p1 = getPlayer(g.p1, g.t1, teams);
@@ -123,7 +123,7 @@ const tournament = createSelector(
         .map(n => findById(n)(s.matches) || {})
         .map(m => {
           const gs = findGames(s, m, games);
-          const wn = gs.filter(g => g.isWin).length;
+          const wn = gs.filter(g => (g.isWin && g.t1 === m.home) || (!g.isWin && g.t1 === m.away)).length;
           const ln = gs.length - wn;
           return {...m, result: wn + ':' + ln };
         })

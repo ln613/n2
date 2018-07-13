@@ -144,7 +144,7 @@ var pn = function pn(n, g) {
 };
 var findGames = function findGames(s, m, gs) {
   return gs.filter(function (g) {
-    return g.t1 == m.home && g.t2 == m.away;
+    return g.t1 === m.home && g.t2 === m.away || g.t2 === m.home && g.t1 === m.away;
   });
 };
 var gg = function gg(g, x) {
@@ -177,9 +177,13 @@ var isWin = function isWin(g) {
 var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t, ps) {
   if (ps.length === 0) return t;
   var teams = (t.teams || []).map(function (t) {
-    return _extends({}, t, { text: t.name, value: t.id, players: t.players.map(function (p) {
-        return _extends({}, (0, _.findById)(p.id)(ps), { initRating: p.rating, isSub: p.isSub });
-      }) });
+    return _extends({}, t, { text: t.name, value: t.id, players: (0, _ramda.sortWith)([(0, _ramda.ascend)(function (x) {
+        return x.isSub ? 1 : 0;
+      }), (0, _ramda.descend)(function (x) {
+        return x.tRating;
+      })], t.players.map(function (p) {
+        return _extends({}, (0, _.findById)(p.id)(ps), { tRating: p.rating, isSub: p.isSub });
+      })) });
   });
   var games = (t.games || []).map(function (g) {
     var result = getResult(g);
@@ -199,7 +203,7 @@ var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t,
       }).map(function (m) {
         var gs = findGames(s, m, games);
         var wn = gs.filter(function (g) {
-          return g.isWin;
+          return g.isWin && g.t1 === m.home || !g.isWin && g.t1 === m.away;
         }).length;
         var ln = gs.length - wn;
         return _extends({}, m, { result: wn + ':' + ln });
