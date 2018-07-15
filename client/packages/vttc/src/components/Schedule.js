@@ -9,14 +9,14 @@ import TMenu from './TMenu';
 
 const Schedule = ({ tournament, id }) =>
   <div class="p16 f">
-    <TMenu id={id} />
-    <div class="p32 fv">
+    <TMenu id={id} isSingle={tournament.isSingle} />
+    <div class="ph32 fv">
       <h1>Schedule - {tournament.name}</h1>
       <hr/>
-      {(tournament.schedules || []).map(s =>
+      {(tournament.schedules || []).map((s, i) =>
         <div class="pt8">
-          <div class="pt8 fs24 darkgreen">{s.date}</div>
-          <Table name="schedule" data={(s.matches || []).filter(m => m && m.id).map(m => ({ 'Table': m.id, 'Home': getNameById(m.home)(tournament.teams), 'Result': m.result === '0:0' ? '' : m.result, 'Away': getNameById(m.away)(tournament.teams) }))} />
+          <div class="pt8 fs24 darkgreen">{tournament.isSingle ? 'Round ' + (i + 1) : s.date }</div>
+          <Table name="schedule" data={mapMatches(s.matches || [], tournament)} />
           {/* <Table name="week" data={w.matches} equalWidth>
             <td key="team1Points" hidden />  
             <td key="team2Points" hidden />  
@@ -34,3 +34,11 @@ export default compose(
   withParams,
   withLoad('tournament')
 )(Schedule);
+
+const mapMatches = (ms, t) => t.isSingle ? ms :
+  ms.filter(m => m && m.id).map(m => ({
+    'Table': m.id,
+    'Home': getNameById(m.home)(t.teams),
+    'Result': m.result === '0:0' ? '' : m.result,
+    'Away': getNameById(m.away)(t.teams)
+  }))

@@ -246,11 +246,11 @@ var select2 = function select2(_ref3) {
   return _react2.default.createElement(
     'select',
     { onChange: onChange, size: size, multiple: multiple, value: value },
-    placeholder ? _react2.default.createElement(
+    (0, _ramda.isNil)(placeholder) ? null : _react2.default.createElement(
       'option',
       { value: '' },
       placeholder
-    ) : null,
+    ),
     isGroup ? Object.keys(options).map(function (k) {
       return optionGroup(k, options);
     }) : options.map(option)

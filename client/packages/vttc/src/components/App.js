@@ -13,6 +13,9 @@ import Schedule from './Schedule';
 import Standing from './Standing';
 import Stats from './Stats';
 import Contact from './Contact';
+import Intro from './Intro';
+import Training from './Training';
+import Link from './Link';
 import Calendar from './Calendar';
 import { Switch, Route } from 'react-router';
 
@@ -24,6 +27,9 @@ const App = p =>
     <Switch>
       <Route exact path='/' component={Home} />
       <Route path='/contact' component={Contact} />
+      <Route path='/intro' component={Intro} />
+      <Route path='/training' component={Training} />
+      <Route path='/links' component={Link} />
       <Route path='/calendar' component={Calendar} />
       <Route exact path='/products' component={Products} />
       <Route path='/products/:id' component={Product} />

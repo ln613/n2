@@ -155,7 +155,7 @@ const s4 = {
 
 const select2 = ({ options, placeholder, isGroup, size, multiple, onChange, value }) =>
   <select onChange={onChange} size={size} multiple={multiple} value={value}>
-    {placeholder ? <option value="">{placeholder}</option> : null}
+    {isNil(placeholder) ? null : <option value="">{placeholder}</option>}
     {isGroup
       ? Object.keys(options).map(k => optionGroup(k, options))
       : options.map(option)

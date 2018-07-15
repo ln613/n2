@@ -183,12 +183,13 @@ var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t,
         return _extends({}, (0, _.findById)(p.id)(ps), { tRating: p.rating, isSub: p.isSub });
       })) });
   });
+  var players = (0, _ramda.sortWith)([(0, _ramda.descend)(function (x) {
+    return x.tRating;
+  })], (t.players || []).map(function (p) {
+    return _extends({}, (0, _.findById)(p.id)(ps), { tRating: p.rating });
+  }));
   var games = (t.games || []).map(function (g) {
     var result = getResult(g);
-    //   const p1 = getPlayer(g.p1, g.t1, teams);
-    //   const p2 = getPlayer(g.p2, g.t2, teams);
-    //   const p3 = getPlayer(g.p3, g.t1, teams);
-    //   const p4 = getPlayer(g.p4, g.t2, teams);
     var team1 = (0, _.getNameById)(g.t1)(teams);
     var team2 = (0, _.getNameById)(g.t2)(teams);
     var game = _extends({}, g, { result: result, player1: getPlayerName(1, g, ps), player2: getPlayerName(2, g, ps), team1: team1, team2: team2 });
@@ -198,7 +199,9 @@ var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t,
   var schedules = (t.schedules || []).map(function (s) {
     return _extends({}, s, {
       date: (0, _.toDate)(s.date),
-      matches: (0, _ramda.range)(1, 9).map(function (n) {
+      matches: t.isSingle ? s.matches.map(function (m) {
+        return { '#': m.id, home: (0, _.getNameById)(m.home)(ps), result: m.result, away: (0, _.getNameById)(m.away)(ps) };
+      }) : (0, _ramda.range)(1, 9).map(function (n) {
         return (0, _.findById)(n)(s.matches) || {};
       }).map(function (m) {
         var gs = findGames(s, m, games);
@@ -210,7 +213,7 @@ var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t,
       })
     });
   });
-  return teams.length > 0 ? _extends({}, t, { teams: teams, schedules: schedules, games: games }) : t;
+  return teams.length > 0 || players.length > 0 ? _extends({}, t, { teams: teams, players: players, schedules: schedules, games: games }) : t;
 });
 
 var tournamentsWithYears = (0, _noRedux.createSelector)(tournaments, function (ts) {

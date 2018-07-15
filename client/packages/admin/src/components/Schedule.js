@@ -18,9 +18,9 @@ const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id
     {range(0, 8).map(n =>
       <div class="f aic">
         <div class="pr8">Table {n + 1}: </div>
-        <Select name={`schedule.matches[${n}].home`} options={tournament.teams} />
+        <Select name={`schedule.matches[${n}].home`} options={tournament.teams} placeholder="" />
         <div class="ph8">VS</div>
-        <Select name={`schedule.matches[${n}].away`} options={tournament.teams} />
+        <Select name={`schedule.matches[${n}].away`} options={tournament.teams} placeholder="" />
         <div class="ph8"></div>
         <Button primary onClick={() => history.push(`/games/${tournament.id}/${schedule.id}/${n + 1}`)}>Matches</Button>
       </div>

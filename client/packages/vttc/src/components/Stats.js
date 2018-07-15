@@ -9,8 +9,8 @@ import TMenu from './TMenu';
 
 const Stats = ({ stats, tournament, id }) =>
   <div class="p16 f">
-    <TMenu id={id} />
-    <div class="p32 fv">
+    <TMenu id={id} isSingle={tournament.isSingle} />
+    <div class="ph32 fv">
       <h1>Stats - {tournament.name}</h1>
       <hr/>
       <Table name="stats" data={stats}>

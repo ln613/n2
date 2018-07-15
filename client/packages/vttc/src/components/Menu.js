@@ -7,7 +7,8 @@ import actions from 'utils/actions';
 import { langSelector } from 'utils/selectors';
 
 //const menus = ['Home', 'Products', 'News', ['Training', [['Classes', 'university'], ['Coaches', 'user'], ['Players', 'users']]], 'Tournaments', 'League', 'Rating', 'Contact'];
-const menus = ['Home', 'Products', 'News', 'Players', 'Tournaments', 'Rating', 'Calendar', 'Contact'];
+//const menus = ['Home', 'Products', 'News', 'Players', 'Tournaments', 'Rating', 'Calendar', 'Contact'];
+const menus = ['Home', 'Intro', 'Tournaments', 'Rating', 'Calendar', 'Links', 'Contact'];
 
 const menu = ({ lang, setLang }) =>
   <div>
@@ -26,13 +27,13 @@ const menu = ({ lang, setLang }) =>
         }
         return <Link to={'/' + (i === 0 ? '' : x)}><Menu.Item name={x} /></Link>;
       })}
-      <Menu.Menu position='right'>
+      {/* <Menu.Menu position='right'>
         <div class="f aic p4">
           {popup('English', 'c1', () => setLang())}
           {popup('中文', 'c2', () => setLang('ch'))}
           <Input icon='search' placeholder='Search...' />
         </div>
-      </Menu.Menu>
+      </Menu.Menu> */}
     </Menu>
   </div>
 

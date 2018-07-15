@@ -10,6 +10,9 @@ export default p =>
           <i class="phone icon" />1-604-215-0288
         </div>  
         <div class="pb16">
+          <i class="phone icon" />1-604-771-9188
+        </div>  
+        <div class="pb16">
           <i class="mail icon" /><a href="mailto:vttc@vttc.ca">vttc@vttc.ca</a>
         </div>  
         <div class="f">

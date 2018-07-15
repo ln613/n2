@@ -75,12 +75,12 @@ const rrCycle = (x, r, l) => x < r ? x - r + l : x - r + 1;
 
 e.rrSchedule = (x, sorted) => {
   const l = sorted ? x : R.sortWith([R.descend(R.prop('rating'))], x);
-  const t1 = R.range(1, tap(l).length);
+  const t1 = R.range(1, l.length);
   const t2 = R.range(0, l.length / 2);
   return t1.map(r => {
     const l1 = t1.map(n => l[rrCycle(n, r, l.length)]);
     const l2 = R.insert(0, l[0], l1);
-    return t2.map(n => ({ home: l2[n].id, away: l2[l.length - n - 1].id }));
+    return t2.map((n, i) => ({ id: i + 1, home: l2[n].id, away: l2[l.length - n - 1].id }));
   })
 }
 

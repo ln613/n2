@@ -9,24 +9,24 @@ import TMenu from './TMenu';
 
 const Tournament = ({ lookup, tournament, id }) =>
   <div class="p16 f">
-    <TMenu id={id} />
-    <div class="p32 fv">
+    <TMenu id={id} isSingle={tournament.isSingle} />
+    <div class="ph32 fv">
       <h1>{tournament.name}</h1>
       <hr/>
       {!tournament.isSingle && tournament.teams ?
       (tournament.teams || []).map(t =>
         <div class="pt8" key={t.id}>
           <div class="pt16 fs24 darkgreen">{t.name}</div>
-          <Table name="team" data={(t.players || []).map(p => ({ id: p.id, 'First Name': p.firstName, 'Last Name': p.lastName, gender: p.sex, 'Tournament Rating': p.tRating, 'Latest Rating': p.rating, 'Is Substitute': p.isSub ? 'Yes' : '' }))}>
+          <Table name="team" data={(t.players || []).map(mapPlayer)}>
             <td key="id" hidden />  
-            <td key="sex" title="Gender" />
           </Table>
         </div>
       ) :
-    //   <Table name="games" data={(tournament.games || [])}>
-    //   </Table>
-      null
-      }
+      <Table name="players" data={(tournament.players || []).map(mapPlayer)}>
+        <td key="id" hidden />  
+        <td key="Is Substitute" hidden />  
+      </Table>
+    }
     </div>
   </div>  
 
@@ -36,3 +36,5 @@ export default compose(
   withLoad('players'),
   withLoad('tournament', 'id', true)
 )(Tournament);
+
+const mapPlayer = p => ({ id: p.id, 'First Name': p.firstName, 'Last Name': p.lastName, gender: p.sex, 'Tournament Rating': p.tRating, 'Latest Rating': p.rating, 'Is Substitute': p.isSub ? 'Yes' : '' });

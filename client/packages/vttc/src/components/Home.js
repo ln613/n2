@@ -1,11 +1,11 @@
 import React from 'react';
 import ImageSlider from './ImageSlider';
 
-const cards = ['Products', 'News', 'Training', 'Tournaments', 'League'];
+const cards = ['Court', 'Club', 'League', 'Students', 'VIP'];
 
 const Home = p =>
   <div>
-    <ImageSlider n={3} />
+    <ImageSlider n={2} />
 
     <div class="p16">
       <h2>Introduction</h2>
@@ -16,8 +16,8 @@ const Home = p =>
     <div class="fw ph8 pb16">
       {cards.map((c, i) =>
         <div class="f w20 p8">
-          <div class="card fv w100 cp">
-            <ImageSlider n={2} name={c} />
+          <div class="card fv w100">
+            <ImageSlider n={2} f={i} name={c} />
             <div class="p8 fs18 tac">{c}</div>
           </div>
         </div>
