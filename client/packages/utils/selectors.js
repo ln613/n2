@@ -171,7 +171,10 @@ var isWin = function isWin(g) {
   var s = totalSubs(g);
   return s === 0 ? g.result[0] > g.result[2] : s < 0;
 };
-
+var getSinglePlayer = function getSinglePlayer(id, ps) {
+  var p = (0, _.findById)(id)(ps);
+  return p.name + ' (' + p.tRating + ')';
+};
 var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t, ps) {
   if (ps.length === 0) return t;
   var teams = (t.teams || []).map(function (t) {
@@ -200,7 +203,7 @@ var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t,
     return _extends({}, s, {
       date: (0, _.toDate)(s.date),
       matches: t.isSingle ? s.matches.map(function (m) {
-        return { '#': m.id, home: (0, _.getNameById)(m.home)(ps), result: m.result, away: (0, _.getNameById)(m.away)(ps) };
+        return { '#': m.id, home: getSinglePlayer(m.home, players), result: m.result, away: getSinglePlayer(m.away, players) };
       }) : (0, _ramda.range)(1, 9).map(function (n) {
         return (0, _.findById)(n)(s.matches) || {};
       }).map(function (m) {

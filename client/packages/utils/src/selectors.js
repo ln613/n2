@@ -99,7 +99,10 @@ const isWin = g => {
   const s = totalSubs(g);
   return s === 0 ? g.result[0] > g.result[2] : s < 0;
 }
-
+const getSinglePlayer = (id, ps) => {
+  const p = findById(id)(ps);
+  return `${p.name} (${p.tRating})`;
+}
 const tournament = createSelector(
   _tournament,
   players,
@@ -119,7 +122,7 @@ const tournament = createSelector(
       ...s,
       date: toDate(s.date),
       matches: t.isSingle ?
-        s.matches.map(m => ({'#': m.id, home: getNameById(m.home)(ps), result: m.result, away: getNameById(m.away)(ps)})) :
+        s.matches.map(m => ({'#': m.id, home: getSinglePlayer(m.home, players), result: m.result, away: getSinglePlayer(m.away, players)})) :
         range(1, 9)
         .map(n => findById(n)(s.matches) || {})
         .map(m => {
