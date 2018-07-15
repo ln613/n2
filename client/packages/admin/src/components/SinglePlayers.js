@@ -22,7 +22,7 @@ const SinglePlayers = ({ tournament, date, players, patchTour, setFormTournament
     )}
     <Button secondary onClick={() => setFormTournamentPlayers({})}>Add Player</Button>
     <hr />
-    <Button primary onClick={() => patchTour(tournament, { id })}>Save</Button>
+    <Button primary onClick={() => patchTour(toTour(tournament), { id })}>Save</Button>
   </div>
 
 export default compose(
@@ -34,3 +34,5 @@ export default compose(
   withEditList('tournament.players'),
   withSuccess('tour', () => alert('Saved'), () => alert('Error happened!'))
 )(SinglePlayers)
+
+const toTour = t => ({id: t.id, players: (t.players || []).map(p => ({id: +(p.id || 0), rating: p.rating})) })

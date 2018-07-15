@@ -126,7 +126,7 @@ const checkBox = p =>
   </div>
 
 export const TextBox = withAll(textBox);
-export const Select = withAll(withTextValue(select1));
+//export const Select = withAll(withTextValue(select1));
 export const CheckBox = withCheck(checkBox);
 
 
@@ -153,8 +153,8 @@ const s4 = {
   marginBottom: '8px'
 };
 
-const select2 = ({ options, placeholder, isGroup, size, multiple, onChange }) =>
-  <select onChange={onChange} size={size} multiple={multiple}>
+const select2 = ({ options, placeholder, isGroup, size, multiple, onChange, value }) =>
+  <select onChange={onChange} size={size} multiple={multiple} value={value}>
     {placeholder ? <option value="">{placeholder}</option> : null}
     {isGroup
       ? Object.keys(options).map(k => optionGroup(k, options))
@@ -163,10 +163,10 @@ const select2 = ({ options, placeholder, isGroup, size, multiple, onChange }) =>
   </select>
 
 const Select2 = withAll(select2);
-//export const Select = withAll(select2);
+export const Select = withAll(select2);
 
 const option = o =>
-  <option key={o.value} value={o.value}>{o.text}</option>
+  <option key={o.value || o.id} value={o.value || o.id}>{o.text || o.name}</option>
 
 const optionGroup = (key, options) =>
   <optgroup label={key} key={key}>

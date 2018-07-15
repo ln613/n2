@@ -108,9 +108,9 @@ app.copy('/admin/initdata', (req, res) => {
   done(api.initdata(), res);
 });
 
-// app.get('/admin/initacc', (req, res) => {
-//   done(api.initacc(), res);
-// });
+app.copy('/admin/initacc', (req, res) => {
+  done(api.initacc(), res);
+});
 
 app.copy('/admin/bak', (req, res) => {
   send(api.bak(), res);
@@ -126,11 +126,11 @@ app.get('/admin/cd/list', (req, res) => {
 
 app.get('/admin/genrr/:id', (req, res) => {
   const id = req.params.id;
-  const t = api.getById('tournament', id);
 
-  const p = (t.players && !t.schedules)
-    ? rrSchedule(t.players).then(s => api.update('tournament', { id, schedules: s.map((x, i) => ({ id: i + 1, matches: x, date: momemt(t.startDate).add(i, 'week').format('MM/DD/YYYY') })) }))
-    : Promise.resolve({});
+  const p = api.getById('tournaments', id).then(t => (t.players && !t.schedules)
+    ? rrSchedule(t.players, true).then(s => api.update('tournaments', { id, schedules: tap(s).map((x, i) => ({ id: i + 1, matches: x, date: momemt(t.startDate).add(i, 'week').format('MM/DD/YYYY') })) }))
+    : {}
+  );
 
   send(p, res);
 });

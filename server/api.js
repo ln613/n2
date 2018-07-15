@@ -2,7 +2,7 @@ const fs = require('fs');
 const mongodb = require('mongodb');
 const cd = require('cloudinary');
 const { sortWith, ascend, descend, prop, fromPairs, merge } = require('ramda');
-const { tap, config } = require('./utils');
+const { tap, config, json2js } = require('./utils');
 const moment = require('moment');
 
 const allDocs = ['cats', 'players', 'products', 'tournaments'];
@@ -27,9 +27,9 @@ e.initdocs = docs => {
   );
 }
 
-e.initdata = () => e.initdocs(JSON.parse(fs.readFileSync('./data/db.json')))
+e.initdata = () => e.initdocs(json2js(fs.readFileSync('./data/db.json')))
 
-//e.initacc = () => e.initdocs(JSON.parse(fs.readFileSync('./data/1.json')))
+e.initacc = () => e.initdocs(json2js(fs.readFileSync('./data/1.json')))
 
 e.bak = () => Promise.all(allDocs.map(e.get)).then(l => fromPairs(l.map((d, i) => [allDocs[i], d]))).then(x => { fs.writeFile('./data/db.json', JSON.stringify(x)); return x; })
 
@@ -76,12 +76,12 @@ e.getPlayerGames = id => db.collection('tournaments').aggregate([
 
 e.getPlayerRating = (id, date) => db.collection('tournaments').aggregate([
   { $unwind: '$games' },
-  { $match: { $or: [ { 'gmes.p1': id }, { 'games.p2': id } ] } },
-  { $match: { 'games.date': { $lte: date === '_' ? moment().format('YYYY-MM-DD') : date } } },
+  { $match: { $or: [ { 'games.p1': id }, { 'games.p2': id } ] } },
+  { $match: { 'games.date': { $lte: date === '_' ? new Date() : new Date(date) } } },
   { $sort: { 'games.date': -1, 'games.id': -1 } },
   { $limit: 1 },
   { $replaceRoot: { newRoot: '$games'} },
-  { $project: { rating: { $cond: [{ $eq: ['p1', id] }, '$p1Rating', '$p2Rating'] } } }
+  { $project: { rating: { $cond: [{ $eq: ['$p1', id] }, { $add: ['$p1Rating', '$p1Diff'] }, { $add: ['$p2Rating', '$p2Diff'] }] } } }
 ]).toArray().then(x => x[0].rating)
 
 module.exports = e;

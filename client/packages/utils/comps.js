@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DoubleSelect = exports.CheckBox = exports.Select = exports.TextBox = exports.Table = undefined;
+exports.DoubleSelect = exports.Select = exports.CheckBox = exports.TextBox = exports.Table = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -209,7 +209,7 @@ var checkBox = function checkBox(p) {
 };
 
 var TextBox = exports.TextBox = withAll(textBox);
-var Select = exports.Select = withAll(withTextValue(select1));
+//export const Select = withAll(withTextValue(select1));
 var CheckBox = exports.CheckBox = withCheck(checkBox);
 
 var s1 = {
@@ -241,10 +241,11 @@ var select2 = function select2(_ref3) {
       isGroup = _ref3.isGroup,
       size = _ref3.size,
       multiple = _ref3.multiple,
-      onChange = _ref3.onChange;
+      onChange = _ref3.onChange,
+      value = _ref3.value;
   return _react2.default.createElement(
     'select',
-    { onChange: onChange, size: size, multiple: multiple },
+    { onChange: onChange, size: size, multiple: multiple, value: value },
     placeholder ? _react2.default.createElement(
       'option',
       { value: '' },
@@ -257,13 +258,13 @@ var select2 = function select2(_ref3) {
 };
 
 var Select2 = withAll(select2);
-//export const Select = withAll(select2);
+var Select = exports.Select = withAll(select2);
 
 var option = function option(o) {
   return _react2.default.createElement(
     'option',
-    { key: o.value, value: o.value },
-    o.text
+    { key: o.value || o.id, value: o.value || o.id },
+    o.text || o.name
   );
 };
 

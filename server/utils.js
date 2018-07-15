@@ -73,9 +73,9 @@ e.gotoLogin = res => {
 
 const rrCycle = (x, r, l) => x < r ? x - r + l : x - r + 1;
 
-e.rrSchedule = x => {
-  const l = R.sortWith([R.descend(R.prop('rating'))], x);
-  const t1 = R.range(1, l.length);
+e.rrSchedule = (x, sorted) => {
+  const l = sorted ? x : R.sortWith([R.descend(R.prop('rating'))], x);
+  const t1 = R.range(1, tap(l).length);
   const t2 = R.range(0, l.length / 2);
   return t1.map(r => {
     const l1 = t1.map(n => l[rrCycle(n, r, l.length)]);
@@ -83,5 +83,7 @@ e.rrSchedule = x => {
     return t2.map(n => ({ home: l2[n].id, away: l2[l.length - n - 1].id }));
   })
 }
+
+e.json2js = x => JSON.parse(x, (k, v) => R.takeLast(4, k).toLowerCase() === 'date' ? new Date(v) : v)
 
 module.exports = e;
