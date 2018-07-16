@@ -17,8 +17,8 @@ const Stats = ({ stats, tournament, id }) =>
         <td key="mp" title="MP"/>
         <td key="gw" title="GW"/>
         <td key="gl" title="GL"/>
-        <td key="dw" title="DW"/>
-        <td key="dl" title="DL"/>
+        <td key="dw" title="DW" hidden/>
+        <td key="dl" title="DL" hidden/>
       </Table>
     </div>
   </div>

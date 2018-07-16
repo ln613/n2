@@ -141,7 +141,7 @@ var pn = function pn(n, g) {
   return g['p' + n];
 };
 var tn = function tn(n, g) {
-  return g['p' + (n > 2 ? n - 2 : n)];
+  return g['t' + (n > 2 ? n - 2 : n)];
 };
 var findGames = function findGames(s, m, gs) {
   return gs.filter(function (g) {
@@ -165,14 +165,14 @@ var getPlayer = function getPlayer(pid, tid, ts) {
   return (0, _.findById)(pid)((0, _.findById)(tid)(ts).players);
 };
 var subs = function subs(n, g, ts) {
-  return (getPlayer(pn(n, g), (0, _.tap)(tn(n, g)), ts) || {}).isSub ? 1 : 0;
+  return (getPlayer(pn(n, g), tn(n, g), ts) || {}).isSub ? 1 : 0;
 };
 var totalSubs = function totalSubs(g, ts) {
   return subs(1, g, ts) + subs(3, g, ts) - subs(2, g, ts) - subs(4, g, ts);
 };
 var isWin = function isWin(g, ts) {
   var s = totalSubs(g, ts);
-  return (0, _.tap)(s) === 0 ? g.result[0] > g.result[2] : s < 0;
+  return s === 0 ? g.result[0] > g.result[2] : s < 0;
 };
 var getSinglePlayer = function getSinglePlayer(id, ps) {
   var p = (0, _.findById)(id)(ps);

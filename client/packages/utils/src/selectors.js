@@ -88,17 +88,17 @@ const teams = createSelector(
 );
 
 const pn = (n, g) => g['p' + n];
-const tn = (n, g) => g['p' + (n > 2 ? n - 2 : n)];
+const tn = (n, g) => g['t' + (n > 2 ? n - 2 : n)];
 const findGames = (s, m, gs) => gs.filter(g => (g.t1 === m.home && g.t2 === m.away) || (g.t2 === m.home && g.t1 === m.away));
 const gg = (g, x) => +(g && g[x] || 0);
 const getResult = g => g.result || (range(0, 5).filter(n => gg(g.g1, n) > gg(g.g2, n)).length + ':' + range(0, 5).filter(n => gg(g.g1, n) < gg(g.g2, n)).length);
 const getPlayerName = (n, g, ps) => getNameById(pn(n, g))(ps) + (g.isDouble ? ' / ' + getNameById(pn(n + 2, g))(ps) : '');
 const getPlayer = (pid, tid, ts) => findById(pid)(findById(tid)(ts).players);
-const subs = (n, g, ts) => (getPlayer(pn(n, g), tap(tn(n, g)), ts) || {}).isSub ? 1 : 0;
+const subs = (n, g, ts) => (getPlayer(pn(n, g), tn(n, g), ts) || {}).isSub ? 1 : 0;
 const totalSubs = (g, ts) => subs(1, g, ts) + subs(3, g, ts) - subs(2, g, ts) - subs(4, g, ts);
 const isWin = (g, ts) => {
   const s = totalSubs(g, ts);
-  return tap(s) === 0 ? g.result[0] > g.result[2] : s < 0;
+  return s === 0 ? g.result[0] > g.result[2] : s < 0;
 }
 const getSinglePlayer = (id, ps) => {
   const p = findById(id)(ps);
