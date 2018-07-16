@@ -51,7 +51,7 @@ var _Table = function _Table(_ref) {
 
   return _react2.default.createElement(
     'table',
-    { 'class': 'ui celled striped table' },
+    { 'class': 'ui celled striped table unstackable' },
     _react2.default.createElement(
       'thead',
       null,

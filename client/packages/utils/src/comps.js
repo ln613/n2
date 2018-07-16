@@ -16,7 +16,7 @@ const _Table = ({ data, name, link, equalWidth, setSort, children, history }) =>
   //const sortDir = sort && sort[1];
 
   return (
-    <table class="ui celled striped table">
+    <table class="ui celled striped table unstackable">
       <thead>
         <tr>
           {keys.map((k, i) =>
