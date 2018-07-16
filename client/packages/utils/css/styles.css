@@ -93,3 +93,7 @@ hr {
 #root table tbody tr:hover {
   background-color: Lavender;
 }
+
+table.ui.striped.table tbody tr:nth-child(even) {
+  background-color: #ffffd8;
+}
