@@ -140,6 +140,9 @@ var teams = (0, _noRedux.createSelector)(_tournament, function (t) {
 var pn = function pn(n, g) {
   return g['p' + n];
 };
+var tn = function tn(n, g) {
+  return g['p' + (n > 2 ? n - 2 : n)];
+};
 var findGames = function findGames(s, m, gs) {
   return gs.filter(function (g) {
     return g.t1 === m.home && g.t2 === m.away || g.t2 === m.home && g.t1 === m.away;
@@ -161,15 +164,15 @@ var getPlayerName = function getPlayerName(n, g, ps) {
 var getPlayer = function getPlayer(pid, tid, ts) {
   return (0, _.findById)(pid)((0, _.findById)(tid)(ts).players);
 };
-var subs = function subs(n, g) {
-  return (pn(n, g) || {}).isSub ? 1 : 0;
+var subs = function subs(n, g, ts) {
+  return (getPlayer(pn(n, g), (0, _.tap)(tn(n, g)), ts) || {}).isSub ? 1 : 0;
 };
-var totalSubs = function totalSubs(g) {
-  return subs(1, g) + subs(3, g) - subs(2, g) - subs(4, g);
+var totalSubs = function totalSubs(g, ts) {
+  return subs(1, g, ts) + subs(3, g, ts) - subs(2, g, ts) - subs(4, g, ts);
 };
-var isWin = function isWin(g) {
-  var s = totalSubs(g);
-  return s === 0 ? g.result[0] > g.result[2] : s < 0;
+var isWin = function isWin(g, ts) {
+  var s = totalSubs(g, ts);
+  return (0, _.tap)(s) === 0 ? g.result[0] > g.result[2] : s < 0;
 };
 var getSinglePlayer = function getSinglePlayer(id, ps) {
   var p = (0, _.findById)(id)(ps);
@@ -196,7 +199,7 @@ var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t,
     var team1 = (0, _.getNameById)(g.t1)(teams);
     var team2 = (0, _.getNameById)(g.t2)(teams);
     var game = _extends({}, g, { result: result, player1: getPlayerName(1, g, ps), player2: getPlayerName(2, g, ps), team1: team1, team2: team2 });
-    game.isWin = isWin(game);
+    game.isWin = isWin(game, teams);
     return game;
   });
   var schedules = (t.schedules || []).map(function (s) {
@@ -292,8 +295,8 @@ var standing = (0, _noRedux.createSelector)(tournament, teams, function (tt, ts)
   }));
 });
 
-var isSamePlayer = function isSamePlayer(p1, p2) {
-  return p1 && p2 && p1.id === p2.id || false;
+var isSamePlayer = function isSamePlayer(p1, id) {
+  return p1 && id && p1.id === id || false;
 };
 var isHomePlayer = function isHomePlayer(p) {
   return function (g) {

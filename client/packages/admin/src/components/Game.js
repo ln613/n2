@@ -14,30 +14,31 @@ const Game = ({ tournament, game, games, schedule, match, players, putGame, post
     <hr />
     <TextBox name="game.id" disabled class="mr16"/>
     <CheckBox name="game.isDouble" label="Is Double?"/>
-    <div class="f aic">
-      <div>  
-        <div class="pr8 pb32">{getNameById(tap(match).home)(tap(tournament.teams))}</div>
+    <div class="f ais">
+      <div class="fv jcsa">  
+        <div class="pr8 pb32">{getNameById(match.home)(tournament.teams)}</div>
         <div class="pr8">{getNameById(match.away)(tournament.teams)}</div>
       </div>  
-      <div>  
+      <div class="fv jcsa">  
         <Select name={`game.p1`} options={getPropById('players')(match.home)(tournament.teams)} />
         <Select name={`game.p2`} options={getPropById('players')(match.away)(tournament.teams)} />
       </div>  
       {game.isDouble ?
-      <div>
+      <div class="fv jcsa">
         <Select name={`game.p3`} options={getPropById('players')(match.home)(tournament.teams)} />
         <Select name={`game.p4`} options={getPropById('players')(match.away)(tournament.teams)} />
       </div>
       : null}
-      <div>  
+      <div class="fv jcsa">  
         <div class="f aic">{range(0, 5).map(n => <TextBox name={`game.g1[${n}]`} noLabel style={{width: '50px'}}/>)}</div>
         <div class="f aic">{range(0, 5).map(n => <TextBox name={`game.g2[${n}]`} noLabel style={{width: '50px'}}/>)}</div>
       </div>  
-      <div>  
+      <div class="fv jcsa">  
         <div class="pl8 pb32">{range(0, 5).filter(x => gg(game.g1, x) > gg(game.g2, x)).length}</div>
         <div class="pl8">{range(0, 5).filter(x => gg(game.g1, x) < gg(game.g2, x)).length}</div>
       </div>  
     </div>
+    <TextBox name={`game.result`} label="Result"/>
     <hr />
     <Button primary onClick={() => id[0] === '+' ? postGame(toGame(game, schedule, match), { id1: tournament.id }) : putGame(game, { id1: tournament.id, id: game.id })}>Save</Button>
   </div>
