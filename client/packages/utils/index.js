@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.diff = exports.isPrimitiveType = exports.replaceParam = exports.addIndex = exports.toMonth = exports.toDate = exports.toTitleCase = exports.withNewId = exports.withParams = exports.withLang = exports.withListener = exports.withSuccess = exports.withNewValue = exports.withEditList = exports.withEdit = exports.withLoad = exports.view = exports.toLensPath = exports.getNameById = exports.getPropById = exports.findByName = exports.findById = exports.findByProp = exports.desc = exports.name = exports.ml = exports.admin = exports.api = exports.host = exports.isDev = exports.tap = exports.cdurl = undefined;
+exports.adjustRating = exports.rateDiff = exports.diff = exports.isPrimitiveType = exports.replaceParam = exports.addIndex = exports.toMonth = exports.toDate = exports.toTitleCase = exports.withNewId = exports.withParams = exports.withLang = exports.withListener = exports.withSuccess = exports.withNewValue = exports.withEditList = exports.withEdit = exports.withLoad = exports.view = exports.toLensPath = exports.getNameById = exports.getPropById = exports.findByName = exports.findById = exports.findByProp = exports.desc = exports.name = exports.ml = exports.admin = exports.api = exports.host = exports.isDev = exports.tap = exports.cdurl = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -187,4 +187,21 @@ var diff = exports.diff = function diff(p) {
   return (0, _ramda.differenceWith)(function (a, b) {
     return isPrimitiveType(a) ? a === b : a[p || 'id'] === b[p || 'id'];
   });
+};
+
+var rdiff = [[3, 0], [5, -2], [8, -5], [10, -7], [13, -9], [15, -11], [18, -14], [20, -16], [25, -21], [30, -26], [35, -31], [40, -36], [45, -41], [50, -45], [55, -50]];
+var rdelta = [401, 301, 201, 151, 101, 51, 26, -24, -49, -99, -149, -199, -299, -399];
+
+var rateDiff = exports.rateDiff = function rateDiff(r1, r2) {
+  var n = rdelta.findIndex(function (x) {
+    return x >= r1 - r2;
+  });
+  return n === -1 ? R.last(rdiff) : rdiff[n];
+};
+
+var adjustRating = exports.adjustRating = function adjustRating(g) {
+  var p1Win = g.result[0] === '3';
+  var d = p1Win ? e.rateDiff(g.p1Rating, g.p2Rating) : e.rateDiff(g.p2Rating, g.p1Rating);
+  g.p1Diff = p1Win ? d[0] : d[1];
+  g.p2Diff = p1Win ? d[1] : d[0];
 };
