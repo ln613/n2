@@ -10,7 +10,7 @@ import { range } from 'ramda';
 const s = { position: 'absolute', height: '150px', width: '10%' };
 const s1 = { ...s, left: 0, background: 'linear-gradient(to left, rgba(42, 27, 112,0) 20%, rgba(42, 27, 112,1) 100%)' };
 const s2 = { ...s, right: 0, background: 'linear-gradient(to right, rgba(42, 27, 112, 0) 20%, rgba(42, 27, 112, 1) 100%)' };
-const n = 9;
+const n = 11;
 const r1 = range(1, n + 1);
 const r2 = r1.concat(r1);
 
