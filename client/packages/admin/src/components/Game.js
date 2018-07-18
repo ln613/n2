@@ -8,7 +8,7 @@ import { gameSelector } from 'utils/selectors';
 import { TextBox, Select, CheckBox } from 'utils/comps';
 import { withLoad, withEdit, withSuccess, withParams, getPropById, findById, getNameById, tap, adjustRating } from 'utils';
 
-const Game = ({ tournament, game, games, schedule, match, players, putGame, postGame, id }) =>
+const Game = ({ tournament, game, games, schedule, match, players, putGame, postGame, id, setFormGame }) =>
   <div>
     <h1>Match - {tournament.name} - {schedule.date}</h1>
     <hr />
@@ -20,8 +20,8 @@ const Game = ({ tournament, game, games, schedule, match, players, putGame, post
         <div class="pr8">{getNameById(match.away)(tournament.teams)}</div>
       </div>  
       <div class="fv jcsa">  
-        <Select name={`game.p1`} options={getPropById('players')(match.home)(tournament.teams)} />
-        <Select name={`game.p2`} options={getPropById('players')(match.away)(tournament.teams)} />
+        <Select name={`game.p1`} options={getPropById('players')(match.home)(tournament.teams)} onChange={v => setFormGame(getPropById('rating')(+v)(players), { prop: 'p1Rating' })}/>
+        <Select name={`game.p2`} options={getPropById('players')(match.away)(tournament.teams)} onChange={v => setFormGame(getPropById('rating')(+v)(players), { prop: 'p2Rating' })}/>
       </div>  
       {game.isDouble ?
       <div class="fv jcsa">

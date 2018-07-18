@@ -194,14 +194,17 @@ var rdelta = [401, 301, 201, 151, 101, 51, 26, -24, -49, -99, -149, -199, -299, 
 
 var rateDiff = exports.rateDiff = function rateDiff(r1, r2) {
   var n = rdelta.findIndex(function (x) {
-    return x >= r1 - r2;
+    return x <= r1 - r2;
   });
   return n === -1 ? R.last(rdiff) : rdiff[n];
 };
 
 var adjustRating = exports.adjustRating = function adjustRating(g) {
-  var p1Win = g.result[0] === '3';
-  var d = p1Win ? e.rateDiff(g.p1Rating, g.p2Rating) : e.rateDiff(g.p2Rating, g.p1Rating);
-  g.p1Diff = p1Win ? d[0] : d[1];
-  g.p2Diff = p1Win ? d[1] : d[0];
+  if (g.isDouble) {
+    return g;
+  } else {
+    var p1Win = g.result[0] === '3';
+    var d = p1Win ? rateDiff(g.p1Rating, g.p2Rating) : rateDiff(g.p2Rating, g.p1Rating);
+    return _extends({}, g, { p1Diff: p1Win ? d[0] : d[1], p2Diff: p1Win ? d[1] : d[0] });
+  }
 };

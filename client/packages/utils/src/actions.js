@@ -84,6 +84,9 @@ export const actionData = {
   formTournamentPlayers: {
     path: 'form.tournament.players[]'
   },
+  formGame: {
+    path: 'form.game.{prop}'
+  },
   filter: {},
   lang: {},
 }
