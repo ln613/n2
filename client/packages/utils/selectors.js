@@ -34,6 +34,9 @@ var filter = function filter(p) {
 var isLoading = function isLoading(s) {
   return s.isLoading;
 };
+var isMobile = function isMobile(s) {
+  return s.isMobile;
+};
 var lastAction = function lastAction(s) {
   return s.lastAction || '';
 };
@@ -387,7 +390,7 @@ var monthRatings = (0, _noRedux.createSelector)(history, function (h) {
 var successSelector = exports.successSelector = function successSelector(a) {
   return (0, _noRedux.mapStateWithSelectors)({ success: success(a) });
 };
-var lookupSelector = exports.lookupSelector = (0, _noRedux.mapStateWithSelectors)({ lookup: lookup, lang: lang });
+var lookupSelector = exports.lookupSelector = (0, _noRedux.mapStateWithSelectors)({ lookup: lookup, lang: lang, isMobile: isMobile });
 var langSelector = exports.langSelector = (0, _noRedux.mapStateWithSelectors)({ lang: lang });
 var catsSelector = exports.catsSelector = (0, _noRedux.mapStateWithSelectors)({ cats: cats, cat: form('cat'), lang: lang });
 var productsSelector = exports.productsSelector = (0, _noRedux.mapStateWithSelectors)({ products: filteredProducts, productFilter: filter('product'), lookup: lookup, lang: lang, product: form('product'), cats: catsDD });

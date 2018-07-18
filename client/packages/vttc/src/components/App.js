@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'no-redux';
+import { compose } from 'recompose';
 import Header from './Header';
 import Menu from './Menu';
 import Home from './Home';
@@ -18,6 +20,8 @@ import Training from './Training';
 import Link from './Link';
 import Calendar from './Calendar';
 import { Switch, Route } from 'react-router';
+import { withWidth } from 'utils';
+import actions from 'utils/actions';
 
 const App = p =>
   <div class="ui">
@@ -47,4 +51,7 @@ const App = p =>
     <div class="ph16 pb16">© 2018 vttc.ca. All Rights Reserved.</div>
   </div>
 
-export default App;
+export default compose(
+  connect(null, actions),
+  withWidth
+)(App);

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.adjustRating = exports.rateDiff = exports.diff = exports.isPrimitiveType = exports.replaceParam = exports.addIndex = exports.toMonth = exports.toDate = exports.toTitleCase = exports.withNewId = exports.withParams = exports.withLang = exports.withListener = exports.withSuccess = exports.withNewValue = exports.withEditList = exports.withEdit = exports.withLoad = exports.view = exports.toLensPath = exports.getNameById = exports.getPropById = exports.findByName = exports.findById = exports.findByProp = exports.desc = exports.name = exports.ml = exports.admin = exports.api = exports.host = exports.isDev = exports.tap = exports.cdurl = undefined;
+exports.adjustRating = exports.rateDiff = exports.diff = exports.isPrimitiveType = exports.replaceParam = exports.addIndex = exports.toMonth = exports.toDate = exports.toTitleCase = exports.withNewId = exports.withParams = exports.withLang = exports.withListener = exports.withSuccess = exports.withNewValue = exports.withEditList = exports.withEdit = exports.withLoad = exports.withWidth = exports.view = exports.toLensPath = exports.getNameById = exports.getPropById = exports.findByName = exports.findById = exports.findByProp = exports.desc = exports.name = exports.ml = exports.admin = exports.api = exports.host = exports.isDev = exports.tap = exports.cdurl = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -68,6 +68,12 @@ var toLensPath = exports.toLensPath = function toLensPath(s) {
 var view = exports.view = function view(s, o) {
   return (0, _ramda.view)((0, _ramda.lensPath)(toLensPath(s)), o);
 };
+
+var withWidth = exports.withWidth = (0, _recompose.lifecycle)({
+  componentWillMount: function componentWillMount() {
+    if (window.innerWidth <= 960) this.props.setIsMobile(true);
+  }
+});
 
 var withLoad = exports.withLoad = function withLoad(p, v, force) {
   return (0, _recompose.lifecycle)({

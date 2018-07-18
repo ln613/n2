@@ -97,3 +97,15 @@ hr {
 table.ui.striped.table tbody tr:nth-child(even) {
   background-color: #ffffd8;
 }
+
+@media (min-width: 700px) {
+#banner {
+  width: 700px;
+}
+}
+
+@media (max-width: 699px) {
+#banner {
+  width: 100%;
+}
+}

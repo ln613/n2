@@ -9,6 +9,7 @@ const form = p => s => _form(s)[p] || {};
 const filter = p => s => _filter(s)[p] || {};
 
 const isLoading = s => s.isLoading;
+const isMobile = s => s.isMobile;
 const lastAction = s => s.lastAction || '';
 const error = s => s.error;
 const lookup = s => s.lookup || {};
@@ -259,7 +260,7 @@ const monthRatings = createSelector(
 );
 
 export const successSelector = a => mapStateWithSelectors({ success: success(a) });
-export const lookupSelector = mapStateWithSelectors({ lookup, lang });
+export const lookupSelector = mapStateWithSelectors({ lookup, lang, isMobile });
 export const langSelector = mapStateWithSelectors({ lang });
 export const catsSelector = mapStateWithSelectors({ cats, cat: form('cat'), lang });
 export const productsSelector = mapStateWithSelectors({ products: filteredProducts, productFilter: filter('product'), lookup, lang, product: form('product'), cats: catsDD });

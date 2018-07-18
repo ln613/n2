@@ -27,6 +27,13 @@ export const getNameById = getPropById('name')
 export const toLensPath = s => s.replace(/\[/g, '.').replace(/\]/g, '').split('.');
 export const view = (s, o) => _view(lensPath(toLensPath(s)), o);
 
+export const withWidth = lifecycle({
+  componentWillMount() {
+    if (window.innerWidth <= 960)
+      this.props.setIsMobile(true);
+  }
+});
+
 export const withLoad = (p, v, force) => lifecycle({
   componentWillMount() {
     const v1 = is(Array, v) ? v[0] : (v || 'id');
