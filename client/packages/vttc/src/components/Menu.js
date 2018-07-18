@@ -12,7 +12,7 @@ const menus = ['Home', 'Intro', 'Tournaments', 'Rating', 'Calendar', 'Links', 'C
 
 const menu = ({ lang, setLang }) =>
   <div>
-    <Menu color="blue" inverted id="main-menu">
+    <Menu color="blue" inverted id="main-menu" stackable>
       {menus.map((x, i) => {
         if (is(Array, x)) {
           return (
