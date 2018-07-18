@@ -16,7 +16,7 @@ const r2 = r1.concat(r1);
 
 const Mq = ({ lookup, isMobile }) =>
   <div class="fg1 ph8 f marquee">
-    <div class="f aic m4">
+    <div class="f aic m1">
       {r2.map(x =>
         <Link to="/">
           <img width={isMobile ? '65' : '130'} height={isMobile ? '65' : '130'} src={cdurl(lookup, 'header', x)} alt="" />  

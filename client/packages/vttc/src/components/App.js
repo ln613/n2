@@ -26,7 +26,8 @@ import actions from 'utils/actions';
 const App = p =>
   <div class="ui">
     <Header />
-    <Menu />
+
+    <Menu>
 
     <Switch>
       <Route exact path='/' component={Home} />
@@ -49,6 +50,8 @@ const App = p =>
 
     <div class="ui divider"></div>
     <div class="ph16 pb16">© 2018 vttc.ca. All Rights Reserved.</div>
+
+    </Menu>
   </div>
 
 export default compose(
