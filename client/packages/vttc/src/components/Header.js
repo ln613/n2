@@ -19,18 +19,19 @@ const Mq = ({ lookup }) =>
     <div class="f aic m1">
       {r2.map(x =>
         <Link to="/">
-          <img width="130" height="130" src={cdurl(tap(lookup), 'header', x)} alt="" />  
+          <img width="130" height="130" src={cdurl(lookup, 'header', x)} alt="" />  
         </Link>
       )}
     </div>
     <div style={s1}></div>
     <div style={s2}></div>
   </div>  
+const Banner = () => <img src="images/banner.jpg" alt="" id="banner" />;
 
 const Header = ({ lookup, isMobile }) =>
-  <div class="bgb f">  
-    <img src="images/banner.jpg" alt="" id="banner" />
-    {isMobile ? null : <Mq lookup={lookup} />}
+  <div class={`bgb ${isMobile ? 'fv' : 'f'}`}>
+    <Banner/>
+    <Mq lookup={lookup} />
   </div>
 
 export default compose(
