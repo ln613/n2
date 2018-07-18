@@ -19,7 +19,7 @@ const Mq = ({ lookup, isMobile }) =>
     <div class="f aic m1">
       {r2.map(x =>
         <Link to="/">
-          <img width={isMobile ? '65' : '130'} height={isMobile ? '85' : '130'} src={cdurl(lookup, 'header', x)} alt="" />  
+          <img width={isMobile ? '65' : '130'} height={isMobile ? '65' : '130'} src={cdurl(lookup, 'header', x)} alt="" />  
         </Link>
       )}
     </div>
