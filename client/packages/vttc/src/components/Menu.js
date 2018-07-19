@@ -71,7 +71,7 @@ const NavBarMobile = ({
       onClick={onPusherClick}
       style={{ minHeight: "100vh" }}
     >
-      <Menu fixed="top" inverted color="blue">
+      <Menu inverted color="blue">
         <Menu.Item onClick={onToggle}>
           <Icon name="sidebar" />
         </Menu.Item>
@@ -82,7 +82,7 @@ const NavBarMobile = ({
 );
 
 const NavBarDesktop = ({ leftItems }) => (
-  <Menu fixed="top" inverted color="blue">
+  <Menu inverted color="blue">
     {leftItems.map(item => <Menu.Item {...item} />)}
   </Menu>
 );
@@ -117,12 +117,12 @@ class NavBar extends React.Component {
             onToggle={this.handleToggle}
             visible={visible}
           >
-            <NavBarChildren>{children}</NavBarChildren>
+            {children}
           </NavBarMobile>
         </Responsive>
         <Responsive minWidth={Responsive.onlyTablet.minWidth}>
           <NavBarDesktop leftItems={leftItems} />
-          <NavBarChildren>{children}</NavBarChildren>
+          {children}
         </Responsive>
       </div>
     );

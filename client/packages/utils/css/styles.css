@@ -12,7 +12,7 @@ body.pushable {
   background-color: rgb(42, 27, 112);
 }
 
-#main-menu {
+#main-menu, .ui.blue.inverted.menu {
   border-radius: 0;
 }
 

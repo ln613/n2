@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { is, find, isNil, difference, innerJoin, view, lensPath, not, identity } from 'ramda';
 import { toTitleCase, tap } from '.';
 import { filterSelector } from './selectors';
-import { Input, Dropdown, Checkbox } from 'semantic-ui-react';
+import { Input, Dropdown, Checkbox, Responsive } from 'semantic-ui-react';
 
 const _Table = ({ data, name, link, equalWidth, setSort, children, history }) => {
   children = children && (is(Array, children) ? children : [children]);
@@ -213,3 +213,13 @@ export const DoubleSelect = compose(
     return { src, dst, onAdd, onRemove };
   })
 )(_DoubleSelect);
+
+export const Mobile = ({ children }) =>
+  <Responsive {...Responsive.onlyMobile}>
+    {children}
+  </Responsive>
+
+export const Desktop = ({ children }) =>
+  <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+    {children}
+  </Responsive>
