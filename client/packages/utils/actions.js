@@ -96,8 +96,7 @@ var actionData = exports.actionData = {
     path: 'form.game.{prop}'
   },
   filter: {},
-  lang: {},
-  isMobile: {}
+  lang: {}
 };
 
 exports.default = (0, _noRedux.generateActions)(actionData);

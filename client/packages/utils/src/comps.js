@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose, withProps } from 'recompose';
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { is, find, isNil, difference, innerJoin, view, lensPath, not, identity } from 'ramda';
 import { toTitleCase, tap } from '.';
 import { filterSelector } from './selectors';
-import { Input, Dropdown, Checkbox, Responsive } from 'semantic-ui-react';
+import { Input, Dropdown, Checkbox, Responsive, Sidebar, Icon, Menu as _Menu } from 'semantic-ui-react';
+import { withState } from 'utils';
 
 const _Table = ({ data, name, link, equalWidth, setSort, children, history }) => {
   children = children && (is(Array, children) ? children : [children]);
@@ -223,3 +224,27 @@ export const Desktop = ({ children }) =>
   <Responsive minWidth={Responsive.onlyTablet.minWidth}>
     {children}
   </Responsive>
+
+const items = (menus, setVisible) => (menus || []).map(x => <Link to={'/' + x} onClick={() => setVisible(false)}><_Menu.Item name={x}/></Link>);
+const _menu = (children, color) => <_Menu inverted color={color || 'black'} style={{margin: 0}}>{children}</_Menu>;
+
+const Menu1 = ({ color, menus, children, visible, setVisible }) =>
+  <div>
+    <Mobile>
+      <Sidebar.Pushable>
+        <Sidebar as={_Menu} animation="overlay" icon="labeled" inverted vertical visible={visible} color={color || 'black'}>
+          {items(menus, setVisible)}
+        </Sidebar>
+        <Sidebar.Pusher dimmed={visible} onClick={() => visible && setVisible(false)} style={{ minHeight: "100vh" }}>
+          {_menu(<_Menu.Item onClick={() => setVisible(!visible)} icon="sidebar"/>, color)}
+          {children}
+        </Sidebar.Pusher>
+      </Sidebar.Pushable>
+    </Mobile>
+    <Desktop>
+      {_menu(items(menus, setVisible), color)}
+      {children}
+    </Desktop>
+  </div>
+
+export const Menu = withState('visible')(Menu1)

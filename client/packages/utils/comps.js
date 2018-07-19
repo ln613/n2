@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Desktop = exports.Mobile = exports.DoubleSelect = exports.Select = exports.CheckBox = exports.TextBox = exports.Table = undefined;
+exports.Menu = exports.Desktop = exports.Mobile = exports.DoubleSelect = exports.Select = exports.CheckBox = exports.TextBox = exports.Table = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -26,6 +26,8 @@ var _ = require('.');
 var _selectors = require('./selectors');
 
 var _semanticUiReact = require('semantic-ui-react');
+
+var _utils = require('utils');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -389,3 +391,65 @@ var Desktop = exports.Desktop = function Desktop(_ref7) {
     children
   );
 };
+
+var items = function items(menus, setVisible) {
+  return (menus || []).map(function (x) {
+    return _react2.default.createElement(
+      _reactRouterDom.Link,
+      { to: '/' + x, onClick: function onClick() {
+          return setVisible(false);
+        } },
+      _react2.default.createElement(_semanticUiReact.Menu.Item, { name: x })
+    );
+  });
+};
+var _menu = function _menu(children, color) {
+  return _react2.default.createElement(
+    _semanticUiReact.Menu,
+    { inverted: true, color: color || 'black', style: { margin: 0 } },
+    children
+  );
+};
+
+var Menu1 = function Menu1(_ref8) {
+  var color = _ref8.color,
+      menus = _ref8.menus,
+      children = _ref8.children,
+      visible = _ref8.visible,
+      setVisible = _ref8.setVisible;
+  return _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      Mobile,
+      null,
+      _react2.default.createElement(
+        _semanticUiReact.Sidebar.Pushable,
+        null,
+        _react2.default.createElement(
+          _semanticUiReact.Sidebar,
+          { as: _semanticUiReact.Menu, animation: 'overlay', icon: 'labeled', inverted: true, vertical: true, visible: visible, color: color || 'black' },
+          items(menus, setVisible)
+        ),
+        _react2.default.createElement(
+          _semanticUiReact.Sidebar.Pusher,
+          { dimmed: visible, onClick: function onClick() {
+              return visible && setVisible(false);
+            }, style: { minHeight: "100vh" } },
+          _menu(_react2.default.createElement(_semanticUiReact.Menu.Item, { onClick: function onClick() {
+              return setVisible(!visible);
+            }, icon: 'sidebar' }), color),
+          children
+        )
+      )
+    ),
+    _react2.default.createElement(
+      Desktop,
+      null,
+      _menu(items(menus, setVisible), color),
+      children
+    )
+  );
+};
+
+var Menu = exports.Menu = (0, _utils.withState)('visible')(Menu1);

@@ -89,7 +89,6 @@ export const actionData = {
   },
   filter: {},
   lang: {},
-  isMobile: {},
 }
 
 export default generateActions(actionData);

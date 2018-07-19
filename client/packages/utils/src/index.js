@@ -1,6 +1,6 @@
 import { tap as _tap, prop, find, pipe, isNil, is, isEmpty, view as _view, lensPath, reduce, max, last, differenceWith, anyPass } from 'ramda';
 import { connect } from 'no-redux';
-import { compose, lifecycle, withProps, withHandlers } from 'recompose';
+import { compose, lifecycle, withProps, withHandlers, withState as _withState } from 'recompose';
 import { successSelector } from './selectors';
 
 export const cdurl = (l, c, n) => l.cdVersion ? `http://res.cloudinary.com/vttc/image/upload/v${l.cdVersion}/${c}/${n}.jpg` : '';
@@ -27,12 +27,8 @@ export const getNameById = getPropById('name')
 export const toLensPath = s => s.replace(/\[/g, '.').replace(/\]/g, '').split('.');
 export const view = (s, o) => _view(lensPath(toLensPath(s)), o);
 
-export const withWidth = lifecycle({
-  componentWillMount() {
-    if (window.innerWidth <= 960)
-      this.props.setIsMobile(true);
-  }
-});
+export const withState = (p, v) =>
+  _withState(p, 'set' + p.charAt(0).toUpperCase() + p.substr(1), v)
 
 export const withLoad = (p, v, force) => lifecycle({
   componentWillMount() {
