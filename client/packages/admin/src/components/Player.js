@@ -16,8 +16,10 @@ const Player = ({ player, putPlayer, postPlayer, id }) =>
     <TextBox name="player.firstName_ch" />
     <TextBox name="player.lastName" />
     <TextBox name="player.lastName_ch" />
+    <TextBox name="player.sex" />
+    <TextBox name="player.rating" />
     <hr />
-    <Button primary onClick={() => id[0] === '+' ? postPlayer(player) : putPlayer(player)}>Save</Button>
+    <Button primary onClick={() => id[0] === '+' ? postPlayer(toPlayer(player)) : putPlayer(toPlayer(player))}>Save</Button>
   </div>
 
 export default compose(
@@ -27,3 +29,5 @@ export default compose(
   withEdit('player'),
   withSuccess('player', () => alert('Saved'), () => alert('Error happened!'))
 )(Player)
+
+const toPlayer = p => ({...p, id: +p.id, rating: p.rating ? +p.rating : 100})

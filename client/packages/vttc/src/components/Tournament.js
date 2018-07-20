@@ -24,7 +24,7 @@ const Tournament = ({ lookup, tournament, id, isMobile }) =>
       ) :
       <Table name="players" data={(tournament.players || []).map(mapPlayer)}>
         <td key="id" hidden />  
-        <td key="Is Substitute" hidden />  
+        <td key="Is Sub" hidden />  
       </Table>
     }
     </div>

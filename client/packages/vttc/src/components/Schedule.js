@@ -15,7 +15,7 @@ const Schedule = ({ tournament, id, isMobile }) =>
       <hr/>
       {(tournament.schedules || []).map((s, i) =>
         <div class="pt8">
-          <div class="pt8 fs24 darkgreen">{tournament.isSingle ? 'Round ' + (i + 1) : s.date }</div>
+          <div class="pv8 fs24 darkgreen">{tournament.isSingle ? 'Round ' + (i + 1) : s.date }</div>
           <Table name="schedule" data={mapMatches(s.matches || [], tournament)} />
           {/* <Table name="week" data={w.matches} equalWidth>
             <td key="team1Points" hidden />  
