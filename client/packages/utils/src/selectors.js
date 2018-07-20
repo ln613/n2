@@ -227,7 +227,7 @@ const stats = createSelector(
       return { player: p.name, 'mp': total, w, l, '+/-': d > 0 ? '+' + d : d, 'win %': wpc, gw, gl, dw, dl };
     }),
     sortWith([descend(prop('+/-')), descend(prop('win %'))]),
-    addIndex('rank')
+    addIndex('#')
   )(t.teams || [])
 );
 
