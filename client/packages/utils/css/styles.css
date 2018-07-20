@@ -99,5 +99,5 @@ table.ui.striped.table tbody tr:nth-child(even) {
 }
 
 #calendar td {
-  padding: 0;
+  padding: 2px;
 }
