@@ -4,11 +4,11 @@ import { connect } from 'no-redux';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { tourSelector } from 'utils/selectors';
-import { TextBox, CheckBox } from 'utils/comps';
+import { TextBox, CheckBox, withMobile } from 'utils/comps';
 import { withEdit, withSuccess, withParams, tap } from 'utils';
 import { withRouter } from "react-router-dom";
 
-const Tournament = ({ tournament, history, postTour, patchTour, getGenrr, id }) =>
+const Tournament = ({ tournament, history, postTour, patchTour, getGenrr, id, isMobile }) =>
   <div>
     <h1>Tournament - {+tournament.id ? tournament.name : 'Add New'}</h1>
     <hr />
@@ -40,5 +40,6 @@ export default compose(
   withParams,
   withEdit('tournament'),
   withSuccess('tour', () => alert('Saved'), () => alert('Error happened!')),
-  withRouter
+  withRouter,
+  withMobile
 )(Tournament)

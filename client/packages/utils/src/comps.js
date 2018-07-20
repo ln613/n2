@@ -248,3 +248,9 @@ const Menu1 = ({ color, menus, children, visible, setVisible }) =>
   </div>
 
 export const Menu = withState('visible')(Menu1)
+
+export const withMobile = Comp =>
+  <div>
+    <Mobile><Comp isMobile={true}/></Mobile>
+    <Desktop><Comp isMobile={false}/></Desktop>
+  </div>
