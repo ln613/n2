@@ -4,14 +4,14 @@ import { compose } from 'recompose';
 import actions from 'utils/actions';
 import { statsSelector } from 'utils/selectors';
 import { withLoad, withParams } from 'utils';
-import { Table } from 'utils/comps';
+import { Table, withMobile } from 'utils/comps';
 import TMenu from './TMenu';
 
-const Stats = ({ stats, tournament, id }) =>
-  <div class="p16 f">
-    <TMenu id={id} isSingle={tournament.isSingle} />
-    <div class="ph32 fv">
-      <h1>Stats - {tournament.name}</h1>
+const Stats = ({ stats, tournament, id, isMobile }) =>
+  <div class={`p16 ${isMobile ? 'fv' : 'f'}`}>
+    <TMenu id={id} isSingle={tournament.isSingle} isMobile={isMobile} page="stats" />
+    <div class={`${isMobile ? '' : 'ph32'} fv`}>
+      <h1>{tournament.name}</h1>
       <hr/>
       <Table name="stats" data={stats}>
         <td key="mp" title="MP"/>
@@ -26,5 +26,6 @@ const Stats = ({ stats, tournament, id }) =>
 export default compose(
   connect(statsSelector, actions),
   withParams,
-  withLoad('tournament')
+  withLoad('tournament'),
+  withMobile
 )(Stats);

@@ -9,8 +9,8 @@ import TMenu from './TMenu';
 
 const Tournament = ({ lookup, tournament, id, isMobile }) =>
   <div class={`p16 ${isMobile ? 'fv' : 'f'}`}>
-    <TMenu id={id} isSingle={tournament.isSingle} />
-    <div class="ph32 fv">
+    <TMenu id={id} isSingle={tournament.isSingle} isMobile={isMobile} page="tournament" />
+    <div class={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr/>
       {!tournament.isSingle && tournament.teams ?

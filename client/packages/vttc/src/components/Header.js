@@ -6,7 +6,7 @@ import { cdurl, withLoad, tap } from 'utils';
 import actions from 'utils/actions';
 import { lookupSelector } from 'utils/selectors';
 import { range } from 'ramda';
-import { Mobile, Desktop } from 'utils/comps';
+import { withMobile } from 'utils/comps';
 
 const s = m => ({ position: 'absolute', height: m ? '75px' : '150px', width: '10%' });
 const s1 = m => ({ ...s(m), left: 0, background: 'linear-gradient(to left, rgba(42, 27, 112,0) 20%, rgba(42, 27, 112,1) 100%)' });
@@ -31,21 +31,14 @@ const Banner = m => <img src="images/banner.jpg" alt="" style={{ width: m ? '100
 
 const Header = ({ lookup, isMobile }) =>
   <div>
-    <Mobile>
-      <div class="bgb fv">
-        <Banner/>
-        <Mq lookup={lookup} isMobile={true}/>
-      </div>
-    </Mobile>
-    <Desktop>
-      <div class="bgb f">
-        <Banner/>
-        <Mq lookup={lookup} isMobile={false}/>
-      </div>
-    </Desktop>
+    <div class={`bgb ${isMobile ? 'fv' : 'f'}`}>
+      <Banner/>
+      <Mq lookup={lookup} isMobile={isMobile} />
+    </div>
   </div>
 
 export default compose(
   connect(lookupSelector, actions),
-  withLoad('lookup')
+  withLoad('lookup'),
+  withMobile
 )(Header);

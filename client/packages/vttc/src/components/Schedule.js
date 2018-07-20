@@ -4,14 +4,14 @@ import { compose } from 'recompose';
 import actions from 'utils/actions';
 import { tournamentSelector } from 'utils/selectors';
 import { withLoad, withParams, getNameById } from 'utils';
-import { Table } from 'utils/comps';
+import { Table, withMobile } from 'utils/comps';
 import TMenu from './TMenu';
 
-const Schedule = ({ tournament, id }) =>
-  <div class="p16 f">
-    <TMenu id={id} isSingle={tournament.isSingle} />
-    <div class="ph32 fv">
-      <h1>Schedule - {tournament.name}</h1>
+const Schedule = ({ tournament, id, isMobile }) =>
+  <div class={`p16 ${isMobile ? 'fv' : 'f'}`}>
+    <TMenu id={id} isSingle={tournament.isSingle} isMobile={isMobile} page="schedule" />
+    <div class={`${isMobile ? '' : 'ph32'} fv`}>
+      <h1>{tournament.name}</h1>
       <hr/>
       {(tournament.schedules || []).map((s, i) =>
         <div class="pt8">
@@ -32,7 +32,8 @@ const Schedule = ({ tournament, id }) =>
 export default compose(
   connect(tournamentSelector, actions),
   withParams,
-  withLoad('tournament')
+  withLoad('tournament'),
+  withMobile
 )(Schedule);
 
 const mapMatches = (ms, t) => t.isSingle ? ms :

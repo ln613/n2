@@ -455,18 +455,20 @@ var Menu1 = function Menu1(_ref8) {
 var Menu = exports.Menu = (0, _utils.withState)('visible')(Menu1);
 
 var withMobile = exports.withMobile = function withMobile(Comp) {
-  return _react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(
-      Mobile,
+  return function (p) {
+    return _react2.default.createElement(
+      'div',
       null,
-      _react2.default.createElement(Comp, { isMobile: true })
-    ),
-    _react2.default.createElement(
-      Desktop,
-      null,
-      _react2.default.createElement(Comp, { isMobile: false })
-    )
-  );
+      _react2.default.createElement(
+        Mobile,
+        null,
+        _react2.default.createElement(Comp, _extends({}, p, { isMobile: true }))
+      ),
+      _react2.default.createElement(
+        Desktop,
+        null,
+        _react2.default.createElement(Comp, _extends({}, p, { isMobile: false }))
+      )
+    );
+  };
 };
