@@ -8,7 +8,23 @@ import { filterSelector } from './selectors';
 import { Input, Dropdown, Checkbox, Responsive, Sidebar, Icon, Menu as _Menu } from 'semantic-ui-react';
 import { withState } from 'utils';
 
-const _Table = ({ data, name, link, equalWidth, setSort, children, history }) => {
+export const Mobile = ({ children }) =>
+  <Responsive {...Responsive.onlyMobile}>
+    {children}
+  </Responsive>
+
+export const Desktop = ({ children }) =>
+  <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+    {children}
+  </Responsive>
+
+export const withMobile = Comp => p =>
+  <div>
+    <Mobile><Comp {...p} isMobile={true}/></Mobile>
+    <Desktop><Comp {...p} isMobile={false}/></Desktop>
+  </div>
+
+const _Table = ({ data, name, link, equalWidth, setSort, children, history, isMobile }) => {
   children = children && (is(Array, children) ? children : [children]);
   const l = data || [];
   const keys = l.length > 0 ? Object.keys(l[0]).filter(k => !hidden(k, children)) : [];
@@ -17,7 +33,7 @@ const _Table = ({ data, name, link, equalWidth, setSort, children, history }) =>
   //const sortDir = sort && sort[1];
 
   return (
-    <table class="ui celled striped table unstackable fs12">
+    <table class="ui celled striped table unstackable" id={name} style={isMobile ? {fontSize: '12px'} : {}}>
       <thead>
         <tr>
           {keys.map((k, i) =>
@@ -46,7 +62,8 @@ export const Table = compose(
       name, prop, dir
     })
   }),
-  withRouter
+  withRouter,
+  withMobile
 )(_Table);
 
 const col = (idx, key, obj, children) => {
@@ -215,16 +232,6 @@ export const DoubleSelect = compose(
   })
 )(_DoubleSelect);
 
-export const Mobile = ({ children }) =>
-  <Responsive {...Responsive.onlyMobile}>
-    {children}
-  </Responsive>
-
-export const Desktop = ({ children }) =>
-  <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-    {children}
-  </Responsive>
-
 const items = (menus, setVisible) => (menus || []).map(x => <Link to={'/' + x} onClick={() => setVisible(false)}><_Menu.Item name={x} style={{fontWeight: 'bold'}}/></Link>);
 const _menu = (children, color) => <_Menu inverted color={color || 'black'} style={{margin: 0}}>{children}</_Menu>;
 
@@ -248,9 +255,3 @@ const Menu1 = ({ color, menus, children, visible, setVisible }) =>
   </div>
 
 export const Menu = withState('visible')(Menu1)
-
-export const withMobile = Comp => p =>
-  <div>
-    <Mobile><Comp {...p} isMobile={true}/></Mobile>
-    <Desktop><Comp {...p} isMobile={false}/></Desktop>
-  </div>

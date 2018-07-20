@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.withMobile = exports.Menu = exports.Desktop = exports.Mobile = exports.DoubleSelect = exports.Select = exports.CheckBox = exports.TextBox = exports.Table = undefined;
+exports.Menu = exports.DoubleSelect = exports.Select = exports.CheckBox = exports.TextBox = exports.Table = exports.withMobile = exports.Desktop = exports.Mobile = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -33,14 +33,52 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var _Table = function _Table(_ref) {
-  var data = _ref.data,
-      name = _ref.name,
-      link = _ref.link,
-      equalWidth = _ref.equalWidth,
-      setSort = _ref.setSort,
-      children = _ref.children,
-      history = _ref.history;
+var Mobile = exports.Mobile = function Mobile(_ref) {
+  var children = _ref.children;
+  return _react2.default.createElement(
+    _semanticUiReact.Responsive,
+    _semanticUiReact.Responsive.onlyMobile,
+    children
+  );
+};
+
+var Desktop = exports.Desktop = function Desktop(_ref2) {
+  var children = _ref2.children;
+  return _react2.default.createElement(
+    _semanticUiReact.Responsive,
+    { minWidth: _semanticUiReact.Responsive.onlyTablet.minWidth },
+    children
+  );
+};
+
+var withMobile = exports.withMobile = function withMobile(Comp) {
+  return function (p) {
+    return _react2.default.createElement(
+      'div',
+      null,
+      _react2.default.createElement(
+        Mobile,
+        null,
+        _react2.default.createElement(Comp, _extends({}, p, { isMobile: true }))
+      ),
+      _react2.default.createElement(
+        Desktop,
+        null,
+        _react2.default.createElement(Comp, _extends({}, p, { isMobile: false }))
+      )
+    );
+  };
+};
+
+var _Table = function _Table(_ref3) {
+  var data = _ref3.data,
+      name = _ref3.name,
+      link = _ref3.link,
+      equalWidth = _ref3.equalWidth,
+      setSort = _ref3.setSort,
+      children = _ref3.children,
+      history = _ref3.history,
+      isMobile = _ref3.isMobile;
 
   children = children && ((0, _ramda.is)(Array, children) ? children : [children]);
   var l = data || [];
@@ -53,7 +91,7 @@ var _Table = function _Table(_ref) {
 
   return _react2.default.createElement(
     'table',
-    { 'class': 'ui celled striped table unstackable fs12' },
+    { 'class': 'ui celled striped table unstackable', id: name, style: isMobile ? { fontSize: '12px' } : {} },
     _react2.default.createElement(
       'thead',
       null,
@@ -95,7 +133,7 @@ var Table = exports.Table = (0, _recompose.compose)((0, _reactRedux.connect)(_se
       name: name, prop: prop, dir: dir
     };
   }
-}), _reactRouterDom.withRouter)(_Table);
+}), _reactRouterDom.withRouter, withMobile)(_Table);
 
 var col = function col(idx, key, obj, children) {
   if (!(0, _ramda.is)(Array, children)) children = children ? [children] : [];
@@ -142,14 +180,14 @@ var setForm = function setForm(n, v, i) {
 
 var withInput = function withInput(isCheck) {
   return function (comp) {
-    return function (_ref2) {
-      var name = _ref2.name,
-          index = _ref2.index,
-          label = _ref2.label,
-          noLabel = _ref2.noLabel,
-          form = _ref2.form,
-          setForm = _ref2.setForm,
-          args = _objectWithoutProperties(_ref2, ['name', 'index', 'label', 'noLabel', 'form', 'setForm']);
+    return function (_ref4) {
+      var name = _ref4.name,
+          index = _ref4.index,
+          label = _ref4.label,
+          noLabel = _ref4.noLabel,
+          form = _ref4.form,
+          setForm = _ref4.setForm,
+          args = _objectWithoutProperties(_ref4, ['name', 'index', 'label', 'noLabel', 'form', 'setForm']);
 
       var path = name.replace(/\[/g, '.').replace(/\]/g, '').split('.');
       var value = (0, _ramda.view)((0, _ramda.lensPath)(path), form);
@@ -237,14 +275,14 @@ var s4 = {
   marginBottom: '8px'
 };
 
-var select2 = function select2(_ref3) {
-  var options = _ref3.options,
-      placeholder = _ref3.placeholder,
-      isGroup = _ref3.isGroup,
-      size = _ref3.size,
-      multiple = _ref3.multiple,
-      onChange = _ref3.onChange,
-      value = _ref3.value;
+var select2 = function select2(_ref5) {
+  var options = _ref5.options,
+      placeholder = _ref5.placeholder,
+      isGroup = _ref5.isGroup,
+      size = _ref5.size,
+      multiple = _ref5.multiple,
+      onChange = _ref5.onChange,
+      value = _ref5.value;
   return _react2.default.createElement(
     'select',
     { onChange: onChange, size: size, multiple: multiple, value: value },
@@ -278,17 +316,17 @@ var optionGroup = function optionGroup(key, options) {
   );
 };
 
-var _DoubleSelect = function _DoubleSelect(_ref4) {
-  var name = _ref4.name,
-      src = _ref4.src,
-      dst = _ref4.dst,
-      srcTitle = _ref4.srcTitle,
-      dstTitle = _ref4.dstTitle,
-      size = _ref4.size,
-      buttonStyle = _ref4.buttonStyle,
-      onChange = _ref4.onChange,
-      onAdd = _ref4.onAdd,
-      onRemove = _ref4.onRemove;
+var _DoubleSelect = function _DoubleSelect(_ref6) {
+  var name = _ref6.name,
+      src = _ref6.src,
+      dst = _ref6.dst,
+      srcTitle = _ref6.srcTitle,
+      dstTitle = _ref6.dstTitle,
+      size = _ref6.size,
+      buttonStyle = _ref6.buttonStyle,
+      onChange = _ref6.onChange,
+      onAdd = _ref6.onAdd,
+      onRemove = _ref6.onRemove;
   return _react2.default.createElement(
     'div',
     { name: name, style: s1 },
@@ -346,11 +384,11 @@ var joinOptions = function joinOptions(o, l, r) {
   }, o, l);
 };
 
-var DoubleSelect = exports.DoubleSelect = (0, _recompose.compose)(withForm, (0, _recompose.withProps)(function (_ref5) {
-  var name = _ref5.name,
-      options = _ref5.options,
-      form = _ref5.form,
-      setForm = _ref5.setForm;
+var DoubleSelect = exports.DoubleSelect = (0, _recompose.compose)(withForm, (0, _recompose.withProps)(function (_ref7) {
+  var name = _ref7.name,
+      options = _ref7.options,
+      form = _ref7.form,
+      setForm = _ref7.setForm;
 
   var _name$split = name.split('.'),
       _name$split2 = _slicedToArray(_name$split, 2),
@@ -373,24 +411,6 @@ var DoubleSelect = exports.DoubleSelect = (0, _recompose.compose)(withForm, (0, 
   };
   return { src: src, dst: dst, onAdd: onAdd, onRemove: onRemove };
 }))(_DoubleSelect);
-
-var Mobile = exports.Mobile = function Mobile(_ref6) {
-  var children = _ref6.children;
-  return _react2.default.createElement(
-    _semanticUiReact.Responsive,
-    _semanticUiReact.Responsive.onlyMobile,
-    children
-  );
-};
-
-var Desktop = exports.Desktop = function Desktop(_ref7) {
-  var children = _ref7.children;
-  return _react2.default.createElement(
-    _semanticUiReact.Responsive,
-    { minWidth: _semanticUiReact.Responsive.onlyTablet.minWidth },
-    children
-  );
-};
 
 var items = function items(menus, setVisible) {
   return (menus || []).map(function (x) {
@@ -453,22 +473,3 @@ var Menu1 = function Menu1(_ref8) {
 };
 
 var Menu = exports.Menu = (0, _utils.withState)('visible')(Menu1);
-
-var withMobile = exports.withMobile = function withMobile(Comp) {
-  return function (p) {
-    return _react2.default.createElement(
-      'div',
-      null,
-      _react2.default.createElement(
-        Mobile,
-        null,
-        _react2.default.createElement(Comp, _extends({}, p, { isMobile: true }))
-      ),
-      _react2.default.createElement(
-        Desktop,
-        null,
-        _react2.default.createElement(Comp, _extends({}, p, { isMobile: false }))
-      )
-    );
-  };
-};

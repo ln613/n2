@@ -98,7 +98,6 @@ table.ui.striped.table tbody tr:nth-child(even) {
   background-color: #ffffd8;
 }
 
-.ui.table {
-  font-size: 12px;
-  overflow-x: scroll;
+#calendar td {
+  padding: 0;
 }
