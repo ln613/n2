@@ -10,7 +10,7 @@ import TMenu from './TMenu';
 const Stats = ({ stats, tournament, id, isMobile }) =>
   <div class={`p16 ${isMobile ? 'fv' : 'f'}`}>
     <TMenu id={id} isSingle={tournament.isSingle} isMobile={isMobile} page="stats" />
-    <div class={`${isMobile ? '' : 'ph32'} fv`} style={{minWidth: '420px', overflowX: 'scroll'}}>
+    <div class={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr/>
       <Table name="stats" data={stats}>

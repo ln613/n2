@@ -33,7 +33,7 @@ const _Table = ({ data, name, link, equalWidth, setSort, children, history, isMo
   //const sortDir = sort && sort[1];
 
   return (
-    <table class="ui celled striped table unstackable" id={name} style={isMobile ? {fontSize: '12px'} : {}}>
+    <table class={`ui celled striped table unstackable ${isMobile ? 'mobile' : ''}`} id={name} style={isMobile ? {fontSize: '12px'} : {}}>
       <thead>
         <tr>
           {keys.map((k, i) =>

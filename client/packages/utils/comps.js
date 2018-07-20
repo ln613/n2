@@ -91,7 +91,7 @@ var _Table = function _Table(_ref3) {
 
   return _react2.default.createElement(
     'table',
-    { 'class': 'ui celled striped table unstackable', id: name, style: isMobile ? { fontSize: '12px' } : {} },
+    { 'class': 'ui celled striped table unstackable ' + (isMobile ? 'mobile' : ''), id: name, style: isMobile ? { fontSize: '12px' } : {} },
     _react2.default.createElement(
       'thead',
       null,

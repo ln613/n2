@@ -16,7 +16,7 @@ const Tournament = ({ lookup, tournament, id, isMobile }) =>
       {!tournament.isSingle && tournament.teams ?
       (tournament.teams || []).map(t =>
         <div class="pt8" key={t.id}>
-          <div class="pt16 fs24 darkgreen">{t.name}</div>
+          <div class="pv8 fs24 darkgreen">{t.name}</div>
           <Table name="team" data={(t.players || []).map(mapPlayer)}>
             <td key="id" hidden />  
           </Table>
@@ -38,4 +38,4 @@ export default compose(
   withMobile
 )(Tournament);
 
-const mapPlayer = p => ({ id: p.id, 'First Name': p.firstName, 'Last Name': p.lastName, gender: p.sex, 'Tournament Rating': p.tRating, 'Latest Rating': p.rating, 'Is Substitute': p.isSub ? 'Yes' : '' });
+const mapPlayer = p => ({ id: p.id, 'Name': p.firstName + ' ' + p.lastName, gender: p.sex, 'Tournament Rating': p.tRating, 'Latest Rating': p.rating, 'Is Sub': p.isSub ? '&#10004' : '' });

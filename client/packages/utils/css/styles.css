@@ -98,6 +98,11 @@ table.ui.striped.table tbody tr:nth-child(even) {
   background-color: #ffffd8;
 }
 
-#calendar td {
+#calendar.mobile td {
   padding: 2px;
+}
+
+#stats.mobile td, #stats.mobile th {
+  padding-left: 2px;
+  padding-right: 0;
 }
