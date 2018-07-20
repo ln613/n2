@@ -64,10 +64,12 @@ const save = p => {
 
   if (isAdd) {
     p.postGame(g, { id1: p.tournament.id });
-    const p1 = findById(g.p1)(p.players);
-    p.putPlayer({...p1, rating: Math.max(g.p1Rating + g.p1Diff, 100)});
-    const p2 = findById(g.p2)(p.players);
-    p.putPlayer({...p2, rating: Math.max(g.p2Rating + g.p2Diff, 100)});
+    if (!g.isDouble) {
+      const p1 = findById(g.p1)(p.players);
+      p.putPlayer({...p1, rating: Math.max(g.p1Rating + g.p1Diff, 100)});
+      const p2 = findById(g.p2)(p.players);
+      p.putPlayer({...p2, rating: Math.max(g.p2Rating + g.p2Diff, 100)});
+    }
   }
   else {
     p.putGame(g, { id1: p.tournament.id, id: p.game.id });
