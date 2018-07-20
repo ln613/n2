@@ -17,7 +17,7 @@ const _Table = ({ data, name, link, equalWidth, setSort, children, history }) =>
   //const sortDir = sort && sort[1];
 
   return (
-    <table class="ui celled striped table unstackable">
+    <table class="ui celled striped table unstackable fs12">
       <thead>
         <tr>
           {keys.map((k, i) =>
@@ -225,7 +225,7 @@ export const Desktop = ({ children }) =>
     {children}
   </Responsive>
 
-const items = (menus, setVisible) => (menus || []).map(x => <Link to={'/' + x} onClick={() => setVisible(false)}><_Menu.Item name={x}/></Link>);
+const items = (menus, setVisible) => (menus || []).map(x => <Link to={'/' + x} onClick={() => setVisible(false)}><_Menu.Item name={x} style={{fontWeight: 'bold'}}/></Link>);
 const _menu = (children, color) => <_Menu inverted color={color || 'black'} style={{margin: 0}}>{children}</_Menu>;
 
 const Menu1 = ({ color, menus, children, visible, setVisible }) =>

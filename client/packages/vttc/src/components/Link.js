@@ -9,6 +9,6 @@ export default p =>
 
     <li><a href="https://www.ittf.com/rankings/" target="_new">ITTF World Ranking</a></li><br/>
 
-    <li><a href="http://cttsl.sports.cn/" target="_new">Offical Website for China Table Tennis Super League</a></li><br />
+    <li><a href="http://cttsl.sports.cn/" target="_new">Offical Website for China Table Tennis Super League</a></li>
     
   </div>  

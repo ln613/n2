@@ -53,7 +53,7 @@ var _Table = function _Table(_ref) {
 
   return _react2.default.createElement(
     'table',
-    { 'class': 'ui celled striped table unstackable' },
+    { 'class': 'ui celled striped table unstackable fs12' },
     _react2.default.createElement(
       'thead',
       null,
@@ -399,7 +399,7 @@ var items = function items(menus, setVisible) {
       { to: '/' + x, onClick: function onClick() {
           return setVisible(false);
         } },
-      _react2.default.createElement(_semanticUiReact.Menu.Item, { name: x })
+      _react2.default.createElement(_semanticUiReact.Menu.Item, { name: x, style: { fontWeight: 'bold' } })
     );
   });
 };
