@@ -35,4 +35,4 @@ export default compose(
   withSuccess('tour', () => alert('Saved'), () => alert('Error happened!'))
 )(SinglePlayers)
 
-const toTour = t => ({id: t.id, players: (t.players || []).map(p => ({id: +(p.id || 0), rating: p.rating})) })
+const toTour = t => ({id: t.id, players: (t.players || []).map(p => ({id: +(p.id || 0), rating: +p.rating})) })

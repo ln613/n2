@@ -33,6 +33,18 @@ e.initacc = () => e.initdocs(json2js(fs.readFileSync('./data/1.json')))
 
 e.bak = () => Promise.all(allDocs.map(e.get)).then(l => fromPairs(l.map((d, i) => [allDocs[i], d]))).then(x => { fs.writeFile('./data/db.json', JSON.stringify(x)); return x; })
 
+e.fix = () => db.collection('tournaments').findOne({ id: 86 }).then(t => {
+  t.games.forEach(g => {
+    g.p1 = +g.p1;
+    g.p2 = +g.p2;
+    if (g.isDouble) {
+      g.p3 = +g.p3;
+      g.p4 = +g.p4;
+    }
+  });
+  return db.collection('tournaments').save(t);
+});
+
 e.list = () => Object.keys(db)
 
 e.count = doc => db.collection(doc).count()

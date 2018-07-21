@@ -115,7 +115,11 @@ app.copy('/admin/initacc', (req, res) => {
 app.copy('/admin/bak', (req, res) => {
   send(api.bak(), res);
 });
-  
+
+app.post('/admin/fix', (req, res) => {
+  done(api.fix(), res);
+});
+
 app.get('/admin/env', (req, res) => {
   res.send(Object.keys(process.env).map(k => k + ' - ' + process.env[k]).sort());
 });

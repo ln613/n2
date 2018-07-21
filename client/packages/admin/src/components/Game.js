@@ -56,11 +56,18 @@ export default compose(
 
 const gg = (g, x) => +((g && g[x]) || 0);
 
-const toGame = (g, s, m) => ({ ...adjustRating(g), date: s.date, t1: m.home, t2: m.away });
+const toGame = (g, s, m) => {
+  const g1 = adjustRating({ isDouble: g.isDouble, date: s.date, t1: +m.home, t2: +m.away, p1: +g.p1, p2: +g.p2, p1Rating: g.p1Rating, p2Rating: g.p2Rating, result: g.result });
+  if (g.isDouble) {
+    g1.r3 = +g.r3;
+    g1.r3 = +g.r3;
+  }
+  return g1;
+}
 
 const save = p => {
   const isAdd = p.id[0] === '+';
-  const g = isAdd ? toGame(p.game, p.schedule, p.match) : p.game;
+  const g = toGame(p.game, p.schedule, p.match);
 
   if (isAdd) {
     p.postGame(g, { id1: p.tournament.id });
