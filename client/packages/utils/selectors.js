@@ -126,7 +126,7 @@ var players = (0, _noRedux.createSelector)(_players, function (ps) {
 
 var filteredPlayers = (0, _noRedux.createSelector)(players, form('player'), function (ps, f) {
   return (0, _ramda.sortWith)([(0, _ramda.descend)((0, _ramda.prop)('rating'))])(ps.filter(function (p) {
-    return (0, _ramda.isEmpty)(f) || p.name.toLowerCase().indexOf(f) > -1;
+    return (0, _ramda.isEmpty)(f) || p.name.toLowerCase().indexOf(f.toLowerCase()) > -1;
   }));
 });
 

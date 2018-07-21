@@ -75,7 +75,7 @@ const players = createSelector(
 const filteredPlayers = createSelector(
   players,
   form('player'),
-  (ps, f) => sortWith([descend(prop('rating'))])(ps.filter(p => isEmpty(f) || p.name.toLowerCase().indexOf(f) > -1))
+  (ps, f) => sortWith([descend(prop('rating'))])(ps.filter(p => isEmpty(f) || p.name.toLowerCase().indexOf(f.toLowerCase()) > -1))
 );
 
 const dsPlayers = createSelector(
