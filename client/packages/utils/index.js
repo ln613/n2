@@ -200,7 +200,7 @@ var rateDiff = exports.rateDiff = function rateDiff(r1, r2) {
   var n = rdelta.findIndex(function (x) {
     return x <= r1 - r2;
   });
-  return n === -1 ? R.last(rdiff) : rdiff[n];
+  return n === -1 ? (0, _ramda.last)(rdiff) : rdiff[n];
 };
 
 var adjustRating = exports.adjustRating = function adjustRating(g) {

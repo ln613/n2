@@ -116,7 +116,7 @@ const rdelta = [401,301,201,151,101,51,26,-24,-49,-99,-149,-199,-299,-399];
 
 export const rateDiff = (r1, r2) => {
   const n = rdelta.findIndex(x => x <= r1 - r2);
-  return n === -1 ? R.last(rdiff) : rdiff[n];
+  return n === -1 ? last(rdiff) : rdiff[n];
 }
 
 export const adjustRating = g => {
