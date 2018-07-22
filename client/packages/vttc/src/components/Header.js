@@ -11,7 +11,7 @@ import { withMobile } from 'utils/comps';
 const s = m => ({ position: 'absolute', height: m ? '75px' : '150px', width: '10%' });
 const s1 = m => ({ ...s(m), left: 0, background: 'linear-gradient(to left, rgba(42, 27, 112,0) 20%, rgba(42, 27, 112,1) 100%)' });
 const s2 = m => ({ ...s(m), right: 0, background: 'linear-gradient(to right, rgba(42, 27, 112, 0) 20%, rgba(42, 27, 112, 1) 100%)' });
-const n = 11;
+const n = 14;
 const r1 = range(1, n + 1);
 const r2 = r1.concat(r1);
 

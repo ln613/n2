@@ -2,7 +2,7 @@ const fs = require('fs');
 const mongodb = require('mongodb');
 const cd = require('cloudinary');
 const { sortWith, ascend, descend, prop, fromPairs, merge } = require('ramda');
-const { tap, config, json2js } = require('./utils');
+const { tap, config, json2js, adjustRating, newRating } = require('./utils');
 const moment = require('moment');
 
 const allDocs = ['cats', 'players', 'products', 'tournaments'];
@@ -95,5 +95,34 @@ e.getPlayerRating = (id, date) => db.collection('tournaments').aggregate([
   { $replaceRoot: { newRoot: '$games'} },
   { $project: { rating: { $cond: [{ $eq: ['$p1', id] }, { $add: ['$p1Rating', '$p1Diff'] }, { $add: ['$p2Rating', '$p2Diff'] }] } } }
 ]).toArray().then(x => x[0].rating)
+
+e.changeResult = g1 => db.collection('tournaments').aggregate([
+  { $unwind: '$games' },
+  { $match: { 'games.id': { $gte: g1.id }, 'games.isDouble': { $ne: true }, isSingle: { $ne: true } } },
+  { $sort: { 'games.id': 1 } },
+  { $project: { games: 1, _id: 0, id: 1 } }
+]).toArray().then(ts => {
+  const ps = [[g1.p1, g1.p1Rating], [g1.p2, g1.p2Rating]];
+  const pp = ts.map(t => {
+    let g = t.games;
+    if (g.id === g1.id) g.result = g1.result;
+    let p1 = ps.find(p => p[0] === g.p1);
+    let p2 = ps.find(p => p[0] === g.p2);
+    if (p1 || p2) {
+      if (p1) g.p1Rating = p1[1];
+      else ps.push(p1 = [g.p1, g.p1Rating]);
+      if (p2) g.p2Rating = p2[1];
+      else ps.push(p2 = [g.p2, g.p2Rating]);
+      g = adjustRating(g);
+      p1[1] = newRating(g.p1Rating, g.p1Diff);
+      p2[1] = newRating(g.p2Rating, g.p2Diff);
+      return db.collection('tournaments').update({ id: t.id, 'games.id': g.id }, { $set: { 'games.$.p1Rating': g.p1Rating, 'games.$.p1Diff': g.p1Diff, 'games.$.p1Rating': g.p1Rating, 'games.$.p2Diff': g.p2Diff, 'games.$.result': g.result } });
+    } else {
+      return null;
+    }
+  }).filter(p => p);
+  return Promise.all(pp)
+    .then(_ => Promise.all(ps.map(p => db.collection('players').update({ id: p[0] }, { $set: {rating: p[1]}}))));
+}).catch(e => console.log(e))
 
 module.exports = e;

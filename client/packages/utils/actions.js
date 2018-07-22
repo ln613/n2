@@ -80,6 +80,10 @@ var actionData = exports.actionData = {
     path: 'tournament.games[id]',
     methods: ['post', 'put', 'patch', 'delete']
   },
+  result: {
+    url: _utils.admin + 'result',
+    methods: ['post', 'patch']
+  },
   history: {
     url: _utils.api + 'playergames/{id}'
   },

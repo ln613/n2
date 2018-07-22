@@ -6,7 +6,7 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { gameSelector } from 'utils/selectors';
 import { TextBox, Select, CheckBox } from 'utils/comps';
-import { withLoad, withEdit, withSuccess, withParams, getPropById, findById, getNameById, tap, adjustRating } from 'utils';
+import { withLoad, withEdit, withSuccess, withParams, getPropById, findById, getNameById, tap, adjustRating, newRating } from 'utils';
 
 const Game = p =>
   <div>
@@ -57,7 +57,7 @@ export default compose(
 const gg = (g, x) => +((g && g[x]) || 0);
 
 const toGame = (g, s, m) => {
-  const g1 = adjustRating({ isDouble: g.isDouble, date: s.date, t1: +m.home, t2: +m.away, p1: +g.p1, p2: +g.p2, p1Rating: g.p1Rating, p2Rating: g.p2Rating, result: g.result });
+  const g1 = adjustRating({ id: g.id, isDouble: g.isDouble, date: s.date, t1: +m.home, t2: +m.away, p1: +g.p1, p2: +g.p2, p1Rating: g.p1Rating, p2Rating: g.p2Rating, result: g.result });
   if (g.isDouble) {
     g1.r3 = +g.r3;
     g1.r3 = +g.r3;
@@ -73,12 +73,12 @@ const save = p => {
     p.postGame(g, { id1: p.tournament.id });
     if (!g.isDouble) {
       const p1 = findById(g.p1)(p.players);
-      p.putPlayer({...p1, rating: Math.max(g.p1Rating + g.p1Diff, 100)});
+      p.putPlayer({...p1, rating: newRating(g.p1Rating, g.p1Diff)});
       const p2 = findById(g.p2)(p.players);
-      p.putPlayer({...p2, rating: Math.max(g.p2Rating + g.p2Diff, 100)});
+      p.putPlayer({...p2, rating: newRating(g.p2Rating, g.p2Diff)});
     }
   }
   else {
-    p.putGame(g, { id1: p.tournament.id, id: p.game.id });
+    p.patchResult(g);
   }
 }

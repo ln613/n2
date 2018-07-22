@@ -72,6 +72,10 @@ export const actionData = {
     path: 'tournament.games[id]',
     methods: ['post', 'put', 'patch', 'delete']
   },
+  result: {
+    url: admin + 'result',
+    methods: ['post', 'patch']
+  },
   history: {
     url: api + 'playergames/{id}'
   },
