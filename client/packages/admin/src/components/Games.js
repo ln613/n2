@@ -16,7 +16,7 @@ const Games = ({ tournament, games, schedule, match, history, T, S, M, newId }) 
       <Button primary onClick={() => history.push(`/game/${T}/${S}/${M}/+${newId}`)}>Add</Button>
     </div>
     <hr/>
-    <Table name="games" link={x => `/game/${T}/${S}/${M}/${x}`} data={tap(games || []).map(pick(['id', 'date', 'team1', 'player1', 'result', 'player2', 'team2' ]))} />
+    <Table name="games" link={x => `/game/${T}/${S}/${M}/${x}`} data={(games || []).map(pick(['id', 'date', 'team1', 'player1', 'result', 'player2', 'team2' ]))} />
   </div>
 
 export default compose(
@@ -26,7 +26,7 @@ export default compose(
   withLoad('tournament', ['id', 'T'], true),
   withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
   withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),
-  withProps(p => ({ games: (p.tournament.games || []).filter(x => (x.schedule === p.S || new Date(x.date).toString() === new Date(p.schedule.date).toString()) && (x.match === p.M || (x.t1 === p.match.home && x.t2 === p.match.away) )) })),
+  withProps(p => ({ games: (p.tournament.games || []).filter(x => (x.schedule === p.S || new Date(x.date).toString() === new Date(p.schedule.date).toString()) && (x.match === p.M || (x.t1 === p.match.home && x.t2 === p.match.away) || (x.t2 === p.match.home && x.t1 === p.match.away) )) })),
   withNewId('tournament.games'),
   withRouter
 )(Games)
