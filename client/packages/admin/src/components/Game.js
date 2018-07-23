@@ -20,13 +20,13 @@ const Game = p =>
         <div class="pr8">{getNameById(p.match.away)(p.tournament.teams)}</div>
       </div>  
       <div class="fv jcsa">  
-        <Select name={`game.p1`} options={getPropById('players')(p.match.home)(p.tournament.teams)} onChange={v => p.setFormGame(getPropById('rating')(+v)(p.players), { prop: 'p1Rating' })}/>
-        <Select name={`game.p2`} options={getPropById('players')(p.match.away)(p.tournament.teams)} onChange={v => p.setFormGame(getPropById('rating')(+v)(p.players), { prop: 'p2Rating' })}/>
+        <Select name={`game.p1`} placeholder="" options={getPropById('players')(p.match.home)(p.tournament.teams)} onChange={v => p.setFormGame(getPropById('rating')(+v)(p.players), { prop: 'p1Rating' })}/>
+        <Select name={`game.p2`} placeholder="" options={getPropById('players')(p.match.away)(p.tournament.teams)} onChange={v => p.setFormGame(getPropById('rating')(+v)(p.players), { prop: 'p2Rating' })}/>
       </div>  
       {p.game.isDouble ?
       <div class="fv jcsa">
-        <Select name={`game.p3`} options={getPropById('players')(p.match.home)(p.tournament.teams)} />
-        <Select name={`game.p4`} options={getPropById('players')(p.match.away)(p.tournament.teams)} />
+        <Select name={`game.p3`} placeholder="" options={getPropById('players')(p.match.home)(p.tournament.teams)} />
+        <Select name={`game.p4`} placeholder="" options={getPropById('players')(p.match.away)(p.tournament.teams)} />
       </div>
       : null}
       <div class="fv jcsa">  
