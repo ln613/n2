@@ -94,7 +94,7 @@ const findGames = (s, m, gs) => gs.filter(g => (g.t1 === m.home && g.t2 === m.aw
 const gg = (g, x) => +(g && g[x] || 0);
 const getResult = g => g.result || (range(0, 5).filter(n => gg(g.g1, n) > gg(g.g2, n)).length + ':' + range(0, 5).filter(n => gg(g.g1, n) < gg(g.g2, n)).length);
 const getPlayerName = (n, g, ps) => getNameById(pn(n, g))(ps) + (g.isDouble ? ' / ' + getNameById(pn(n + 2, g))(ps) : '');
-const getPlayer = (pid, tid, ts) => findById(pid)(findById(tid)(ts).players);
+const getPlayer = (pid, tid, ts) => findById(pid)((findById(tid)(ts) || {}).players);
 const subs = (n, g, ts) => (getPlayer(pn(n, g), tn(n, g), ts) || {}).isSub ? 1 : 0;
 const totalSubs = (g, ts) => subs(1, g, ts) + subs(3, g, ts) - subs(2, g, ts) - subs(4, g, ts);
 const isWin = (g, ts) => {
@@ -124,7 +124,7 @@ const tournament = createSelector(
       ...s,
       date: toDate(s.date),
       matches: t.isSingle ?
-        s.matches.map(m => ({'#': m.id, home: getSinglePlayer(m.home, players), result: m.result, away: getSinglePlayer(m.away, players)})) :
+        s.matches.map(m => ({...m, player1: getSinglePlayer(m.home, players), player2: getSinglePlayer(m.away, players)})) :
         range(1, 9)
         .map(n => findById(n)(s.matches) || {})
         .map(m => {

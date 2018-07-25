@@ -165,7 +165,7 @@ var getPlayerName = function getPlayerName(n, g, ps) {
   return (0, _.getNameById)(pn(n, g))(ps) + (g.isDouble ? ' / ' + (0, _.getNameById)(pn(n + 2, g))(ps) : '');
 };
 var getPlayer = function getPlayer(pid, tid, ts) {
-  return (0, _.findById)(pid)((0, _.findById)(tid)(ts).players);
+  return (0, _.findById)(pid)(((0, _.findById)(tid)(ts) || {}).players);
 };
 var subs = function subs(n, g, ts) {
   return (getPlayer(pn(n, g), tn(n, g), ts) || {}).isSub ? 1 : 0;
@@ -209,7 +209,7 @@ var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t,
     return _extends({}, s, {
       date: (0, _.toDate)(s.date),
       matches: t.isSingle ? s.matches.map(function (m) {
-        return { '#': m.id, home: getSinglePlayer(m.home, players), result: m.result, away: getSinglePlayer(m.away, players) };
+        return _extends({}, m, { player1: getSinglePlayer(m.home, players), player2: getSinglePlayer(m.away, players) });
       }) : (0, _ramda.range)(1, 9).map(function (n) {
         return (0, _.findById)(n)(s.matches) || {};
       }).map(function (m) {

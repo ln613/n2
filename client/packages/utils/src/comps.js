@@ -76,10 +76,14 @@ const col = (idx, key, obj, children) => {
   let cls = p.class || '';
   if (p.center) cls += ' tac';
   if (p.right) cls += ' tar';
+  if (p.input) {
+    v = <TextBox name={key} index={idx} className={`${p.center ? 'text-center' : ''} ${p.right ? 'text-right' : ''}`} />;
+    cls += ' edit';
+  }
 
   return (
     <td key={`td${key + idx}`} class={cls}>
-      {p.children ? p.children(obj, obj[key]) : <div dangerouslySetInnerHTML={{ __html: v }} />}
+      {p.children ? p.children(obj, obj[key]) : (v.props ? v : <div dangerouslySetInnerHTML={{ __html: v }} />)}
     </td>
   );
 }

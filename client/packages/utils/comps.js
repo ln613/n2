@@ -148,11 +148,15 @@ var col = function col(idx, key, obj, children) {
   var cls = p.class || '';
   if (p.center) cls += ' tac';
   if (p.right) cls += ' tar';
+  if (p.input) {
+    v = _react2.default.createElement(TextBox, { name: key, index: idx, className: (p.center ? 'text-center' : '') + ' ' + (p.right ? 'text-right' : '') });
+    cls += ' edit';
+  }
 
   return _react2.default.createElement(
     'td',
     { key: 'td' + (key + idx), 'class': cls },
-    p.children ? p.children(obj, obj[key]) : _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: v } })
+    p.children ? p.children(obj, obj[key]) : v.props ? v : _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: v } })
   );
 };
 
