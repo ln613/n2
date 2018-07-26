@@ -5,7 +5,7 @@ import { withRouter, Link } from "react-router-dom";
 import { is, find, isNil, difference, innerJoin, view, lensPath, not, identity } from 'ramda';
 import { toTitleCase, tap } from '.';
 import { filterSelector } from './selectors';
-import { Input, Dropdown, Checkbox, Responsive, Sidebar, Icon, Menu as _Menu } from 'semantic-ui-react';
+import { Input, Dropdown, Checkbox, Responsive, Sidebar, Icon, Menu as _Menu, Loader } from 'semantic-ui-react';
 import { withState } from 'utils';
 
 export const Mobile = ({ children }) =>
@@ -77,13 +77,16 @@ const col = (idx, key, obj, children) => {
   if (p.center) cls += ' tac';
   if (p.right) cls += ' tar';
   if (p.input) {
-    v = <TextBox name={key} index={idx} className={`${p.center ? 'text-center' : ''} ${p.right ? 'text-right' : ''}`} />;
+    v = <TextBox name={p.path.replace('{i}', idx)} noLabel className={`${p.center ? 'text-center' : ''} ${p.right ? 'text-right' : ''}`} />;
     cls += ' edit';
+  }
+  else if (p.select) {
+    v = <Select name={p.path.replace('{i}', idx)} placeholder="" options={p.options} />;
   }
 
   return (
     <td key={`td${key + idx}`} class={cls}>
-      {p.children ? p.children(obj, obj[key]) : (v.props ? v : <div dangerouslySetInnerHTML={{ __html: v }} />)}
+      {p.children ? p.children(obj, obj[key]) : ((v && v.props) ? v : <div dangerouslySetInnerHTML={{ __html: v }} />)}
     </td>
   );
 }
@@ -188,7 +191,7 @@ const Select2 = withAll(select2);
 export const Select = withAll(select2);
 
 const option = o =>
-  <option key={o.value || o.id} value={o.value || o.id}>{o.text || o.name}</option>
+  <option key={o.value || o.id || o} value={o.value || o.id || o}>{o.text || o.name || o}</option>
 
 const optionGroup = (key, options) =>
   <optgroup label={key} key={key}>
@@ -259,3 +262,7 @@ const Menu1 = ({ color, menus, children, visible, setVisible }) =>
   </div>
 
 export const Menu = withState('visible')(Menu1)
+
+export const Ready = ({on, children}) => on.every(ready) ? children : <Loader active inline='centered' />;
+
+const ready = x => is(Array, x) ? (x.length > 0) : (is(Object, x) ? (Object.keys(x).length > 0) : !isNil(x))

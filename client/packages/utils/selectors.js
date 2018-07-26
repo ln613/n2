@@ -13,6 +13,8 @@ var _noRedux = require('no-redux');
 
 var _ = require('.');
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var _form = function _form(s) {
   return s.form || {};
 };
@@ -279,22 +281,36 @@ var getPoints = function getPoints(m, t, v) {
   return m[t] === v ? m[t + 'Points'] : 0;
 };
 
+var dp = function dp(s) {
+  return (0, _ramda.descend)((0, _ramda.prop)(s ? 'gw' : 'points'));
+};
+var at = (0, _ramda.ascend)((0, _ramda.prop)('total'));
+var dw = (0, _ramda.descend)((0, _ramda.prop)('w'));
+var al = (0, _ramda.ascend)((0, _ramda.prop)('gl'));
+
 var standing = (0, _noRedux.createSelector)(tournament, teams, function (tt, ts) {
-  return (0, _ramda.pipe)((0, _ramda.sortWith)([(0, _ramda.descend)((0, _ramda.prop)('points')), (0, _ramda.ascend)((0, _ramda.prop)('total')), (0, _ramda.descend)((0, _ramda.prop)('w'))]), (0, _.addIndex)('rank'))(ts.map(function (t) {
+  return (0, _ramda.pipe)((0, _ramda.sortWith)(tt.isSingle ? [dw, at, dp(1), al] : [dp(0), at, dw]), (0, _.addIndex)('rank'))((tt.isSingle ? tt.players : ts).map(function (t) {
+    var _s;
+
     var ms = (0, _ramda.unnest)(tt.schedules.map(function (s) {
       return s.matches;
     })).filter(function (m) {
-      return (m.home == t.id || m.away == t.id) && m.result != '0:0';
+      return (m.home === t.id || m.away === t.id) && m.result && m.result != '0:0';
     });
     var ws = ms.filter(function (m) {
-      return m.home == t.id && m.result[0] > m.result[2] || m.away == t.id && m.result[0] < m.result[2];
+      return m.home === t.id && m.result[0] > m.result[2] || m.away === t.id && m.result[0] < m.result[2];
     });
     var wn = ws.length;
     var ln = ms.length - wn;
     var ps = (0, _ramda.sum)(ms.map(function (m) {
       return +m.result[m.home == t.id ? 0 : 2];
     }));
-    return { team: t.name, total: ms.length, w: wn, l: ln, points: ps };
+    var ps1 = (0, _ramda.sum)(ms.map(function (m) {
+      return +m.result[m.home == t.id ? 2 : 0];
+    }));
+    var s = (_s = {}, _defineProperty(_s, tt.isSingle ? 'player' : 'team', t.name), _defineProperty(_s, 'total', ms.length), _defineProperty(_s, 'w', wn), _defineProperty(_s, 'l', ln), _defineProperty(_s, tt.isSingle ? 'gw' : 'points', ps), _s);
+    if (tt.isSingle) s.gl = ps1;
+    return s;
   }));
 });
 
@@ -400,7 +416,7 @@ var tournamentsSelector = exports.tournamentsSelector = (0, _noRedux.mapStateWit
 var tournamentSelector = exports.tournamentSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, lookup: lookup, players: players });
 var tourSelector = exports.tourSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: form('tournament'), tournaments: tournaments, players: players });
 var historySelector = exports.historySelector = (0, _noRedux.mapStateWithSelectors)({ history: history, lookup: lookup, players: players });
-var standingSelector = exports.standingSelector = (0, _noRedux.mapStateWithSelectors)({ standing: standing, tournament: tournament });
+var standingSelector = exports.standingSelector = (0, _noRedux.mapStateWithSelectors)({ standing: standing, tournament: tournament, players: players });
 var teamSelector = exports.teamSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, team: form('team'), players: players, monthRatings: monthRatings });
 var scheduleSelector = exports.scheduleSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, schedule: form('schedule') });
 var gameSelector = exports.gameSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, players: players, game: form('game') });

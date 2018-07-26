@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Menu = exports.DoubleSelect = exports.Select = exports.CheckBox = exports.TextBox = exports.Table = exports.withMobile = exports.Desktop = exports.Mobile = undefined;
+exports.Ready = exports.Menu = exports.DoubleSelect = exports.Select = exports.CheckBox = exports.TextBox = exports.Table = exports.withMobile = exports.Desktop = exports.Mobile = undefined;
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -149,14 +149,16 @@ var col = function col(idx, key, obj, children) {
   if (p.center) cls += ' tac';
   if (p.right) cls += ' tar';
   if (p.input) {
-    v = _react2.default.createElement(TextBox, { name: key, index: idx, className: (p.center ? 'text-center' : '') + ' ' + (p.right ? 'text-right' : '') });
+    v = _react2.default.createElement(TextBox, { name: p.path.replace('{i}', idx), noLabel: true, className: (p.center ? 'text-center' : '') + ' ' + (p.right ? 'text-right' : '') });
     cls += ' edit';
+  } else if (p.select) {
+    v = _react2.default.createElement(Select, { name: p.path.replace('{i}', idx), placeholder: '', options: p.options });
   }
 
   return _react2.default.createElement(
     'td',
     { key: 'td' + (key + idx), 'class': cls },
-    p.children ? p.children(obj, obj[key]) : v.props ? v : _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: v } })
+    p.children ? p.children(obj, obj[key]) : v && v.props ? v : _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: v } })
   );
 };
 
@@ -307,8 +309,8 @@ var Select = exports.Select = withAll(select2);
 var option = function option(o) {
   return _react2.default.createElement(
     'option',
-    { key: o.value || o.id, value: o.value || o.id },
-    o.text || o.name
+    { key: o.value || o.id || o, value: o.value || o.id || o },
+    o.text || o.name || o
   );
 };
 
@@ -477,3 +479,13 @@ var Menu1 = function Menu1(_ref8) {
 };
 
 var Menu = exports.Menu = (0, _utils.withState)('visible')(Menu1);
+
+var Ready = exports.Ready = function Ready(_ref9) {
+  var on = _ref9.on,
+      children = _ref9.children;
+  return on.every(ready) ? children : _react2.default.createElement(_semanticUiReact.Loader, { active: true, inline: 'centered' });
+};
+
+var ready = function ready(x) {
+  return (0, _ramda.is)(Array, x) ? x.length > 0 : (0, _ramda.is)(Object, x) ? Object.keys(x).length > 0 : !(0, _ramda.isNil)(x);
+};

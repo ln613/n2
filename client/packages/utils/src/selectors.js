@@ -179,20 +179,30 @@ const redSpan = x => `<span class="red">${x}</span>`;
 
 const getPoints = (m, t, v) => m[t] === v ? m[t + 'Points'] : 0;
 
+const dp = s => descend(prop(s ? 'gw' : 'points'));
+const at = ascend(prop('total'));
+const dw = descend(prop('w'));
+const al = ascend(prop('gl'));
+
 const standing = createSelector(
   tournament,
   teams,
   (tt, ts) => pipe(
-    sortWith([descend(prop('points')), ascend(prop('total')), descend(prop('w'))]),
+    sortWith(tt.isSingle ? [dw, at, dp(1), al] : [dp(0), at, dw]),
     addIndex('rank')
-  )(ts.map(t => {
-    const ms = unnest(tt.schedules.map(s => s.matches)).filter(m => (m.home == t.id || m.away == t.id) && m.result != '0:0');
-    const ws = ms.filter(m => (m.home == t.id && m.result[0] > m.result[2]) || (m.away == t.id && m.result[0] < m.result[2]));
-    const wn = ws.length;
-    const ln = ms.length - wn;
-    const ps = sum(ms.map(m => +m.result[m.home == t.id ? 0 : 2]));
-    return { team: t.name, total: ms.length, w: wn, l: ln, points: ps };
-  }))
+  )(
+    (tt.isSingle ? tt.players : ts).map(t => {
+      const ms = unnest(tt.schedules.map(s => s.matches)).filter(m => (m.home === t.id || m.away === t.id) && m.result && m.result != '0:0');
+      const ws = ms.filter(m => (m.home === t.id && m.result[0] > m.result[2]) || (m.away === t.id && m.result[0] < m.result[2]));
+      const wn = ws.length;
+      const ln = ms.length - wn;
+      const ps = sum(ms.map(m => +m.result[m.home == t.id ? 0 : 2]));
+      const ps1 = sum(ms.map(m => +m.result[m.home == t.id ? 2 : 0]));
+      const s = { [tt.isSingle ? 'player' : 'team']: t.name, total: ms.length, w: wn, l: ln, [tt.isSingle ? 'gw' : 'points']: ps };
+      if (tt.isSingle) s.gl = ps1;
+      return s;
+    })
+  )
 );
 
 const isSamePlayer = (p1, id) => p1 && id && p1.id === id || false;
@@ -270,7 +280,7 @@ export const tournamentsSelector = mapStateWithSelectors({ tournaments: tourname
 export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players });
 export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), tournaments, players });
 export const historySelector = mapStateWithSelectors({ history, lookup, players });
-export const standingSelector = mapStateWithSelectors({ standing, tournament });
+export const standingSelector = mapStateWithSelectors({ standing, tournament, players });
 export const teamSelector = mapStateWithSelectors({ tournament, team: form('team'), players, monthRatings });
 export const scheduleSelector = mapStateWithSelectors({ tournament, schedule: form('schedule') });
 export const gameSelector = mapStateWithSelectors({ tournament, players, game: form('game') });

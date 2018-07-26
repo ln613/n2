@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'no-redux';
 import { compose } from 'recompose';
+import { pick } from 'ramda';
 import actions from 'utils/actions';
 import { tournamentSelector } from 'utils/selectors';
-import { withLoad, withParams, getNameById } from 'utils';
+import { withLoad, withParams, getNameById, tap } from 'utils';
 import { Table, withMobile } from 'utils/comps';
 import TMenu from './TMenu';
 
@@ -32,11 +33,12 @@ const Schedule = ({ tournament, id, isMobile }) =>
 export default compose(
   connect(tournamentSelector, actions),
   withParams,
+  withLoad('players'),
   withLoad('tournament'),
   withMobile
 )(Schedule);
 
-const mapMatches = (ms, t) => t.isSingle ? ms :
+const mapMatches = (ms, t) => t.isSingle ? ms.map(pick(['id', 'player1', 'result', 'player2'])) :
   ms.filter(m => m && m.id).map(m => ({
     'Table': m.id,
     'Home': getNameById(m.home)(t.teams),

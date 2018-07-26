@@ -1,6 +1,6 @@
 import React from 'react';
 import { compose } from 'recompose';
-import { range } from 'ramda';
+import { range, pick } from 'ramda';
 import { connect } from 'no-redux';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
@@ -9,6 +9,8 @@ import { TextBox, Select, Table } from 'utils/comps';
 import { withLoad, withEdit, withSuccess, withParams, tap } from 'utils';
 import { withRouter } from "react-router-dom";
 
+const results = ['3:0', '3:1', '3:2', '2:3', '1:3', '0:3'];
+
 const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id }) =>
   <div>
     <h1>Schedule - {tournament.name} - {tournament.isSingle ? ('Round ' + schedule.id) : schedule.date}</h1>
@@ -16,9 +18,8 @@ const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id
     <TextBox name="schedule.id" disabled />
     <TextBox name="schedule.date" />
     {tournament.isSingle ? 
-      <Table name="schedule" data={schedule.matches}>
-        <td key="result" input/>
-        {/* name={`schedule.matches[${i}].result`} noLabel style={{width: '50px'}} */}
+      <Table name="schedule" data={(schedule.matches || []).map(pick(['id', 'player1', 'result', 'player2']))}>
+        <td key="result" path="schedule.matches[{i}].result" select options={results}/>
       </Table> :
     range(0, 8).map(n =>
       <div class="f aic">
