@@ -15,7 +15,7 @@ const Schedules = ({ tournament, history, id, newId }) =>
       <Button primary onClick={() => history.push(`/schedule/${id}/+${newId}`)}>Add</Button>
     </div>
     <hr/>
-    <Table name="schedules" link={x => `/schedule/${id}/${x}`} data={(tournament.schedules || []).map(x => ({ 'id': x.id, 'date': x.date }))} />
+    <Table name="schedules" link={x => `/schedule/${id}/${x}`} data={(tournament.schedules || []).map(x => ({ 'id': x.id, [tournament.isSingle ? 'round' : 'date']: tournament.isSingle ? ('Round ' + x.id) : x.date }))} />
   </div>
 
 export default compose(

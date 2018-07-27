@@ -181,7 +181,7 @@ var isWin = function isWin(g, ts) {
 };
 var getSinglePlayer = function getSinglePlayer(id, ps) {
   var p = (0, _.findById)(id)(ps);
-  return p.name + ' (' + p.tRating + ')';
+  return p.rank + '. ' + p.name + ' (' + p.tRating + ')';
 };
 var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t, ps) {
   if (ps.length === 0) return t;
@@ -194,11 +194,11 @@ var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t,
         return _extends({}, (0, _.findById)(p.id)(ps), { tRating: p.rating, isSub: p.isSub });
       })) });
   });
-  var players = (0, _ramda.sortWith)([(0, _ramda.descend)(function (x) {
+  var players = (0, _.addIndex)('rank')((0, _ramda.sortWith)([(0, _ramda.descend)(function (x) {
     return x.tRating;
   })], (t.players || []).map(function (p) {
     return _extends({}, (0, _.findById)(p.id)(ps), { tRating: p.rating });
-  }));
+  })));
   var games = (t.games || []).map(function (g) {
     var result = getResult(g);
     var team1 = (0, _.getNameById)(g.t1)(teams);
@@ -211,7 +211,7 @@ var tournament = (0, _noRedux.createSelector)(_tournament, players, function (t,
     return _extends({}, s, {
       date: (0, _.toDate)(s.date),
       matches: t.isSingle ? s.matches.map(function (m) {
-        return _extends({}, m, { player1: getSinglePlayer(m.home, players), player2: getSinglePlayer(m.away, players) });
+        return _extends({}, m, { player1: getSinglePlayer(m.home, players), player2: getSinglePlayer(m.away, players), result: m.result || '' });
       }) : (0, _ramda.range)(1, 9).map(function (n) {
         return (0, _.findById)(n)(s.matches) || {};
       }).map(function (m) {
@@ -418,6 +418,6 @@ var tourSelector = exports.tourSelector = (0, _noRedux.mapStateWithSelectors)({ 
 var historySelector = exports.historySelector = (0, _noRedux.mapStateWithSelectors)({ history: history, lookup: lookup, players: players });
 var standingSelector = exports.standingSelector = (0, _noRedux.mapStateWithSelectors)({ standing: standing, tournament: tournament, players: players });
 var teamSelector = exports.teamSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, team: form('team'), players: players, monthRatings: monthRatings });
-var scheduleSelector = exports.scheduleSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, schedule: form('schedule') });
+var scheduleSelector = exports.scheduleSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, schedule: form('schedule'), players: players });
 var gameSelector = exports.gameSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, players: players, game: form('game') });
 var statsSelector = exports.statsSelector = (0, _noRedux.mapStateWithSelectors)({ tournament: tournament, stats: stats });

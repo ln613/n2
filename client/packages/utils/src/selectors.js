@@ -103,7 +103,7 @@ const isWin = (g, ts) => {
 }
 const getSinglePlayer = (id, ps) => {
   const p = findById(id)(ps);
-  return `${p.name} (${p.tRating})`;
+  return `${p.rank}. ${p.name} (${p.tRating})`;
 }
 const tournament = createSelector(
   _tournament,
@@ -111,7 +111,7 @@ const tournament = createSelector(
   (t, ps) => {
     if (ps.length === 0) return t;
     const teams = (t.teams || []).map(t => ({ ...t, text: t.name, value: t.id, players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating)], t.players.map(p => ({ ...findById(p.id)(ps), tRating: p.rating, isSub: p.isSub }))) }));
-    const players = sortWith([descend(x => x.tRating)], (t.players || []).map(p => ({...findById(p.id)(ps), tRating: p.rating })));
+    const players = addIndex('rank')(sortWith([descend(x => x.tRating)], (t.players || []).map(p => ({...findById(p.id)(ps), tRating: p.rating }))));
     const games = (t.games || []).map(g => {
       const result = getResult(g);
       const team1 = getNameById(g.t1)(teams);
@@ -124,7 +124,7 @@ const tournament = createSelector(
       ...s,
       date: toDate(s.date),
       matches: t.isSingle ?
-        s.matches.map(m => ({...m, player1: getSinglePlayer(m.home, players), player2: getSinglePlayer(m.away, players)})) :
+        s.matches.map(m => ({...m, player1: getSinglePlayer(m.home, players), player2: getSinglePlayer(m.away, players), result: m.result || ''})) :
         range(1, 9)
         .map(n => findById(n)(s.matches) || {})
         .map(m => {
@@ -282,6 +282,6 @@ export const tourSelector = mapStateWithSelectors({ tournament: form('tournament
 export const historySelector = mapStateWithSelectors({ history, lookup, players });
 export const standingSelector = mapStateWithSelectors({ standing, tournament, players });
 export const teamSelector = mapStateWithSelectors({ tournament, team: form('team'), players, monthRatings });
-export const scheduleSelector = mapStateWithSelectors({ tournament, schedule: form('schedule') });
+export const scheduleSelector = mapStateWithSelectors({ tournament, schedule: form('schedule'), players });
 export const gameSelector = mapStateWithSelectors({ tournament, players, game: form('game') });
 export const statsSelector = mapStateWithSelectors({ tournament, stats });

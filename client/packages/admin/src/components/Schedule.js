@@ -18,7 +18,7 @@ const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id
     <TextBox name="schedule.id" disabled />
     <TextBox name="schedule.date" />
     {tournament.isSingle ? 
-      <Table name="schedule" data={(schedule.matches || []).map(pick(['id', 'player1', 'result', 'player2']))}>
+      <Table name="schedule" data={(tap(schedule.matches || [])).map(pick(['id', 'player1', 'result', 'player2']))}>
         <td key="result" path="schedule.matches[{i}].result" select options={results}/>
       </Table> :
     range(0, 8).map(n =>
