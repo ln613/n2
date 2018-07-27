@@ -82,7 +82,7 @@ e.cdVersion = () => cd.v2.api.resources({ max_results: 500 }).then(r => sortWith
 
 e.getPlayerGames = id => db.collection('tournaments').aggregate([
   { $unwind: '$games' },
-  { $match: { $or: [ { "games.p1": +id }, { "games.p2": +id } ] } },
+  { $match: { $or: [ { 'games.p1': +id }, { 'games.p2': +id } ], 'games.isDouble': { $ne: true }, isSingle: { $ne: true } } },
   { $project: { games: 1, _id: 0, name: 1 } }
 ]).toArray().then(r => r.map(x => ({name: x.name, games: x.games, pid: id})))
 
