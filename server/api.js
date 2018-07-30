@@ -31,7 +31,7 @@ e.initdata = () => e.initdocs(json2js(fs.readFileSync('./data/db.json')))
 
 e.initacc = () => e.initdocs(json2js(fs.readFileSync('./data/1.json')))
 
-e.bak = () => Promise.all(allDocs.map(e.get)).then(l => fromPairs(l.map((d, i) => [allDocs[i], d]))).then(x => { fs.writeFile('./data/db.json', JSON.stringify(x)); return x; })
+e.bak = () => Promise.all(allDocs.map(e.get)).then(l => fromPairs(l.map((d, i) => [allDocs[i], d]))).then(x => JSON.stringify(x)).then(x => { fs.writeFile('./data/db.json', x); return x; })
 
 e.fix = () => db.collection('tournaments').findOne({ id: 86 }).then(t => {
   t.games.forEach(g => {

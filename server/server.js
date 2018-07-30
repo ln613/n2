@@ -5,11 +5,11 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const moment = require('moment');
 const api = require('./api');
-const { tap, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule } = require('./utils');
+const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule } = require('./utils');
 
 const app = express();
 
-if (!process.env.DATABASE_SERVICE_NAME)
+if (!isProd)
   app.use(cors);
 
 api.initdb(mongoURL);
@@ -29,7 +29,11 @@ app.use((req, res, next) => {
 app.get('/api/ut', (req, res) => {
   res.json(rrSchedule([{id:1,rating:1},{id:2,rating:2},{id:3,rating:3},{id:4,rating:4},{id:5,rating:5},{id:6,rating:6}]));
 });
-  
+
+app.get('/api/env', (req, res) => {
+  res.send(process.env);
+});
+
 app.get('/api/lookup', (req, res) => {
   send(
     Promise.all([api.cdVersion(), api.get('cats')])
@@ -85,7 +89,7 @@ app.get('/logout', (req, res) => {
 });
 
 app.use('/admin', (req, res, next) => {
-  if (config) {
+  if (!isProd) {
     next();
   } else {
     const token = req.cookies.vttc_token;
