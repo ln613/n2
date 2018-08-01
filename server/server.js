@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 // get --------------------
 
 app.get('/api/ut', (req, res) => {
-  res.json(rrSchedule([{id:1,rating:1},{id:2,rating:2},{id:3,rating:3},{id:4,rating:4},{id:5,rating:5},{id:6,rating:6}]));
+  res.json(isProd);
 });
 
 app.get('/api/env', (req, res) => {
@@ -89,7 +89,7 @@ app.get('/logout', (req, res) => {
 });
 
 app.use('/admin', (req, res, next) => {
-  if (1) {
+  if (!isProd) {
     next();
   } else {
     const token = req.cookies.vttc_token;
