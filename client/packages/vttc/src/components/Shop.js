@@ -14,9 +14,9 @@ const Shop = ({ isMobile }) =>
     <h1>Shop - Coming Soon</h1>
     <hr />
     We are the official dealer of Butterfly and Joola, and we carry the following brands.<br />
-    {isMobile ? <div class="tac pv8">{brands.map(c1)}</div> : <div class={`fw pb16 ${isMobile ? '' : 'ph8'}`}>{brands.map(b => <div class="f w20 p8">{c1(b)}</div>)}</div>}}
+    {isMobile ? <div class="tac pv8">{brands.map(c1)}</div> : <div class={`fw pb16 ${isMobile ? '' : 'ph8'}`}>{brands.map(b => <div class="f w20 p8">{c1(b)}</div>)}</div>}
   </div>
 
 export default withMobile(Shop);
 
-const c1 = b => <img src={'/images/brands/' + b + '.jpg'} />;
+const c1 = b => <div><img src={'/images/brands/' + b + '.jpg'} /></div>;

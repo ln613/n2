@@ -3,7 +3,7 @@ import ImageSlider from './ImageSlider';
 import { withMobile } from 'utils/comps';
 
 const cards = ['', 'Club', 'League', 'Students', 'VIP'];
-const num   = [1, 7, 2, 3, 4];
+const num   = [1, 15, 2, 3, 4];
 
 const c1 = m =>
   <div class={`fw pb16 ${m ? '' : 'ph8'}`}>
