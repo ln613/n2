@@ -239,7 +239,7 @@ export const DoubleSelect = compose(
   })
 )(_DoubleSelect);
 
-const items = (menus, setVisible) => (menus || []).map(x => <Link to={'/' + x} onClick={() => setVisible(false)}><_Menu.Item name={x} style={{fontWeight: 'bold'}}/></Link>);
+const items = (menus, setVisible) => (menus || []).map((x, i) => <Link to={'/' + (i === 0 ? '' : x)} onClick={() => setVisible(false)}><_Menu.Item name={x} style={{fontWeight: 'bold'}}/></Link>);
 const _menu = (children, color) => <_Menu inverted color={color || 'black'} style={{margin: 0}}>{children}</_Menu>;
 
 const Menu1 = ({ color, menus, children, visible, setVisible }) =>

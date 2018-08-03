@@ -11,17 +11,17 @@ import { withState } from 'utils';
 
 //const menus = ['Home', 'Products', 'News', ['Training', [['Classes', 'university'], ['Coaches', 'user'], ['Players', 'users']]], 'Tournaments', 'League', 'Rating', 'Contact'];
 //const menus = ['Home', 'Products', 'News', 'Players', 'Tournaments', 'Rating', 'Calendar', 'Contact'];
-const menus = ['Intro', 'Tournaments', 'Rating', 'Calendar', 'Links', 'Contact'];
+//const menus = ['Home', 'Intro', 'Tournaments', 'Rating', 'Calendar', 'Links', 'Contact'];
 
-const items = s => menus.map(x => <Link to={'/' + x} onClick={() => s(false)}><Menu.Item name={x}/></Link>);
+const items = (ms, s) => ms.map((x, i) => <Link to={'/4' + (i === 0 ? '' : x)} onClick={() => s(false)}><Menu.Item name={x}/></Link>);
 const _menu = c => <Menu inverted color="blue" style={{margin: 0}}>{c}</Menu>;
 
-const _Menu = ({ children, visible, setVisible }) =>
+const _Menu = ({ children, visible, menus, setVisible }) =>
   <div>
     <Mobile>
       <Sidebar.Pushable>
         <Sidebar as={Menu} animation="overlay" icon="labeled" inverted vertical visible={visible} color="blue">
-          {items(setVisible)}
+          {items(menus, setVisible)}
         </Sidebar>
         <Sidebar.Pusher dimmed={visible} onClick={() => visible && setVisible(false)} style={{ minHeight: "100vh" }}>
           {_menu(
@@ -34,7 +34,7 @@ const _Menu = ({ children, visible, setVisible }) =>
       </Sidebar.Pushable>
     </Mobile>
     <Desktop>
-      {_menu(items(setVisible))}
+      {_menu(items(menus, setVisible))}
       {children}
     </Desktop>
   </div>

@@ -419,10 +419,10 @@ var DoubleSelect = exports.DoubleSelect = (0, _recompose.compose)(withForm, (0, 
 }))(_DoubleSelect);
 
 var items = function items(menus, setVisible) {
-  return (menus || []).map(function (x) {
+  return (menus || []).map(function (x, i) {
     return _react2.default.createElement(
       _reactRouterDom.Link,
-      { to: '/' + x, onClick: function onClick() {
+      { to: '/' + (i === 0 ? '' : x), onClick: function onClick() {
           return setVisible(false);
         } },
       _react2.default.createElement(_semanticUiReact.Menu.Item, { name: x, style: { fontWeight: 'bold' } })
