@@ -8,6 +8,8 @@ import { gameSelector } from 'utils/selectors';
 import { TextBox, Select, CheckBox } from 'utils/comps';
 import { withLoad, withEdit, withSuccess, withParams, getPropById, findById, getNameById, tap, adjustRating, newRating } from 'utils';
 
+const results = ['3:0', '3:1', '3:2', '2:3', '1:3', '0:3'];
+
 const Game = p =>
   <div>
     <h1>Match - {p.tournament.name} - {p.schedule.date}</h1>
@@ -38,7 +40,7 @@ const Game = p =>
         <div class="pl8">{range(0, 5).filter(x => gg(p.game.g1, x) < gg(p.game.g2, x)).length}</div>
       </div>  
     </div>
-    <TextBox name={`game.result`} label="Result"/>
+    Result: <Select name={`game.result`} options={results} placeholder="" />
     <hr />
     <Button primary onClick={() => save(p)}>Save</Button>
   </div>
