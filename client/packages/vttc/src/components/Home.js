@@ -2,8 +2,8 @@ import React from 'react';
 import ImageSlider from './ImageSlider';
 import { withMobile } from 'utils/comps';
 
-const cards = ['', 'Club', 'League', 'Students', 'VIP'];
-const num   = [1, 15, 2, 3, 4];
+const cards = ['https://www.youtube.com/embed/Bb1R3HeYcyA', 'https://www.youtube.com/embed/335mQHNpL3A', 'News', 'Court', 'Club', 'Sales', 'Products', 'League', 'Students', 'VIP'];
+const num   = [1, 1, 1, 8, 4, 1, 1, 2, 3, 4];
 
 const c1 = m =>
   <div class={`fw pb16 ${m ? '' : 'ph8'}`}>
@@ -13,7 +13,7 @@ const c1 = m =>
 const D1 = ({ isMobile, children }) => <div class={`${isMobile ? '' : 'card'} fv w100`}>{children}</div>
 
 const c2 = (c, i, m) => {
-  if (i === 0) return <D1 isMobile={m}>{yt(m)}</D1>;
+  if (c.slice(0, 4) === 'http') return <D1 isMobile={m}>{yt(c, m)}</D1>;
   const c3 = <ImageSlider n={num[i]} f={i} name={c} />;
   const c4 = <div class="p8 fs18 tac">{c}</div>;
 
@@ -22,7 +22,7 @@ const c2 = (c, i, m) => {
     <D1 isMobile={m}>{c3}{c4}</D1>;
 }
 
-const yt = m => <iframe src="https://www.youtube.com/embed/Bb1R3HeYcyA" frameborder="0" style={{ overflow: 'hidden', height: m ? '300px' : '100%', width: '100%' }} height={m ? '300px' : '100%'} width="100%"></iframe>
+const yt = (s, m) => <iframe src={s} frameborder="0" style={{ overflow: 'hidden', height: m ? '300px' : '100%', width: '100%' }} height={m ? '300px' : '100%'} width="100%"></iframe>
 
 const Home = ({ isMobile }) =>
   <div>

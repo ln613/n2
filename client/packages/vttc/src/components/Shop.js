@@ -13,7 +13,8 @@ const Shop = ({ isMobile }) =>
   <div class="p16 fv">
     <h1>Shop - Coming Soon</h1>
     <hr />
-    We are the official dealer of Butterfly and Joola, and we carry the following brands.<br />
+    <h2>We are the official dealer of Butterfly and Joola, and we carry the following brands.</h2>
+    <h2>我们是 Butterfly 和 Joola 加拿大总代理。我们也代理以下品牌.</h2>
     {isMobile ? <div class="tac pv8">{brands.map(c1)}</div> : <div class={`fw pb16 ${isMobile ? '' : 'ph8'}`}>{brands.map(b => <div class="f w20 p8">{c1(b)}</div>)}</div>}
   </div>
 

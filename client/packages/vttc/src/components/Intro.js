@@ -35,7 +35,7 @@ export default p =>
 
 <ul>
 
-<li>9000 sq/ft playing area</li>
+<li>5500 sq/ft playing area</li>
 
 <li>10 ITTF approved international tournament-level tables</li>
 
@@ -53,7 +53,7 @@ export default p =>
 
 <ul>
 
-<li>Drop-in:                $6.75 (12pm-11pm (Mon~Fri) (Except for 1st &3rd Monday of the month)(Tue/Thu), 12pm-6pm /9:30pm-11pm (Sat), 3:30pm-7pm /9pm-11pm (Sun) </li>
+<li>Drop-in:                $6.75</li>
 
 
 
@@ -71,7 +71,7 @@ export default p =>
 
 <li>Ball rental:            $1</li>
 
-<li>Training class:         Beginner & Advanced - $230 (10 lessons) or $25/lesson (Tue. 8pm-10:15pm& Sun.2:30pm-4:30pm)</li>
+<li>Training class:         Beginner & Advanced - $230 (10 lessons) or $25/lesson</li>
 
                             
 
