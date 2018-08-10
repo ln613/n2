@@ -2,7 +2,7 @@ import React from 'react';
 import ImageSlider from './ImageSlider';
 import { withMobile } from 'utils/comps';
 
-const cards = ['https://www.youtube.com/embed/Bb1R3HeYcyA', 'https://www.youtube.com/embed/335mQHNpL3A', 'News', 'Court', 'Club', 'Sales', 'Products', 'League', 'Students', 'VIP'];
+const cards = ['https://www.youtube.com/embed/Bb1R3HeYcyA', 'https://www.youtube.com/embed/nmcOpuBDWRM', 'News', 'Court', 'Club', 'Sales', 'Products', 'League', 'Students', 'VIP'];
 const num   = [1, 1, 1, 8, 4, 1, 1, 2, 3, 4];
 
 const c1 = m =>
