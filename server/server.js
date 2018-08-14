@@ -70,6 +70,10 @@ app.get('/api/:doc', (req, res) => {
 
 // admin --------------------
 
+app.copy('/admin/bak', (req, res) => {
+  send(api.bak(), res);
+});
+
 app.get('/login', nocache, (req, res) => {
   res.sendFile(path.join(__dirname, 'login.html'));
 });
@@ -114,10 +118,6 @@ app.copy('/admin/initdata', (req, res) => {
 
 app.copy('/admin/initacc', (req, res) => {
   done(api.initacc(), res);
-});
-
-app.copy('/admin/bak', (req, res) => {
-  send(api.bak(), res);
 });
 
 app.post('/admin/fix', (req, res) => {
