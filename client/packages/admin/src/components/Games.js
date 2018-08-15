@@ -3,7 +3,7 @@ import { compose, withProps } from 'recompose';
 import { pick } from 'ramda';
 import { connect } from 'no-redux';
 import actions from 'utils/actions';
-import { withLoad, withParams, withNewId, findById, tap } from 'utils';
+import { withLoad, withParams, withNewId, findById, toAbsDate, tap } from 'utils';
 import { tournamentSelector } from 'utils/selectors';
 import { Table } from 'utils/comps';
 import { withRouter } from "react-router-dom";
@@ -26,7 +26,7 @@ export default compose(
   withLoad('tournament', ['id', 'T'], true),
   withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
   withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),
-  withProps(p => ({ games: (p.tournament.games || []).filter(x => (x.schedule === p.S || new Date(x.date).toString() === new Date(p.schedule.date).toString()) && (x.match === p.M || (x.t1 === p.match.home && x.t2 === p.match.away) || (x.t2 === p.match.home && x.t1 === p.match.away) )) })),
+  withProps(p => ({ games: (p.tournament.games || []).filter(x => (x.schedule === p.S || toAbsDate(x.date) === toAbsDate(p.schedule.date)) && (x.match === p.M || (x.t1 === p.match.home && x.t2 === p.match.away) || (x.t2 === p.match.home && x.t1 === p.match.away) )) })),
   withNewId('tournament.games'),
   withRouter
 )(Games)

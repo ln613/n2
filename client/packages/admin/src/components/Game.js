@@ -7,6 +7,7 @@ import actions from 'utils/actions';
 import { gameSelector } from 'utils/selectors';
 import { TextBox, Select, CheckBox } from 'utils/comps';
 import { withLoad, withEdit, withSuccess, withParams, getPropById, findById, getNameById, tap, adjustRating, newRating } from 'utils';
+import { withRouter } from 'react-router-dom';
 
 const results = ['3:0', '3:1', '3:2', '2:3', '1:3', '0:3'];
 
@@ -47,13 +48,15 @@ const Game = p =>
 
 export default compose(
   connect(gameSelector, actions),
+  withRouter,
   withParams,
-  withLoad('players'),
+  withLoad('players', null, true),
   withLoad('tournament', ['id', 'T'], true),
   withEdit('game', 'tournament.games', { g1: [], g2: []}),
   withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
   withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),
-  withSuccess('game', () => alert('Saved'), () => alert('Error happened!'))
+  withSuccess('game', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!')),
+  withSuccess('result', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!'))
 )(Game)
 
 const gg = (g, x) => +((g && g[x]) || 0);
@@ -61,8 +64,8 @@ const gg = (g, x) => +((g && g[x]) || 0);
 const toGame = (g, s, m) => {
   const g1 = adjustRating({ id: g.id, isDouble: g.isDouble, date: s.date, t1: +m.home, t2: +m.away, p1: +g.p1, p2: +g.p2, p1Rating: g.p1Rating, p2Rating: g.p2Rating, result: g.result });
   if (g.isDouble) {
-    g1.r3 = +g.r3;
-    g1.r3 = +g.r3;
+    g1.p3 = +g.p3;
+    g1.p4 = +g.p4;
   }
   return g1;
 }
@@ -81,6 +84,6 @@ const save = p => {
     }
   }
   else {
-    p.patchResult(g);
+    g.isDouble ? p.putGame(g, { id1: p.tournament.id }) : p.patchResult(g);
   }
 }
