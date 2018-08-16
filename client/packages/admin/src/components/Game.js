@@ -85,5 +85,6 @@ const save = p => {
   }
   else {
     g.isDouble ? p.putGame(g, { id1: p.tournament.id }) : p.patchResult(g);
+    //p.putGame(g, { id1: p.tournament.id });
   }
 }

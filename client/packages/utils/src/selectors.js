@@ -244,7 +244,7 @@ const stats = createSelector(
 const history = createSelector(
   _history,
   players,
-  (h, ps) => sortWith([descend(x => new Date(x.date)), descend(prop('id'))], h.map(x => {
+  (h, ps) => sortWith([descend(prop('id')), descend(x => new Date(x.date))], h.map(x => {
     const g = x.games;
     let player1 = `${getNameById(g.p1)(ps)} (${g.p1Rating} ${(g.p1Diff > 0 ? '+ ' : '- ') + Math.abs(g.p1Diff)} = ${Math.max(100, g.p1Rating + g.p1Diff)})`;
     let player2 = `${getNameById(g.p2)(ps)} (${g.p2Rating} ${(g.p2Diff > 0 ? '+ ' : '- ') + Math.abs(g.p2Diff)} = ${Math.max(100, g.p2Rating + g.p2Diff)})`;

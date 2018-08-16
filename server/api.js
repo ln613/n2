@@ -116,7 +116,7 @@ e.changeResult = g1 => db.collection('tournaments').aggregate([
       g = adjustRating(g);
       p1[1] = newRating(g.p1Rating, g.p1Diff);
       p2[1] = newRating(g.p2Rating, g.p2Diff);
-      return db.collection('tournaments').update({ id: t.id, 'games.id': g.id }, { $set: { 'games.$.p1Rating': g.p1Rating, 'games.$.p1Diff': g.p1Diff, 'games.$.p1Rating': g.p1Rating, 'games.$.p2Diff': g.p2Diff, 'games.$.result': g.result } });
+      return db.collection('tournaments').update({ id: t.id, 'games.id': g.id }, { $set: { 'games.$.p1Rating': g.p1Rating, 'games.$.p1Diff': g.p1Diff, 'games.$.p2Rating': g.p2Rating, 'games.$.p2Diff': g.p2Diff, 'games.$.result': g.result } });
     } else {
       return null;
     }
