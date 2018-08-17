@@ -13,6 +13,7 @@ const History = ({ lookup, history, player }) =>
     </div>  
     <div class="ui divider"></div>
     <Table name="history" data={history}>
+      <td key="id" hidden />
       <td key="month" hidden />
       <td key="isLastGameInMonth" hidden />
     </Table>
