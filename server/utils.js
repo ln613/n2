@@ -18,7 +18,7 @@ e.done = send('done')
 
 e.send = send()
 
-e.port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080
+e.port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000
 
 e.ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0'
 
