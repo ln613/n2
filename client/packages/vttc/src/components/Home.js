@@ -3,7 +3,7 @@ import ImageSlider from './ImageSlider';
 import { withMobile } from 'utils/comps';
 
 const cards = ['https://www.youtube.com/embed/Bb1R3HeYcyA', 'https://www.youtube.com/embed/nmcOpuBDWRM', 'News', 'Court', 'Club', 'Sales', 'Products', 'League', 'Students', 'VIP'];
-const num   = [1, 1, 1, 8, 4, 1, 1, 2, 3, 4];
+const num   = [1, 1, 3, 8, 4, 4, 2, 2, 3, 4];
 
 const c1 = m =>
   <div class={`fw pb16 ${m ? '' : 'ph8'}`}>
@@ -26,7 +26,7 @@ const yt = (s, m) => <iframe src={s} frameborder="0" style={{ overflow: 'hidden'
 
 const Home = ({ isMobile }) =>
   <div>
-    <ImageSlider n={2} />
+    <ImageSlider n={3} />
 
     <div class="p16">
       <h2>Introduction</h2>
