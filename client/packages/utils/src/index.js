@@ -9,7 +9,7 @@ export const tap = x => _tap(console.log, isNil(x) ? 'null' : x);
 
 export const isDev = () => process.env.NODE_ENV === 'development';
 
-export const host = isDev() ? 'http://localhost:8080/' : '/';
+export const host = isDev() ? 'http://localhost:3000/' : '/';
 export const api = host + 'api/';
 export const admin = host + 'admin/';
 

@@ -29,7 +29,7 @@ var isDev = exports.isDev = function isDev() {
   return process.env.NODE_ENV === 'development';
 };
 
-var host = exports.host = isDev() ? 'http://localhost:8080/' : '/';
+var host = exports.host = isDev() ? 'http://localhost:3000/' : '/';
 var api = exports.api = host + 'api/';
 var admin = exports.admin = host + 'admin/';
 
