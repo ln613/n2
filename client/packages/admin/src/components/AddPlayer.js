@@ -8,17 +8,16 @@ import { tourSelector } from 'utils/selectors';
 import { TextBox, Select, CheckBox } from 'utils/comps';
 import { withLoad, withEditList, withSuccess, withParams } from 'utils';
 
-const SinglePlayers = ({ tournament, date, players, patchTour, setFormTournamentPlayers, getPlayerRating, id }) =>
+export default ({ players, allPlayers, formPath, date, withSub, setFormPlayers, getPlayerRating, id }) =>
   <div>
-    <hr />
-    {(tournament.players || []).map((p, i) =>
+    {(players || []).map((p, i) =>
       <div class="f aic mrc8" key={`players${i}`}>
-        <Select name={`tournament.players[${i}].id`} index={i} options={players} />
-        <TextBox name={`tournament.players[${i}].rating`} index={i} label="Rating" />
-        <Button primary onClick={() => getPlayerRating({id: tournament.players[i].id, date})}>Get Tournament Rating</Button>
-        <Button primary onClick={() => getPlayerRating({id: tournament.players[i].id, date: '_'})}>Get Current Rating</Button>
+        <Select name={`${formPath}.players[${i}].id`} index={i} options={allPlayers} />
+        {withSub ? <CheckBox name={`${formPath}.players[${i}].isSub`} index={i} label="Is Substitute?" /> : null}
+        <TextBox name={`${formPath}.players[${i}].rating`} index={i} label="Rating" />
+        <Button primary onClick={() => getPlayerRating({id: players[i].id, date})}>Get Tournament Rating</Button>
+        <Button primary onClick={() => getPlayerRating({id: players[i].id, date: '_'})}>Get Current Rating</Button>
       </div>
     )}
-    <Button secondary onClick={() => setFormTournamentPlayers({})}>Add Player</Button>
-    <hr />
+    <Button secondary onClick={() => setFormPlayers({})}>Add Player</Button>
   </div>

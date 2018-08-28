@@ -7,20 +7,13 @@ import actions from 'utils/actions';
 import { tourSelector } from 'utils/selectors';
 import { TextBox, Select, CheckBox } from 'utils/comps';
 import { withLoad, withEditList, withSuccess, withParams } from 'utils';
+import AddPlayer from './AddPlayer';
 
 const SinglePlayers = ({ tournament, date, players, patchTour, setFormTournamentPlayers, getPlayerRating, id }) =>
   <div>
     <h1>Players - {tournament.name}</h1>
     <hr />
-    {(tournament.players || []).map((p, i) =>
-      <div class="f aic mrc8" key={`players${i}`}>
-        <Select name={`tournament.players[${i}].id`} index={i} options={players} />
-        <TextBox name={`tournament.players[${i}].rating`} index={i} label="Rating" />
-        <Button primary onClick={() => getPlayerRating({id: tournament.players[i].id, date})}>Get Tournament Rating</Button>
-        <Button primary onClick={() => getPlayerRating({id: tournament.players[i].id, date: '_'})}>Get Current Rating</Button>
-      </div>
-    )}
-    <Button secondary onClick={() => setFormTournamentPlayers({})}>Add Player</Button>
+    <AddPlayer players={tournament.players} allPlayers={players} forPath='tournament' date={date} setFormPlayers={setFormTournamentPlayers} getPlayerRating={getPlayerRating} />
     <hr />
     <Button primary onClick={() => patchTour(toTour(tournament), { id })}>Save</Button>
   </div>

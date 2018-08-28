@@ -86,6 +86,10 @@ e.rrSchedule = (x, sorted) => {
   })
 }
 
+e.getTeamRating = t => t.players && t.players.length > 1
+  ? R.take(2, R.sortWith(R.descend(x => +(x.tRating || x.rating)))).
+  : 0;
+
 e.json2js = x => JSON.parse(x, (k, v) => R.takeLast(4, k).toLowerCase() === 'date' ? new Date(v) : v)
 
 const rdiff = [[3,0],[5,-2],[8,-5],[10,-7],[13,-9],[15,-11],[18,-14],[20,-16],[25,-21],[30,-26],[35,-31],[40,-36],[45,-41],[50,-45],[55,-50]];

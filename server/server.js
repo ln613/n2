@@ -136,14 +136,27 @@ app.get('/admin/genrr/:id', (req, res) => {
   const id = +req.params.id;
 
   api.getById('tournaments', id).then(t => {
-    if (t.players && !t.schedules) {
-      const s = rrSchedule(t.players, true);
-      api.update('tournaments', {
-        id,
-        schedules: s.map((x, i) => ({ id: i + 1, matches: x, date: moment(t.startDate).add(i, 'week').format('MM/DD/YYYY') }))
-      }).then(_ => res.json(s));
+    if (t.isSingle) {
+      if (t.players && !t.schedules) {
+        const s = rrSchedule(t.players, true);
+        api.update('tournaments', {
+          id,
+          schedules: s.map((x, i) => ({ id: i + 1, matches: x, date: moment(t.startDate).add(i, 'week').format('MM/DD/YYYY') }))
+        }).then(_ => res.json(s));
+      } else {
+        res.json('N/A');
+      }
     } else {
-      res.json('N/A');
+      if (t.teams && !t.schedules) {
+        
+        const s = rrSchedule(t.teams, true);
+        // api.update('tournaments', {
+        //   id,
+        //   schedules: s.map((x, i) => ({ id: i + 1, matches: x, date: moment(t.startDate).add(i, 'week').format('MM/DD/YYYY') }))
+        // }).then(_ => res.json(s));
+      } else {
+        res.json('N/A');
+      }
     }
   });
 });
