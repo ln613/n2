@@ -1,6 +1,7 @@
 const R = require('ramda');
 const fs = require('fs');
 const path = require('path');
+const moment = require('moment');
 
 const e = {};
 
@@ -9,6 +10,10 @@ e.isProd = process.env.NODE_ENV === 'PROD';
 e.cd = 'http://res.cloudinary.com/vttc/image/upload/v1522908408/';
 
 e.tap = x => R.tap(console.log, R.isNil(x) ? 'null' : x);
+
+e.sort = R.sort((a, b) => a - b);
+
+e.sortDesc = R.sort((a, b) => b - a);
 
 e.config = fs.existsSync(path.join(__dirname, 'config.js')) ? require('./config') : null;
 
@@ -79,16 +84,24 @@ e.rrSchedule = (x, sorted) => {
   const l = sorted ? x : R.sortWith([R.descend(R.prop('rating'))], x);
   const t1 = R.range(1, l.length);
   const t2 = R.range(0, l.length / 2);
-  return t1.map(r => {
+  return t1.map((r, i) => {
     const l1 = t1.map(n => l[rrCycle(n, r, l.length)]);
     const l2 = R.insert(0, l[0], l1);
-    return t2.map((n, i) => ({ id: i + 1, home: l2[n].id, away: l2[l.length - n - 1].id }));
+    return t2.map((n, j) => ({ id: j + 1, round: i + 1, home: l2[n].id, away: l2[l.length - n - 1].id }));
   })
 }
 
 e.getTeamRating = t => t.players && t.players.length > 1
-  ? R.take(2, R.sortWith(R.descend(x => +(x.tRating || x.rating)))).
+  ? R.pipe(R.map(x => +(x.tRating || x.rating)), e.sort, R.takeLast(2), R.sum)(t.players)
   : 0;
+
+e.rrScheduleTeam = (t, ids = [1, 2, 3, 4, 5, 6]) => R.compose(
+  rs => rs.map((w, i) => ({ id: i + 1, matches: w.map((m, j) => { m.id = ids[j]; return m; }), date: moment(t.startDate).add(i, 'week').format('MM/DD/YYYY') })),
+  R.splitEvery(ids.length),
+  R.unnest,
+  e.rrSchedule,
+  R.map(t => ({...t, rating: e.getTeamRating(t)}))
+)(t.teams);
 
 e.json2js = x => JSON.parse(x, (k, v) => R.takeLast(4, k).toLowerCase() === 'date' ? new Date(v) : v)
 

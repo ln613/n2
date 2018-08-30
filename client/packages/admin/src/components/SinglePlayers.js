@@ -13,7 +13,7 @@ const SinglePlayers = ({ tournament, date, players, patchTour, setFormTournament
   <div>
     <h1>Players - {tournament.name}</h1>
     <hr />
-    <AddPlayer players={tournament.players} allPlayers={players} forPath='tournament' date={date} setFormPlayers={setFormTournamentPlayers} getPlayerRating={getPlayerRating} />
+    <AddPlayer players={tournament.players} allPlayers={players} formPath='tournament' date={date} setFormPlayers={setFormTournamentPlayers} getPlayerRating={getPlayerRating} />
     <hr />
     <Button primary onClick={() => patchTour(toTour(tournament), { id })}>Save</Button>
   </div>

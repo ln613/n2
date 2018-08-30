@@ -21,7 +21,7 @@ var actionData = exports.actionData = {
   },
   playerRating: {
     url: _utils.api + 'playerRating/{id}/{date}',
-    path: 'form.tournament.players[id].rating'
+    path: 'form.{formPath}.players[id].rating'
   },
   player: {
     url: _utils.admin + 'players',

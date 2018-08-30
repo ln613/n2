@@ -16,7 +16,7 @@ const Team = ({ tournament, team, players, monthRatings, putTeam, postTeam, id, 
     <TextBox name="team.name" />
     <br/>
     Players:
-    <AddPlayer players={team.players} allPlayers={players} forPath='team' setFormPlayers={setFormTeamPlayers} getPlayerRating={getPlayerRating} withSub />
+    <AddPlayer players={team.players} allPlayers={players} formPath='team' setFormPlayers={setFormTeamPlayers} getPlayerRating={getPlayerRating} withSub />
     <hr />
     <Button primary onClick={() => id[0] !== '+' ? putTeam(team, { id1: tournament.id, id: team.id }) : postTeam(team, { id1: tournament.id })}>Save</Button>
   </div>

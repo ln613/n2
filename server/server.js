@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const moment = require('moment');
 const api = require('./api');
-const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule } = require('./utils');
+const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule, rrScheduleTeam } = require('./utils');
 
 const app = express();
 
@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 // get --------------------
 
 app.get('/api/ut', (req, res) => {
-  res.json(isProd);
+  api.getById('tournaments', 86).then(x => rrScheduleTeam(x)).then(x => res.json(x));
 });
 
 app.get('/api/env', (req, res) => {
@@ -148,12 +148,8 @@ app.get('/admin/genrr/:id', (req, res) => {
       }
     } else {
       if (t.teams && !t.schedules) {
-        
-        const s = rrSchedule(t.teams, true);
-        // api.update('tournaments', {
-        //   id,
-        //   schedules: s.map((x, i) => ({ id: i + 1, matches: x, date: moment(t.startDate).add(i, 'week').format('MM/DD/YYYY') }))
-        // }).then(_ => res.json(s));
+        const s = rrScheduleTeam(t);
+        api.update('tournaments', { id, schedules: s }).then(_ => res.json(s));
       } else {
         res.json('N/A');
       }
