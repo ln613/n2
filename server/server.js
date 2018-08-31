@@ -141,7 +141,7 @@ app.get('/admin/genrr/:id', (req, res) => {
         const s = rrSchedule(t.players, true);
         api.update('tournaments', {
           id,
-          schedules: s.map((x, i) => ({ id: i + 1, matches: x, date: moment(t.startDate).add(i, 'week').format('MM/DD/YYYY') }))
+          schedules: s.map((x, i) => ({ id: i + 1, matches: x, date: moment(t.startDate).add(i, 'week').toISOString() }))
         }).then(_ => res.json(s));
       } else {
         res.json('N/A');
