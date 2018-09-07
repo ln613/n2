@@ -5,7 +5,7 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { playersSelector } from 'utils/selectors';
 import { TextBox } from 'utils/comps';
-import { withEdit, withSuccess, withLoad, withParams } from 'utils';
+import { withEdit, withLoad, withParams } from '@ln613/compose';
 
 const Player = ({ player, putPlayer, postPlayer, id }) =>
   <div>
@@ -27,7 +27,7 @@ export default compose(
   withParams,
   withLoad('players'),
   withEdit('player'),
-  withSuccess('player', () => alert('Saved'), () => alert('Error happened!'))
+  //withSuccess('player', () => alert('Saved'), () => alert('Error happened!'))
 )(Player)
 
 const toPlayer = p => ({...p, id: +p.id, rating: p.rating ? +p.rating : 100})

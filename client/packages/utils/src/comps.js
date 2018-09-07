@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { compose, withProps } from 'recompose';
 import { withRouter, Link } from "react-router-dom";
 import { is, find, isNil, difference, innerJoin, view, lensPath, not, identity } from 'ramda';
-import { toTitleCase, tap } from '.';
+import { toTitleCase } from '@ln613/util';
 import { filterSelector } from './selectors';
 import { Input, Dropdown, Checkbox, Responsive, Sidebar, Icon, Menu as _Menu, Loader } from 'semantic-ui-react';
-import { withState } from 'utils';
+import { withState } from '@ln613/compose';
 
 export const Mobile = ({ children }) =>
   <Responsive {...Responsive.onlyMobile}>

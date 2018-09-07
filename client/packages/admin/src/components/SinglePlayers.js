@@ -6,7 +6,7 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { tourSelector } from 'utils/selectors';
 import { TextBox, Select, CheckBox } from 'utils/comps';
-import { withLoad, withEditList, withSuccess, withParams } from 'utils';
+import { withLoad, withEditList, withParams } from '@ln613/compose';
 import AddPlayer from './AddPlayer';
 
 const SinglePlayers = ({ tournament, date, players, patchTour, setFormTournamentPlayers, getPlayerRating, id }) =>
@@ -25,7 +25,7 @@ export default compose(
   withLoad('players'),
   withLoad('tournament'),
   withEditList('tournament.players'),
-  withSuccess('tour', () => alert('Saved'), () => alert('Error happened!'))
+  //withSuccess('tour', () => alert('Saved'), () => alert('Error happened!'))
 )(SinglePlayers)
 
 const toTour = t => ({id: t.id, players: (t.players || []).map(p => ({id: +(p.id || 0), rating: +p.rating})) })

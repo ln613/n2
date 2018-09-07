@@ -21,13 +21,13 @@ var _reactRouterDom = require('react-router-dom');
 
 var _ramda = require('ramda');
 
-var _ = require('.');
+var _util = require('@ln613/util');
 
 var _selectors = require('./selectors');
 
 var _semanticUiReact = require('semantic-ui-react');
 
-var _utils = require('utils');
+var _compose = require('@ln613/compose');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -173,7 +173,7 @@ var prop = function prop(_prop) {
 };
 
 var title = function title(key, children) {
-  return prop('title', (0, _.toTitleCase)(key))(key, children);
+  return prop('title', (0, _util.toTitleCase)(key))(key, children);
 };
 var hidden = prop('hidden', false);
 
@@ -478,7 +478,7 @@ var Menu1 = function Menu1(_ref8) {
   );
 };
 
-var Menu = exports.Menu = (0, _utils.withState)('visible')(Menu1);
+var Menu = exports.Menu = (0, _compose.withState)('visible')(Menu1);
 
 var Ready = exports.Ready = function Ready(_ref9) {
   var on = _ref9.on,

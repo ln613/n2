@@ -3,7 +3,7 @@ import { compose } from 'recompose';
 import { pick } from 'ramda';
 import { connect } from 'no-redux';
 import actions from 'utils/actions';
-import { withLoad } from 'utils';
+import { withLoad } from '@ln613/compose';
 import { catsSelector } from 'utils/selectors';
 import { Table } from 'utils/comps';
 import { Button } from 'semantic-ui-react';

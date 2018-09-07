@@ -5,7 +5,7 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { tourSelector } from 'utils/selectors';
 import { TextBox, CheckBox, withMobile } from 'utils/comps';
-import { withEdit, withSuccess, withParams, tap } from 'utils';
+import { withEdit, withParams } from '@ln613/compose';
 import { withRouter } from "react-router-dom";
 
 const Tournament = ({ tournament, history, postTour, patchTour, getGenrr, id, isMobile }) =>
@@ -36,7 +36,7 @@ export default compose(
   connect(tourSelector, actions),
   withParams,
   withEdit('tournament'),
-  withSuccess('tour', () => alert('Saved'), () => alert('Error happened!')),
+  //withSuccess('tour', () => alert('Saved'), () => alert('Error happened!')),
   withRouter,
   withMobile
 )(Tournament)

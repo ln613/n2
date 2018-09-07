@@ -5,7 +5,7 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { teamSelector } from 'utils/selectors';
 import { TextBox, Select, CheckBox } from 'utils/comps';
-import { withLoad, withEdit, withSuccess, withParams } from 'utils';
+import { withLoad, withEdit, withParams } from '@ln613/compose';
 import AddPlayer from './AddPlayer';
 
 const Team = ({ tournament, team, players, monthRatings, putTeam, postTeam, id, setFormTeamPlayers, getPlayerRating }) =>
@@ -27,7 +27,7 @@ export default compose(
   withLoad('players'),
   withLoad('tournament', ['id', 'id1']),
   withEdit('team', 'tournament.teams', {players:[]}),
-  withSuccess('team', () => alert('Saved'), () => alert('Error happened!'))
+  //withSuccess('team', () => alert('Saved'), () => alert('Error happened!'))
 )(Team)
 
 // const toTeam = (t, ps) => ({

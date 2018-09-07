@@ -5,7 +5,9 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { productsSelector } from 'utils/selectors';
 import { TextBox, Select } from 'utils/comps';
-import { withLoad, withEdit, cdurl, getPropById } from 'utils';
+import { withLoad, withEdit } from '@ln613/compose';
+import { getPropById } from '@ln613/util';
+import { cdurl } from 'utils';
 
 const Product = ({ product, putProduct, postNewProduct, lookup, cats }) =>
   <div>

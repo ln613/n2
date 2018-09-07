@@ -6,7 +6,7 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { scheduleSelector } from 'utils/selectors';
 import { TextBox, Select, Table } from 'utils/comps';
-import { withLoad, withEdit, withSuccess, withParams, tap } from 'utils';
+import { withLoad, withEdit, withParams } from '@ln613/compose';
 import { withRouter } from "react-router-dom";
 
 const results = ['3:0', '3:1', '3:2', '2:3', '1:3', '0:3'];
@@ -18,7 +18,7 @@ const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id
     <TextBox name="schedule.id" disabled />
     <TextBox name="schedule.date" />
     {tournament.isSingle ? 
-      <Table name="schedule" data={(tap(schedule.matches || [])).map(pick(['id', 'player1', 'result', 'player2']))}>
+      <Table name="schedule" data={(schedule.matches || []).map(pick(['id', 'player1', 'result', 'player2']))}>
         <td key="result" path="schedule.matches[{i}].result" select options={results}/>
       </Table> :
     range(0, 8).map(n =>
@@ -40,6 +40,6 @@ export default compose(
   withParams,
   withLoad('tournament', ['id', 'id1'], true),
   withEdit('schedule', 'tournament.schedules', { matches: [] }),
-  withSuccess('schedule', () => alert('Saved'), () => alert('Error happened!')),
+  //withSuccess('schedule', () => alert('Saved'), () => alert('Error happened!')),
   withRouter
 )(Schedule)

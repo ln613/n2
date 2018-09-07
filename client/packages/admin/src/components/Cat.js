@@ -5,7 +5,7 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { catsSelector } from 'utils/selectors';
 import { TextBox } from 'utils/comps';
-import { withEdit, withSuccess } from 'utils';
+import { withEdit } from '@ln613/compose';
 
 const Cat = ({ cat, putCat, postCat }) =>
   <div>
@@ -21,5 +21,5 @@ const Cat = ({ cat, putCat, postCat }) =>
 export default compose(
   connect(catsSelector, actions),
   withEdit('cat'),
-  withSuccess('cat', () => alert('Saved'), () => alert('Error happened!'))
+  //withSuccess('cat', () => alert('Saved'), () => alert('Error happened!'))
 )(Cat)

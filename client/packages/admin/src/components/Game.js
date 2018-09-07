@@ -6,7 +6,9 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { gameSelector } from 'utils/selectors';
 import { TextBox, Select, CheckBox } from 'utils/comps';
-import { withLoad, withEdit, withSuccess, withParams, getPropById, findById, getNameById, tap, adjustRating, newRating } from 'utils';
+import { withLoad, withEdit, withParams } from '@ln613/compose';
+import { getPropById, findById, getNameById } from '@ln613/util';
+import { adjustRating, newRating } from 'utils';
 import { withRouter } from 'react-router-dom';
 
 const results = ['3:0', '3:1', '3:2', '2:3', '1:3', '0:3'];
@@ -55,8 +57,8 @@ export default compose(
   withEdit('game', 'tournament.games', { g1: [], g2: []}),
   withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
   withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),
-  withSuccess('game', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!')),
-  withSuccess('result', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!'))
+  //withSuccess('game', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!')),
+  //withSuccess('result', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!'))
 )(Game)
 
 const gg = (g, x) => +((g && g[x]) || 0);
