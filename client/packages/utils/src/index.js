@@ -1,5 +1,5 @@
 import { last } from 'ramda';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import { successSelector } from './selectors';
 

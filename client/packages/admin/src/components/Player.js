@@ -1,6 +1,6 @@
 import React from 'react';
 import { compose } from 'recompose';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { playersSelector } from 'utils/selectors';

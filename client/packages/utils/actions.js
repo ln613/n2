@@ -5,87 +5,87 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.actionData = undefined;
 
-var _noRedux = require('no-redux');
+var _state = require('@ln613/state');
 
-var _utils = require('utils');
+var _util = require('@ln613/util');
 
 var actionData = exports.actionData = {
   logout: {
     url: '/logout'
   },
   lookup: {
-    url: _utils.api + 'lookup'
+    url: _util.api + 'lookup'
   },
   players: {
-    url: _utils.api + 'players'
+    url: _util.api + 'players'
   },
   playerRating: {
-    url: _utils.api + 'playerRating/{id}/{date}',
+    url: _util.api + 'playerRating/{id}/{date}',
     path: 'form.{formPath}.players[id].rating'
   },
   player: {
-    url: _utils.admin + 'players',
+    url: _util.admin + 'players',
     path: 'players[id]',
     methods: ['post', 'put', 'patch', 'delete']
   },
   tournaments: {
-    url: _utils.api + 'tournaments/_/_/isSingle,startDate,ratingDate,players'
+    url: _util.api + 'tournaments/_/_/isSingle,startDate,ratingDate,players'
   },
   tour: {
-    url: _utils.admin + 'tournaments',
+    url: _util.admin + 'tournaments',
     path: 'tournaments[id]',
     methods: ['post', 'put', 'patch', 'delete']
   },
   tournament: {
-    url: _utils.api + 'tournaments/{id}'
+    url: _util.api + 'tournaments/{id}'
   },
   team: {
-    url: _utils.admin + 'tournaments/{id1}/teams',
+    url: _util.admin + 'tournaments/{id1}/teams',
     path: 'tournament.teams[id]',
     methods: ['post', 'put', 'patch', 'delete']
   },
   cats: {
-    url: _utils.api + 'cats'
+    url: _util.api + 'cats'
   },
   cat: {
-    url: _utils.admin + 'cats',
+    url: _util.admin + 'cats',
     path: 'cats[id]',
     methods: ['post', 'put', 'patch', 'delete']
   },
   products: {
-    url: _utils.api + 'products'
+    url: _util.api + 'products'
   },
   product: {
-    url: _utils.admin + 'products',
+    url: _util.admin + 'products',
     path: 'products[id]',
     methods: ['post', 'put', 'patch', 'delete']
   },
   schedules: {
-    url: _utils.api + 'schedules'
+    url: _util.api + 'schedules'
   },
   schedule: {
-    url: _utils.admin + 'tournaments/{id1}/schedules',
+    url: _util.admin + 'tournaments/{id1}/schedules',
     path: 'tournament.schedules[id]',
     methods: ['post', 'put', 'patch', 'delete']
   },
   genrr: {
-    url: _utils.admin + 'genrr/{id}',
+    url: _util.admin + 'genrr/{id}',
     path: 'tournament.schedules'
   },
   games: {
-    url: _utils.api + 'games'
+    url: _util.api + 'games'
   },
   game: {
-    url: _utils.admin + 'tournaments/{id1}/games',
+    url: _util.admin + 'tournaments/{id1}/games',
     path: 'tournament.games[id]',
     methods: ['post', 'put', 'patch', 'delete']
   },
   result: {
-    url: _utils.admin + 'result',
+    url: _util.admin + 'result',
     methods: ['post', 'patch']
   },
   history: {
-    url: _utils.api + 'playergames/{id}'
+    url: _util.api + 'playergames/{id}'
   },
   form: {
     path: 'form.{path}'
@@ -103,4 +103,4 @@ var actionData = exports.actionData = {
   lang: {}
 };
 
-exports.default = (0, _noRedux.generateActions)(actionData);
+exports.default = (0, _state.generateActions)(actionData);

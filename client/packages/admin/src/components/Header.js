@@ -1,6 +1,6 @@
 import React from 'react';
 import actions from 'utils/actions';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 
 const Header = ({ getLogout }) =>
   <div class="f jcsb">

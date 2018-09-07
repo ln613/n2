@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose, withProps } from 'recompose';
 import { pick } from 'ramda';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import actions from 'utils/actions';
 import { withLoad, withParams, withNewId } from '@ln613/compose';
 import { findById, toAbsDate } from '@ln613/util';

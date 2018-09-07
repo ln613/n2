@@ -1,7 +1,7 @@
 import React from 'react';
 import { compose } from 'recompose';
 import { sortWith, descend, prop } from 'ramda';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import actions from 'utils/actions';
 import { withLoad, withNewId } from '@ln613/compose';
 import { tournamentsSelector } from 'utils/selectors';

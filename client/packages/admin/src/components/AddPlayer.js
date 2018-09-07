@@ -1,12 +1,6 @@
 import React from 'react';
-import { compose, withProps } from 'recompose';
-import { connect } from 'no-redux';
-import moment from 'moment';
 import { Button } from 'semantic-ui-react';
-import actions from 'utils/actions';
-import { tourSelector } from 'utils/selectors';
-import { TextBox, Select, CheckBox } from 'utils/comps';
-import { withLoad, withEditList, withSuccess, withParams } from 'utils';
+import { TextBox, Select, CheckBox } from '@ln613/ui/semantic';
 
 export default ({ players, allPlayers, formPath, date, withSub, setFormPlayers, getPlayerRating, id }) =>
   <div>
