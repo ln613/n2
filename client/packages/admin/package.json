@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ln613/ui": "^1.0.0",
     "css-short": "^1.0.3",
     "jquery": "^3.3.1",
     "no-redux": "^0.5.0",
