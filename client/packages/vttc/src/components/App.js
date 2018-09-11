@@ -18,7 +18,7 @@ import Training from './Training';
 import Link from './Link';
 import Calendar from './Calendar';
 import { Switch, Route } from 'react-router';
-import { Menu } from 'utils/comps';
+import { Menu } from '@ln613/ui/semantic';
 
 const menus = ['Home', 'Intro', 'Shop', 'Tournaments', 'Rating', 'Calendar', 'Links', 'Contact'];
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import { withState, lifecycle, compose } from 'recompose';
 import { cdurl } from 'utils';
 import { range, isNil } from 'ramda';

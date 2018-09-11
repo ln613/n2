@@ -4,7 +4,7 @@ import { connect } from '@ln613/state';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { playersSelector } from 'utils/selectors';
-import { TextBox } from 'utils/comps';
+import { TextBox } from '@ln613/ui/semantic';
 import { withEdit, withLoad, withParams } from '@ln613/compose';
 
 const Player = ({ player, putPlayer, postPlayer, id }) =>

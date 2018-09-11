@@ -1,11 +1,12 @@
 import React from 'react';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import { pick } from 'ramda';
 import actions from 'utils/actions';
 import { tournamentSelector } from 'utils/selectors';
-import { withLoad, withParams, getNameById, tap } from 'utils';
-import { Table, withMobile } from 'utils/comps';
+import { getNameById } from '@ln613/util';
+import { withLoad, withParams } from '@ln613/compose';
+import { Table, withMobile } from '@ln613/ui/semantic';
 import TMenu from './TMenu';
 
 const Schedule = ({ tournament, id, isMobile }) =>

@@ -6,7 +6,7 @@ import actions from 'utils/actions';
 import { withLoad, withParams, withNewId } from '@ln613/compose';
 import { findById, toAbsDate } from '@ln613/util';
 import { tournamentSelector } from 'utils/selectors';
-import { Table } from 'utils/comps';
+import { Table } from '@ln613/ui/semantic';
 import { withRouter } from "react-router-dom";
 import { Button } from 'semantic-ui-react';
 

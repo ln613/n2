@@ -1,13 +1,12 @@
 import React from 'react';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import { compose } from 'recompose';
-import { is } from 'ramda';
 import { Link } from 'react-router-dom';
 import { Menu, Input, Dropdown, Popup, Container, Sidebar, Icon } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { langSelector } from 'utils/selectors';
-import { Mobile, Desktop } from 'utils/comps';
-import { withState } from 'utils';
+import { Mobile, Desktop } from '@ln613/ui/semantic';
+import { withState } from '@ln613/compose';
 
 //const menus = ['Home', 'Products', 'News', ['Training', [['Classes', 'university'], ['Coaches', 'user'], ['Players', 'users']]], 'Tournaments', 'League', 'Rating', 'Contact'];
 //const menus = ['Home', 'Products', 'News', 'Players', 'Tournaments', 'Rating', 'Calendar', 'Contact'];

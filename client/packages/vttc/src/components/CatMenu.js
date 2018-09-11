@@ -1,9 +1,9 @@
 import React from 'react';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import actions from 'utils/actions';
 import { lookupSelector } from 'utils/selectors';
-import { withLang } from 'utils';
+import { withLang } from '@ln613/compose';
 
 const CatMenu = ({ lookup, setFilter, n, d }) =>
     <div class="ui vertical menu">

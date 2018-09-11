@@ -1,10 +1,12 @@
 import React from 'react';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import actions from 'utils/actions';
 import { lookupSelector } from 'utils/selectors';
-import { cdurl, withLoad, findById } from 'utils';
-import { withMobile } from 'utils/comps';
+import { cdurl } from 'utils';
+import { withLoad } from '@ln613/compose';
+import { findById } from '@ln613/util';
+import { withMobile } from '@ln613/ui/semantic';
 import CatMenu from './CatMenu';
 
 const brands = ['729', 'addidas', 'andro', 'asics', 'avalox', 'butterfly', 'cornilleau', 'darker', 'dawei', 'dhs', 'donic', 'Dr.Neubauer', 'gewo', 'haifu', 'joola', 'kokutaku', 'ktl', 'li-ning', 'Mizuno', 'nittaku', 'palio', 'stiga', 'sword', 'tibhar', 'tsp', 'victas', 'xiom', 'yasaka', 'yinhe'];

@@ -1,9 +1,10 @@
 import React from 'react';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import actions from 'utils/actions';
 import { productsSelector } from 'utils/selectors';
-import { cdurl, withLang, withEdit } from 'utils';
+import { cdurl } from 'utils';
+import { withLang, withEdit } from '@ln613/compose';
 import CatMenu from './CatMenu';
 
 const Product = ({ product, lookup, n, d }) =>

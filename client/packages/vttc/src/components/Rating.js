@@ -1,10 +1,10 @@
 import React from 'react';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import actions from 'utils/actions';
 import { ratingSelector } from 'utils/selectors';
-import { withLoad } from 'utils';
-import { TextBox, Table } from 'utils/comps';
+import { withLoad } from '@ln613/compose';
+import { TextBox, Table } from '@ln613/ui/semantic';
 
 const Rating = ({ lookup, players }) =>
   <div class="p16 fv">

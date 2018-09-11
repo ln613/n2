@@ -13,5 +13,9 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
     "watch": "^1.0.2"
+  },
+  "dependencies": {
+    "@ln613/state": "^1.0.0",
+    "@ln613/util": "^1.0.0"
   }
 }

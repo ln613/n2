@@ -5,7 +5,8 @@ import { connect } from '@ln613/state';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { scheduleSelector } from 'utils/selectors';
-import { TextBox, Select, Table } from 'utils/comps';
+import { TextBox, Table } from '@ln613/ui/semantic';
+import { Select } from '@ln613/ui';
 import { withLoad, withEdit, withParams } from '@ln613/compose';
 import { withRouter } from "react-router-dom";
 

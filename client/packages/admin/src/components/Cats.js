@@ -5,7 +5,7 @@ import { connect } from '@ln613/state';
 import actions from 'utils/actions';
 import { withLoad } from '@ln613/compose';
 import { catsSelector } from 'utils/selectors';
-import { Table } from 'utils/comps';
+import { Table } from '@ln613/ui/semantic';
 import { Button } from 'semantic-ui-react';
 import { withRouter } from "react-router-dom";
 

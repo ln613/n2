@@ -4,7 +4,7 @@ import { connect } from '@ln613/state';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { catsSelector } from 'utils/selectors';
-import { TextBox } from '@ln613/ui';
+import { TextBox } from '@ln613/ui/semantic';
 import { withEdit } from '@ln613/compose';
 
 const Cat = ({ cat, putCat, postCat }) =>

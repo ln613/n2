@@ -4,7 +4,7 @@ import { connect } from '@ln613/state';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { tourSelector } from 'utils/selectors';
-import { TextBox, CheckBox, withMobile } from 'utils/comps';
+import { TextBox, CheckBox, withMobile } from '@ln613/ui/semantic';
 import { withEdit, withParams } from '@ln613/compose';
 import { withRouter } from "react-router-dom";
 

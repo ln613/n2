@@ -1,5 +1,5 @@
 import React from 'react';
-import { withMobile } from 'utils/comps';
+import { withMobile } from '@ln613/ui/semantic';
 
 export const Contact = ({ isMobile }) =>
   <div class="p16">

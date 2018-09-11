@@ -1,9 +1,9 @@
 import React from 'react';
 import { range, splitEvery, fromPairs, mergeDeepLeft } from 'ramda';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import { lookupSelector } from 'utils/selectors';
-import { Table } from 'utils/comps';
+import { Table } from '@ln613/ui/semantic';
 import moment from 'moment';
 
 const names = ['Drop In', 'Training', 'League'];

@@ -1,9 +1,11 @@
 import React from 'react';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import actions from 'utils/actions';
 import { productsSelector } from 'utils/selectors';
-import { cdurl, withLoad, withLang, findById } from 'utils';
+import { cdurl } from 'utils';
+import { findById } from '@ln613/util';
+import { withLoad, withLang } from '@ln613/compose';
 import CatMenu from './CatMenu';
 import { withRouter } from "react-router-dom";
 

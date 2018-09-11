@@ -4,7 +4,7 @@ import { connect } from '@ln613/state';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { teamSelector } from 'utils/selectors';
-import { TextBox, Select, CheckBox } from 'utils/comps';
+import { TextBox } from '@ln613/ui/semantic';
 import { withLoad, withEdit, withParams } from '@ln613/compose';
 import AddPlayer from './AddPlayer';
 

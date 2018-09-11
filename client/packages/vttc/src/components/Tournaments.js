@@ -1,11 +1,11 @@
 import React from 'react';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import { pick } from 'ramda';
 import actions from 'utils/actions';
 import { tournamentsSelector } from 'utils/selectors';
-import { withLoad, tap } from 'utils';
-import { Table } from 'utils/comps';
+import { withLoad } from '@ln613/compose';
+import { Table } from '@ln613/ui/semantic';
 
 const Tournaments = ({ lookup, tournaments }) =>
   <div class="p16 fv">

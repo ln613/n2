@@ -5,7 +5,6 @@ import moment from 'moment';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { tourSelector } from 'utils/selectors';
-import { TextBox, Select, CheckBox } from 'utils/comps';
 import { withLoad, withEditList, withParams } from '@ln613/compose';
 import AddPlayer from './AddPlayer';
 

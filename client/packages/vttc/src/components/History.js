@@ -1,10 +1,11 @@
 import React from 'react';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import { compose, withProps } from 'recompose';
 import actions from 'utils/actions';
 import { historySelector } from 'utils/selectors';
-import { withLoad, findById, withParams } from 'utils';
-import { Table } from 'utils/comps';
+import { findById } from '@ln613/util';
+import { withLoad, withParams, withLoadForce } from '@ln613/compose';
+import { Table } from '@ln613/ui/semantic';
 
 const History = ({ lookup, history, player }) =>
   <div class="p16 fv">
@@ -23,6 +24,6 @@ export default compose(
   connect(historySelector, actions),
   withParams,
   withLoad('players'),
-  withLoad('history', 'id', true),
+  withLoadForce('history'),
   withProps(p => ({ player: findById(p.id)(p.players) || {} }))
 )(History);

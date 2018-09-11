@@ -1,10 +1,10 @@
 import React from 'react';
-import { connect } from 'no-redux';
+import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import actions from 'utils/actions';
 import { statsSelector } from 'utils/selectors';
-import { withLoad, withParams } from 'utils';
-import { Table, withMobile } from 'utils/comps';
+import { withLoad, withParams } from '@ln613/compose';
+import { Table, withMobile } from '@ln613/ui/semantic';
 import TMenu from './TMenu';
 
 const Stats = ({ stats, tournament, id, isMobile }) =>
