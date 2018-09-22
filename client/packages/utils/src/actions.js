@@ -61,7 +61,8 @@ export const actionData = {
     methods: ['post', 'put', 'patch', 'delete']
   },
   genrr: {
-    url: admin + 'genrr/{id}',
+    url: admin + 'genrr',
+    method: 'post',
     path: 'tournament.schedules'
   },
   games: {

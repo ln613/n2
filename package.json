@@ -4,6 +4,7 @@
   "description": "Vancouver Table Tennis Club",
   "main": "server.js",
   "dependencies": {
+    "@ln613/util": "^1.0.0",
     "body-parser": "^1.18.2",
     "cloudinary": "^1.11.0",
     "cookie-parser": "^1.4.3",

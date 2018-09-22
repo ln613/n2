@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const moment = require('moment');
 const api = require('./api');
 const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule, rrScheduleTeam } = require('./utils');
+const { last, mergeDeepWith, zipWith, concat, is, find } = require('ramda');
+const { getPropByProp, split2 } = require('@ln613/util');
 
 const app = express();
 
@@ -132,8 +134,9 @@ app.get('/admin/cd/list', (req, res) => {
   send(api.cdList(), res);
 });
 
-app.get('/admin/genrr/:id', (req, res) => {
-  const id = +req.params.id;
+app.post('/admin/genrr', (req, res) => {
+  const id = +req.body.id;
+  const standing = req.body.standing;
 
   api.getById('tournaments', id).then(t => {
     if (t.isSingle) {
@@ -147,10 +150,25 @@ app.get('/admin/genrr/:id', (req, res) => {
         res.json('N/A');
       }
     } else {
-      if (t.teams && !t.schedules) {
+      if (!t.startDate2 && t.teams && t.schedules) {
+        const sd = moment(last(t.schedules).date).add(1, 'week');
+        const tt = split2(standing.map(x => find(y => y.name === x.team, t.teams)));
+        const s1 = rrScheduleTeam(tt[0], sd, [6, 7]);
+        const s2 = rrScheduleTeam(tt[1], sd, [3, 5]);
+        const s = zipWith(mergeDeepWith((a, b) => is(Array, a) ? concat(a, b) : a))(s1, s2);
+        const lastId = last(t.schedules).id;
+        api.update('tournaments', {
+          id,
+          startDate2: sd.toISOString(),
+          teams: t.teams.map(x => ({...x, rank: find(y => y.team === x.name, standing).rank })),
+          schedules: concat(t.schedules, s.map(x => ({ ...x, id: lastId + x.id, half: true })))
+        }).then(_ => res.json(s));
+      }
+      else if (t.teams && !t.schedules) {
         const s = rrScheduleTeam(t);
         api.update('tournaments', { id, schedules: s }).then(_ => res.json(s));
-      } else {
+      }
+      else {
         res.json('N/A');
       }
     }

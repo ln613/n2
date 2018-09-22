@@ -1,6 +1,6 @@
-import { reduce, prop, sortWith, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, uniqBy, anyPass, both } from 'ramda';
+import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, uniqBy, anyPass, both } from 'ramda';
 import { createSelector, mapStateWithSelectors } from '@ln613/state';
-import { findById, getNameById, toDate, toMonth, addIndex, diff } from '@ln613/util';
+import { findById, getNameById, toDate, toMonth, addIndex, diff, tap, split2 } from '@ln613/util';
 
 const _form = s => s.form || {};
 const _filter = s => s.filter || {};
@@ -90,7 +90,7 @@ const teams = createSelector(
 
 const pn = (n, g) => g['p' + n];
 const tn = (n, g) => g['t' + (n > 2 ? n - 2 : n)];
-const findGames = (s, m, gs) => gs.filter(g => (g.t1 === m.home && g.t2 === m.away) || (g.t2 === m.home && g.t1 === m.away));
+const findGames = (s, m, gs) => gs.filter(g => ((s.half && g.half) || (!s.half && !g.half)) && ((g.t1 === m.home && g.t2 === m.away) || (g.t2 === m.home && g.t1 === m.away)));
 const gg = (g, x) => +(g && g[x] || 0);
 const getResult = g => g.result || (range(0, 5).filter(n => gg(g.g1, n) > gg(g.g2, n)).length + ':' + range(0, 5).filter(n => gg(g.g1, n) < gg(g.g2, n)).length);
 const getPlayerName = (n, g, ps) => getNameById(pn(n, g))(ps) + (g.isDouble ? ' / ' + getNameById(pn(n + 2, g))(ps) : '');
@@ -187,11 +187,8 @@ const al = ascend(prop('gl'));
 const standing = createSelector(
   tournament,
   teams,
-  (tt, ts) => pipe(
-    sortWith(tt.isSingle ? [dw, at, dp(1), al] : [dp(0), at, dw]),
-    addIndex('rank')
-  )(
-    (tt.isSingle ? tt.players : ts).map(t => {
+  (tt, ts) => {
+    const st = (tt.isSingle ? tt.players : ts).map(t => {
       const ms = unnest(tt.schedules.map(s => s.matches)).filter(m => (m.home === t.id || m.away === t.id) && m.result && m.result != '0:0');
       const ws = ms.filter(m => (m.home === t.id && m.result[0] > m.result[2]) || (m.away === t.id && m.result[0] < m.result[2]));
       const wn = ws.length;
@@ -201,8 +198,15 @@ const standing = createSelector(
       const s = { [tt.isSingle ? 'player' : 'team']: t.name, total: ms.length, w: wn, l: ln, [tt.isSingle ? 'gw' : 'points']: ps };
       if (tt.isSingle) s.gl = ps1;
       return s;
-    })
-  )
+    });
+    
+    const p = pipe(
+      sortWith(tt.isSingle ? [dw, at, dp(1), al] : [dp(0), at, dw]),
+      addIndex('rank')
+    );
+
+    return tt.startDate2 ? pipe(sortBy(prop('rank')), split2, map(p))(st) : p(st);
+  }
 );
 
 const isSamePlayer = (p1, id) => p1 && id && p1.id === id || false;
@@ -278,7 +282,7 @@ export const ratingSelector = mapStateWithSelectors({ players: filteredPlayers }
 export const playersSelector = mapStateWithSelectors({ players, lookup, player: form('player') });
 export const tournamentsSelector = mapStateWithSelectors({ tournaments: tournamentsWithYears, lookup });
 export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players });
-export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), tournaments, players });
+export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), tournaments, players, standing });
 export const historySelector = mapStateWithSelectors({ history, lookup, players });
 export const standingSelector = mapStateWithSelectors({ standing, tournament, players });
 export const teamSelector = mapStateWithSelectors({ tournament, team: form('team'), players, monthRatings });

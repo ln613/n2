@@ -14,8 +14,18 @@ const Standing = ({ standing, tournament, players, id, isMobile }) =>
     <div class={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr/>
-      <Ready on={[players, tournament]}><Table name="standing" data={standing}/></Ready>
-    </div>
+      {tournament.startDate2 ?
+        <Ready on={[players, tournament]}>
+          <div class="fs18 fw6 pt8">Upper Division</div>
+          <Table name="standing1" data={standing[0]} />
+          <div class="fs18 fw6">Lower Division</div>
+          <Table name="standing2" data={standing[1]} />
+        </Ready> :
+        <Ready on={[players, tournament]}>
+          <Table name="standing" data={standing} />
+        </Ready>
+      }
+  </div>
   </div>
 
 export default compose(

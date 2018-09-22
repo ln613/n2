@@ -69,7 +69,8 @@ var actionData = exports.actionData = {
     methods: ['post', 'put', 'patch', 'delete']
   },
   genrr: {
-    url: _util.admin + 'genrr/{id}',
+    url: _util.admin + 'genrr',
+    method: 'post',
     path: 'tournament.schedules'
   },
   games: {

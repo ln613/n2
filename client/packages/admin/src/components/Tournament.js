@@ -5,10 +5,10 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { tourSelector } from 'utils/selectors';
 import { TextBox, CheckBox, withMobile } from '@ln613/ui/semantic';
-import { withEdit, withParams } from '@ln613/compose';
+import { withEdit, withParams, withLoad } from '@ln613/compose';
 import { withRouter } from "react-router-dom";
 
-const Tournament = ({ tournament, history, postTour, patchTour, getGenrr, id, isMobile }) =>
+const Tournament = ({ tournament, standing, history, postTour, patchTour, postGenrr, id, isMobile }) =>
   <div>
     <h1>Tournament - {+tournament.id ? tournament.name : 'Add New'}</h1>
     <hr />
@@ -20,8 +20,11 @@ const Tournament = ({ tournament, history, postTour, patchTour, getGenrr, id, is
       }
       <Button primary onClick={() => history.push(`/schedules/${tournament.id}`)}>Schedules</Button>
       <Button primary onClick={() => history.push(`/games/${tournament.id}`)}>Games</Button>
-      <Button primary onClick={() => getGenrr({ id })}>Generate Schedule</Button>
-    </div>  
+      <Button primary onClick={() => postGenrr({ id })}>Generate Schedule</Button>
+      {tournament.isSingle || tournament.startDate2 ? null :
+        <Button primary onClick={() => postGenrr({ id, standing })}>Generate Schedule 2</Button>
+      }
+      </div>  
     : null}  
     <TextBox name="tournament.id" disabled />
     <TextBox name="tournament.name" fluid />
@@ -35,6 +38,8 @@ const Tournament = ({ tournament, history, postTour, patchTour, getGenrr, id, is
 export default compose(
   connect(tourSelector, actions),
   withParams,
+  withLoad('players'),
+  withLoad('tournament'),
   withEdit('tournament'),
   //withSuccess('tour', () => alert('Saved'), () => alert('Error happened!')),
   withRouter,

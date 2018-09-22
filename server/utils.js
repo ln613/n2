@@ -95,13 +95,13 @@ e.getTeamRating = t => t.players && t.players.length > 1
   ? R.pipe(R.map(x => +(x.tRating || x.rating)), e.sort, R.takeLast(2), R.sum)(t.players)
   : 0;
 
-e.rrScheduleTeam = (t, ids = [1, 2, 3, 4, 5, 6]) => R.compose(
-  rs => rs.map((w, i) => ({ id: i + 1, matches: w.map((m, j) => { m.id = ids[j]; return m; }), date: moment(t.startDate).add(i, 'week').toISOString() })),
+e.rrScheduleTeam = (teams, startDate, ids = [1, 2, 3, 4, 5, 6]) => R.compose(
+  rs => rs.map((w, i) => ({ id: i + 1, matches: w.map((m, j) => { m.id = ids[j]; return m; }), date: moment(startDate).add(i, 'week').toISOString() })),
   R.splitEvery(ids.length),
   R.unnest,
   e.rrSchedule,
   R.map(t => ({...t, rating: e.getTeamRating(t)}))
-)(t.teams);
+)(teams);
 
 e.json2js = x => JSON.parse(x, (k, v) => R.takeLast(4, k).toLowerCase() === 'date' ? new Date(v) : v)
 
