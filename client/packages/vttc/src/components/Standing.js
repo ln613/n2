@@ -20,6 +20,8 @@ const Standing = ({ standing, tournament, players, id, isMobile }) =>
           <Table name="standing1" data={standing[0]} />
           <div class="fs18 fw6">Lower Division</div>
           <Table name="standing2" data={standing[1]} />
+          <hr />
+          <div>Note: The results from first round will carry over to the second round.</div>
         </Ready> :
         <Ready on={[players, tournament]}>
           <Table name="standing" data={standing} />
