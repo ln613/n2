@@ -13,7 +13,7 @@ const Stats = ({ stats, tournament, id, isMobile }) =>
     <div class={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr/>
-      <Table name="stats" data={stats}>
+      <Table name="stats" data={stats} isMobile={isMobile} >
         <td key="mp" title="MP"/>
         <td key="gw" title="GW"/>
         <td key="gl" title="GL"/>

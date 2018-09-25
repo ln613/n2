@@ -373,7 +373,13 @@ var stats = (0, _state.createSelector)(tournament, function (t) {
       var dl = dloses.length;
       return { player: p.name, 'mp': total, w: w, l: l, '+/-': d > 0 ? '+' + d : d, 'win %': wpc, gw: gw, gl: gl, dw: dw, dl: dl };
     });
-  }, (0, _ramda.sortWith)([(0, _ramda.descend)((0, _ramda.prop)('+/-')), (0, _ramda.descend)((0, _ramda.prop)('win %'))]), (0, _util.addIndex)('#'))(t.teams || []);
+  }, (0, _ramda.sortWith)([(0, _ramda.descend)(function (x) {
+    return +x['+/-'];
+  }), (0, _ramda.descend)(function (x) {
+    return +(0, _ramda.dropLast)(1, x['win %']);
+  }), (0, _ramda.descend)(function (x) {
+    return x.gw;
+  })]), (0, _util.addIndex)('#'))(t.teams || []);
 });
 
 var history = (0, _state.createSelector)(_history, players, function (h, ps) {

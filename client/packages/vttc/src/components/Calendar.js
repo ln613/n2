@@ -3,7 +3,7 @@ import { range, splitEvery, fromPairs, mergeDeepLeft } from 'ramda';
 import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import { lookupSelector } from 'utils/selectors';
-import { Table } from '@ln613/ui/semantic';
+import { Table, withMobile } from '@ln613/ui/semantic';
 import moment from 'moment';
 
 const names = ['Drop In', 'Training', 'League'];
@@ -39,7 +39,7 @@ const thisMonth = d => {
   return d >= s1 && d <= e1;
 }
 
-const Calendar = ({ lookup }) =>
+const Calendar = ({ lookup , isMobile }) =>
   <div class="p16 fv">
     <h1>Calendar - {moment().format('YYYY MMMM')}</h1>
     <hr/>
@@ -48,7 +48,7 @@ const Calendar = ({ lookup }) =>
         <div class={`br4 m4 white p4 ${bg[i]}`}>{x}</div>
       )}
     </div>
-    <Table name="calendar" data={getDates()}>
+    <Table name="calendar" data={getDates()} isMobile={isMobile} >
       <td class="vat">{(_, x) =>
         <div class={`fv ${thisMonth(x.d) ? '' : 'op30'}`}>
           <div>{x.date}</div>
@@ -61,5 +61,6 @@ const Calendar = ({ lookup }) =>
   </div>
 
 export default compose(
-  connect(lookupSelector)
+  connect(lookupSelector),
+  withMobile
 )(Calendar);

@@ -1,4 +1,4 @@
-import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, uniqBy, anyPass, both } from 'ramda';
+import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, uniqBy, anyPass, both, dropLast } from 'ramda';
 import { createSelector, mapStateWithSelectors } from '@ln613/state';
 import { findById, getNameById, toDate, toMonth, addIndex, diff, tap, split2 } from '@ln613/util';
 
@@ -240,7 +240,7 @@ const stats = createSelector(
       const dl = dloses.length;
       return { player: p.name, 'mp': total, w, l, '+/-': d > 0 ? '+' + d : d, 'win %': wpc, gw, gl, dw, dl };
     }),
-    sortWith([descend(prop('+/-')), descend(prop('win %'))]),
+    sortWith([descend(x => +x['+/-']), descend(x => +(dropLast(1, x['win %']))), descend(x => x.gw)]),
     addIndex('#')
   )(t.teams || [])
 );
