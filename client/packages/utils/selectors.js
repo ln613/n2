@@ -308,7 +308,7 @@ var standing = (0, _state.createSelector)(tournament, teams, function (tt, ts) {
     var ps1 = (0, _ramda.sum)(ms.map(function (m) {
       return +m.result[m.home == t.id ? 2 : 0];
     }));
-    var s = (_s = {}, _defineProperty(_s, tt.isSingle ? 'player' : 'team', t.name), _defineProperty(_s, 'total', ms.length), _defineProperty(_s, 'w', wn), _defineProperty(_s, 'l', ln), _defineProperty(_s, tt.isSingle ? 'gw' : 'points', ps), _s);
+    var s = (_s = {}, _defineProperty(_s, tt.isSingle ? 'player' : 'team', t.name), _defineProperty(_s, 'total', ms.length), _defineProperty(_s, 'w', wn), _defineProperty(_s, 'l', ln), _defineProperty(_s, tt.isSingle ? 'gw' : 'points', ps), _defineProperty(_s, 'rank', t.rank), _s);
     if (tt.isSingle) s.gl = ps1;
     return s;
   });

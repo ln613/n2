@@ -195,7 +195,7 @@ const standing = createSelector(
       const ln = ms.length - wn;
       const ps = sum(ms.map(m => +m.result[m.home == t.id ? 0 : 2]));
       const ps1 = sum(ms.map(m => +m.result[m.home == t.id ? 2 : 0]));
-      const s = { [tt.isSingle ? 'player' : 'team']: t.name, total: ms.length, w: wn, l: ln, [tt.isSingle ? 'gw' : 'points']: ps };
+      const s = { [tt.isSingle ? 'player' : 'team']: t.name, total: ms.length, w: wn, l: ln, [tt.isSingle ? 'gw' : 'points']: ps, rank: t.rank };
       if (tt.isSingle) s.gl = ps1;
       return s;
     });
