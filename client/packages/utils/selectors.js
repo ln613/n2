@@ -315,7 +315,7 @@ var standing = (0, _state.createSelector)(tournament, teams, function (tt, ts) {
 
   var p = (0, _ramda.pipe)((0, _ramda.sortWith)(tt.isSingle ? [dw, at, dp(1), al] : [dp(0), at, dw]), (0, _util.addIndex)('rank'));
 
-  return tt.startDate2 ? (0, _ramda.pipe)((0, _ramda.sortBy)((0, _ramda.prop)('rank')), _util.split2, (0, _ramda.map)(p))(st) : p(st);
+  return tt.startDate2 ? (0, _util.tap)((0, _ramda.pipe)((0, _ramda.sortBy)((0, _ramda.prop)('rank')), _util.split2, (0, _ramda.map)(p))(st)) : p(st);
 });
 
 var isSamePlayer = function isSamePlayer(p1, id) {

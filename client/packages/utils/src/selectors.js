@@ -205,7 +205,7 @@ const standing = createSelector(
       addIndex('rank')
     );
 
-    return tt.startDate2 ? pipe(sortBy(prop('rank')), split2, map(p))(st) : p(st);
+    return tt.startDate2 ? tap(pipe(sortBy(prop('rank')), split2, map(p))(st)) : p(st);
   }
 );
 

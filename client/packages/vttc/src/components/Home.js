@@ -3,7 +3,7 @@ import ImageSlider from './ImageSlider';
 import { withMobile } from '@ln613/ui/semantic';
 
 const cards = ['https://www.youtube.com/embed/Bb1R3HeYcyA', 'https://www.youtube.com/embed/nmcOpuBDWRM', 'News', 'Court', 'Club', 'Sales', 'Products', 'League', 'Students', 'VIP'];
-const num   = [1, 1, 3, 8, 4, 4, 2, 2, 3, 4];
+const num   = [1, 1, 3, 8, 4, 4, 2, 4, 3, 4];
 
 const c1 = m =>
   <div class={`fw pb16 ${m ? '' : 'ph8'}`}>
