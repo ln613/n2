@@ -11,6 +11,8 @@ var _ramda = require('ramda');
 
 var _state = require('@ln613/state');
 
+var _ui = require('@ln613/ui');
+
 var _util = require('@ln613/util');
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -150,7 +152,7 @@ var tn = function tn(n, g) {
 };
 var findGames = function findGames(s, m, gs) {
   return gs.filter(function (g) {
-    return (s.half && g.half || !s.half && !g.half) && (g.t1 === m.home && g.t2 === m.away || g.t2 === m.home && g.t1 === m.away);
+    return (0, _util.toAbsDate)(g.date) === (0, _util.toAbsDate)(s.date) && (g.t1 === m.home && g.t2 === m.away || g.t2 === m.home && g.t1 === m.away);
   });
 };
 var gg = function gg(g, x) {
@@ -389,7 +391,10 @@ var history = (0, _state.createSelector)(_history, players, function (h, ps) {
     var g = x.games;
     var player1 = (0, _util.getNameById)(g.p1)(ps) + ' (' + g.p1Rating + ' ' + ((g.p1Diff > 0 ? '+ ' : '- ') + Math.abs(g.p1Diff)) + ' = ' + Math.max(100, g.p1Rating + g.p1Diff) + ')';
     var player2 = (0, _util.getNameById)(g.p2)(ps) + ' (' + g.p2Rating + ' ' + ((g.p2Diff > 0 ? '+ ' : '- ') + Math.abs(g.p2Diff)) + ' = ' + Math.max(100, g.p2Rating + g.p2Diff) + ')';
-    if (g.p1 === +x.pid) player1 = '<b>' + player1 + '</b>';else player2 = '<b>' + player2 + '</b>';
+
+    if (g.p1 === +x.pid) player1 = (0, _ui.Italic)(player1);else player2 = (0, _ui.Italic)(player2);
+
+    if (+g.result[0] > +g.result[2]) player1 = (0, _ui.Bold)(player1);else player2 = (0, _ui.Bold)(player2);
 
     return {
       id: g.id,

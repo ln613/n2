@@ -1,6 +1,7 @@
 import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, uniqBy, anyPass, both, dropLast } from 'ramda';
 import { createSelector, mapStateWithSelectors } from '@ln613/state';
-import { findById, getNameById, toDate, toMonth, addIndex, diff, tap, split2 } from '@ln613/util';
+import { Bold, Italic } from '@ln613/ui';
+import { findById, getNameById, toDate, toMonth, addIndex, diff, tap, split2, toAbsDate } from '@ln613/util';
 
 const _form = s => s.form || {};
 const _filter = s => s.filter || {};
@@ -90,7 +91,7 @@ const teams = createSelector(
 
 const pn = (n, g) => g['p' + n];
 const tn = (n, g) => g['t' + (n > 2 ? n - 2 : n)];
-const findGames = (s, m, gs) => gs.filter(g => ((s.half && g.half) || (!s.half && !g.half)) && ((g.t1 === m.home && g.t2 === m.away) || (g.t2 === m.home && g.t1 === m.away)));
+const findGames = (s, m, gs) => gs.filter(g => toAbsDate(g.date) === toAbsDate(s.date) && ((g.t1 === m.home && g.t2 === m.away) || (g.t2 === m.home && g.t1 === m.away)));
 const gg = (g, x) => +(g && g[x] || 0);
 const getResult = g => g.result || (range(0, 5).filter(n => gg(g.g1, n) > gg(g.g2, n)).length + ':' + range(0, 5).filter(n => gg(g.g1, n) < gg(g.g2, n)).length);
 const getPlayerName = (n, g, ps) => getNameById(pn(n, g))(ps) + (g.isDouble ? ' / ' + getNameById(pn(n + 2, g))(ps) : '');
@@ -252,8 +253,12 @@ const history = createSelector(
     const g = x.games;
     let player1 = `${getNameById(g.p1)(ps)} (${g.p1Rating} ${(g.p1Diff > 0 ? '+ ' : '- ') + Math.abs(g.p1Diff)} = ${Math.max(100, g.p1Rating + g.p1Diff)})`;
     let player2 = `${getNameById(g.p2)(ps)} (${g.p2Rating} ${(g.p2Diff > 0 ? '+ ' : '- ') + Math.abs(g.p2Diff)} = ${Math.max(100, g.p2Rating + g.p2Diff)})`;
-    if (g.p1 === +x.pid) player1 = '<b>' + player1 + '</b>';
-    else player2 = '<b>' + player2 + '</b>';
+
+    if (g.p1 === +x.pid) player1 = Italic(player1);
+    else player2 = Italic(player2);
+
+    if (+g.result[0] > +g.result[2]) player1 = Bold(player1);
+    else player2 = Bold(player2);
 
     return {
       id: g.id,

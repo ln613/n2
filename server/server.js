@@ -6,8 +6,8 @@ const cookieParser = require('cookie-parser');
 const moment = require('moment');
 const api = require('./api');
 const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule, rrScheduleTeam } = require('./utils');
-const { last, mergeDeepWith, zipWith, concat, is, find } = require('ramda');
-const { getPropByProp, split2 } = require('@ln613/util');
+const { last, mergeDeepWith, zipWith, concat, is, find, unnest, uniq, pipe, map, filter, len } = require('ramda');
+const { getPropByProp, split2, getPropById } = require('@ln613/util');
 
 const app = express();
 
@@ -29,7 +29,18 @@ app.use((req, res, next) => {
 // get --------------------
 
 app.get('/api/ut', (req, res) => {
-  api.getById('tournaments', 86).then(x => rrScheduleTeam(x)).then(x => res.json(x));
+  //api.getById('tournaments', 86).then(x => rrScheduleTeam(x)).then(x => res.json(x));
+  api.bak().then(r => res.json(pipe(
+    map(x => x.games),
+    unnest,
+    filter(x => x && x.result.indexOf('3') === -1 ),
+    map(x => [x.p1, x.p2]),
+    unnest,
+    uniq,
+    len,
+    //map(x => getPropById('firstName')(x)(r.players) + ' ' + getPropById('lastName')(x)(r.players))
+  )(r.tournaments)));
+  //api.bak().then(r => res.json(r.players.length));
 });
 
 app.get('/api/env', (req, res) => {

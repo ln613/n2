@@ -1,10 +1,10 @@
 import React from 'react';
 import { compose, withProps } from 'recompose';
-import { pick } from 'ramda';
+import { pick, sortWith, descend, prop } from 'ramda';
 import { connect } from '@ln613/state';
 import actions from 'utils/actions';
-import { withLoad, withParams, withNewId } from '@ln613/compose';
-import { findById, toAbsDate } from '@ln613/util';
+import { withLoad, withLoadForce, withParams, withNewId } from '@ln613/compose';
+import { findById, toAbsDate, tap } from '@ln613/util';
 import { tournamentSelector } from 'utils/selectors';
 import { Table } from '@ln613/ui/semantic';
 import { withRouter } from "react-router-dom";
@@ -24,10 +24,12 @@ export default compose(
   connect(tournamentSelector, actions),
   withParams,
   withLoad('players'),
-  withLoad('tournament', ['id', 'T'], true),
+  withLoadForce('tournament', 'id', 'T'),
   withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
   withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),
-  withProps(p => ({ games: (p.tournament.games || []).filter(x => (x.schedule === p.S || toAbsDate(x.date) === toAbsDate(p.schedule.date)) && (x.match === p.M || (x.t1 === p.match.home && x.t2 === p.match.away) || (x.t2 === p.match.home && x.t1 === p.match.away) )) })),
+  withProps(p => ({ games: sortWith([descend(prop('id'))],
+    (p.tournament.games || []).filter(x => (x.schedule === p.S || toAbsDate(x.date) === toAbsDate(p.schedule.date)) && (x.match === p.M || (x.t1 === p.match.home && x.t2 === p.match.away) || (x.t2 === p.match.home && x.t1 === p.match.away) ))
+  )})),
   withNewId('tournament.games'),
   withRouter
 )(Games)

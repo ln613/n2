@@ -117,7 +117,7 @@ e.adjustRating = g => {
   if (g.isDouble) {
       return g;
   } else {
-    const p1Win = g.result[0] === '3';
+    const p1Win = +g.result[0] > +g.result[2];
     const d = p1Win ? rateDiff(g.p1Rating, g.p2Rating) : rateDiff(g.p2Rating, g.p1Rating);
     return Object.assign({}, g, { p1Diff: p1Win ? d[0] : d[1], p2Diff: p1Win ? d[1] : d[0] });
   }
