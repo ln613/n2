@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const moment = require('moment');
 const api = require('./api');
 const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule, rrScheduleTeam } = require('./utils');
-const { last, mergeDeepWith, zipWith, concat, is, find, unnest, uniq, pipe, map, filter, len } = require('ramda');
+const { last, mergeDeepWith, zipWith, concat, is, find, unnest, uniq, pipe, map, filter, length, sortBy, sortWith, descend, prop, ascend } = require('ramda');
 const { getPropByProp, split2, getPropById } = require('@ln613/util');
 
 const app = express();
@@ -33,14 +33,29 @@ app.get('/api/ut', (req, res) => {
   api.bak().then(r => res.json(pipe(
     map(x => x.games),
     unnest,
-    filter(x => x && x.result.indexOf('3') === -1 ),
-    map(x => [x.p1, x.p2]),
-    unnest,
-    uniq,
-    len,
+    filter(x => x && x.result.indexOf('3') === -1 && ((+x.result[0] > +x.result[2] && x.p1Diff <= 0) || ((+x.result[0] < +x.result[2] && x.p1Diff > 0)))),
+    sortBy(x => x.date),
+    map(x => [x.id, x.date]),
+    //map(x => [x.p1, x.p2]),
+    //unnest,
+    //uniq,
+    //length,
     //map(x => getPropById('firstName')(x)(r.players) + ' ' + getPropById('lastName')(x)(r.players))
   )(r.tournaments)));
   //api.bak().then(r => res.json(r.players.length));
+});
+
+app.get('/api/ut1', (req, res) => {
+  api.bak().then(r => {
+    const games = pipe(map(x => x.games), unnest)(r.tournaments);
+    res.json(pipe(
+      sortBy(x => +x.id),
+      map(x => {
+        const g0 = sortWith([ascend(x => new Date(x.date)), ascend(prop('id'))])(games.filter(g => g && (g.p1 === x.id || g.p2 === x.id)))[0];
+        return [x.id, x.firstName + ' ' + x.lastName, g0 ? (g0.p1 === x.id ? g0.p1Rating : g0.p2Rating) : ''];
+      }),
+    )(r.players));
+  });
 });
 
 app.get('/api/env', (req, res) => {
@@ -191,7 +206,11 @@ app.get('/admin/count/:doc', (req, res) => {
 });
 
 app.patch('/admin/result', (req, res) => {
-  done(api.changeResult(req.body), res);
+  api.search('tournaments', 'games.id', )(api.changeResult(req.body), res);
+});
+
+app.patch('/admin/updaterating', (req, res) => {
+  done(api.updateRating(), res);
 });
 
 app.post('/admin/:doc/:id/:list', (req, res) => {

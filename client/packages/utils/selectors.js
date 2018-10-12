@@ -385,9 +385,9 @@ var stats = (0, _state.createSelector)(tournament, function (t) {
 });
 
 var history = (0, _state.createSelector)(_history, players, function (h, ps) {
-  return (0, _ramda.sortWith)([(0, _ramda.descend)((0, _ramda.prop)('id')), (0, _ramda.descend)(function (x) {
+  return (0, _ramda.sortWith)([(0, _ramda.descend)(function (x) {
     return new Date(x.date);
-  })], h.map(function (x) {
+  }), (0, _ramda.descend)((0, _ramda.prop)('id'))], h.map(function (x) {
     var g = x.games;
     var player1 = (0, _util.getNameById)(g.p1)(ps) + ' (' + g.p1Rating + ' ' + ((g.p1Diff > 0 ? '+ ' : '- ') + Math.abs(g.p1Diff)) + ' = ' + Math.max(100, g.p1Rating + g.p1Diff) + ')';
     var player2 = (0, _util.getNameById)(g.p2)(ps) + ' (' + g.p2Rating + ' ' + ((g.p2Diff > 0 ? '+ ' : '- ') + Math.abs(g.p2Diff)) + ' = ' + Math.max(100, g.p2Rating + g.p2Diff) + ')';

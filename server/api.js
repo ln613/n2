@@ -58,7 +58,7 @@ e.getIdName = doc => db.collection(doc).find({}, { _id: 0, id: 1, name: 1 }).toA
 e.getById = (doc, id) => db.collection(doc).findOne({ id: +id }, { _id: 0 })
 
 e.search = (doc, prop, val, fields) => db.collection(doc).find(
-    (prop || prop === '_') ? {} : { [prop]: isNaN(+val) ? new RegExp(val, 'i') : +val},
+    (!prop || prop === '_') ? {} : { [prop]: isNaN(+val) ? new RegExp(val, 'i') : +val},
     merge({ _id: 0, id: 1, name: 1 }, fields ? fromPairs(fields.split(',').map(x => [x, 1])) : {})
 ).toArray()
 
@@ -98,8 +98,8 @@ e.getPlayerRating = (id, date) => db.collection('tournaments').aggregate([
 
 e.changeResult = g1 => db.collection('tournaments').aggregate([
   { $unwind: '$games' },
-  { $match: { 'games.id': { $gte: g1.id }, 'games.isDouble': { $ne: true }, isSingle: { $ne: true } } },
-  { $sort: { 'games.id': 1 } },
+  { $match: { 'games.date': { $gte: g1.date }, 'games.isDouble': { $ne: true }, isSingle: { $ne: true } } },
+  { $sort: { 'games.date': 1 } },
   { $project: { games: 1, _id: 0, id: 1 } }
 ]).toArray().then(ts => {
   const ps = [[g1.p1, g1.p1Rating], [g1.p2, g1.p2Rating]];
@@ -124,5 +124,27 @@ e.changeResult = g1 => db.collection('tournaments').aggregate([
   return Promise.all(pp)
     .then(_ => Promise.all(ps.map(p => db.collection('players').update({ id: p[0] }, { $set: {rating: p[1]}}))));
 }).catch(e => console.log(e))
+
+e.updateRating = () => {
+  const pr = {};
+  return db.collection('tournaments').aggregate([
+    { $unwind: '$games' },
+    { $match: { 'games.isDouble': { $ne: true }, isSingle: { $ne: true } } },
+    { $sort: { 'games.date': 1, 'games.id': 1 } },
+    { $project: { games: 1, _id: 0, id: 1 } }
+  ]).toArray().then(ts => {
+    const pp = ts.map(t => {
+      let g = t.games;
+      if (pr[g.p1]) g.p1Rating = pr[g.p1];
+      if (pr[g.p2]) g.p2Rating = pr[g.p2];
+      g = adjustRating(g);
+      pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
+      pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
+      return db.collection('tournaments').update({ id: t.id, 'games.id': g.id }, { $set: { 'games.$.p1Rating': g.p1Rating, 'games.$.p1Diff': g.p1Diff, 'games.$.p2Rating': g.p2Rating, 'games.$.p2Diff': g.p2Diff } });
+    });
+    return Promise.all(pp)
+      .then(_ => Promise.all(Object.keys(pr).map(p => db.collection('players').update({ id: +p }, { $set: { rating: +pr[p] } }))));
+  }).catch(e => console.log(e));
+}
 
 module.exports = e;
