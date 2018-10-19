@@ -220,6 +220,7 @@ const stats = createSelector(
   tournament,
   t => pipe(
     map(x => x.players),
+    filter(x => !x.isSub),
     unnest,
     uniqBy(x => x.id),
     ps => ps.map(p => {

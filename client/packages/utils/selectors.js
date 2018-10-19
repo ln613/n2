@@ -345,6 +345,8 @@ var isPlayerWin = function isPlayerWin(p) {
 var stats = (0, _state.createSelector)(tournament, function (t) {
   return (0, _ramda.pipe)((0, _ramda.map)(function (x) {
     return x.players;
+  }), filter(function (x) {
+    return !x.isSub;
   }), _ramda.unnest, (0, _ramda.uniqBy)(function (x) {
     return x.id;
   }), function (ps) {
