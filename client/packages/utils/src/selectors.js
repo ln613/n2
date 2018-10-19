@@ -206,7 +206,7 @@ const standing = createSelector(
       addIndex('rank')
     );
 
-    return tt.startDate2 ? tap(pipe(sortBy(prop('rank')), split2, map(p))(st)) : p(st);
+    return tt.startDate2 ? pipe(sortBy(prop('rank')), split2, map(p))(st) : p(st);
   }
 );
 
@@ -218,33 +218,47 @@ const isPlayerWin = p => g => (isHomePlayer(p)(g) && g.isWin) || (isAwayPlayer(p
 
 const stats = createSelector(
   tournament,
-  t => pipe(
-    map(x => x.players),
-    unnest,
-    where(x => !x.isSub),
-    uniqBy(x => x.id),
-    ps => ps.map(p => {
-      const gs = (t.games || []).filter(isPlayerInGame(p));
-      const sgs = gs.filter(g => !g.isDouble);
-      const dgs = gs.filter(g => g.isDouble);
-      const total = sgs.length;
-      const wins = sgs.filter(isPlayerWin(p));
-      const loses = diff()(sgs, wins);
-      const gw = sum(sgs.map(g => +g.result[isHomePlayer(p)(g) ? 0 : 2]));
-      const gl = sum(sgs.map(g => +g.result[isHomePlayer(p)(g) ? 2 : 0]));
-      const w = wins.length;
-      const l = loses.length;
-      const d = w - l;
-      const wpc = ((total && (w / total)) * 100).toFixed(1) + '%';
-      const dwins = dgs.filter(isPlayerWin(p));
-      const dloses = diff()(dgs, dwins);
-      const dw = dwins.length;
-      const dl = dloses.length;
-      return { player: p.name, 'mp': total, w, l, '+/-': d > 0 ? '+' + d : d, 'win %': wpc, gw, gl, dw, dl };
-    }),
-    sortWith([descend(x => +x['+/-']), descend(x => +(dropLast(1, x['win %']))), descend(x => x.gw)]),
-    addIndex('#')
-  )(t.teams || [])
+  t => {
+    const teams = t.teams || [];
+
+    const players = pipe(
+      map(x => x.players.map(p => ({...p, isUpperDiv: x.rank <= teams.length / 2}))),
+      unnest,
+      where(x => !x.isSub),
+      uniqBy(x => x.id)
+    )(teams);
+
+    const st = pipe(
+      map(p => {
+        const gs = (t.games || []).filter(isPlayerInGame(p));
+        const sgs = gs.filter(g => !g.isDouble);
+        const dgs = gs.filter(g => g.isDouble);
+        const total = sgs.length;
+        const wins = sgs.filter(isPlayerWin(p));
+        const loses = diff()(sgs, wins);
+        const gw = sum(sgs.map(g => +g.result[isHomePlayer(p)(g) ? 0 : 2]));
+        const gl = sum(sgs.map(g => +g.result[isHomePlayer(p)(g) ? 2 : 0]));
+        const w = wins.length;
+        const l = loses.length;
+        const d = w - l;
+        const wpc = ((total && (w / total)) * 100).toFixed(1) + '%';
+        const dwins = dgs.filter(isPlayerWin(p));
+        const dloses = diff()(dgs, dwins);
+        const dw = dwins.length;
+        const dl = dloses.length;
+        return { player: p.name, 'mp': total, w, l, '+/-': d > 0 ? '+' + d : d, 'win %': wpc, gw, gl, dw, dl };
+      }),
+      sortWith([descend(x => +x['+/-']), descend(x => +(dropLast(1, x['win %']))), descend(x => x.gw)]),
+      addIndex('#')
+    );
+    
+    if (t.startDate2) {
+      const pp = groupWith(x => x.isUpperDiv, players);
+      return map(st, pp);
+    }
+
+    return st(players);
+  }
 );
 
 const history = createSelector(
