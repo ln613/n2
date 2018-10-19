@@ -1,4 +1,4 @@
-import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, uniqBy, anyPass, both, dropLast } from 'ramda';
+import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, filter as where, uniqBy, anyPass, both, dropLast } from 'ramda';
 import { createSelector, mapStateWithSelectors } from '@ln613/state';
 import { Bold, Italic } from '@ln613/ui';
 import { findById, getNameById, toDate, toMonth, addIndex, diff, tap, split2, toAbsDate } from '@ln613/util';
@@ -220,8 +220,8 @@ const stats = createSelector(
   tournament,
   t => pipe(
     map(x => x.players),
-    filter(x => !x.isSub),
     unnest,
+    where(x => !x.isSub),
     uniqBy(x => x.id),
     ps => ps.map(p => {
       const gs = (t.games || []).filter(isPlayerInGame(p));
