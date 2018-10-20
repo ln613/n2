@@ -253,11 +253,12 @@ const stats = createSelector(
     );
     
     if (t.startDate2) {
-      const pp = groupWith(x => x.isUpperDiv, players);
-      return map(st, pp);
+      const p1 = players.filter(x => x.isUpperDiv);
+      const p2 = players.filter(x => !x.isUpperDiv);
+      return map(st, [p1, p2]);
     }
 
-    return st(players);
+    return tap(st(players));
   }
 );
 

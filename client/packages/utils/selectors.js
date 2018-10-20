@@ -390,13 +390,16 @@ var stats = (0, _state.createSelector)(tournament, function (t) {
   })]), (0, _util.addIndex)('#'));
 
   if (t.startDate2) {
-    var pp = (0, _ramda.groupWith)(function (x) {
+    var p1 = players.filter(function (x) {
       return x.isUpperDiv;
-    }, players);
-    return (0, _ramda.map)(st, pp);
+    });
+    var p2 = players.filter(function (x) {
+      return !x.isUpperDiv;
+    });
+    return (0, _ramda.map)(st, [p1, p2]);
   }
 
-  return st(players);
+  return (0, _util.tap)(st(players));
 });
 
 var history = (0, _state.createSelector)(_history, players, function (h, ps) {

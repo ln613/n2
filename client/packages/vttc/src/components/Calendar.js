@@ -19,7 +19,7 @@ const tt = {
   Sat: { schedules: [[0, '12', '6:30'], [1, '6:30', '9:30'], [0, '9:30', '11']] }
 }
 const sm13 = [[0, '12', '6']];
-const ssun2 = [[0, '2', '7']];
+const ssun3 = [[0, '3', '7']];
 
 const getDates = () => {
   const s1 = moment().startOf('month');
@@ -29,12 +29,12 @@ const getDates = () => {
   const m1 = moment(s2).add(1, 'days');
   if (m1.month() !== s1.month()) m1.add(1, 'weeks');
   const m3 = moment(m1).add(2, 'weeks');
-  const sun2 = moment(s2).add(s1.month() === s2.month() ? 1 : 2, 'weeks');
+  const sun3 = moment(s2).add(s1.month() === s2.month() ? 2 : 3, 'weeks');
   const dates = range(0, e2.diff(s2, 'days') + 1).map(x => moment(s2).add(x, 'days'));
   const rs = splitEvery(7, dates).map(x => fromPairs(x.map(d => [d.format('ddd'), { date: d.date(), d }]))).map(x => mergeDeepLeft(x, tt));
   rs.forEach(r => {
     Object.keys(r).filter(k => r[k].d.isSame(m1) || r[k].d.isSame(m3)).forEach(k => r[k].schedules = sm13);
-    Object.keys(r).filter(k => r[k].d.isSame(sun2)).forEach(k => r[k].schedules = ssun2.concat(drop(1, tt.Sun.schedules)));
+    Object.keys(r).filter(k => r[k].d.isSame(sun3)).forEach(k => r[k].schedules = ssun3.concat(drop(1, tt.Sun.schedules)));
   });
   return rs;
 }
