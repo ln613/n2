@@ -10,7 +10,7 @@ export default class ImageSlider extends React.Component {
   }
 
   componentDidMount() {
-    timer = setInterval(() => this.setState({ index: this.state.index === images.length - 1 ? 0 : this.state.index + 1 }), 3000);
+    timer = setInterval(() => this.setState({ index: this.state.index === images.length - 1 ? 0 : this.state.index + 1 }), 6000);
   }
 
   componentWillUnmount() {
