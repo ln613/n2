@@ -7,6 +7,7 @@ import { tourSelector } from 'utils/selectors';
 import { TextBox, CheckBox, withMobile } from '@ln613/ui/semantic';
 import { withEdit, withParams, withLoad } from '@ln613/compose';
 import { withRouter } from "react-router-dom";
+import { withSuccess } from 'utils';
 
 const Tournament = ({ tournament, standing, history, postTour, patchTour, postGenrr, id, isMobile }) =>
   <div>
@@ -41,7 +42,7 @@ export default compose(
   withLoad('players'),
   withLoad('tournament'),
   withEdit('tournament'),
-  //withSuccess('tour', () => alert('Saved'), () => alert('Error happened!')),
+  withSuccess('tour', () => alert('Saved'), () => alert('Error happened!')),
   withRouter,
   withMobile
 )(Tournament)

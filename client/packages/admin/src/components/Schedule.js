@@ -9,6 +9,7 @@ import { TextBox, Table } from '@ln613/ui/semantic';
 import { Select } from '@ln613/ui';
 import { withLoad, withEdit, withParams } from '@ln613/compose';
 import { withRouter } from "react-router-dom";
+import { withSuccess } from 'utils';
 
 const results = ['3:0', '3:1', '3:2', '2:3', '1:3', '0:3'];
 
@@ -41,6 +42,6 @@ export default compose(
   withParams,
   withLoad('tournament', ['id', 'id1'], true),
   withEdit('schedule', 'tournament.schedules', { matches: [] }),
-  //withSuccess('schedule', () => alert('Saved'), () => alert('Error happened!')),
+  withSuccess('schedule', () => alert('Saved'), () => alert('Error happened!')),
   withRouter
 )(Schedule)

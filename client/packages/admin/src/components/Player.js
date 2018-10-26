@@ -6,6 +6,7 @@ import actions from 'utils/actions';
 import { playersSelector } from 'utils/selectors';
 import { TextBox } from '@ln613/ui/semantic';
 import { withEdit, withLoad, withParams } from '@ln613/compose';
+import { withSuccess } from 'utils';
 
 const Player = ({ player, putPlayer, postPlayer, id }) =>
   <div>
@@ -27,7 +28,7 @@ export default compose(
   withParams,
   withLoad('players'),
   withEdit('player'),
-  //withSuccess('player', () => alert('Saved'), () => alert('Error happened!'))
+  withSuccess('player', () => alert('Saved'), () => alert('Error happened!'))
 )(Player)
 
 const toPlayer = p => ({...p, id: +p.id, rating: p.rating ? +p.rating : 100})

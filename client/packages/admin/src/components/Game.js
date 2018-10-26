@@ -5,6 +5,7 @@ import { connect } from '@ln613/state';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { gameSelector } from 'utils/selectors';
+import { withSuccess } from 'utils';
 import { TextBox, CheckBox } from '@ln613/ui/semantic';
 import { Select } from '@ln613/ui';
 import { withLoad, withEdit, withParams } from '@ln613/compose';
@@ -58,8 +59,8 @@ export default compose(
   withEdit('game', 'tournament.games', { g1: [], g2: []}),
   withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
   withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),
-  //withSuccess('game', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!')),
-  //withSuccess('result', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!'))
+  withSuccess('game', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!')),
+  withSuccess('result', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!'))
 )(Game)
 
 const gg = (g, x) => +((g && g[x]) || 0);

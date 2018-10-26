@@ -7,6 +7,7 @@ import { teamSelector } from 'utils/selectors';
 import { TextBox } from '@ln613/ui/semantic';
 import { withLoad, withEdit, withParams } from '@ln613/compose';
 import AddPlayer from './AddPlayer';
+import { withSuccess } from 'utils';
 
 const Team = ({ tournament, team, players, monthRatings, putTeam, postTeam, id, setFormTeamPlayers, getPlayerRating }) =>
   <div>
@@ -27,7 +28,7 @@ export default compose(
   withLoad('players'),
   withLoad('tournament', ['id', 'id1']),
   withEdit('team', 'tournament.teams', {players:[]}),
-  //withSuccess('team', () => alert('Saved'), () => alert('Error happened!'))
+  withSuccess('team', () => alert('Saved'), () => alert('Error happened!'))
 )(Team)
 
 // const toTeam = (t, ps) => ({
