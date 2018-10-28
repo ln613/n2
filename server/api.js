@@ -98,11 +98,11 @@ e.getPlayerRating = (id, date) => db.collection('tournaments').aggregate([
 
 e.changeResult = g1 => db.collection('tournaments').aggregate([
   { $unwind: '$games' },
-  { $match: { 'games.date': { $gte: g1.date }, 'games.isDouble': { $ne: true }, isSingle: { $ne: true } } },
+  { $match: { 'games.date': { $gte: new Date(g1.date) }, 'games.isDouble': { $ne: true }, isSingle: { $ne: true } } },
   { $sort: { 'games.date': 1 } },
   { $project: { games: 1, _id: 0, id: 1 } }
 ]).toArray().then(ts => {
-  const ps = [[g1.p1, g1.p1Rating], [g1.p2, g1.p2Rating]];
+  const ps =   [[g1.p1, g1.p1Rating], [g1.p2, g1.p2Rating]];
   const pp = ts.map(t => {
     let g = t.games;
     if (g.id === g1.id) g.result = g1.result;

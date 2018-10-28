@@ -16,7 +16,7 @@ const ImageList = ({ n, f, name, index, lookup }) =>
     )}
   </div>
 
-const setIndex = p => setTimeout(() => p.setIndex(p.index === p.n - 1 ? 0 : p.index + 1), Math.random() * 2000 + 2000);
+const setIndex = p => setTimeout(() => p.setIndex(p.index === p.n - 1 ? 0 : p.index + 1), Math.random() * (p.t || 2) * 1000 + (p.t || 2) * 1000);
 
 export default compose(
   withState('index', 'setIndex', 0),

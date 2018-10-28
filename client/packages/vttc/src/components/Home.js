@@ -26,7 +26,7 @@ const yt = (s, m) => <iframe src={s} frameborder="0" style={{ overflow: 'hidden'
 
 const Home = ({ isMobile }) =>
   <div>
-    <ImageSlider n={3} />
+    <ImageSlider n={3} t={6} />
 
     <div class="p16">
       <h2>Introduction</h2>

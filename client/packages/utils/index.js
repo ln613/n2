@@ -15,12 +15,14 @@ var _recompose = require('recompose');
 
 var _selectors = require('./selectors');
 
+var _compose = require('@ln613/compose');
+
 var cdurl = exports.cdurl = function cdurl(l, c, n) {
   return l.cdVersion ? 'http://res.cloudinary.com/vttc/image/upload/v' + l.cdVersion + '/' + c + '/' + n + '.jpg' : '';
 };
 
 var withSuccess = exports.withSuccess = function withSuccess(a, f1, f2) {
-  return (0, _recompose.compose)((0, _state.connect)((0, _selectors.successSelector)(a)), withNewValue('success', true, f1), withNewValue('success', false, f2));
+  return (0, _recompose.compose)((0, _state.connect)((0, _selectors.successSelector)(a)), (0, _compose.withNewValue)('success', true, f1), (0, _compose.withNewValue)('success', false, f2));
 };
 
 var rdiff = [[3, 0], [5, -2], [8, -5], [10, -7], [13, -9], [15, -11], [18, -14], [20, -16], [25, -21], [30, -26], [35, -31], [40, -36], [45, -41], [50, -45], [55, -50]];

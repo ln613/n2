@@ -206,7 +206,7 @@ app.get('/admin/count/:doc', (req, res) => {
 });
 
 app.patch('/admin/result', (req, res) => {
-  api.search('tournaments', 'games.id', )(api.changeResult(req.body), res);
+  done(api.changeResult(req.body), res);
 });
 
 app.patch('/admin/updaterating', (req, res) => {

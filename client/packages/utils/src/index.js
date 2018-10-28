@@ -2,6 +2,7 @@ import { last } from 'ramda';
 import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import { successSelector } from './selectors';
+import { withNewValue } from '@ln613/compose';
 
 export const cdurl = (l, c, n) => l.cdVersion ? `http://res.cloudinary.com/vttc/image/upload/v${l.cdVersion}/${c}/${n}.jpg` : '';
 
