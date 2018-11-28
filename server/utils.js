@@ -11,6 +11,8 @@ e.cd = 'http://res.cloudinary.com/vttc/image/upload/v1522908408/';
 
 e.tap = x => R.tap(console.log, R.isNil(x) ? 'null' : x);
 
+e.serial = (arr, func) => arr.reduce((promise, next) => promise.then(r => func(next).then(r1 => R.append(r1, r))), Promise.resolve([]));
+
 e.sort = R.sort((a, b) => a - b);
 
 e.sortDesc = R.sort((a, b) => b - a);

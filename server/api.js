@@ -2,7 +2,7 @@ const fs = require('fs');
 const mongodb = require('mongodb');
 const cd = require('cloudinary');
 const { sortWith, ascend, descend, prop, fromPairs, merge } = require('ramda');
-const { tap, config, json2js, adjustRating, newRating } = require('./utils');
+const { tap, config, json2js, adjustRating, newRating, serial } = require('./utils');
 const moment = require('moment');
 
 const allDocs = ['cats', 'players', 'products', 'tournaments'];
@@ -133,7 +133,7 @@ e.updateRating = () => {
     { $sort: { 'games.date': 1, 'games.id': 1 } },
     { $project: { games: 1, _id: 0, id: 1 } }
   ]).toArray().then(ts => {
-    const pp = ts.map(t => {
+    return serial(ts, t => {
       let g = t.games;
       if (pr[g.p1]) g.p1Rating = pr[g.p1];
       if (pr[g.p2]) g.p2Rating = pr[g.p2];
@@ -141,9 +141,9 @@ e.updateRating = () => {
       pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
       pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
       return db.collection('tournaments').update({ id: t.id, 'games.id': g.id }, { $set: { 'games.$.p1Rating': g.p1Rating, 'games.$.p1Diff': g.p1Diff, 'games.$.p2Rating': g.p2Rating, 'games.$.p2Diff': g.p2Diff } });
-    });
-    return Promise.all(pp)
-      .then(_ => Promise.all(Object.keys(pr).map(p => db.collection('players').update({ id: +p }, { $set: { rating: +pr[p] } }))));
+    }).then(_ =>
+        serial(Object.keys(pr), p => db.collection('players').update({ id: +p }, { $set: { rating: +pr[p] } }))
+    );
   }).catch(e => console.log(e));
 }
 
