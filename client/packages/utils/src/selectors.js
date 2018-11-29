@@ -190,7 +190,7 @@ const standing = createSelector(
   teams,
   (tt, ts) => {
     const st = (tt.isSingle ? tt.players : ts).map(t => {
-      const ms = unnest(tt.schedules.map(s => s.matches)).filter(m => (m.home === t.id || m.away === t.id) && m.result && m.result != '0:0');
+      const ms = unnest((tt.schedules || []).map(s => s.matches)).filter(m => (m.home === t.id || m.away === t.id) && m.result && m.result != '0:0');
       const ws = ms.filter(m => (m.home === t.id && m.result[0] > m.result[2]) || (m.away === t.id && m.result[0] < m.result[2]));
       const wn = ws.length;
       const ln = ms.length - wn;

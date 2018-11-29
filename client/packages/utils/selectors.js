@@ -294,7 +294,7 @@ var standing = (0, _state.createSelector)(tournament, teams, function (tt, ts) {
   var st = (tt.isSingle ? tt.players : ts).map(function (t) {
     var _s;
 
-    var ms = (0, _ramda.unnest)(tt.schedules.map(function (s) {
+    var ms = (0, _ramda.unnest)((tt.schedules || []).map(function (s) {
       return s.matches;
     })).filter(function (m) {
       return (m.home === t.id || m.away === t.id) && m.result && m.result != '0:0';
