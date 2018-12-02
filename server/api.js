@@ -126,7 +126,7 @@ e.changeResult = g1 => db.collection('tournaments').aggregate([
 }).catch(e => console.log(e))
 
 e.updateRating = () => {
-  const pr = {};
+  const pr = JSON.parse(fs.readFileSync(__dirname + '/../data/initialRatings.json'));
   return db.collection('tournaments').aggregate([
     { $unwind: '$games' },
     { $match: { 'games.isDouble': { $ne: true }, isSingle: { $ne: true } } },
