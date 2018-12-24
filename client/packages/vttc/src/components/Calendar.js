@@ -48,7 +48,9 @@ const thisMonth = d => {
 const Calendar = ({ lookup , isMobile }) =>
   <div class="p16 fv">
     <h1>Calendar - {moment().format('YYYY MMMM')}</h1>
-    <hr/>
+    <hr />
+    <h3>Christmas opening hours: Dec 24 12pm to 6pm, Dec 25 closed. 圣诞节开放时间: 12月24日 12pm to 6pm, 12月25日关闭</h3>
+    <hr />
     <div class="f">
       {names.map((x, i) =>
         <div class={`br4 m4 white p4 ${bg[i]}`}>{x}</div>
