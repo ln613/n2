@@ -127,4 +127,7 @@ e.adjustRating = g => {
 
 e.newRating = (r, d) => Math.max(r + d, 100)
 
+e.groups = ts => R.pipe(R.map(t => [e.getTeamRating(t), t]), R.sortWith([R.descend(R.nth(0))]))
+
+
 module.exports = e;
