@@ -17,6 +17,8 @@ e.sort = R.sort((a, b) => a - b);
 
 e.sortDesc = R.sort((a, b) => b - a);
 
+e.isOdd = n => n % 2 === 1;
+
 e.config = fs.existsSync(path.join(__dirname, 'config.js')) ? require('./config') : null;
 
 const send = d => (p, res) => p.then(x => res.json(d || x)).catch(e => res.send(e))
@@ -84,12 +86,16 @@ const rrCycle = (x, r, l) => x < r ? x - r + l : x - r + 1;
 
 e.rrSchedule = (x, sorted) => {
   const l = sorted ? x : R.sortWith([R.descend(R.prop('rating'))], x);
+  if (e.isOdd(l.length)) l.push({id: null});
   const t1 = R.range(1, l.length);
   const t2 = R.range(0, l.length / 2);
   return t1.map((r, i) => {
     const l1 = t1.map(n => l[rrCycle(n, r, l.length)]);
     const l2 = R.insert(0, l[0], l1);
-    return t2.map((n, j) => ({ id: j + 1, round: i + 1, home: l2[n].id, away: l2[l.length - n - 1].id }));
+    return t2
+      .map(n => ({ round: i + 1, home: l2[n].id, away: l2[l.length - n - 1].id }))
+      .filter(t => t.home && t.away)
+      .map((t, j) => ({...t, id: j + 1}));
   })
 }
 
@@ -131,3 +137,5 @@ e.groups = ts => R.pipe(R.map(t => [e.getTeamRating(t), t]), R.sortWith([R.desce
 
 
 module.exports = e;
+
+console.log(e.rrSchedule([1,2,3,4,5,6].map(x => ({id:x})), true));
