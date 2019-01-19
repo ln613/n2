@@ -5,8 +5,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const moment = require('moment');
 const api = require('./api');
-const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule, rrScheduleTeam } = require('./utils');
-const { last, mergeDeepWith, zipWith, concat, is, find, unnest, uniq, pipe, map, filter, length, sortBy, sortWith, descend, prop, ascend } = require('ramda');
+const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule, rrScheduleTeam, group, sortTeam } = require('./utils');
+const { last, mergeDeepWith, zipWith, concat, is, find, unnest, uniq, pipe, map, filter, length, sortBy, sortWith, descend, prop, ascend, isNil } = require('ramda');
 const { getPropByProp, split2, getPropById } = require('@ln613/util');
 
 const app = express();
@@ -200,7 +200,16 @@ app.post('/admin/genrr', (req, res) => {
     }
   });
 });
-  
+
+app.post('/admin/gengroup', (req, res) => {
+  const id = +req.body.id;
+  api.getById('tournaments', id).then(t => {
+    if (!t.isSingle && t.teams && t.teams.length > 0 && isNil(t.teams[0].group) && isNil(t.games) && isNil(t.schedules)) {
+      api.update('tournaments', { id, teams: group(sortTeam(t.teams)) }).then(r => res.json(r));
+    }
+  });
+});
+
 app.get('/admin/count/:doc', (req, res) => {
   send(api.count(req.params.doc), res);
 });

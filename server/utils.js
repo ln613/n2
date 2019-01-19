@@ -100,7 +100,7 @@ e.rrSchedule = (x, sorted) => {
 }
 
 e.getTeamRating = t => t.players && t.players.length > 1
-  ? R.pipe(R.map(x => +(x.tRating || x.rating)), e.sort, R.takeLast(2), R.sum)(t.players)
+  ? R.pipe(R.map(x => +(x.isSub ? 0 : (x.tRating || x.rating))), e.sort, R.takeLast(2), R.sum)(t.players)
   : 0;
 
 e.rrScheduleTeam = (teams, startDate, ids = [1, 2, 3, 4, 5, 6]) => R.compose(
@@ -133,9 +133,19 @@ e.adjustRating = g => {
 
 e.newRating = (r, d) => Math.max(r + d, 100)
 
-e.groups = ts => R.pipe(R.map(t => [e.getTeamRating(t), t]), R.sortWith([R.descend(R.nth(0))]))
+e.sortTeam = R.pipe(R.map(t => [e.getTeamRating(t), t]), R.sortWith([R.descend(R.nth(0))]), R.map(R.nth(1)))
 
+e.numOfGroups = n => Math.pow(2, Math.floor(Math.log10(n / 3) / Math.log10(2)))
+
+e.group = ts => {
+  const n = ts.length;
+  const g = e.numOfGroups(n);
+  return ts.map((t, i) => {
+    const l = Math.floor(i / g);
+    const c = i % g;
+    const group = e.isOdd(l) ? (g - c - 1) : c;
+    return {...t, group};
+  });
+}
 
 module.exports = e;
-
-console.log(e.rrSchedule([1,2,3,4,5,6].map(x => ({id:x})), true));
