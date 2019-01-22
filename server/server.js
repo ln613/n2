@@ -5,8 +5,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const moment = require('moment');
 const api = require('./api');
-const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule, rrScheduleTeam, group, sortTeam } = require('./utils');
-const { last, mergeDeepWith, zipWith, concat, is, find, unnest, uniq, pipe, map, filter, length, sortBy, sortWith, descend, prop, ascend, isNil } = require('ramda');
+const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule, rrScheduleTeam, group, sortTeam, numOfGroups } = require('./utils');
+const { last, mergeDeepWith, zipWith, concat, is, find, unnest, uniq, pipe, map, filter, length, sortBy, sortWith, descend, prop, ascend, isNil, groupBy, sum, range } = require('ramda');
 const { getPropByProp, split2, getPropById } = require('@ln613/util');
 
 const app = express();
@@ -163,6 +163,7 @@ app.get('/admin/cd/list', (req, res) => {
 app.post('/admin/genrr', (req, res) => {
   const id = +req.body.id;
   const standing = req.body.standing;
+  const groups = req.body.groups;
 
   api.getById('tournaments', id).then(t => {
     if (t.isSingle) {
@@ -176,7 +177,22 @@ app.post('/admin/genrr', (req, res) => {
         res.json('N/A');
       }
     } else {
-      if (!t.startDate2 && t.teams && t.schedules) {
+      if (t.teams && t.teams.length > 0 && isNil(t.teams[0].group)) {
+        if (!t.schedules) {
+          const groups = groupBy(x => x.group, t.teams);
+          const schedules = Object.keys(groups).map(g => ({matches: unnest(rrSchedule(groups[g])), group: g}));
+          api.update('tournaments', { id, schedules }).then(r => res.json(r));
+        } else if (groups) {
+          const ko = unnest(range(0, groups.length / 2).map(n => [
+            { home: groups[n][0], away: groups[groups.length - n - 1][1], round: groups.length },
+            { home: groups[n][1], away: groups[groups.length - n - 1][0], round: groups.length }
+          ]));
+          api.update('tournaments', { id, schedules: t.schedules.concat(ko) }).then(r => res.json(r));
+        } else {
+          res.json('N/A');
+        }
+      }
+      else if (!t.startDate2 && t.teams && t.schedules) {
         const sd = moment(last(t.schedules).date).add(1, 'week');
         const tt = split2(standing.map(x => find(y => y.name === x.team, t.teams)));
         const s1 = rrScheduleTeam(tt[0], sd, [6, 7]);
@@ -205,7 +221,10 @@ app.post('/admin/gengroup', (req, res) => {
   const id = +req.body.id;
   api.getById('tournaments', id).then(t => {
     if (!t.isSingle && t.teams && t.teams.length > 0 && isNil(t.teams[0].group) && isNil(t.games) && isNil(t.schedules)) {
-      api.update('tournaments', { id, teams: group(sortTeam(t.teams)) }).then(r => res.json(r));
+      const teams = group(sortTeam(t.teams));
+      api.update('tournaments', { id, teams }).then(r => res.json(r));
+    } else {
+      res.json('N/A');
     }
   });
 });
