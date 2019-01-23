@@ -163,7 +163,7 @@ app.get('/admin/cd/list', (req, res) => {
 app.post('/admin/genrr', (req, res) => {
   const id = +req.body.id;
   const standing = req.body.standing;
-  const groups = req.body.groups;
+  const koStanding = req.body.koStanding;
 
   api.getById('tournaments', id).then(t => {
     if (t.isSingle) {
@@ -178,21 +178,21 @@ app.post('/admin/genrr', (req, res) => {
       }
     } else {
       if (t.teams && t.teams.length > 0 && isNil(t.teams[0].group)) {
+        const groups = groupBy(x => x.group, t.teams);
         if (!t.schedules) {
-          const groups = groupBy(x => x.group, t.teams);
           const schedules = Object.keys(groups).map(g => ({matches: unnest(rrSchedule(groups[g])), group: g}));
           api.update('tournaments', { id, schedules }).then(r => res.json(r));
-        } else if (groups) {
-          const ko = unnest(range(0, groups.length / 2).map(n => [
-            { home: groups[n][0], away: groups[groups.length - n - 1][1], round: groups.length },
-            { home: groups[n][1], away: groups[groups.length - n - 1][0], round: groups.length }
+        } else if (standing && (!find(s => s.ko, t.schedules) || find(s => s.ko === koStanding.length, t.schedules))) {
+          //pipe(filter(s => !isNil(s.group)), map(x => x.matches.length * 5), sum)(t.schedules)
+          const ko = unnest(range(0, standing.length / 2).map(n => [
+            { home: standing[n][0], away: standing[standing.length - n - 1][1], ko: standing.length },
+            { home: standing[n][1], away: standing[standing.length - n - 1][0], ko: standing.length }
           ]));
           api.update('tournaments', { id, schedules: t.schedules.concat(ko) }).then(r => res.json(r));
         } else {
           res.json('N/A');
         }
-      }
-      else if (!t.startDate2 && t.teams && t.schedules) {
+      } else if (!t.startDate2 && t.teams && t.schedules) {
         const sd = moment(last(t.schedules).date).add(1, 'week');
         const tt = split2(standing.map(x => find(y => y.name === x.team, t.teams)));
         const s1 = rrScheduleTeam(tt[0], sd, [6, 7]);
@@ -205,12 +205,10 @@ app.post('/admin/genrr', (req, res) => {
           teams: t.teams.map(x => ({...x, rank: find(y => y.team === x.name, standing).rank })),
           schedules: concat(t.schedules, s.map(x => ({ ...x, id: lastId + x.id, half: true })))
         }).then(_ => res.json(s));
-      }
-      else if (t.teams && !t.schedules) {
+      } else if (t.teams && !t.schedules) {
         const s = rrScheduleTeam(t);
         api.update('tournaments', { id, schedules: s }).then(_ => res.json(s));
-      }
-      else {
+      } else {
         res.json('N/A');
       }
     }
