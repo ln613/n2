@@ -206,7 +206,7 @@ app.post('/admin/genrr', (req, res) => {
           schedules: concat(t.schedules, s.map(x => ({ ...x, id: lastId + x.id, half: true })))
         }).then(_ => res.json(s));
       } else if (t.teams && !t.schedules) {
-        const s = rrScheduleTeam(t.teams);
+        const s = rrScheduleTeam(t.teams, t.startDate);
         api.update('tournaments', { id, schedules: s }).then(_ => res.json(s));
       } else {
         res.json('N/A');
