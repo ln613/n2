@@ -18,7 +18,7 @@ export const Contact = ({ isMobile }) =>
         </div>  
         <div class="pb16">
           <i class="map marker alternate icon" />
-          3925 Fraser Street, Vancouver, BC
+          3925 Fraser Street, Vancouver
         </div>
         <br/>
       </div>  
