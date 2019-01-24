@@ -177,7 +177,7 @@ app.post('/admin/genrr', (req, res) => {
         res.json('N/A');
       }
     } else {
-      if (t.teams && t.teams.length > 0 && isNil(t.teams[0].group)) {
+      if (t.teams && t.teams.length > 0 && !isNil(t.teams[0].group)) {
         const groups = groupBy(x => x.group, t.teams);
         if (!t.schedules) {
           const schedules = Object.keys(groups).map(g => ({matches: unnest(rrSchedule(groups[g])), group: g}));
@@ -206,7 +206,7 @@ app.post('/admin/genrr', (req, res) => {
           schedules: concat(t.schedules, s.map(x => ({ ...x, id: lastId + x.id, half: true })))
         }).then(_ => res.json(s));
       } else if (t.teams && !t.schedules) {
-        const s = rrScheduleTeam(t);
+        const s = rrScheduleTeam(t.teams);
         api.update('tournaments', { id, schedules: s }).then(_ => res.json(s));
       } else {
         res.json('N/A');
