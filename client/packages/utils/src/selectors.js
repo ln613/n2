@@ -112,6 +112,7 @@ const tournament = createSelector(
   (t, ps) => {
     if (ps.length === 0) return t;
     const teams = (t.teams || []).map(t => ({ ...t, text: t.name, value: t.id, players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating)], t.players.map(p => ({ ...findById(p.id)(ps), tRating: p.rating, isSub: p.isSub }))) }));
+    const groups = teams.length === 0 || isNil(teams[0].group) ? null : toPairs(groupBy(x => x.group, teams));
     const players = addIndex('rank')(sortWith([descend(x => x.tRating)], (t.players || []).map(p => ({...findById(p.id)(ps), tRating: p.rating }))));
     const games = (t.games || []).map(g => {
       const result = getResult(g);
@@ -135,7 +136,7 @@ const tournament = createSelector(
           return {...m, result: wn + ':' + ln };
         })
     }));
-    return teams.length > 0 || players.length > 0 ? { ...t, teams, players, schedules, games } : t;
+    return teams.length > 0 || players.length > 0 ? { ...t, teams, groups, players, schedules, games } : t;
   }
 );
 
