@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const moment = require('moment');
 const api = require('./api');
 const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule, rrScheduleTeam, group, sortTeam, numOfGroups } = require('./utils');
-const { last, mergeDeepWith, zipWith, concat, is, find, unnest, uniq, pipe, map, filter, length, sortBy, sortWith, descend, prop, ascend, isNil, groupBy, sum, range } = require('ramda');
+const { last, mergeDeepWith, zipWith, concat, is, find, findIndex, unnest, uniq, pipe, map, filter, length, sortBy, sortWith, descend, prop, ascend, isNil, groupBy, sum, range } = require('ramda');
 const { getPropByProp, split2, getPropById } = require('@ln613/util');
 
 const app = express();
@@ -221,6 +221,24 @@ app.post('/admin/gengroup', (req, res) => {
     if (!t.isSingle && t.teams && t.teams.length > 0 && isNil(t.teams[0].group) && isNil(t.games) && isNil(t.schedules)) {
       const teams = group(sortTeam(t.teams));
       api.update('tournaments', { id, teams }).then(r => res.json(r));
+    } else {
+      res.json('N/A');
+    }
+  });
+});
+
+app.post('/admin/nogame', (req, res) => {
+  const id = +req.body.id;
+  const date = new Date(req.body.date + 'T08:00:00').toDateString();
+  api.getById('tournaments', id).then(t => {
+    if (t.schedules) {
+      const n = findIndex(s => new Date(s.date).toDateString() === date, t.schedules);
+      if (n === -1) {
+        res.json('N/A');
+      } else {
+        const schedules = t.schedules.map((s, i) => i >= n ? {...s, date: moment(s.date).add(1, 'week').toISOString()} : s);
+        api.update('tournaments', { id, schedules }).then(r => res.json(r));
+      }
     } else {
       res.json('N/A');
     }
