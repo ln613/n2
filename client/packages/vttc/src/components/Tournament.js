@@ -11,7 +11,7 @@ import TMenu from './TMenu';
 
 const Tournament = ({ lookup, tournament, id, isMobile }) =>
   <div class={`p16 ${isMobile ? 'fv' : 'f'}`}>
-    <TMenu id={id} isSingle={tournament.isSingle} isGroup={!isNil(get('teams[0].group')(tournament))} isMobile={isMobile} page="tournament" />
+    <TMenu id={id} isSingle={tournament.isSingle}  isMobile={isMobile} page="tournament" />
     <div class={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr/>
