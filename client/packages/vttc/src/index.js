@@ -7,7 +7,7 @@ import 'semantic-ui/dist/semantic.min.js';
 import 'semantic-ui-css/semantic.min.css';
 import '@ln613/css';
 import 'utils/css/styles.css';
-import App from 'components/App';
+import App from './components/App';
 
 ReactDOM.render(
   <Provider store={createStore(actionData)}>
