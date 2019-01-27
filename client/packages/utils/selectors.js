@@ -188,14 +188,22 @@ var getSinglePlayer = function getSinglePlayer(id, ps) {
 var tournament = (0, _state.createSelector)(_tournament, players, function (t, ps) {
   if (ps.length === 0) return t;
   var teams = (t.teams || []).map(function (t) {
-    return _extends({}, t, { text: t.name, value: t.id, players: (0, _ramda.sortWith)([(0, _ramda.ascend)(function (x) {
+    return _extends({}, t, { text: t.name, value: t.id,
+      players: (0, _ramda.sortWith)([(0, _ramda.ascend)(function (x) {
         return x.isSub ? 1 : 0;
       }), (0, _ramda.descend)(function (x) {
-        return x.tRating;
+        return x.tRating || x.rating;
       })], t.players.map(function (p) {
-        return _extends({}, (0, _util.findById)(p.id)(ps), { tRating: p.rating, isSub: p.isSub });
-      })) });
+        return (0, _util.findById)(p.id)(ps);
+      }).map(function (p) {
+        return _extends({}, p, { tRating: p.rating, isSub: p.isSub, name: p.firstName + ' ' + p.lastName
+        });
+      }))
+    });
   });
+  var groups = teams.length === 0 || (0, _ramda.isNil)(teams[0].group) ? null : (0, _ramda.toPairs)((0, _ramda.groupBy)(function (x) {
+    return x.group;
+  }, teams));
   var players = (0, _util.addIndex)('rank')((0, _ramda.sortWith)([(0, _ramda.descend)(function (x) {
     return x.tRating;
   })], (t.players || []).map(function (p) {
@@ -226,7 +234,7 @@ var tournament = (0, _state.createSelector)(_tournament, players, function (t, p
       })
     });
   });
-  return teams.length > 0 || players.length > 0 ? _extends({}, t, { teams: teams, players: players, schedules: schedules, games: games }) : t;
+  return teams.length > 0 || players.length > 0 ? _extends({}, t, { teams: teams, groups: groups, players: players, schedules: schedules, games: games }) : t;
 });
 
 var tournamentsWithYears = (0, _state.createSelector)(tournaments, function (ts) {

@@ -1,4 +1,4 @@
-import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, filter as where, uniqBy, anyPass, both, dropLast } from 'ramda';
+import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, filter as where, uniqBy, anyPass, both, dropLast, isNil, toPairs } from 'ramda';
 import { createSelector, mapStateWithSelectors } from '@ln613/state';
 import { Bold, Italic } from '@ln613/ui';
 import { findById, getNameById, toDate, toMonth, addIndex, diff, tap, split2, toAbsDate } from '@ln613/util';
@@ -111,7 +111,12 @@ const tournament = createSelector(
   players,
   (t, ps) => {
     if (ps.length === 0) return t;
-    const teams = (t.teams || []).map(t => ({ ...t, text: t.name, value: t.id, players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating)], t.players.map(p => ({ ...findById(p.id)(ps), tRating: p.rating, isSub: p.isSub }))) }));
+    const teams = (t.teams || []).map(t => ({
+      ...t, text: t.name, value: t.id,
+      players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating || x.rating)], t.players.map(p => findById(p.id)(ps)).map(p => ({
+        ...p, tRating: p.rating, isSub: p.isSub, name: p.firstName + ' ' + p.lastName
+      })))
+    }));
     const groups = teams.length === 0 || isNil(teams[0].group) ? null : toPairs(groupBy(x => x.group, teams));
     const players = addIndex('rank')(sortWith([descend(x => x.tRating)], (t.players || []).map(p => ({...findById(p.id)(ps), tRating: p.rating }))));
     const games = (t.games || []).map(g => {
