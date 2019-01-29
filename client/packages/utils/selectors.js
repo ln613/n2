@@ -187,13 +187,13 @@ var getSinglePlayer = function getSinglePlayer(id, ps) {
 };
 var tournament = (0, _state.createSelector)(_tournament, players, function (t, ps) {
   if (ps.length === 0) return t;
-  var teams = (t.teams || []).map(function (t) {
-    return _extends({}, t, { text: t.name, value: t.id,
+  var teams = (t.teams || []).map(function (m) {
+    return _extends({}, m, { text: m.name, value: m.id,
       players: (0, _ramda.sortWith)([(0, _ramda.ascend)(function (x) {
         return x.isSub ? 1 : 0;
       }), (0, _ramda.descend)(function (x) {
         return x.tRating || x.rating;
-      })], t.players.map(function (p) {
+      })], m.players.map(function (p) {
         return (0, _util.findById)(p.id)(ps);
       }).map(function (p) {
         return _extends({}, p, { tRating: p.rating, isSub: p.isSub, name: p.firstName + ' ' + p.lastName
@@ -407,7 +407,7 @@ var stats = (0, _state.createSelector)(tournament, function (t) {
     return (0, _ramda.map)(st, [p1, p2]);
   }
 
-  return (0, _util.tap)(st(players));
+  return st(players);
 });
 
 var history = (0, _state.createSelector)(_history, players, function (h, ps) {

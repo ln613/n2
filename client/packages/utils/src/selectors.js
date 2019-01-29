@@ -111,9 +111,9 @@ const tournament = createSelector(
   players,
   (t, ps) => {
     if (ps.length === 0) return t;
-    const teams = (t.teams || []).map(t => ({
-      ...t, text: t.name, value: t.id,
-      players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating || x.rating)], t.players.map(p => findById(p.id)(ps)).map(p => ({
+    const teams = (t.teams || []).map(m => ({
+      ...m, text: m.name, value: m.id,
+      players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating || x.rating)], m.players.map(p => findById(p.id)(ps)).map(p => ({
         ...p, tRating: p.rating, isSub: p.isSub, name: p.firstName + ' ' + p.lastName
       })))
     }));
@@ -263,7 +263,7 @@ const stats = createSelector(
       return map(st, [p1, p2]);
     }
 
-    return tap(st(players));
+    return st(players);
   }
 );
 

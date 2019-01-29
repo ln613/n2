@@ -5,7 +5,7 @@ import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { tourSelector } from 'utils/selectors';
 import { TextBox, CheckBox, withMobile } from '@ln613/ui/semantic';
-import { withEdit, withParams, withLoad } from '@ln613/compose';
+import { withEdit, withParams, withLoad, withLoadForce } from '@ln613/compose';
 import { tap } from '@ln613/util';
 import { withRouter } from "react-router-dom";
 import { withSuccess } from 'utils';
@@ -42,7 +42,7 @@ export default compose(
   connect(tourSelector, actions),
   withParams,
   withLoad('players'),
-  withLoad('tournament'),
+  withLoadForce('tournament'),
   withEdit('tournament'),
   withSuccess('tour', () => alert('Saved'), () => alert('Error happened!')),
   withRouter,

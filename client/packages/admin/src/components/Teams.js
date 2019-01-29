@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'recompose';
 import { connect } from '@ln613/state';
 import actions from 'utils/actions';
-import { withLoad, withParams, withNewId } from '@ln613/compose';
+import { withLoad, withLoadForce, withParams, withNewId } from '@ln613/compose';
 import { tournamentSelector } from 'utils/selectors';
 import { Table } from '@ln613/ui/semantic';
 import { withRouter } from "react-router-dom";
@@ -22,7 +22,7 @@ export default compose(
   connect(tournamentSelector, actions),
   withParams,
   withLoad('players'),
-  withLoad('tournament'),
+  withLoadForce('tournament'),
   withNewId('tournament.teams'),
   withRouter
 )(Teams)
