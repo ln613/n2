@@ -219,12 +219,12 @@ var tournament = (0, _state.createSelector)(_tournament, players, function (t, p
   });
   var schedules = (t.schedules || []).map(function (s) {
     return _extends({}, s, {
-      date: (0, _util.toDate)(s.date),
+      date: s.date && (0, _util.toDate)(s.date),
       matches: t.isSingle ? s.matches.map(function (m) {
         return _extends({}, m, { player1: getSinglePlayer(m.home, players), player2: getSinglePlayer(m.away, players), result: m.result || '' });
-      }) : (0, _ramda.range)(1, 9).map(function (n) {
+      }) : ((0, _ramda.isNil)(s.group) ? (0, _ramda.range)(1, 9).map(function (n) {
         return (0, _util.findById)(n)(s.matches) || {};
-      }).map(function (m) {
+      }) : s.matches).map(function (m) {
         var gs = findGames(s, m, games);
         var wn = gs.filter(function (g) {
           return g.isWin && g.t1 === m.home || !g.isWin && g.t1 === m.away;

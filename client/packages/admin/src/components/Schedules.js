@@ -1,4 +1,5 @@
 import React from 'react';
+import { isNil } from 'ramda';
 import { compose } from 'recompose';
 import { connect } from '@ln613/state';
 import actions from 'utils/actions';
@@ -12,10 +13,13 @@ const Schedules = ({ tournament, history, id, newId }) =>
   <div>
     <div class="f">
       <h1 class="fg1">Schedules - {tournament.name}</h1>
-      <Button primary onClick={() => history.push(`/schedule/${id}/+${newId}`)}>Add</Button>
+      {/* <Button primary onClick={() => history.push(`/schedule/${id}/+${newId}`)}>Add</Button> */}
     </div>
     <hr/>
-    <Table name="schedules" link={x => `/schedule/${id}/${x}`} data={(tournament.schedules || []).map(x => ({ 'id': x.id, [tournament.isSingle ? 'round' : 'date']: tournament.isSingle ? ('Round ' + x.id) : x.date }))} />
+    <Table name="schedules" link={x => `/schedule/${id}/${x}`} data={(tournament.schedules || []).map(x => ({
+      'id': x.id || (+x.group + 1),
+      [tournament.isSingle ? 'round' : (isNil(x.group) ? 'date' : 'group')]: tournament.isSingle ? ('Round ' + x.id) : (isNil(x.group) ? x.date : ('Group ' + (+x.group + 1))) })
+    )} />
   </div>
 
 export default compose(
