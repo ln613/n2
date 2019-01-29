@@ -192,8 +192,8 @@ app.post('/admin/genrr', (req, res) => {
         } else {
           res.json('N/A');
         }
-      } else if (!t.startDate2 && t.teams && t.schedules) {
-        const sd = moment(last(t.schedules).date).add(1, 'week');
+      } else if (!t.has2half && t.teams && t.schedules) {
+        const sd = t.startDate2 || moment(last(t.schedules).date).add(1, 'week');
         const tt = split2(standing.map(x => find(y => y.name === x.team, t.teams)));
         const s1 = rrScheduleTeam(tt[0], sd, [6, 7]);
         const s2 = rrScheduleTeam(tt[1], sd, [3, 5]);
@@ -201,7 +201,8 @@ app.post('/admin/genrr', (req, res) => {
         const lastId = last(t.schedules).id;
         api.update('tournaments', {
           id,
-          startDate2: sd.toISOString(),
+          startDate2: is(String, sd) ? sd : sd.toISOString(),
+          has2half: true,
           teams: t.teams.map(x => ({...x, rank: find(y => y.team === x.name, standing).rank })),
           schedules: concat(t.schedules, s.map(x => ({ ...x, id: lastId + x.id, half: true })))
         }).then(_ => res.json(s));

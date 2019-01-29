@@ -21,7 +21,7 @@ export const actionData = {
     methods: ['post', 'put', 'patch', 'delete']
   },
   tournaments: {
-    url: api + 'tournaments/_/_/isSingle,startDate,ratingDate,players'
+    url: api + 'tournaments/_/_/isSingle,startDate,startDate2,ratingDate,players'
   },
   tour: {
     url: admin + 'tournaments',

@@ -14,7 +14,7 @@ const Standing = ({ standing, tournament, players, id, isMobile }) =>
     <div class={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr/>
-      {tournament.startDate2 ?
+      {tournament.has2half ?
         <Ready on={[players, tournament]}>
           <div class="fs18 fw6 pt8">Upper Division</div>
           <Table name="standing1" data={standing[0]} />

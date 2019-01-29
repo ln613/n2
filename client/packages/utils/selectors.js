@@ -325,7 +325,7 @@ var standing = (0, _state.createSelector)(tournament, teams, function (tt, ts) {
 
   var p = (0, _ramda.pipe)((0, _ramda.sortWith)(tt.isSingle ? [dw, at, dp(1), al] : [dp(0), at, dw]), (0, _util.addIndex)('rank'));
 
-  return tt.startDate2 ? (0, _ramda.pipe)((0, _ramda.sortBy)((0, _ramda.prop)('rank')), _util.split2, (0, _ramda.map)(p))(st) : p(st);
+  return tt.has2half ? (0, _ramda.pipe)((0, _ramda.sortBy)((0, _ramda.prop)('rank')), _util.split2, (0, _ramda.map)(p))(st) : p(st);
 });
 
 var isSamePlayer = function isSamePlayer(p1, id) {
@@ -397,7 +397,7 @@ var stats = (0, _state.createSelector)(tournament, function (t) {
     return x.gw;
   })]), (0, _util.addIndex)('#'));
 
-  if (t.startDate2) {
+  if (t.has2half) {
     var p1 = players.filter(function (x) {
       return x.isUpperDiv;
     });

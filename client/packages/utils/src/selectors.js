@@ -211,7 +211,7 @@ const standing = createSelector(
       addIndex('rank')
     );
 
-    return tt.startDate2 ? pipe(sortBy(prop('rank')), split2, map(p))(st) : p(st);
+    return tt.has2half ? pipe(sortBy(prop('rank')), split2, map(p))(st) : p(st);
   }
 );
 
@@ -257,7 +257,7 @@ const stats = createSelector(
       addIndex('#')
     );
     
-    if (t.startDate2) {
+    if (t.has2half) {
       const p1 = players.filter(x => x.isUpperDiv);
       const p2 = players.filter(x => !x.isUpperDiv);
       return map(st, [p1, p2]);

@@ -29,7 +29,7 @@ var actionData = exports.actionData = {
     methods: ['post', 'put', 'patch', 'delete']
   },
   tournaments: {
-    url: _util.api + 'tournaments/_/_/isSingle,startDate,ratingDate,players'
+    url: _util.api + 'tournaments/_/_/isSingle,startDate,startDate2,ratingDate,players'
   },
   tour: {
     url: _util.admin + 'tournaments',
