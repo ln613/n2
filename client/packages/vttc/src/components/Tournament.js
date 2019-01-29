@@ -45,7 +45,7 @@ const groups = gs =>
 
 const Tournament = ({ lookup, tournament, id, isMobile }) =>
   <div class={`p16 ${isMobile ? 'fv' : 'f'}`}>
-    <TMenu id={id} isSingle={tournament.isSingle} isGroup={true} isMobile={isMobile} page="tournament" />
+    <TMenu id={id} isSingle={tournament.isSingle} isGroup={tournament.groups} isMobile={isMobile} page="tournament" />
     <div class={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr/>
