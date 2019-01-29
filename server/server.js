@@ -195,8 +195,8 @@ app.post('/admin/genrr', (req, res) => {
       } else if (!t.has2half && t.teams && t.schedules) {
         const sd = t.startDate2 || moment(last(t.schedules).date).add(1, 'week');
         const tt = split2(standing.map(x => find(y => y.name === x.team, t.teams)));
-        const s1 = rrScheduleTeam(tt[0], sd, [6, 7]);
-        const s2 = rrScheduleTeam(tt[1], sd, [3, 5]);
+        const s1 = rrScheduleTeam(tt[0], sd, [5, 6, 7]);
+        const s2 = rrScheduleTeam(tt[1], sd, [1, 2, 3]);
         const s = zipWith(mergeDeepWith((a, b) => is(Array, a) ? concat(a, b) : a))(s1, s2);
         const lastId = last(t.schedules).id;
         api.update('tournaments', {
