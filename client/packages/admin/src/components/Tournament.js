@@ -10,7 +10,7 @@ import { tap } from '@ln613/util';
 import { withRouter } from "react-router-dom";
 import { withSuccess } from 'utils';
 
-const Tournament = ({ tournament, standing, history, postTour, patchTour, postGenrr, id, isMobile }) =>
+const Tournament = ({ tournament, standing, history, postTour, patchTour, postGenrr, postGengroup, id, isMobile }) =>
   <div>
     <h1>Tournament - {+tournament.id ? tournament.name : 'Add New'}</h1>
     <hr />
@@ -22,6 +22,7 @@ const Tournament = ({ tournament, standing, history, postTour, patchTour, postGe
       }
       <Button primary onClick={() => history.push(`/schedules/${tournament.id}`)}>Schedules</Button>
       <Button primary onClick={() => history.push(`/games/${tournament.id}`)}>Games</Button>
+      <Button primary onClick={() => postGengroup({ id })}>Generate Groups</Button>
       <Button primary onClick={() => postGenrr({ id })}>Generate Schedule</Button>
       {tournament.isSingle || tournament.has2half ? null :
         <Button primary onClick={() => postGenrr({ id, standing })}>Generate Schedule 2</Button>

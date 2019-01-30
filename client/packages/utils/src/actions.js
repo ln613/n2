@@ -62,8 +62,11 @@ export const actionData = {
   },
   genrr: {
     url: admin + 'genrr',
-    method: 'post',
-    path: 'tournament.schedules'
+    method: 'post'
+  },
+  gengroup: {
+    url: admin + 'gengroup',
+    method: 'post'
   },
   games: {
     url: api + 'games'

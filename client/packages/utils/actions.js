@@ -70,8 +70,11 @@ var actionData = exports.actionData = {
   },
   genrr: {
     url: _util.admin + 'genrr',
-    method: 'post',
-    path: 'tournament.schedules'
+    method: 'post'
+  },
+  gengroup: {
+    url: _util.admin + 'gengroup',
+    method: 'post'
   },
   games: {
     url: _util.api + 'games'

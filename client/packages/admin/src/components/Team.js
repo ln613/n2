@@ -15,6 +15,7 @@ const Team = ({ tournament, team, players, monthRatings, putTeam, postTeam, id, 
     <hr />
     <TextBox name="team.id" disabled />
     <TextBox name="team.name" />
+    <TextBox name="team.group" />
     <br/>
     Players:
     <AddPlayer players={team.players} allPlayers={players} formPath='team' setFormPlayers={setFormTeamPlayers} getPlayerRating={getPlayerRating} withSub />
