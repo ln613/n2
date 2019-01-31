@@ -10,8 +10,31 @@ import { Select } from '@ln613/ui';
 import { withLoad, withEdit, withParams } from '@ln613/compose';
 import { withRouter } from "react-router-dom";
 import { withSuccess } from 'utils';
+import { tap } from '@ln613/util';
 
-const results = ['3:0', '3:1', '3:2', '2:3', '1:3', '0:3'];
+const results = ['3:0', '3:1', '3:2', '2:3', '1:3', '0:3', '2:0', '2:1', '1:2', '0:2'];
+
+const single = ms =>
+  <Table name="schedule" data={(ms || []).map(pick(['id', 'player1', 'result', 'player2']))}>
+    <td key="result" path="schedule.matches[{i}].result" select options={results}/>
+  </Table>;
+
+const teams = (tournament, schedule, history) =>
+  range(0, 8).map(n =>
+    <div class="f aic">
+      <div class="pr8">Table {n + 1}: </div>
+      <Select name={`schedule.matches[${n}].home`} options={tournament.teams} placeholder="" />
+      <div class="ph8">VS</div>
+      <Select name={`schedule.matches[${n}].away`} options={tournament.teams} placeholder="" />
+      <div class="ph8"></div>
+      <Button primary onClick={() => history.push(`/games/${tournament.id}/${schedule.id}/${n + 1}`)}>Matches</Button>
+    </div>
+  );
+
+const groups = ms =>
+  <Table name="groups" data={(ms || []).map(pick(['round', 'team1', 'result', 'team2']))}>
+    {/* <td key="result" path="schedule.matches[{i}].result" select options={results}/> */}
+  </Table>;
 
 const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id }) =>
   <div>
@@ -19,20 +42,13 @@ const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id
     <hr />
     <TextBox name="schedule.id" disabled />
     <TextBox name="schedule.date" />
-    {tournament.isSingle ? 
-      <Table name="schedule" data={(schedule.matches || []).map(pick(['id', 'player1', 'result', 'player2']))}>
-        <td key="result" path="schedule.matches[{i}].result" select options={results}/>
-      </Table> :
-    range(0, 8).map(n =>
-      <div class="f aic">
-        <div class="pr8">Table {n + 1}: </div>
-        <Select name={`schedule.matches[${n}].home`} options={tournament.teams} placeholder="" />
-        <div class="ph8">VS</div>
-        <Select name={`schedule.matches[${n}].away`} options={tournament.teams} placeholder="" />
-        <div class="ph8"></div>
-        <Button primary onClick={() => history.push(`/games/${tournament.id}/${schedule.id}/${n + 1}`)}>Matches</Button>
-      </div>
-    )}
+    {tournament.isSingle ?
+      single(schedule.matches) :
+      (tournament.groups ?
+        groups(tournament.schedules[id].matches) :
+        teams(tournament, schedule, history)
+      )
+    }
     <hr />
     <Button primary onClick={() => id[0] === '+' ? postSchedule(schedule, { id1: tournament.id }) : putSchedule(schedule, { id1: tournament.id, id: schedule.id })}>Save</Button>
   </div>

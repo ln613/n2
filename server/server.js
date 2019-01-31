@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const moment = require('moment');
 const api = require('./api');
-const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule, rrScheduleTeam, group, sortTeam, numOfGroups } = require('./utils');
+const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule, rrScheduleTeam, group, sortTeam, numOfGroups, gengames } = require('./utils');
 const { last, mergeDeepWith, zipWith, concat, is, find, findIndex, unnest, uniq, pipe, map, filter, length, sortBy, sortWith, descend, prop, ascend, isNil, groupBy, sum, range } = require('ramda');
 const { getPropByProp, split2, getPropById } = require('@ln613/util');
 
@@ -180,7 +180,7 @@ app.post('/admin/genrr', (req, res) => {
       if (t.teams && t.teams.length > 0 && !isNil(t.teams[0].group)) {
         const groups = groupBy(x => x.group, t.teams);
         if (!t.schedules) {
-          const schedules = Object.keys(groups).map(g => ({matches: unnest(rrSchedule(groups[g])), group: g}));
+          const schedules = Object.keys(groups).map(g => ({matches: pipe(rrSchedule, unnest, map(x => ({...x, games: gengames(t, x.home, x.away)})))(groups[g]), group: g}));
           api.update('tournaments', { id, schedules }).then(r => res.json(r));
         } else if (standing && (!find(s => s.ko, t.schedules) || find(s => s.ko === koStanding.length, t.schedules))) {
           //pipe(filter(s => !isNil(s.group)), map(x => x.matches.length * 5), sum)(t.schedules)

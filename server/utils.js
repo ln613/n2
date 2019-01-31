@@ -2,6 +2,7 @@ const R = require('ramda');
 const fs = require('fs');
 const path = require('path');
 const moment = require('moment');
+const util = require('@ln613/util');
 
 const e = {};
 
@@ -146,6 +147,17 @@ e.group = ts => {
     const group = e.isOdd(l) ? (g - c - 1) : c;
     return {...t, group};
   });
+}
+
+e.gengames = (t, t1, t2) => {
+  const team1 = util.findById(t1)(t.teams);
+  const team2 = util.findById(t2)(t.teams);
+  return R.range(0, 5).map(n => ({ id: n + 1, date: t.startDate, t1, t2,
+    p1: +team1.players[n === 1 || n === 4 ? 1 : 0].id,
+    p2: +team2.players[n === 0 || n === 4 ? 1 : 0].id,
+    p3: n === 2 ? team1.players[1].id : undefined,
+    p4: n === 2 ? team2.players[1].id : undefined
+  }));
 }
 
 module.exports = e;

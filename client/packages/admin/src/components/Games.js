@@ -14,7 +14,7 @@ const Games = ({ tournament, games, schedule, match, history, T, S, M, newId }) 
   <div>
     <div class="f">
       <h1 class="fg1">Matches - {tournament.name} - {schedule.date}</h1>
-      <Button primary onClick={() => history.push(`/game/${T}/${S}/${M}/+${newId}`)}>Add</Button>
+      {tournament.groups ? null : <Button primary onClick={() => history.push(`/game/${T}/${S}/${M}/+${newId}`)}>Add</Button>}
     </div>
     <hr/>
     <Table name="games" link={x => `/game/${T}/${S}/${M}/${x}`} data={(games || []).map(pick(['id', 'date', 'team1', 'player1', 'result', 'player2', 'team2' ]))} />

@@ -230,7 +230,7 @@ var tournament = (0, _state.createSelector)(_tournament, players, function (t, p
           return g.isWin && g.t1 === m.home || !g.isWin && g.t1 === m.away;
         }).length;
         var ln = gs.length - wn;
-        return _extends({}, m, { result: wn + ':' + ln });
+        return _extends({}, m, { team1: (0, _util.getNameById)(m.home)(teams), team2: (0, _util.getNameById)(m.away)(teams), result: wn + ':' + ln });
       })
     });
   });

@@ -1,7 +1,7 @@
 import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, filter as where, uniqBy, anyPass, both, dropLast, isNil, toPairs } from 'ramda';
 import { createSelector, mapStateWithSelectors } from '@ln613/state';
 import { Bold, Italic } from '@ln613/ui';
-import { findById, getNameById, toDate, toMonth, addIndex, diff, tap, split2, toAbsDate } from '@ln613/util';
+import { findById, getNameById, toDate, toMonth, addIndex, diff, tap, split2, toAbsDate, findByName } from '@ln613/util';
 
 const _form = s => s.form || {};
 const _filter = s => s.filter || {};
@@ -137,7 +137,7 @@ const tournament = createSelector(
           const gs = findGames(s, m, games);
           const wn = gs.filter(g => (g.isWin && g.t1 === m.home) || (!g.isWin && g.t1 === m.away)).length;
           const ln = gs.length - wn;
-          return {...m, result: wn + ':' + ln };
+          return {...m, team1: getNameById(m.home)(teams), team2: getNameById(m.away)(teams), result: wn + ':' + ln };
         })
     }));
     return teams.length > 0 || players.length > 0 ? { ...t, teams, groups, players, schedules, games } : t;
