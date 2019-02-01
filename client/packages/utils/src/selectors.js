@@ -137,7 +137,17 @@ const tournament = createSelector(
           const gs = findGames(s, m, games);
           const wn = gs.filter(g => (g.isWin && g.t1 === m.home) || (!g.isWin && g.t1 === m.away)).length;
           const ln = gs.length - wn;
-          return {...m, team1: getNameById(m.home)(teams), team2: getNameById(m.away)(teams), result: wn + ':' + ln };
+          const groupGames = (m.games || []).map(x => ({
+            ...x,
+            team1: getNameById(x.t1)(teams),
+            team2: getNameById(x.t2)(teams),
+            player1: getNameById(x.p1)(ps),
+            player2: getNameById(x.p2)(ps),
+            player3: getNameById(x.p3)(ps),
+            player4: getNameById(x.p4)(ps),
+            result: '0:0'
+          }))
+          return {...m, team1: getNameById(m.home)(teams), team2: getNameById(m.away)(teams), result: wn + ':' + ln, games: groupGames };
         })
     }));
     return teams.length > 0 || players.length > 0 ? { ...t, teams, groups, players, schedules, games } : t;

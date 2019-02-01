@@ -31,3 +31,5 @@ export const adjustRating = g => {
 }
 
 export const newRating = (r, d) => Math.max(r + d, 100)
+
+export const resultOptions = ['3:0', '3:1', '3:2', '2:3', '1:3', '0:3', '2:0', '2:1', '1:2', '0:2'];

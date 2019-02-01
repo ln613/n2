@@ -230,7 +230,18 @@ var tournament = (0, _state.createSelector)(_tournament, players, function (t, p
           return g.isWin && g.t1 === m.home || !g.isWin && g.t1 === m.away;
         }).length;
         var ln = gs.length - wn;
-        return _extends({}, m, { team1: (0, _util.getNameById)(m.home)(teams), team2: (0, _util.getNameById)(m.away)(teams), result: wn + ':' + ln });
+        var groupGames = (m.games || []).map(function (x) {
+          return _extends({}, x, {
+            team1: (0, _util.getNameById)(x.t1)(teams),
+            team2: (0, _util.getNameById)(x.t2)(teams),
+            player1: (0, _util.getNameById)(x.p1)(ps),
+            player2: (0, _util.getNameById)(x.p2)(ps),
+            player3: (0, _util.getNameById)(x.p3)(ps),
+            player4: (0, _util.getNameById)(x.p4)(ps),
+            result: '0:0'
+          });
+        });
+        return _extends({}, m, { team1: (0, _util.getNameById)(m.home)(teams), team2: (0, _util.getNameById)(m.away)(teams), result: wn + ':' + ln, games: groupGames });
       })
     });
   });

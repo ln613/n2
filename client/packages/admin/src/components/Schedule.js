@@ -9,14 +9,12 @@ import { TextBox, Table } from '@ln613/ui/semantic';
 import { Select } from '@ln613/ui';
 import { withLoad, withEdit, withParams } from '@ln613/compose';
 import { withRouter } from "react-router-dom";
-import { withSuccess } from 'utils';
+import { withSuccess, resultOptions } from 'utils';
 import { tap } from '@ln613/util';
-
-const results = ['3:0', '3:1', '3:2', '2:3', '1:3', '0:3', '2:0', '2:1', '1:2', '0:2'];
 
 const single = ms =>
   <Table name="schedule" data={(ms || []).map(pick(['id', 'player1', 'result', 'player2']))}>
-    <td key="result" path="schedule.matches[{i}].result" select options={results}/>
+    <td key="result" path="schedule.matches[{i}].result" select options={resultOptions}/>
   </Table>;
 
 const teams = (tournament, schedule, history) =>
@@ -31,9 +29,9 @@ const teams = (tournament, schedule, history) =>
     </div>
   );
 
-const groups = ms =>
-  <Table name="groups" data={(ms || []).map(pick(['round', 'team1', 'result', 'team2']))}>
-    {/* <td key="result" path="schedule.matches[{i}].result" select options={results}/> */}
+const groups = (ms, tid, sid) =>
+  <Table name="groups" link={x => `/games/${tid}/${sid}/${x}`} data={(ms || []).map(pick(['id', 'round', 'team1', 'result', 'team2']))}>
+    <td key="id" hidden />
   </Table>;
 
 const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id }) =>
@@ -45,7 +43,7 @@ const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id
     {tournament.isSingle ?
       single(schedule.matches) :
       (tournament.groups ?
-        groups(tournament.schedules[id].matches) :
+        groups(tournament.schedules[id].matches, tournament.id, id) :
         teams(tournament, schedule, history)
       )
     }

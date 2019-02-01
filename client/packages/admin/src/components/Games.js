@@ -4,11 +4,12 @@ import { pick, sortWith, descend, prop } from 'ramda';
 import { connect } from '@ln613/state';
 import actions from 'utils/actions';
 import { withLoad, withLoadForce, withParams, withNewId } from '@ln613/compose';
-import { findById, toAbsDate, tap } from '@ln613/util';
+import { findById, findByProp, toAbsDate, tap } from '@ln613/util';
 import { tournamentSelector } from 'utils/selectors';
 import { Table } from '@ln613/ui/semantic';
 import { withRouter } from "react-router-dom";
 import { Button } from 'semantic-ui-react';
+import { resultOptions } from 'utils';
 
 const Games = ({ tournament, games, schedule, match, history, T, S, M, newId }) =>
   <div>
@@ -17,7 +18,9 @@ const Games = ({ tournament, games, schedule, match, history, T, S, M, newId }) 
       {tournament.groups ? null : <Button primary onClick={() => history.push(`/game/${T}/${S}/${M}/+${newId}`)}>Add</Button>}
     </div>
     <hr/>
-    <Table name="games" link={x => `/game/${T}/${S}/${M}/${x}`} data={(games || []).map(pick(['id', 'date', 'team1', 'player1', 'result', 'player2', 'team2' ]))} />
+    <Table name="games" link={x => `/game/${T}/${S}/${M}/${x}`} data={(games || []).map(pick(['id', 'date', 'team1', 'player1', 'result', 'player2', 'team2' ]))}>
+      <td key="result" path="matche.games[{i}].result" select options={resultOptions}/>
+    </Table>
   </div>
 
 export default compose(
@@ -25,9 +28,10 @@ export default compose(
   withParams,
   withLoad('players'),
   withLoadForce('tournament', 'id', 'T'),
-  withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
+  withProps(p => ({ schedule: (p.tournament.groups ? findByProp('group') : findById)(p.S)(p.tournament.schedules) || {} })),
   withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),
   withProps(p => ({ games: sortWith([descend(prop('id'))],
+    p.tournament.groups ? p.match.games :
     (p.tournament.games || []).filter(x => (x.schedule === p.S || toAbsDate(x.date) === toAbsDate(p.schedule.date)) && (x.match === p.M || (x.t1 === p.match.home && x.t2 === p.match.away) || (x.t2 === p.match.home && x.t1 === p.match.away) ))
   )})),
   withNewId('tournament.games'),

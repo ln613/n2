@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.newRating = exports.adjustRating = exports.withSuccess = exports.cdurl = undefined;
+exports.resultOptions = exports.newRating = exports.adjustRating = exports.withSuccess = exports.cdurl = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -48,3 +48,5 @@ var adjustRating = exports.adjustRating = function adjustRating(g) {
 var newRating = exports.newRating = function newRating(r, d) {
   return Math.max(r + d, 100);
 };
+
+var resultOptions = exports.resultOptions = ['3:0', '3:1', '3:2', '2:3', '1:3', '0:3', '2:0', '2:1', '1:2', '0:2'];
