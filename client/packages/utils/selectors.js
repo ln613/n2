@@ -234,10 +234,8 @@ var tournament = (0, _state.createSelector)(_tournament, players, function (t, p
           return _extends({}, x, {
             team1: (0, _util.getNameById)(x.t1)(teams),
             team2: (0, _util.getNameById)(x.t2)(teams),
-            player1: (0, _util.getNameById)(x.p1)(ps),
-            player2: (0, _util.getNameById)(x.p2)(ps),
-            player3: (0, _util.getNameById)(x.p3)(ps),
-            player4: (0, _util.getNameById)(x.p4)(ps),
+            player1: (0, _util.getNameById)(x.p1)(ps) + (x.p3 ? ' / ' + (0, _util.getNameById)(x.p3)(ps) : ''),
+            player2: (0, _util.getNameById)(x.p2)(ps) + (x.p4 ? ' / ' + (0, _util.getNameById)(x.p4)(ps) : ''),
             result: '0:0'
           });
         });

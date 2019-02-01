@@ -141,10 +141,8 @@ const tournament = createSelector(
             ...x,
             team1: getNameById(x.t1)(teams),
             team2: getNameById(x.t2)(teams),
-            player1: getNameById(x.p1)(ps),
-            player2: getNameById(x.p2)(ps),
-            player3: getNameById(x.p3)(ps),
-            player4: getNameById(x.p4)(ps),
+            player1: getNameById(x.p1)(ps) + (x.p3 ? (' / ' + getNameById(x.p3)(ps)) : ''),
+            player2: getNameById(x.p2)(ps) + (x.p4 ? (' / ' + getNameById(x.p4)(ps)) : ''),
             result: '0:0'
           }))
           return {...m, team1: getNameById(m.home)(teams), team2: getNameById(m.away)(teams), result: wn + ':' + ln, games: groupGames };
