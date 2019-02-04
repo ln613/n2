@@ -1,6 +1,6 @@
 import React from 'react';
 import { compose, withProps } from 'recompose';
-import { range } from 'ramda';
+import { range, find } from 'ramda';
 import { connect } from '@ln613/state';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
@@ -8,12 +8,10 @@ import { gameSelector } from 'utils/selectors';
 import { withSuccess } from 'utils';
 import { TextBox, CheckBox } from '@ln613/ui/semantic';
 import { Select } from '@ln613/ui';
-import { withLoad, withEdit, withParams } from '@ln613/compose';
+import { withLoad, withEdit, withParams, withMount } from '@ln613/compose';
 import { getPropById, findById, getNameById } from '@ln613/util';
-import { adjustRating, newRating } from 'utils';
+import { toGame, newRating, resultOptions } from 'utils';
 import { withRouter } from 'react-router-dom';
-
-const results = ['3:0', '3:1', '3:2', '2:3', '1:3', '0:3'];
 
 const Game = p =>
   <div>
@@ -45,7 +43,7 @@ const Game = p =>
         <div class="pl8">{range(0, 5).filter(x => gg(p.game.g1, x) < gg(p.game.g2, x)).length}</div>
       </div>  
     </div>
-    Result: <Select name={`game.result`} options={results} placeholder="" />
+    Result: <Select name={`game.result`} options={resultOptions} placeholder="" />
     <hr />
     <Button primary onClick={() => save(p)}>Save</Button>
   </div>
@@ -56,7 +54,8 @@ export default compose(
   withParams,
   withLoad('players', null, true),
   withLoad('tournament', ['id', 'T'], true),
-  withEdit('game', 'tournament.games', { g1: [], g2: []}),
+  withMount(p => p.setForm(find(x => x.id == p.id, p.tournament.games), { path: 'game' })),
+  //withEdit('game', 'tournament.games', { g1: [], g2: []}),
   withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
   withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),
   withSuccess('game', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!')),
@@ -64,15 +63,6 @@ export default compose(
 )(Game)
 
 const gg = (g, x) => +((g && g[x]) || 0);
-
-const toGame = (g, s, m) => {
-  const g1 = adjustRating({ id: g.id, isDouble: g.isDouble, date: s.date, t1: +m.home, t2: +m.away, p1: +g.p1, p2: +g.p2, p1Rating: g.p1Rating, p2Rating: g.p2Rating, result: g.result });
-  if (g.isDouble) {
-    g1.p3 = +g.p3;
-    g1.p4 = +g.p4;
-  }
-  return g1;
-}
 
 const save = p => {
   const isAdd = p.id[0] === '+';

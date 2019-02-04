@@ -1,11 +1,12 @@
 import React from 'react';
 import { compose } from 'recompose';
+import { find } from 'ramda';
 import { connect } from '@ln613/state';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { tourSelector } from 'utils/selectors';
 import { TextBox, CheckBox, withMobile } from '@ln613/ui/semantic';
-import { withEdit, withParams, withLoad, withLoadForce } from '@ln613/compose';
+import { withMount, withParams, withLoad, withLoadForce } from '@ln613/compose';
 import { tap } from '@ln613/util';
 import { withRouter } from "react-router-dom";
 import { withSuccess } from 'utils';
@@ -44,7 +45,7 @@ export default compose(
   withParams,
   withLoad('players'),
   withLoadForce('tournament'),
-  withEdit('tournament'),
+  withMount(p => p.setForm(find(x => x.id == p.id, p.tournaments), { path: 'tournament' })),
   withSuccess('tour', () => alert('Saved'), () => alert('Error happened!')),
   withRouter,
   withMobile

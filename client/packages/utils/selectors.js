@@ -236,7 +236,12 @@ var tournament = (0, _state.createSelector)(_tournament, players, function (t, p
             team2: (0, _util.getNameById)(x.t2)(teams),
             player1: (0, _util.getNameById)(x.p1)(ps) + (x.p3 ? ' / ' + (0, _util.getNameById)(x.p3)(ps) : ''),
             player2: (0, _util.getNameById)(x.p2)(ps) + (x.p4 ? ' / ' + (0, _util.getNameById)(x.p4)(ps) : ''),
-            result: '0:0'
+            p1Rating: (0, _util.getPropById)('rating')(x.p1)(ps),
+            p2Rating: (0, _util.getPropById)('rating')(x.p2)(ps),
+            isDouble: !!x.p3,
+            result: ((0, _ramda.find)(function (g1) {
+              return g1.t1 == x.t1 && g1.t2 == x.t2 && g1.p1 == x.p1 && g1.p2 == x.p2 && g1.p3 == x.p3 && g1.p4 == x.p4;
+            }, games) || {}).result
           });
         });
         return _extends({}, m, { team1: (0, _util.getNameById)(m.home)(teams), team2: (0, _util.getNameById)(m.away)(teams), result: wn + ':' + ln, games: groupGames });
@@ -334,7 +339,11 @@ var standing = (0, _state.createSelector)(tournament, teams, function (tt, ts) {
 
   var p = (0, _ramda.pipe)((0, _ramda.sortWith)(tt.isSingle ? [dw, at, dp(1), al] : [dp(0), at, dw]), (0, _util.addIndex)('rank'));
 
-  return tt.has2half ? (0, _ramda.pipe)((0, _ramda.sortBy)((0, _ramda.prop)('rank')), _util.split2, (0, _ramda.map)(p))(st) : p(st);
+  return tt.has2half ? (0, _ramda.pipe)((0, _ramda.sortBy)((0, _ramda.prop)('rank')), _util.split2, (0, _ramda.map)(p))(st) : tt.teams && tt.teams.length > 0 && !(0, _ramda.isNil)(teams[0].group) ? (0, _ramda.pipe)((0, _ramda.groupBy)(function (t) {
+    return t.group;
+  }), _ramda.toPairs, (0, _ramda.map)(function (x) {
+    return x[1];
+  }), (0, _ramda.map)(p))(st) : p(st);
 });
 
 var isSamePlayer = function isSamePlayer(p1, id) {
@@ -463,7 +472,7 @@ var productsSelector = exports.productsSelector = (0, _state.mapStateWithSelecto
 var ratingSelector = exports.ratingSelector = (0, _state.mapStateWithSelectors)({ players: filteredPlayers });
 var playersSelector = exports.playersSelector = (0, _state.mapStateWithSelectors)({ players: players, lookup: lookup, player: form('player') });
 var tournamentsSelector = exports.tournamentsSelector = (0, _state.mapStateWithSelectors)({ tournaments: tournamentsWithYears, lookup: lookup });
-var tournamentSelector = exports.tournamentSelector = (0, _state.mapStateWithSelectors)({ tournament: tournament, lookup: lookup, players: players });
+var tournamentSelector = exports.tournamentSelector = (0, _state.mapStateWithSelectors)({ tournament: tournament, lookup: lookup, players: players, formMatch: form('match') });
 var tourSelector = exports.tourSelector = (0, _state.mapStateWithSelectors)({ tournament: form('tournament'), tournaments: tournaments, players: players, standing: standing });
 var historySelector = exports.historySelector = (0, _state.mapStateWithSelectors)({ history: history, lookup: lookup, players: players });
 var standingSelector = exports.standingSelector = (0, _state.mapStateWithSelectors)({ standing: standing, tournament: tournament, players: players });

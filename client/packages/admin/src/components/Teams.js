@@ -20,7 +20,7 @@ const Teams = ({ tournament, history, id, newId }) =>
     <hr/>
     {tournament.groups ? tournament.groups.map(g =>
       <div class="pt8" key={g[0]}>
-        <div class="pv8 fs24 darkgreen">Group {+g[0] + 1}</div>
+        <div class="pv8 fs24 darkgreen">Group {g[0]}</div>
         {teamTable(g[1], id)}
       </div>
     ) : teamTable(tournament.teams, id)}

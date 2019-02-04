@@ -17,8 +17,8 @@ const Schedules = ({ tournament, history, id, newId }) =>
     </div>
     <hr/>
     <Table name="schedules" link={x => `/schedule/${id}/${x}`} data={(tournament.schedules || []).map(x => ({
-      'id': x.id || (+x.group + 1),
-      [tournament.isSingle ? 'round' : (isNil(x.group) ? 'date' : 'group')]: tournament.isSingle ? ('Round ' + x.id) : (isNil(x.group) ? x.date : ('Group ' + (+x.group + 1))) })
+      'id': x.id || +x.group,
+      [tournament.isSingle ? 'round' : (isNil(x.group) ? 'date' : 'group')]: tournament.isSingle ? ('Round ' + x.id) : (isNil(x.group) ? x.date : ('Group ' + x.group)) })
     )} />
   </div>
 

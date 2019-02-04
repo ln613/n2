@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const moment = require('moment');
 const api = require('./api');
-const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule, rrScheduleTeam, group, sortTeam, numOfGroups, gengames } = require('./utils');
+const { tap, isProd, done, send, config, cors, nocache, port, ip, mongoURL, secret, username, password, gotoLogin, rrSchedule, rrScheduleTeam, group, sortTeam, numOfGroups, gengames, serial } = require('./utils');
 const { last, mergeDeepWith, zipWith, concat, is, find, findIndex, unnest, uniq, pipe, map, filter, length, sortBy, sortWith, descend, prop, ascend, isNil, groupBy, sum, range } = require('ramda');
 const { getPropByProp, split2, getPropById } = require('@ln613/util');
 
@@ -180,7 +180,7 @@ app.post('/admin/genrr', (req, res) => {
       if (t.teams && t.teams.length > 0 && !isNil(t.teams[0].group)) {
         const groups = groupBy(x => x.group, t.teams);
         if (!t.schedules) {
-          const schedules = Object.keys(groups).map(g => ({matches: pipe(rrSchedule, unnest, map(x => ({...x, games: gengames(t, x.home, x.away)})))(groups[g]), group: g}));
+          const schedules = Object.keys(groups).map(g => ({matches: pipe(l => rrSchedule(l, false, true), unnest, map(x => ({...x, games: gengames(t, x.home, x.away)})))(groups[g]), date: t.startDate, group: g}));
           api.update('tournaments', { id, schedules }).then(r => res.json(r));
         } else if (standing && (!find(s => s.ko, t.schedules) || find(s => s.ko === koStanding.length, t.schedules))) {
           //pipe(filter(s => !isNil(s.group)), map(x => x.matches.length * 5), sum)(t.schedules)
@@ -256,6 +256,20 @@ app.patch('/admin/result', (req, res) => {
 
 app.patch('/admin/updaterating', (req, res) => {
   done(api.updateRating(), res);
+});
+
+app.put('/admin/groupmatch/:id/:group', (req, res) => {
+  const { id, group } = req.params;
+  api.getById('tournaments', id).then(t => {
+    if (t.schedules) {
+      //const games = t.games.map(() => g.group);
+      //const schedules = t.schedules.map((s, i) => s.group == group ? {...s, matches: s.matches.map(m => m.id == req.body.id ? req.body : m)} : s);
+      //api.update('tournaments', { id: +id, schedules }).then(r => res.json(r));
+      serial(req.body.games, g => api.addToList('tournaments', +id, 'games', g)).then(r => res.json(r));
+    } else {
+      res.json('N/A');
+    }
+  });
 });
 
 app.post('/admin/:doc/:id/:list', (req, res) => {

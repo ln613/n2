@@ -1,7 +1,7 @@
 import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, filter as where, uniqBy, anyPass, both, dropLast, isNil, toPairs } from 'ramda';
 import { createSelector, mapStateWithSelectors } from '@ln613/state';
 import { Bold, Italic } from '@ln613/ui';
-import { findById, getNameById, toDate, toMonth, addIndex, diff, tap, split2, toAbsDate, findByName } from '@ln613/util';
+import { findById, getNameById, getPropById, toDate, toMonth, addIndex, diff, tap, split2, toAbsDate, findByName } from '@ln613/util';
 
 const _form = s => s.form || {};
 const _filter = s => s.filter || {};
@@ -143,7 +143,10 @@ const tournament = createSelector(
             team2: getNameById(x.t2)(teams),
             player1: getNameById(x.p1)(ps) + (x.p3 ? (' / ' + getNameById(x.p3)(ps)) : ''),
             player2: getNameById(x.p2)(ps) + (x.p4 ? (' / ' + getNameById(x.p4)(ps)) : ''),
-            result: '0:0'
+            p1Rating: getPropById('rating')(x.p1)(ps),
+            p2Rating: getPropById('rating')(x.p2)(ps),
+            isDouble: !!x.p3,
+            result: (find(g1 => g1.t1 == x.t1 && g1.t2 == x.t2 && g1.p1 == x.p1 && g1.p2 == x.p2 && g1.p3 == x.p3 && g1.p4 == x.p4, games) || {}).result
           }))
           return {...m, team1: getNameById(m.home)(teams), team2: getNameById(m.away)(teams), result: wn + ':' + ln, games: groupGames };
         })
@@ -219,7 +222,9 @@ const standing = createSelector(
       addIndex('rank')
     );
 
-    return tt.has2half ? pipe(sortBy(prop('rank')), split2, map(p))(st) : p(st);
+    return tt.has2half ? pipe(sortBy(prop('rank')), split2, map(p))(st) :
+      (tt.teams && tt.teams.length > 0 && !isNil(teams[0].group) ? pipe(groupBy(t => t.group), toPairs, map(x => x[1]), map(p))(st) :
+      p(st));
   }
 );
 
@@ -315,7 +320,7 @@ export const productsSelector = mapStateWithSelectors({ products: filteredProduc
 export const ratingSelector = mapStateWithSelectors({ players: filteredPlayers });
 export const playersSelector = mapStateWithSelectors({ players, lookup, player: form('player') });
 export const tournamentsSelector = mapStateWithSelectors({ tournaments: tournamentsWithYears, lookup });
-export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players });
+export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players, formMatch: form('match') });
 export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), tournaments, players, standing });
 export const historySelector = mapStateWithSelectors({ history, lookup, players });
 export const standingSelector = mapStateWithSelectors({ standing, tournament, players });

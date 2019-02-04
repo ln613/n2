@@ -36,7 +36,7 @@ const teams = ts =>
 const groups = gs =>
   (gs || []).map(g =>
     <div class="pt8" key={g[0]}>
-      <div class="pv8 fs24 darkgreen">Group {+g[0] + 1}</div>
+      <div class="pv8 fs24 darkgreen">Group {g[0]}</div>
       <Table name="team" data={(g[1] || []).map(mapTeam)}>
         <td key="id" hidden />  
       </Table>

@@ -17,7 +17,7 @@ const Schedule = ({ tournament, id, isMobile }) =>
       <hr/>
       {(tournament.schedules || []).map((s, i) =>
         <div class="pt8">
-          <div class="pv8 fs24 darkgreen">{tournament.isSingle ? 'Round ' + (i + 1) : (isNil(s.group) ? s.date : ('Group ' + (+s.group + 1))) }</div>
+          <div class="pv8 fs24 darkgreen">{tournament.isSingle ? 'Round ' + (i + 1) : (isNil(s.group) ? s.date : ('Group ' + s.group)) }</div>
           <Table name="schedule" data={mapMatches(s.matches || [], tournament, !isNil(s.group))} />
           {/* <Table name="week" data={w.matches} equalWidth>
             <td key="team1Points" hidden />  

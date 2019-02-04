@@ -24,7 +24,8 @@ const Standing = ({ standing, tournament, players, id, isMobile }) =>
           <div>Note: The results from first round will carry over to the second round.</div>
         </Ready> :
         <Ready on={[players, tournament]}>
-          <Table name="standing" data={standing} />
+          {tournament.groups ? standing.map((s, i) => <Table name={'standing' + i} data={s} />) :
+          <Table name="standing" data={standing} />}
         </Ready>
       }
   </div>

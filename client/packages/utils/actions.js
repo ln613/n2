@@ -84,6 +84,10 @@ var actionData = exports.actionData = {
     path: 'tournament.games[id]',
     methods: ['post', 'put', 'patch', 'delete']
   },
+  groupMatch: {
+    url: _util.admin + 'groupmatch/{id}/{group}',
+    methods: ['put']
+  },
   result: {
     url: _util.admin + 'result',
     methods: ['post', 'patch']

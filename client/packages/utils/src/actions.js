@@ -76,6 +76,10 @@ export const actionData = {
     path: 'tournament.games[id]',
     methods: ['post', 'put', 'patch', 'delete']
   },
+  groupMatch: {
+    url: admin + 'groupmatch/{id}/{group}',
+    methods: ['put']
+  },
   result: {
     url: admin + 'result',
     methods: ['post', 'patch']
