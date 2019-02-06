@@ -4,6 +4,7 @@ import { compose } from 'recompose';
 import { pick, isNil } from 'ramda';
 import actions from 'utils/actions';
 import { tournamentSelector } from 'utils/selectors';
+import { kos } from 'utils';
 import { getNameById, tap } from '@ln613/util';
 import { withLoad, withParams } from '@ln613/compose';
 import { Table, withMobile } from '@ln613/ui/semantic';
@@ -17,7 +18,7 @@ const Schedule = ({ tournament, id, isMobile }) =>
       <hr/>
       {(tournament.schedules || []).map((s, i) =>
         <div class="pt8">
-          <div class="pv8 fs24 darkgreen">{tournament.isSingle ? 'Round ' + (i + 1) : (isNil(s.group) ? s.date : ('Group ' + s.group)) }</div>
+          <div class="pv8 fs24 darkgreen">{tournament.isSingle ? 'Round ' + (i + 1) : (!isNil(s.group) ? ('Group ' + s.group) : (s.ko ? kos[Math.log2(s.ko)] : s.date)) }</div>
           <Table name="schedule" data={mapMatches(s.matches || [], tournament, !isNil(s.group))} />
           {/* <Table name="week" data={w.matches} equalWidth>
             <td key="team1Points" hidden />  

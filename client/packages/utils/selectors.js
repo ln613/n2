@@ -222,10 +222,12 @@ var tournament = (0, _state.createSelector)(_tournament, players, function (t, p
       date: s.date && (0, _util.toDate)(s.date),
       matches: t.isSingle ? s.matches.map(function (m) {
         return _extends({}, m, { player1: getSinglePlayer(m.home, players), player2: getSinglePlayer(m.away, players), result: m.result || '' });
-      }) : ((0, _ramda.isNil)(s.group) ? (0, _ramda.range)(1, 9).map(function (n) {
+      }) : (s.group || s.ko ? s.matches : (0, _ramda.range)(1, 9).map(function (n) {
         return (0, _util.findById)(n)(s.matches) || {};
-      }) : s.matches).map(function (m) {
-        var gs = findGames(s, m, games);
+      })).map(function (m) {
+        var gs = findGames(s, m, games).filter(function (g) {
+          return s.group ? s.group == g.group : s.ko ? s.ko == g.ko : true;
+        });
         var wn = gs.filter(function (g) {
           return g.isWin && g.t1 === m.home || !g.isWin && g.t1 === m.away;
         }).length;
@@ -241,7 +243,7 @@ var tournament = (0, _state.createSelector)(_tournament, players, function (t, p
             isDouble: !!x.p3,
             result: ((0, _ramda.find)(function (g1) {
               return g1.t1 == x.t1 && g1.t2 == x.t2 && g1.p1 == x.p1 && g1.p2 == x.p2 && g1.p3 == x.p3 && g1.p4 == x.p4;
-            }, games) || {}).result
+            }, gs) || {}).result
           });
         });
         return _extends({}, m, { team1: (0, _util.getNameById)(m.home)(teams), team2: (0, _util.getNameById)(m.away)(teams), result: wn + ':' + ln, games: groupGames });
@@ -316,7 +318,9 @@ var standing = (0, _state.createSelector)(tournament, teams, function (tt, ts) {
   var st = (tt.isSingle ? tt.players : ts).map(function (t) {
     var _s;
 
-    var ms = (0, _ramda.unnest)((tt.schedules || []).map(function (s) {
+    var ms = (0, _ramda.unnest)((tt.schedules || []).filter(function (s) {
+      return !s.ko;
+    }).map(function (s) {
       return s.matches;
     })).filter(function (m) {
       return (m.home === t.id || m.away === t.id) && m.result && m.result != '0:0';
@@ -332,18 +336,34 @@ var standing = (0, _state.createSelector)(tournament, teams, function (tt, ts) {
     var ps1 = (0, _ramda.sum)(ms.map(function (m) {
       return +m.result[m.home == t.id ? 2 : 0];
     }));
-    var s = (_s = {}, _defineProperty(_s, tt.isSingle ? 'player' : 'team', t.name), _defineProperty(_s, 'total', ms.length), _defineProperty(_s, 'w', wn), _defineProperty(_s, 'l', ln), _defineProperty(_s, tt.isSingle ? 'gw' : 'points', ps), _defineProperty(_s, 'rank', t.rank), _s);
+    var s = (_s = {}, _defineProperty(_s, tt.isSingle ? 'player' : 'team', t.name), _defineProperty(_s, 'id', t.id), _defineProperty(_s, 'total', ms.length), _defineProperty(_s, 'w', wn), _defineProperty(_s, 'l', ln), _defineProperty(_s, tt.isSingle ? 'gw' : 'points', ps), _defineProperty(_s, 'rank', t.rank), _defineProperty(_s, 'group', t.group), _s);
     if (tt.isSingle) s.gl = ps1;
     return s;
   });
 
   var p = (0, _ramda.pipe)((0, _ramda.sortWith)(tt.isSingle ? [dw, at, dp(1), al] : [dp(0), at, dw]), (0, _util.addIndex)('rank'));
 
-  return tt.has2half ? (0, _ramda.pipe)((0, _ramda.sortBy)((0, _ramda.prop)('rank')), _util.split2, (0, _ramda.map)(p))(st) : tt.teams && tt.teams.length > 0 && !(0, _ramda.isNil)(teams[0].group) ? (0, _ramda.pipe)((0, _ramda.groupBy)(function (t) {
+  return tt.has2half ? (0, _ramda.pipe)((0, _ramda.sortBy)((0, _ramda.prop)('rank')), _util.split2, (0, _ramda.map)(p))(st) : tt.teams && tt.teams.length > 0 && !(0, _ramda.isNil)(tt.teams[0].group) ? (0, _ramda.pipe)((0, _ramda.groupBy)(function (t) {
     return t.group;
   }), _ramda.toPairs, (0, _ramda.map)(function (x) {
     return x[1];
   }), (0, _ramda.map)(p))(st) : p(st);
+});
+
+var ko = (0, _state.createSelector)(tournament, function (t) {
+  var kos = (t.schedules || []).filter(function (s) {
+    return s.ko;
+  });
+  if (kos.length === 0) return null;
+  var ms = (0, _ramda.sortBy)(function (s) {
+    return s.ko;
+  }, kos)[0].matches;
+  if (ms.length === 1 || ms.some(function (m) {
+    return !m.result || m.result == '0:0';
+  })) return null;
+  return ms.map(function (m) {
+    return m.result[0] > m.result[2] ? m.home : m.away;
+  });
 });
 
 var isSamePlayer = function isSamePlayer(p1, id) {
@@ -365,6 +385,11 @@ var isPlayerInGame = function isPlayerInGame(p) {
 var isPlayerWin = function isPlayerWin(p) {
   return function (g) {
     return isHomePlayer(p)(g) && g.isWin || isAwayPlayer(p)(g) && !g.isWin;
+  };
+};
+var isPlayerLose = function isPlayerLose(p) {
+  return function (g) {
+    return isHomePlayer(p)(g) && !g.isWin || isAwayPlayer(p)(g) && g.isWin;
   };
 };
 
@@ -391,7 +416,7 @@ var stats = (0, _state.createSelector)(tournament, function (t) {
     });
     var total = sgs.length;
     var wins = sgs.filter(isPlayerWin(p));
-    var loses = (0, _util.diff)()(sgs, wins);
+    var loses = sgs.filter(isPlayerLose(p));
     var gw = (0, _ramda.sum)(sgs.map(function (g) {
       return +g.result[isHomePlayer(p)(g) ? 0 : 2];
     }));
@@ -403,7 +428,7 @@ var stats = (0, _state.createSelector)(tournament, function (t) {
     var d = w - l;
     var wpc = ((total && w / total) * 100).toFixed(1) + '%';
     var dwins = dgs.filter(isPlayerWin(p));
-    var dloses = (0, _util.diff)()(dgs, dwins);
+    var dloses = dgs.filter(isPlayerLose(p));
     var dw = dwins.length;
     var dl = dloses.length;
     return { player: p.name, 'mp': total, w: w, l: l, '+/-': d > 0 ? '+' + d : d, 'win %': wpc, gw: gw, gl: gl, dw: dw, dl: dl };
@@ -473,7 +498,7 @@ var ratingSelector = exports.ratingSelector = (0, _state.mapStateWithSelectors)(
 var playersSelector = exports.playersSelector = (0, _state.mapStateWithSelectors)({ players: players, lookup: lookup, player: form('player') });
 var tournamentsSelector = exports.tournamentsSelector = (0, _state.mapStateWithSelectors)({ tournaments: tournamentsWithYears, lookup: lookup });
 var tournamentSelector = exports.tournamentSelector = (0, _state.mapStateWithSelectors)({ tournament: tournament, lookup: lookup, players: players, formMatch: form('match') });
-var tourSelector = exports.tourSelector = (0, _state.mapStateWithSelectors)({ tournament: form('tournament'), tournaments: tournaments, players: players, standing: standing });
+var tourSelector = exports.tourSelector = (0, _state.mapStateWithSelectors)({ tournament: form('tournament'), tournaments: tournaments, players: players, standing: standing, ko: ko });
 var historySelector = exports.historySelector = (0, _state.mapStateWithSelectors)({ history: history, lookup: lookup, players: players });
 var standingSelector = exports.standingSelector = (0, _state.mapStateWithSelectors)({ standing: standing, tournament: tournament, players: players });
 var teamSelector = exports.teamSelector = (0, _state.mapStateWithSelectors)({ tournament: tournament, team: form('team'), players: players, monthRatings: monthRatings });

@@ -11,6 +11,7 @@ import { withLoad, withEdit, withParams, withMount } from '@ln613/compose';
 import { withRouter } from "react-router-dom";
 import { withSuccess, resultOptions } from 'utils';
 import { tap } from '@ln613/util';
+import { kos } from 'utils';
 
 const single = ms =>
   <Table name="schedule" data={(ms || []).map(pick(['id', 'player1', 'result', 'player2']))}>
@@ -36,26 +37,28 @@ const groups = (ms, tid, sid) =>
 
 const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id }) =>
   <div>
-    <h1>Schedule - {tournament.name} - {tournament.isSingle ? ('Round ' + schedule.id) : schedule.date}</h1>
+    <h1>Schedule - {tournament.name} - {tournament.isSingle ? ('Round ' + schedule.id) : tap(schedule).date}</h1>
     <hr />
-    <TextBox name={`schedule.${tournament.groups ? 'group' : 'id'}`} disabled />
+    <div class="pv8 fs24 darkgreen">
+      {schedule.ko ? kos[Math.log2(schedule.ko)] : (schedule.group ? ('Group ' + schedule.group) : ('Id ' + schedule.id))}
+    </div>
     <TextBox name="schedule.date" />
     {tournament.isSingle ?
       single(schedule.matches) :
       (tournament.groups ?
-        groups(find(x => x.group == id, tournament.schedules).matches, tournament.id, id) :
+        groups(find(x => x.id == id, tournament.schedules).matches, tournament.id, id) :
         teams(tournament, schedule, history)
       )
     }
     <hr />
-    <Button primary onClick={() => id[0] === '+' ? postSchedule(schedule, { id1: tournament.id }) : putSchedule(schedule, { id1: tournament.id, id: schedule.id })}>Save</Button>
+    {tournament.groups ? null : <Button primary onClick={() => id[0] === '+' ? postSchedule(schedule, { id1: tournament.id }) : putSchedule(schedule, { id1: tournament.id, id: schedule.id })}>Save</Button>}
   </div>
 
 export default compose(
   connect(scheduleSelector, actions),
   withParams,
   withLoad('tournament', ['id', 'id1'], true),
-  withMount(p => p.setForm({ matches: [], ...find(x => x[isNil(x.group) ? 'id' : 'group'] == p.id, p.tournament.schedules) }, { path: 'schedule' })),
+  withMount(p => p.setForm({ matches: [], ...find(x => x.id == p.id, p.tournament.schedules) }, { path: 'schedule' })),
   //withEdit('schedule', 'tournament.schedules', { matches: [] }),
   withSuccess('schedule', () => alert('Saved'), () => alert('Error happened!')),
   withRouter

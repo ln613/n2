@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.resultOptions = exports.newRating = exports.toGame = exports.adjustRating = exports.withSuccess = exports.cdurl = undefined;
+exports.kos = exports.resultOptions = exports.newRating = exports.toGame = exports.adjustRating = exports.withSuccess = exports.cdurl = undefined;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -52,6 +52,7 @@ var toGame = exports.toGame = function toGame(g, s, m) {
     g1.p4 = +g.p4;
   }
   if (!(0, _ramda.isNil)(s.group)) g1.group = s.group;
+  if (s.ko) g1.ko = s.ko;
   return g1;
 };
 
@@ -60,3 +61,5 @@ var newRating = exports.newRating = function newRating(r, d) {
 };
 
 var resultOptions = exports.resultOptions = ['', '3:0', '3:1', '3:2', '2:3', '1:3', '0:3', '2:0', '2:1', '1:2', '0:2'];
+
+var kos = exports.kos = ['Final', 'Semifinals', 'Quarterfinals'];

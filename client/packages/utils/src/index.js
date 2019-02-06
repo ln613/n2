@@ -37,9 +37,12 @@ export const toGame = (g, s, m) => {
     g1.p4 = +g.p4;
   }
   if (!isNil(s.group)) g1.group = s.group;
+  if (s.ko) g1.ko = s.ko;
   return g1;
 }
 
 export const newRating = (r, d) => Math.max(r + d, 100)
 
 export const resultOptions = ['', '3:0', '3:1', '3:2', '2:3', '1:3', '0:3', '2:0', '2:1', '1:2', '0:2'];
+
+export const kos = ['Final', 'Semifinals', 'Quarterfinals' ];

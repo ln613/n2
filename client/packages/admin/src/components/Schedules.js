@@ -5,9 +5,11 @@ import { connect } from '@ln613/state';
 import actions from 'utils/actions';
 import { withLoad, withLoadForce, withParams, withNewId } from '@ln613/compose';
 import { tournamentSelector } from 'utils/selectors';
+import { kos } from 'utils';
 import { Table } from '@ln613/ui/semantic';
 import { withRouter } from "react-router-dom";
 import { Button } from 'semantic-ui-react';
+import { tap } from '@ln613/util';
 
 const Schedules = ({ tournament, history, id, newId }) =>
   <div>
@@ -17,8 +19,8 @@ const Schedules = ({ tournament, history, id, newId }) =>
     </div>
     <hr/>
     <Table name="schedules" link={x => `/schedule/${id}/${x}`} data={(tournament.schedules || []).map(x => ({
-      'id': x.id || +x.group,
-      [tournament.isSingle ? 'round' : (isNil(x.group) ? 'date' : 'group')]: tournament.isSingle ? ('Round ' + x.id) : (isNil(x.group) ? x.date : ('Group ' + x.group)) })
+      'id': x.id || (isNil(x.group) ? '' : +x.group),
+      [tournament.isSingle ? 'round' : (!isNil(x.group) || x.ko ? 'group' : 'date')]: tournament.isSingle ? ('Round ' + x.id) : (!isNil(x.group) ? ('Group ' + x.group) : (x.ko ? kos[Math.log2(x.ko)] : x.date)) })
     )} />
   </div>
 

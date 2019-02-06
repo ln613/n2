@@ -1,6 +1,6 @@
 import React from 'react';
-import { compose } from 'recompose';
-import { find } from 'ramda';
+import { compose, withProps } from 'recompose';
+import { find, is } from 'ramda';
 import { connect } from '@ln613/state';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
@@ -11,8 +11,8 @@ import { tap } from '@ln613/util';
 import { withRouter } from "react-router-dom";
 import { withSuccess } from 'utils';
 
-const Tournament = ({ tournament, standing, history, postTour, patchTour, postGenrr, postGengroup, id, isMobile }) =>
-  <div>
+const Tournament = ({ tournament, standing, ko, isGroup, history, postTour, patchTour, postGenrr, postGengroup, id, isMobile }) =>
+  <div>{tap(standing) && ''}
     <h1>Tournament - {+tournament.id ? tournament.name : 'Add New'}</h1>
     <hr />
     {+tournament.id ?
@@ -26,7 +26,7 @@ const Tournament = ({ tournament, standing, history, postTour, patchTour, postGe
       <Button primary onClick={() => postGengroup({ id })}>Generate Groups</Button>
       <Button primary onClick={() => postGenrr({ id })}>Generate Schedule</Button>
       {tournament.isSingle || tournament.has2half ? null :
-        <Button primary onClick={() => postGenrr({ id, standing })}>Generate Schedule 2</Button>
+        <Button primary onClick={() => postGenrr({ id, standing, koStanding: ko })}>Generate {isGroup ? 'KO' : 'Schedule 2'}</Button>
       }
       </div>  
     : null}  
@@ -46,6 +46,7 @@ export default compose(
   withLoad('players'),
   withLoadForce('tournament'),
   withMount(p => p.setForm(find(x => x.id == p.id, p.tournaments), { path: 'tournament' })),
+  withProps(({ standing }) => ({ isGroup: is(Array, standing) && standing.length > 2 })),
   withSuccess('tour', () => alert('Saved'), () => alert('Error happened!')),
   withRouter,
   withMobile

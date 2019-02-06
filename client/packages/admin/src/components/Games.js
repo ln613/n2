@@ -30,21 +30,27 @@ export default compose(
   withParams,
   withLoad('players'),
   withLoadForce('tournament', 'id', 'T'),
-  withProps(p => ({ schedule: (p.tournament.groups ? findByProp('group') : findById)(p.S)(p.tournament.schedules) || {} })),
+  withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
   withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),
   withProps(p => ({ games: sortWith([p.tournament.groups ? ascend(prop('id')) : descend(prop('id'))],
     p.tournament.groups ? p.match.games :
     (p.tournament.games || []).filter(x => (x.schedule === p.S || toAbsDate(x.date) === toAbsDate(p.schedule.date)) && (x.match === p.M || (x.t1 === p.match.home && x.t2 === p.match.away) || (x.t2 === p.match.home && x.t1 === p.match.away) ))
   )})),
   withNewId('tournament.games'),
-  withMount(p => p.tournament.groups && p.setForm(find(x => x.id == p.M, find(x => x.group == p.S, p.tournament.schedules).matches), { path: 'match' })),
+  withMount(p => p.tournament.groups && p.setForm(find(x => x.id == p.M, find(x => x.id == p.S, p.tournament.schedules).matches), { path: 'match' })),
   //withEdit('match', 'schedule.matches', { id: 'M', games: [] }),
   //withRouter,
-  withSuccess('groupMatch', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!'))
+  withSuccess('groupmatch', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!'))
 )(Games)
 
 const save = p => {
-  p.putGroupMatch({ ...p.formMatch, games: p.formMatch.games.map(g => toGame(g, p.schedule, p.formMatch)) }, { id: p.T, group: p.S})
+  const gs = p.formMatch.games.filter(g => g.result);
+  const wins = gs.filter(g => +g.result[0] > +g.result[2]).length;
+  const loses = gs.filter(g => +g.result[0] < +g.result[2]).length;
+  if (wins < 3 && loses < 3)
+    alert('not valid!');
+  else
+    p.putGroupMatch({ ...p.formMatch, games: gs.map(g => toGame(g, p.schedule, p.formMatch)) }, { id: p.T, group: p.S })
 //   const isAdd = p.id[0] === '+';
 //   const g = toGame(p.game, p.schedule, p.match);
 
