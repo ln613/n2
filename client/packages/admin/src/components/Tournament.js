@@ -12,7 +12,7 @@ import { withRouter } from "react-router-dom";
 import { withSuccess } from 'utils';
 
 const Tournament = ({ tournament, standing, ko, isGroup, history, postTour, patchTour, postGenrr, postGengroup, id, isMobile }) =>
-  <div>{tap(standing) && ''}
+  <div>{standing && ''}
     <h1>Tournament - {+tournament.id ? tournament.name : 'Add New'}</h1>
     <hr />
     {+tournament.id ?

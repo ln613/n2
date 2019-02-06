@@ -37,7 +37,7 @@ const groups = (ms, tid, sid) =>
 
 const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id }) =>
   <div>
-    <h1>Schedule - {tournament.name} - {tournament.isSingle ? ('Round ' + schedule.id) : tap(schedule).date}</h1>
+    <h1>Schedule - {tournament.name} - {tournament.isSingle ? ('Round ' + schedule.id) : schedule.date}</h1>
     <hr />
     <div class="pv8 fs24 darkgreen">
       {schedule.ko ? kos[Math.log2(schedule.ko)] : (schedule.group ? ('Group ' + schedule.group) : ('Id ' + schedule.id))}

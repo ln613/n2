@@ -68,9 +68,11 @@ const filteredProducts = createSelector(
   }))
 );
 
+const fullname = p => p.firstName + ' ' + p.lastName;
+
 const players = createSelector(
   _players,
-  ps => sortWith([ascend(prop('name'))])(ps.map(p => ({ ...p, name: p.firstName + ' ' + p.lastName })))
+  ps => sortWith([ascend(prop('name'))])(ps.map(p => ({ ...p, name: fullname(p) })))
 );
 
 const filteredPlayers = createSelector(
@@ -86,7 +88,8 @@ const dsPlayers = createSelector(
 
 const teams = createSelector(
   _tournament,
-  t => t.teams || []
+  players,
+  (t, ps) => (t.teams || []).map(x => ({ ...x, name: x.name || (tap(getNameById(x.players[0].id)(ps)) + " / " + getNameById(x.players[1].id)(ps))}))
 );
 
 const pn = (n, g) => g['p' + n];
@@ -114,7 +117,7 @@ const tournament = createSelector(
     const teams = (t.teams || []).map(m => ({
       ...m, text: m.name, value: m.id,
       players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating || x.rating)], m.players.map(p => findById(p.id)(ps)).map(p => ({
-        ...p, tRating: p.rating, isSub: p.isSub, name: p.firstName + ' ' + p.lastName
+        ...p, tRating: p.rating, isSub: p.isSub, name: fullname(p)
       })))
     }));
     const groups = teams.length === 0 || isNil(teams[0].group) ? null : toPairs(groupBy(x => x.group, teams));

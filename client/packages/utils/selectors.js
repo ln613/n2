@@ -122,9 +122,13 @@ var filteredProducts = (0, _state.createSelector)(productsWithCat, filter('produ
   }));
 });
 
+var fullname = function fullname(p) {
+  return p.firstName + ' ' + p.lastName;
+};
+
 var players = (0, _state.createSelector)(_players, function (ps) {
   return (0, _ramda.sortWith)([(0, _ramda.ascend)((0, _ramda.prop)('name'))])(ps.map(function (p) {
-    return _extends({}, p, { name: p.firstName + ' ' + p.lastName });
+    return _extends({}, p, { name: fullname(p) });
   }));
 });
 
@@ -140,8 +144,10 @@ var dsPlayers = (0, _state.createSelector)(filteredPlayers, function (ps) {
   });
 });
 
-var teams = (0, _state.createSelector)(_tournament, function (t) {
-  return t.teams || [];
+var teams = (0, _state.createSelector)(_tournament, players, function (t, ps) {
+  return (t.teams || []).map(function (x) {
+    return _extends({}, x, { name: x.name || (0, _util.tap)((0, _util.getNameById)(x.players[0].id)(ps)) + " / " + (0, _util.getNameById)(x.players[1].id)(ps) });
+  });
 });
 
 var pn = function pn(n, g) {
@@ -196,7 +202,7 @@ var tournament = (0, _state.createSelector)(_tournament, players, function (t, p
       })], m.players.map(function (p) {
         return (0, _util.findById)(p.id)(ps);
       }).map(function (p) {
-        return _extends({}, p, { tRating: p.rating, isSub: p.isSub, name: p.firstName + ' ' + p.lastName
+        return _extends({}, p, { tRating: p.rating, isSub: p.isSub, name: fullname(p)
         });
       }))
     });
