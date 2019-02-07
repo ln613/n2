@@ -1,4 +1,4 @@
-import { last } from 'ramda';
+import { last, isNil } from 'ramda';
 import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import { successSelector } from './selectors';
@@ -24,10 +24,25 @@ export const adjustRating = g => {
   if (g.isDouble) {
       return g;
   } else {
-    const p1Win = g.result[0] === '3';
+    const p1Win = +g.result[0] > +g.result[2];
     const d = p1Win ? rateDiff(g.p1Rating, g.p2Rating) : rateDiff(g.p2Rating, g.p1Rating);
     return {...g, p1Diff: p1Win ? d[0] : d[1], p2Diff: p1Win ? d[1] : d[0]};
   }
 }
 
+export const toGame = (g, s, m) => {
+  const g1 = adjustRating({ id: g.id, isDouble: g.isDouble, date: s.date, t1: +m.home, t2: +m.away, p1: +g.p1, p2: +g.p2, p1Rating: g.p1Rating, p2Rating: g.p2Rating, result: g.result });
+  if (g.isDouble) {
+    g1.p3 = +g.p3;
+    g1.p4 = +g.p4;
+  }
+  if (!isNil(s.group)) g1.group = s.group;
+  if (s.ko) g1.ko = s.ko;
+  return g1;
+}
+
 export const newRating = (r, d) => Math.max(r + d, 100)
+
+export const resultOptions = ['', '3:0', '3:1', '3:2', '2:3', '1:3', '0:3', '2:0', '2:1', '1:2', '0:2'];
+
+export const kos = ['Final', 'Semifinals', 'Quarterfinals' ];

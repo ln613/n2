@@ -22,7 +22,7 @@ const Stats = ({ stats, tournament, id, isMobile }) =>
     <div class={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr/>
-      {tournament.startDate2 ?
+      {tournament.has2half ?
         <Fragment>
           <div class="fs18 fw6 pt8">Upper Division</div>
           {table(stats[0], isMobile)}

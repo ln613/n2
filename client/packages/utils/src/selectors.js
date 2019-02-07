@@ -1,7 +1,7 @@
 import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, filter as where, uniqBy, anyPass, both, dropLast, isNil, toPairs } from 'ramda';
 import { createSelector, mapStateWithSelectors } from '@ln613/state';
 import { Bold, Italic } from '@ln613/ui';
-import { findById, getNameById, toDate, toMonth, addIndex, diff, tap, split2, toAbsDate } from '@ln613/util';
+import { findById, getNameById, getPropById, toDate, toMonth, addIndex, diff, tap, split2, toAbsDate, findByName } from '@ln613/util';
 
 const _form = s => s.form || {};
 const _filter = s => s.filter || {};
@@ -68,9 +68,11 @@ const filteredProducts = createSelector(
   }))
 );
 
+const fullname = p => p.firstName + ' ' + p.lastName;
+
 const players = createSelector(
   _players,
-  ps => sortWith([ascend(prop('name'))])(ps.map(p => ({ ...p, name: p.firstName + ' ' + p.lastName })))
+  ps => sortWith([ascend(prop('name'))])(ps.map(p => ({ ...p, name: fullname(p) })))
 );
 
 const filteredPlayers = createSelector(
@@ -86,7 +88,8 @@ const dsPlayers = createSelector(
 
 const teams = createSelector(
   _tournament,
-  t => t.teams || []
+  players,
+  (t, ps) => (t.teams || []).map(x => ({ ...x, name: x.name || (tap(getNameById(x.players[0].id)(ps)) + " / " + getNameById(x.players[1].id)(ps))}))
 );
 
 const pn = (n, g) => g['p' + n];
@@ -111,10 +114,10 @@ const tournament = createSelector(
   players,
   (t, ps) => {
     if (ps.length === 0) return t;
-    const teams = (t.teams || []).map(t => ({
-      ...t, text: t.name, value: t.id,
-      players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating || x.rating)], t.players.map(p => findById(p.id)(ps)).map(p => ({
-        ...p, tRating: p.rating, isSub: p.isSub, name: p.firstName + ' ' + p.lastName
+    const teams = (t.teams || []).map(m => ({
+      ...m, text: m.name, value: m.id,
+      players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating || x.rating)], m.players.map(p => findById(p.id)(ps)).map(p => ({
+        ...p, tRating: p.rating, isSub: p.isSub, name: fullname(p)
       })))
     }));
     const groups = teams.length === 0 || isNil(teams[0].group) ? null : toPairs(groupBy(x => x.group, teams));
@@ -129,16 +132,26 @@ const tournament = createSelector(
     });
     const schedules = (t.schedules || []).map(s => ({
       ...s,
-      date: toDate(s.date),
+      date: s.date && toDate(s.date),
       matches: t.isSingle ?
         s.matches.map(m => ({...m, player1: getSinglePlayer(m.home, players), player2: getSinglePlayer(m.away, players), result: m.result || ''})) :
-        range(1, 9)
-        .map(n => findById(n)(s.matches) || {})
+        ((s.group || s.ko) ? s.matches : range(1, 9).map(n => findById(n)(s.matches) || {}))
         .map(m => {
-          const gs = findGames(s, m, games);
+          const gs = findGames(s, m, games).filter(g => s.group ? s.group == g.group : (s.ko ? s.ko == g.ko : true));
           const wn = gs.filter(g => (g.isWin && g.t1 === m.home) || (!g.isWin && g.t1 === m.away)).length;
           const ln = gs.length - wn;
-          return {...m, result: wn + ':' + ln };
+          const groupGames = (m.games || []).map(x => ({
+            ...x,
+            team1: getNameById(x.t1)(teams),
+            team2: getNameById(x.t2)(teams),
+            player1: getNameById(x.p1)(ps) + (x.p3 ? (' / ' + getNameById(x.p3)(ps)) : ''),
+            player2: getNameById(x.p2)(ps) + (x.p4 ? (' / ' + getNameById(x.p4)(ps)) : ''),
+            p1Rating: getPropById('rating')(x.p1)(ps),
+            p2Rating: getPropById('rating')(x.p2)(ps),
+            isDouble: !!x.p3,
+            result: (find(g1 => g1.t1 == x.t1 && g1.t2 == x.t2 && g1.p1 == x.p1 && g1.p2 == x.p2 && g1.p3 == x.p3 && g1.p4 == x.p4, gs) || {}).result
+          }))
+          return {...m, team1: getNameById(m.home)(teams), team2: getNameById(m.away)(teams), result: wn + ':' + ln, games: groupGames };
         })
     }));
     return teams.length > 0 || players.length > 0 ? { ...t, teams, groups, players, schedules, games } : t;
@@ -196,13 +209,13 @@ const standing = createSelector(
   teams,
   (tt, ts) => {
     const st = (tt.isSingle ? tt.players : ts).map(t => {
-      const ms = unnest((tt.schedules || []).map(s => s.matches)).filter(m => (m.home === t.id || m.away === t.id) && m.result && m.result != '0:0');
+      const ms = unnest((tt.schedules || []).filter(s => !s.ko).map(s => s.matches)).filter(m => (m.home === t.id || m.away === t.id) && m.result && m.result != '0:0');
       const ws = ms.filter(m => (m.home === t.id && m.result[0] > m.result[2]) || (m.away === t.id && m.result[0] < m.result[2]));
       const wn = ws.length;
       const ln = ms.length - wn;
       const ps = sum(ms.map(m => +m.result[m.home == t.id ? 0 : 2]));
       const ps1 = sum(ms.map(m => +m.result[m.home == t.id ? 2 : 0]));
-      const s = { [tt.isSingle ? 'player' : 'team']: t.name, total: ms.length, w: wn, l: ln, [tt.isSingle ? 'gw' : 'points']: ps, rank: t.rank };
+      const s = { [tt.isSingle ? 'player' : 'team']: t.name, id: t.id, total: ms.length, w: wn, l: ln, [tt.isSingle ? 'gw' : 'points']: ps, rank: t.rank, group: t.group };
       if (tt.isSingle) s.gl = ps1;
       return s;
     });
@@ -212,7 +225,20 @@ const standing = createSelector(
       addIndex('rank')
     );
 
-    return tt.startDate2 ? pipe(sortBy(prop('rank')), split2, map(p))(st) : p(st);
+    return tt.has2half ? pipe(sortBy(prop('rank')), split2, map(p))(st) :
+      (tt.teams && tt.teams.length > 0 && !isNil(tt.teams[0].group) ? pipe(groupBy(t => t.group), toPairs, map(x => x[1]), map(p))(st) :
+      p(st));
+  }
+);
+
+const ko = createSelector(
+  tournament,
+  t => {
+    const kos = (t.schedules || []).filter(s => s.ko);
+    if (kos.length === 0) return null;
+    const ms = sortBy(s => s.ko, kos)[0].matches;
+    if (ms.length === 1 || ms.some(m => !m.result || m.result == '0:0')) return null;
+    return ms.map(m => m.result[0] > m.result[2] ? m.home : m.away);
   }
 );
 
@@ -221,6 +247,7 @@ const isHomePlayer = p => g => isSamePlayer(p, g.p1) || isSamePlayer(p, g.p3);
 const isAwayPlayer = p => g => isSamePlayer(p, g.p2) || isSamePlayer(p, g.p4);
 const isPlayerInGame = p => anyPass([isHomePlayer(p), isAwayPlayer(p)]);
 const isPlayerWin = p => g => (isHomePlayer(p)(g) && g.isWin) || (isAwayPlayer(p)(g) && !g.isWin);
+const isPlayerLose = p => g => (isHomePlayer(p)(g) && !g.isWin) || (isAwayPlayer(p)(g) && g.isWin);
 
 const stats = createSelector(
   tournament,
@@ -241,7 +268,7 @@ const stats = createSelector(
         const dgs = gs.filter(g => g.isDouble);
         const total = sgs.length;
         const wins = sgs.filter(isPlayerWin(p));
-        const loses = diff()(sgs, wins);
+        const loses = sgs.filter(isPlayerLose(p));
         const gw = sum(sgs.map(g => +g.result[isHomePlayer(p)(g) ? 0 : 2]));
         const gl = sum(sgs.map(g => +g.result[isHomePlayer(p)(g) ? 2 : 0]));
         const w = wins.length;
@@ -249,7 +276,7 @@ const stats = createSelector(
         const d = w - l;
         const wpc = ((total && (w / total)) * 100).toFixed(1) + '%';
         const dwins = dgs.filter(isPlayerWin(p));
-        const dloses = diff()(dgs, dwins);
+        const dloses = dgs.filter(isPlayerLose(p));
         const dw = dwins.length;
         const dl = dloses.length;
         return { player: p.name, 'mp': total, w, l, '+/-': d > 0 ? '+' + d : d, 'win %': wpc, gw, gl, dw, dl };
@@ -258,13 +285,13 @@ const stats = createSelector(
       addIndex('#')
     );
     
-    if (t.startDate2) {
+    if (t.has2half) {
       const p1 = players.filter(x => x.isUpperDiv);
       const p2 = players.filter(x => !x.isUpperDiv);
       return map(st, [p1, p2]);
     }
 
-    return tap(st(players));
+    return st(players);
   }
 );
 
@@ -308,8 +335,8 @@ export const productsSelector = mapStateWithSelectors({ products: filteredProduc
 export const ratingSelector = mapStateWithSelectors({ players: filteredPlayers });
 export const playersSelector = mapStateWithSelectors({ players, lookup, player: form('player') });
 export const tournamentsSelector = mapStateWithSelectors({ tournaments: tournamentsWithYears, lookup });
-export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players });
-export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), tournaments, players, standing });
+export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players, formMatch: form('match') });
+export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), tournaments, players, standing, ko });
 export const historySelector = mapStateWithSelectors({ history, lookup, players });
 export const standingSelector = mapStateWithSelectors({ standing, tournament, players });
 export const teamSelector = mapStateWithSelectors({ tournament, team: form('team'), players, monthRatings });

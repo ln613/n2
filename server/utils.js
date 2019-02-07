@@ -2,6 +2,7 @@ const R = require('ramda');
 const fs = require('fs');
 const path = require('path');
 const moment = require('moment');
+const util = require('@ln613/util');
 
 const e = {};
 
@@ -84,7 +85,7 @@ e.gotoLogin = res => {
 
 const rrCycle = (x, r, l) => x < r ? x - r + l : x - r + 1;
 
-e.rrSchedule = (x, sorted) => {
+e.rrSchedule = (x, sorted, continuousId) => {
   const l = sorted ? x : R.sortWith([R.descend(R.prop('rating'))], x);
   if (e.isOdd(l.length)) l.push({id: null});
   const t1 = R.range(1, l.length);
@@ -95,7 +96,7 @@ e.rrSchedule = (x, sorted) => {
     return t2
       .map(n => ({ round: i + 1, home: l2[n].id, away: l2[l.length - n - 1].id }))
       .filter(t => t.home && t.away)
-      .map((t, j) => ({...t, id: j + 1}));
+      .map((t, j) => ({...t, id: continuousId ? ((i * l.length / 2) + j + 1) : (j + 1) }));
   })
 }
 
@@ -143,9 +144,20 @@ e.group = ts => {
   return ts.map((t, i) => {
     const l = Math.floor(i / g);
     const c = i % g;
-    const group = e.isOdd(l) ? (g - c - 1) : c;
+    const group = e.isOdd(l) ? (g - c) : c + 1;
     return {...t, group};
   });
+}
+
+e.gengames = (t, t1, t2) => {
+  const team1 = util.findById(t1)(t.teams);
+  const team2 = util.findById(t2)(t.teams);
+  return R.range(0, 5).map(n => ({ id: n + 1, date: t.startDate, t1, t2,
+    p1: +team1.players[n === 1 || n === 4 ? 1 : 0].id,
+    p2: +team2.players[n === 0 || n === 4 ? 1 : 0].id,
+    p3: n === 2 ? team1.players[1].id : undefined,
+    p4: n === 2 ? team2.players[1].id : undefined
+  }));
 }
 
 module.exports = e;

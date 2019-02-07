@@ -122,9 +122,13 @@ var filteredProducts = (0, _state.createSelector)(productsWithCat, filter('produ
   }));
 });
 
+var fullname = function fullname(p) {
+  return p.firstName + ' ' + p.lastName;
+};
+
 var players = (0, _state.createSelector)(_players, function (ps) {
   return (0, _ramda.sortWith)([(0, _ramda.ascend)((0, _ramda.prop)('name'))])(ps.map(function (p) {
-    return _extends({}, p, { name: p.firstName + ' ' + p.lastName });
+    return _extends({}, p, { name: fullname(p) });
   }));
 });
 
@@ -140,8 +144,10 @@ var dsPlayers = (0, _state.createSelector)(filteredPlayers, function (ps) {
   });
 });
 
-var teams = (0, _state.createSelector)(_tournament, function (t) {
-  return t.teams || [];
+var teams = (0, _state.createSelector)(_tournament, players, function (t, ps) {
+  return (t.teams || []).map(function (x) {
+    return _extends({}, x, { name: x.name || (0, _util.tap)((0, _util.getNameById)(x.players[0].id)(ps)) + " / " + (0, _util.getNameById)(x.players[1].id)(ps) });
+  });
 });
 
 var pn = function pn(n, g) {
@@ -187,16 +193,16 @@ var getSinglePlayer = function getSinglePlayer(id, ps) {
 };
 var tournament = (0, _state.createSelector)(_tournament, players, function (t, ps) {
   if (ps.length === 0) return t;
-  var teams = (t.teams || []).map(function (t) {
-    return _extends({}, t, { text: t.name, value: t.id,
+  var teams = (t.teams || []).map(function (m) {
+    return _extends({}, m, { text: m.name, value: m.id,
       players: (0, _ramda.sortWith)([(0, _ramda.ascend)(function (x) {
         return x.isSub ? 1 : 0;
       }), (0, _ramda.descend)(function (x) {
         return x.tRating || x.rating;
-      })], t.players.map(function (p) {
+      })], m.players.map(function (p) {
         return (0, _util.findById)(p.id)(ps);
       }).map(function (p) {
-        return _extends({}, p, { tRating: p.rating, isSub: p.isSub, name: p.firstName + ' ' + p.lastName
+        return _extends({}, p, { tRating: p.rating, isSub: p.isSub, name: fullname(p)
         });
       }))
     });
@@ -219,18 +225,34 @@ var tournament = (0, _state.createSelector)(_tournament, players, function (t, p
   });
   var schedules = (t.schedules || []).map(function (s) {
     return _extends({}, s, {
-      date: (0, _util.toDate)(s.date),
+      date: s.date && (0, _util.toDate)(s.date),
       matches: t.isSingle ? s.matches.map(function (m) {
         return _extends({}, m, { player1: getSinglePlayer(m.home, players), player2: getSinglePlayer(m.away, players), result: m.result || '' });
-      }) : (0, _ramda.range)(1, 9).map(function (n) {
+      }) : (s.group || s.ko ? s.matches : (0, _ramda.range)(1, 9).map(function (n) {
         return (0, _util.findById)(n)(s.matches) || {};
-      }).map(function (m) {
-        var gs = findGames(s, m, games);
+      })).map(function (m) {
+        var gs = findGames(s, m, games).filter(function (g) {
+          return s.group ? s.group == g.group : s.ko ? s.ko == g.ko : true;
+        });
         var wn = gs.filter(function (g) {
           return g.isWin && g.t1 === m.home || !g.isWin && g.t1 === m.away;
         }).length;
         var ln = gs.length - wn;
-        return _extends({}, m, { result: wn + ':' + ln });
+        var groupGames = (m.games || []).map(function (x) {
+          return _extends({}, x, {
+            team1: (0, _util.getNameById)(x.t1)(teams),
+            team2: (0, _util.getNameById)(x.t2)(teams),
+            player1: (0, _util.getNameById)(x.p1)(ps) + (x.p3 ? ' / ' + (0, _util.getNameById)(x.p3)(ps) : ''),
+            player2: (0, _util.getNameById)(x.p2)(ps) + (x.p4 ? ' / ' + (0, _util.getNameById)(x.p4)(ps) : ''),
+            p1Rating: (0, _util.getPropById)('rating')(x.p1)(ps),
+            p2Rating: (0, _util.getPropById)('rating')(x.p2)(ps),
+            isDouble: !!x.p3,
+            result: ((0, _ramda.find)(function (g1) {
+              return g1.t1 == x.t1 && g1.t2 == x.t2 && g1.p1 == x.p1 && g1.p2 == x.p2 && g1.p3 == x.p3 && g1.p4 == x.p4;
+            }, gs) || {}).result
+          });
+        });
+        return _extends({}, m, { team1: (0, _util.getNameById)(m.home)(teams), team2: (0, _util.getNameById)(m.away)(teams), result: wn + ':' + ln, games: groupGames });
       })
     });
   });
@@ -302,7 +324,9 @@ var standing = (0, _state.createSelector)(tournament, teams, function (tt, ts) {
   var st = (tt.isSingle ? tt.players : ts).map(function (t) {
     var _s;
 
-    var ms = (0, _ramda.unnest)((tt.schedules || []).map(function (s) {
+    var ms = (0, _ramda.unnest)((tt.schedules || []).filter(function (s) {
+      return !s.ko;
+    }).map(function (s) {
       return s.matches;
     })).filter(function (m) {
       return (m.home === t.id || m.away === t.id) && m.result && m.result != '0:0';
@@ -318,14 +342,34 @@ var standing = (0, _state.createSelector)(tournament, teams, function (tt, ts) {
     var ps1 = (0, _ramda.sum)(ms.map(function (m) {
       return +m.result[m.home == t.id ? 2 : 0];
     }));
-    var s = (_s = {}, _defineProperty(_s, tt.isSingle ? 'player' : 'team', t.name), _defineProperty(_s, 'total', ms.length), _defineProperty(_s, 'w', wn), _defineProperty(_s, 'l', ln), _defineProperty(_s, tt.isSingle ? 'gw' : 'points', ps), _defineProperty(_s, 'rank', t.rank), _s);
+    var s = (_s = {}, _defineProperty(_s, tt.isSingle ? 'player' : 'team', t.name), _defineProperty(_s, 'id', t.id), _defineProperty(_s, 'total', ms.length), _defineProperty(_s, 'w', wn), _defineProperty(_s, 'l', ln), _defineProperty(_s, tt.isSingle ? 'gw' : 'points', ps), _defineProperty(_s, 'rank', t.rank), _defineProperty(_s, 'group', t.group), _s);
     if (tt.isSingle) s.gl = ps1;
     return s;
   });
 
   var p = (0, _ramda.pipe)((0, _ramda.sortWith)(tt.isSingle ? [dw, at, dp(1), al] : [dp(0), at, dw]), (0, _util.addIndex)('rank'));
 
-  return tt.startDate2 ? (0, _ramda.pipe)((0, _ramda.sortBy)((0, _ramda.prop)('rank')), _util.split2, (0, _ramda.map)(p))(st) : p(st);
+  return tt.has2half ? (0, _ramda.pipe)((0, _ramda.sortBy)((0, _ramda.prop)('rank')), _util.split2, (0, _ramda.map)(p))(st) : tt.teams && tt.teams.length > 0 && !(0, _ramda.isNil)(tt.teams[0].group) ? (0, _ramda.pipe)((0, _ramda.groupBy)(function (t) {
+    return t.group;
+  }), _ramda.toPairs, (0, _ramda.map)(function (x) {
+    return x[1];
+  }), (0, _ramda.map)(p))(st) : p(st);
+});
+
+var ko = (0, _state.createSelector)(tournament, function (t) {
+  var kos = (t.schedules || []).filter(function (s) {
+    return s.ko;
+  });
+  if (kos.length === 0) return null;
+  var ms = (0, _ramda.sortBy)(function (s) {
+    return s.ko;
+  }, kos)[0].matches;
+  if (ms.length === 1 || ms.some(function (m) {
+    return !m.result || m.result == '0:0';
+  })) return null;
+  return ms.map(function (m) {
+    return m.result[0] > m.result[2] ? m.home : m.away;
+  });
 });
 
 var isSamePlayer = function isSamePlayer(p1, id) {
@@ -347,6 +391,11 @@ var isPlayerInGame = function isPlayerInGame(p) {
 var isPlayerWin = function isPlayerWin(p) {
   return function (g) {
     return isHomePlayer(p)(g) && g.isWin || isAwayPlayer(p)(g) && !g.isWin;
+  };
+};
+var isPlayerLose = function isPlayerLose(p) {
+  return function (g) {
+    return isHomePlayer(p)(g) && !g.isWin || isAwayPlayer(p)(g) && g.isWin;
   };
 };
 
@@ -373,7 +422,7 @@ var stats = (0, _state.createSelector)(tournament, function (t) {
     });
     var total = sgs.length;
     var wins = sgs.filter(isPlayerWin(p));
-    var loses = (0, _util.diff)()(sgs, wins);
+    var loses = sgs.filter(isPlayerLose(p));
     var gw = (0, _ramda.sum)(sgs.map(function (g) {
       return +g.result[isHomePlayer(p)(g) ? 0 : 2];
     }));
@@ -385,7 +434,7 @@ var stats = (0, _state.createSelector)(tournament, function (t) {
     var d = w - l;
     var wpc = ((total && w / total) * 100).toFixed(1) + '%';
     var dwins = dgs.filter(isPlayerWin(p));
-    var dloses = (0, _util.diff)()(dgs, dwins);
+    var dloses = dgs.filter(isPlayerLose(p));
     var dw = dwins.length;
     var dl = dloses.length;
     return { player: p.name, 'mp': total, w: w, l: l, '+/-': d > 0 ? '+' + d : d, 'win %': wpc, gw: gw, gl: gl, dw: dw, dl: dl };
@@ -397,7 +446,7 @@ var stats = (0, _state.createSelector)(tournament, function (t) {
     return x.gw;
   })]), (0, _util.addIndex)('#'));
 
-  if (t.startDate2) {
+  if (t.has2half) {
     var p1 = players.filter(function (x) {
       return x.isUpperDiv;
     });
@@ -407,7 +456,7 @@ var stats = (0, _state.createSelector)(tournament, function (t) {
     return (0, _ramda.map)(st, [p1, p2]);
   }
 
-  return (0, _util.tap)(st(players));
+  return st(players);
 });
 
 var history = (0, _state.createSelector)(_history, players, function (h, ps) {
@@ -454,8 +503,8 @@ var productsSelector = exports.productsSelector = (0, _state.mapStateWithSelecto
 var ratingSelector = exports.ratingSelector = (0, _state.mapStateWithSelectors)({ players: filteredPlayers });
 var playersSelector = exports.playersSelector = (0, _state.mapStateWithSelectors)({ players: players, lookup: lookup, player: form('player') });
 var tournamentsSelector = exports.tournamentsSelector = (0, _state.mapStateWithSelectors)({ tournaments: tournamentsWithYears, lookup: lookup });
-var tournamentSelector = exports.tournamentSelector = (0, _state.mapStateWithSelectors)({ tournament: tournament, lookup: lookup, players: players });
-var tourSelector = exports.tourSelector = (0, _state.mapStateWithSelectors)({ tournament: form('tournament'), tournaments: tournaments, players: players, standing: standing });
+var tournamentSelector = exports.tournamentSelector = (0, _state.mapStateWithSelectors)({ tournament: tournament, lookup: lookup, players: players, formMatch: form('match') });
+var tourSelector = exports.tourSelector = (0, _state.mapStateWithSelectors)({ tournament: form('tournament'), tournaments: tournaments, players: players, standing: standing, ko: ko });
 var historySelector = exports.historySelector = (0, _state.mapStateWithSelectors)({ history: history, lookup: lookup, players: players });
 var standingSelector = exports.standingSelector = (0, _state.mapStateWithSelectors)({ standing: standing, tournament: tournament, players: players });
 var teamSelector = exports.teamSelector = (0, _state.mapStateWithSelectors)({ tournament: tournament, team: form('team'), players: players, monthRatings: monthRatings });

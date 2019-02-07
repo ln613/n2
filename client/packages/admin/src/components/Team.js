@@ -1,11 +1,12 @@
 import React from 'react';
 import { compose } from 'recompose';
+import { find } from 'ramda';
 import { connect } from '@ln613/state';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { teamSelector } from 'utils/selectors';
 import { TextBox } from '@ln613/ui/semantic';
-import { withLoad, withEdit, withParams } from '@ln613/compose';
+import { withLoad, withEdit, withParams, withMount } from '@ln613/compose';
 import AddPlayer from './AddPlayer';
 import { withSuccess } from 'utils';
 
@@ -15,6 +16,7 @@ const Team = ({ tournament, team, players, monthRatings, putTeam, postTeam, id, 
     <hr />
     <TextBox name="team.id" disabled />
     <TextBox name="team.name" />
+    <TextBox name="team.group" />
     <br/>
     Players:
     <AddPlayer players={team.players} allPlayers={players} formPath='team' setFormPlayers={setFormTeamPlayers} getPlayerRating={getPlayerRating} withSub />
@@ -27,7 +29,8 @@ export default compose(
   withParams,
   withLoad('players'),
   withLoad('tournament', ['id', 'id1']),
-  withEdit('team', 'tournament.teams', {players:[]}),
+  //withEdit('team', 'tournament.teams', { players: [] }),
+  withMount(p => p.setForm(find(x => x.id == +p.id, (p.tournament.teams || [])) || { id: +p.id, name: '', group: undefined }, { path: 'team' })),
   withSuccess('team', () => alert('Saved'), () => alert('Error happened!'))
 )(Team)
 

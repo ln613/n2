@@ -29,7 +29,7 @@ var actionData = exports.actionData = {
     methods: ['post', 'put', 'patch', 'delete']
   },
   tournaments: {
-    url: _util.api + 'tournaments/_/_/isSingle,startDate,ratingDate,players'
+    url: _util.api + 'tournaments/_/_/isSingle,startDate,startDate2,ratingDate,players'
   },
   tour: {
     url: _util.admin + 'tournaments',
@@ -70,8 +70,11 @@ var actionData = exports.actionData = {
   },
   genrr: {
     url: _util.admin + 'genrr',
-    method: 'post',
-    path: 'tournament.schedules'
+    method: 'post'
+  },
+  gengroup: {
+    url: _util.admin + 'gengroup',
+    method: 'post'
   },
   games: {
     url: _util.api + 'games'
@@ -80,6 +83,10 @@ var actionData = exports.actionData = {
     url: _util.admin + 'tournaments/{id1}/games',
     path: 'tournament.games[id]',
     methods: ['post', 'put', 'patch', 'delete']
+  },
+  groupMatch: {
+    url: _util.admin + 'groupmatch/{id}/{group}',
+    methods: ['put']
   },
   result: {
     url: _util.admin + 'result',

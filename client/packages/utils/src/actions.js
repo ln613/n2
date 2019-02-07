@@ -21,7 +21,7 @@ export const actionData = {
     methods: ['post', 'put', 'patch', 'delete']
   },
   tournaments: {
-    url: api + 'tournaments/_/_/isSingle,startDate,ratingDate,players'
+    url: api + 'tournaments/_/_/isSingle,startDate,startDate2,ratingDate,players'
   },
   tour: {
     url: admin + 'tournaments',
@@ -62,8 +62,11 @@ export const actionData = {
   },
   genrr: {
     url: admin + 'genrr',
-    method: 'post',
-    path: 'tournament.schedules'
+    method: 'post'
+  },
+  gengroup: {
+    url: admin + 'gengroup',
+    method: 'post'
   },
   games: {
     url: api + 'games'
@@ -72,6 +75,10 @@ export const actionData = {
     url: admin + 'tournaments/{id1}/games',
     path: 'tournament.games[id]',
     methods: ['post', 'put', 'patch', 'delete']
+  },
+  groupMatch: {
+    url: admin + 'groupmatch/{id}/{group}',
+    methods: ['put']
   },
   result: {
     url: admin + 'result',

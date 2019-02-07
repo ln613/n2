@@ -36,7 +36,7 @@ const teams = ts =>
 const groups = gs =>
   (gs || []).map(g =>
     <div class="pt8" key={g[0]}>
-      <div class="pv8 fs24 darkgreen">Group {+g[0] + 1}</div>
+      <div class="pv8 fs24 darkgreen">Group {g[0]}</div>
       <Table name="team" data={(g[1] || []).map(mapTeam)}>
         <td key="id" hidden />  
       </Table>
@@ -45,7 +45,7 @@ const groups = gs =>
 
 const Tournament = ({ lookup, tournament, id, isMobile }) =>
   <div class={`p16 ${isMobile ? 'fv' : 'f'}`}>
-    <TMenu id={id} isSingle={tournament.isSingle} isGroup={true} isMobile={isMobile} page="tournament" />
+    <TMenu id={id} isSingle={tournament.isSingle} isGroup={tournament.groups} isMobile={isMobile} page="tournament" />
     <div class={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr/>
