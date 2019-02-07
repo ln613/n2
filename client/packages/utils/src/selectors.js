@@ -117,7 +117,7 @@ const tournament = createSelector(
     const teams = (t.teams || []).map(m => ({
       ...m, text: m.name, value: m.id,
       players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating || x.rating)], m.players.map(p => findById(p.id)(ps)).map(p => ({
-        ...p, tRating: p.rating, isSub: p.isSub, name: fullname(p)
+        ...p, rating: p.rating, tRating: findById(p.id)(m.players).rating, isSub: p.isSub, name: fullname(p)
       })))
     }));
     const groups = teams.length === 0 || isNil(teams[0].group) ? null : toPairs(groupBy(x => x.group, teams));

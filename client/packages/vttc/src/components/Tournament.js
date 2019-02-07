@@ -10,11 +10,11 @@ import { tap } from '@ln613/util';
 import TMenu from './TMenu';
 
 const mapPlayer = p => ({ id: p.id, 'Name': p.firstName + ' ' + p.lastName, gender: p.sex, 'Tournament Rating': p.tRating, 'Latest Rating': p.rating, 'Is Sub': p.isSub ? '&#10004' : '' });
-const mapTeam = t => !t.players || t.players.length < 2 ? {} :
+const mapTeam = t => !tap(t).players || t.players.length < 2 ? {} :
   pipe(take(2), x => ({
     id: t.id,
     name: x[0].name + ' / ' + x[1].name,
-    'Combined Rating': (+x[0].tRating || +x[0].rating) + (+x[1].tRating || +x[1].rating)
+    'Combined Rating': (+x[0].tRating || +x[0].rating) + (+tap(x[1]).tRating || +x[1].rating)
   }))(t.players);
 
 const single = players =>
