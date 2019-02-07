@@ -202,7 +202,7 @@ var tournament = (0, _state.createSelector)(_tournament, players, function (t, p
       })], m.players.map(function (p) {
         return (0, _util.findById)(p.id)(ps);
       }).map(function (p) {
-        return _extends({}, p, { tRating: p.rating, isSub: p.isSub, name: fullname(p)
+        return _extends({}, p, { rating: p.rating, tRating: (0, _util.findById)(p.id)(m.players).rating, isSub: p.isSub, name: fullname(p)
         });
       }))
     });
