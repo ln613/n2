@@ -12,7 +12,7 @@ import TMenu from './TMenu';
 
 const Schedule = ({ tournament, id, isMobile }) =>
   <div class={`p16 ${isMobile ? 'fv' : 'f'}`}>
-    <TMenu id={id} isSingle={tournament.isSingle} isMobile={isMobile} page="schedule" />
+    <TMenu id={id} isSingle={tap(tournament).isSingle} isMobile={isMobile} page="schedule" />
     <div class={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr/>
