@@ -146,7 +146,7 @@ var dsPlayers = (0, _state.createSelector)(filteredPlayers, function (ps) {
 
 var teams = (0, _state.createSelector)(_tournament, players, function (t, ps) {
   return (t.teams || []).map(function (x) {
-    return _extends({}, x, { name: x.name || (0, _util.tap)((0, _util.getNameById)(x.players[0].id)(ps)) + " / " + (0, _util.getNameById)(x.players[1].id)(ps) });
+    return _extends({}, x, { name: x.name || (0, _util.getNameById)(x.players[0].id)(ps) + " / " + (0, _util.getNameById)(x.players[1].id)(ps) });
   });
 });
 
@@ -191,9 +191,9 @@ var getSinglePlayer = function getSinglePlayer(id, ps) {
   var p = (0, _util.findById)(id)(ps);
   return p.rank + '. ' + p.name + ' (' + p.tRating + ')';
 };
-var tournament = (0, _state.createSelector)(_tournament, players, function (t, ps) {
+var tournament = (0, _state.createSelector)(_tournament, players, teams, function (t, ps, ts) {
   if (ps.length === 0) return t;
-  var teams = (t.teams || []).map(function (m) {
+  var teams = (ts || []).map(function (m) {
     return _extends({}, m, { text: m.name, value: m.id,
       players: (0, _ramda.sortWith)([(0, _ramda.ascend)(function (x) {
         return x.isSub ? 1 : 0;

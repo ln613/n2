@@ -179,8 +179,8 @@ app.post('/admin/genrr', (req, res) => {
     } else {
       if (t.teams && t.teams.length > 0 && !isNil(t.teams[0].group)) {
         const groups = groupBy(x => x.group, t.teams);
-        const hasKO = find(s => s.ko, t.schedules);
-        const hasKOStanding = find(s => s.ko === koStanding.length, t.schedules);
+        const hasKO = find(s => s.ko, t.schedules || []);
+        const hasKOStanding = find(s => s.ko === koStanding.length, t.schedules || []);
         if (!t.schedules) {
           const schedules = Object.keys(groups).map(g => ({
             matches: pipe(l => rrSchedule(l, false, true), unnest, map(x => ({ ...x, games: gengames(t, x.home, x.away) })))(groups[g]),

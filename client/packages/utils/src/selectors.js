@@ -89,7 +89,7 @@ const dsPlayers = createSelector(
 const teams = createSelector(
   _tournament,
   players,
-  (t, ps) => (t.teams || []).map(x => ({ ...x, name: x.name || (tap(getNameById(x.players[0].id)(ps)) + " / " + getNameById(x.players[1].id)(ps))}))
+  (t, ps) => (t.teams || []).map(x => ({ ...x, name: x.name || (getNameById(x.players[0].id)(ps) + " / " + getNameById(x.players[1].id)(ps))}))
 );
 
 const pn = (n, g) => g['p' + n];
@@ -112,9 +112,10 @@ const getSinglePlayer = (id, ps) => {
 const tournament = createSelector(
   _tournament,
   players,
-  (t, ps) => {
+  teams,
+  (t, ps, ts) => {
     if (ps.length === 0) return t;
-    const teams = (t.teams || []).map(m => ({
+    const teams = (ts || []).map(m => ({
       ...m, text: m.name, value: m.id,
       players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating || x.rating)], m.players.map(p => findById(p.id)(ps)).map(p => ({
         ...p, rating: p.rating, tRating: findById(p.id)(m.players).rating, isSub: p.isSub, name: fullname(p)
