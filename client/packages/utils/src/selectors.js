@@ -203,7 +203,10 @@ const getPoints = (m, t, v) => m[t] === v ? m[t + 'Points'] : 0;
 const dp = s => descend(prop(s ? 'gw' : 'points'));
 const at = ascend(prop('total'));
 const dw = descend(prop('w'));
+const dl = descend(prop('gw'));
 const al = ascend(prop('gl'));
+const dm = descend(prop('mw'));
+const am = ascend(prop('ml'));
 
 const standing = createSelector(
   tournament,
@@ -216,13 +219,18 @@ const standing = createSelector(
       const ln = ms.length - wn;
       const ps = sum(ms.map(m => +m.result[m.home == t.id ? 0 : 2]));
       const ps1 = sum(ms.map(m => +m.result[m.home == t.id ? 2 : 0]));
-      const s = { [tt.isSingle ? 'player' : 'team']: t.name, id: t.id, total: ms.length, w: wn, l: ln, [tt.isSingle ? 'gw' : 'points']: ps, rank: t.rank, group: t.group };
+      const s = { [tt.isSingle ? 'player' : 'team']: t.name, id: t.id, total: ms.length, w: wn, l: ln, [tt.isSingle ? 'gw' : (tt.groups ? 'mw' : 'points')]: ps, rank: t.rank, group: t.group };
       if (tt.isSingle) s.gl = ps1;
+      if (tt.groups) {
+        s.ml = ps1;
+        s.gw = sum(ms.map(m => sum(m.games.filter(g => g.result).map(g => +g.result[m.home == t.id ? 0 : 2]))));
+        s.gl = sum(ms.map(m => sum(m.games.filter(g => g.result).map(g => +g.result[m.home == t.id ? 2 : 0]))));
+      }
       return s;
     });
     
     const p = pipe(
-      sortWith(tt.isSingle ? [dw, at, dp(1), al] : [dp(0), at, dw]),
+      sortWith(tt.isSingle ? [dw, at, dp(1), al] : (tt.groups ? [dw, at, dm, am, dl, al] : [dp(0), at, dw])),
       addIndex('rank')
     );
 

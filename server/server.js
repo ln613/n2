@@ -184,7 +184,7 @@ app.post('/admin/genrr', (req, res) => {
         if (!t.schedules) {
           const schedules = Object.keys(groups).map(g => ({
             matches: pipe(l => rrSchedule(l, false, true), unnest, map(x => ({ ...x, games: gengames(t, x.home, x.away) })))(groups[g]),
-            date: t.startDate,
+            date: moment(t.startDate).toISOString(),
             group: g,
             id: +g
           }));
@@ -274,7 +274,7 @@ app.put('/admin/groupmatch/:id/:group', (req, res) => {
       //const games = t.games.map(() => g.group);
       //const schedules = t.schedules.map((s, i) => s.group == group ? {...s, matches: s.matches.map(m => m.id == req.body.id ? req.body : m)} : s);
       //api.update('tournaments', { id: +id, schedules }).then(r => res.json(r));
-      serial(req.body.games, g => api.addToList('tournaments', +id, 'games', g)).then(r => res.json(r));
+      serial(req.body.games.filter(g => g.result && g.result !== '0:0'), g => api.addToList('tournaments', +id, 'games', g)).then(r => res.json(r));
     } else {
       res.json('N/A');
     }

@@ -318,7 +318,10 @@ var dp = function dp(s) {
 };
 var at = (0, _ramda.ascend)((0, _ramda.prop)('total'));
 var dw = (0, _ramda.descend)((0, _ramda.prop)('w'));
+var dl = (0, _ramda.descend)((0, _ramda.prop)('gw'));
 var al = (0, _ramda.ascend)((0, _ramda.prop)('gl'));
+var dm = (0, _ramda.descend)((0, _ramda.prop)('mw'));
+var am = (0, _ramda.ascend)((0, _ramda.prop)('ml'));
 
 var standing = (0, _state.createSelector)(tournament, teams, function (tt, ts) {
   var st = (tt.isSingle ? tt.players : ts).map(function (t) {
@@ -342,12 +345,29 @@ var standing = (0, _state.createSelector)(tournament, teams, function (tt, ts) {
     var ps1 = (0, _ramda.sum)(ms.map(function (m) {
       return +m.result[m.home == t.id ? 2 : 0];
     }));
-    var s = (_s = {}, _defineProperty(_s, tt.isSingle ? 'player' : 'team', t.name), _defineProperty(_s, 'id', t.id), _defineProperty(_s, 'total', ms.length), _defineProperty(_s, 'w', wn), _defineProperty(_s, 'l', ln), _defineProperty(_s, tt.isSingle ? 'gw' : 'points', ps), _defineProperty(_s, 'rank', t.rank), _defineProperty(_s, 'group', t.group), _s);
+    var s = (_s = {}, _defineProperty(_s, tt.isSingle ? 'player' : 'team', t.name), _defineProperty(_s, 'id', t.id), _defineProperty(_s, 'total', ms.length), _defineProperty(_s, 'w', wn), _defineProperty(_s, 'l', ln), _defineProperty(_s, tt.isSingle ? 'gw' : tt.groups ? 'mw' : 'points', ps), _defineProperty(_s, 'rank', t.rank), _defineProperty(_s, 'group', t.group), _s);
     if (tt.isSingle) s.gl = ps1;
+    if (tt.groups) {
+      s.ml = ps1;
+      s.gw = (0, _ramda.sum)(ms.map(function (m) {
+        return (0, _ramda.sum)(m.games.filter(function (g) {
+          return g.result;
+        }).map(function (g) {
+          return +g.result[m.home == t.id ? 0 : 2];
+        }));
+      }));
+      s.gl = (0, _ramda.sum)(ms.map(function (m) {
+        return (0, _ramda.sum)(m.games.filter(function (g) {
+          return g.result;
+        }).map(function (g) {
+          return +g.result[m.home == t.id ? 2 : 0];
+        }));
+      }));
+    }
     return s;
   });
 
-  var p = (0, _ramda.pipe)((0, _ramda.sortWith)(tt.isSingle ? [dw, at, dp(1), al] : [dp(0), at, dw]), (0, _util.addIndex)('rank'));
+  var p = (0, _ramda.pipe)((0, _ramda.sortWith)(tt.isSingle ? [dw, at, dp(1), al] : tt.groups ? [dw, at, dm, am, dl, al] : [dp(0), at, dw]), (0, _util.addIndex)('rank'));
 
   return tt.has2half ? (0, _ramda.pipe)((0, _ramda.sortBy)((0, _ramda.prop)('rank')), _util.split2, (0, _ramda.map)(p))(st) : tt.teams && tt.teams.length > 0 && !(0, _ramda.isNil)(tt.teams[0].group) ? (0, _ramda.pipe)((0, _ramda.groupBy)(function (t) {
     return t.group;
