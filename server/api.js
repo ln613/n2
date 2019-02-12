@@ -150,14 +150,24 @@ e.changeResult = g1 => db.collection('tournaments').aggregate([
 e.updateRating = () => {
   const pr = JSON.parse(fs.readFileSync(__dirname + '/../data/initialRatings.json'));
   return e.bak().then(o => {
-    let games = o.tournaments.filter(t => !t.isSingle).map(t => t.games).filter(t => !t.isDouble);
-    games = sortWith([ascend(prop('date')), descend()], games);
-      if (pr[g.p1]) g.p1Rating = pr[g.p1];
-      if (pr[g.p2]) g.p2Rating = pr[g.p2];
-      g = adjustRating(g);
-      pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
-      pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
-      return db.collection('tournaments').update({ id: t.id, 'games.id': g.id }, { $set: { 'games.$.p1Rating': g.p1Rating, 'games.$.p1Diff': g.p1Diff, 'games.$.p2Rating': g.p2Rating, 'games.$.p2Diff': g.p2Diff } });
+    const games = pipe(
+      filter(t => !t.isSingle),
+      map(t => t.games),
+      unnest,
+      filter(g => !g.isDouble),
+      sortWith([
+        ascend(prop('date')),
+        ascend(g => g.group || Number.POSITIVE_INFINITY),
+        descend(g => g.ko || 0),
+        ascend(prop('id'))
+      ])
+    )(o.tournaments);
+      map(g => {
+        if (pr[g.p1]) g.p1Rating = pr[g.p1];
+        if (pr[g.p2]) g.p2Rating = pr[g.p2];
+        g = adjustRating(g);
+        pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
+        pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
     }).then(_ =>
         serial(Object.keys(pr), p => db.collection('players').update({ id: +p }, { $set: { rating: +pr[p] } }))
     );
