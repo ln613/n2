@@ -125,16 +125,33 @@ e.changeResult = g1 => db.collection('tournaments').aggregate([
     .then(_ => Promise.all(ps.map(p => db.collection('players').update({ id: p[0] }, { $set: {rating: p[1]}}))));
 }).catch(e => console.log(e))
 
+// e.updateRating = () => {
+//   const pr = JSON.parse(fs.readFileSync(__dirname + '/../data/initialRatings.json'));
+//   return db.collection('tournaments').aggregate([
+//     { $unwind: '$games' },
+//     { $match: { 'games.isDouble': { $ne: true }, isSingle: { $ne: true } } },
+//     { $sort: { 'games.date': 1, 'games.id': 1 } },
+//     { $project: { games: 1, _id: 0, id: 1 } }
+//   ]).toArray().then(ts => {
+//     return serial(ts, t => {
+//       let g = t.games;
+//       if (pr[g.p1]) g.p1Rating = pr[g.p1];
+//       if (pr[g.p2]) g.p2Rating = pr[g.p2];
+//       g = adjustRating(g);
+//       pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
+//       pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
+//       return db.collection('tournaments').update({ id: t.id, 'games.id': g.id }, { $set: { 'games.$.p1Rating': g.p1Rating, 'games.$.p1Diff': g.p1Diff, 'games.$.p2Rating': g.p2Rating, 'games.$.p2Diff': g.p2Diff } });
+//     }).then(_ =>
+//         serial(Object.keys(pr), p => db.collection('players').update({ id: +p }, { $set: { rating: +pr[p] } }))
+//     );
+//   }).catch(e => console.log(e));
+// }
+
 e.updateRating = () => {
   const pr = JSON.parse(fs.readFileSync(__dirname + '/../data/initialRatings.json'));
-  return db.collection('tournaments').aggregate([
-    { $unwind: '$games' },
-    { $match: { 'games.isDouble': { $ne: true }, isSingle: { $ne: true } } },
-    { $sort: { 'games.date': 1, 'games.id': 1 } },
-    { $project: { games: 1, _id: 0, id: 1 } }
-  ]).toArray().then(ts => {
-    return serial(ts, t => {
-      let g = t.games;
+  return e.bak().then(o => {
+    let games = o.tournaments.filter(t => !t.isSingle).map(t => t.games).filter(t => !t.isDouble);
+    games = sortWith([ascend(prop('date')), descend()], games);
       if (pr[g.p1]) g.p1Rating = pr[g.p1];
       if (pr[g.p2]) g.p2Rating = pr[g.p2];
       g = adjustRating(g);
