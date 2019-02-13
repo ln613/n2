@@ -307,27 +307,39 @@ const stats = createSelector(
 const history = createSelector(
   _history,
   players,
-  (h, ps) => sortWith([descend(x => new Date(x.date)), descend(prop('id'))], h.map(x => {
-    const g = x.games;
-    let player1 = `${getNameById(g.p1)(ps)} (${g.p1Rating} ${(g.p1Diff > 0 ? '+ ' : '- ') + Math.abs(g.p1Diff)} = ${Math.max(100, g.p1Rating + g.p1Diff)})`;
-    let player2 = `${getNameById(g.p2)(ps)} (${g.p2Rating} ${(g.p2Diff > 0 ? '+ ' : '- ') + Math.abs(g.p2Diff)} = ${Math.max(100, g.p2Rating + g.p2Diff)})`;
+  (h, ps) => sortWith(
+    [
+      descend(g => new Date(g.date)),
+      descend(g => (g.group && +g.group) || Number.POSITIVE_INFINITY),
+      descend(g => (g.round && +g.round) || Number.POSITIVE_INFINITY),
+      ascend(g => g.ko || 0),
+      descend(prop('id'))
+    ],
+    h.map(x => {
+      const g = x.games;
+      let player1 = `${getNameById(g.p1)(ps)} (${g.p1Rating} ${(g.p1Diff > 0 ? '+ ' : '- ') + Math.abs(g.p1Diff)} = ${Math.max(100, g.p1Rating + g.p1Diff)})`;
+      let player2 = `${getNameById(g.p2)(ps)} (${g.p2Rating} ${(g.p2Diff > 0 ? '+ ' : '- ') + Math.abs(g.p2Diff)} = ${Math.max(100, g.p2Rating + g.p2Diff)})`;
 
-    if (g.p1 === +x.pid) player1 = Italic(player1);
-    else player2 = Italic(player2);
+      if (g.p1 === +x.pid) player1 = Italic(player1);
+      else player2 = Italic(player2);
 
-    if (+g.result[0] > +g.result[2]) player1 = Bold(player1);
-    else player2 = Bold(player2);
+      if (+g.result[0] > +g.result[2]) player1 = Bold(player1);
+      else player2 = Bold(player2);
 
-    return {
-      id: g.id,
-      date: toDate(g.date),
-      tournament: x.name,
-      month: toMonth(g.date),
-      player1,
-      result: g.result,
-      player2,
-    };
-  }))
+      return {
+        id: g.id,
+        date: toDate(g.date),
+        tournament: x.name,
+        month: toMonth(g.date),
+        player1,
+        result: g.result,
+        player2,
+        group: g.group,
+        ko: g.ko,
+        round: g.round
+      };
+    })
+  )
   //groupWith((a, b) => a.month === b.month, gs).forEach(x => x[0].isLastGameInMonth = true);
 );
 

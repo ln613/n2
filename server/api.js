@@ -1,9 +1,10 @@
 const fs = require('fs');
 const mongodb = require('mongodb');
 const cd = require('cloudinary');
-const { sortWith, ascend, descend, prop, fromPairs, merge } = require('ramda');
+const { sortWith, ascend, descend, prop, fromPairs, merge, filter, map, unnest, pipe, find, isNil, last } = require('ramda');
 const { tap, config, json2js, adjustRating, newRating, serial } = require('./utils');
 const moment = require('moment');
+const { findById } = require('@ln613/util');
 
 const allDocs = ['cats', 'players', 'products', 'tournaments'];
 
@@ -27,7 +28,7 @@ e.initdocs = docs => {
   );
 }
 
-e.initdata = () => e.initdocs(json2js(fs.readFileSync('./data/db.json')))
+e.initdata = d => e.initdocs(d || json2js(fs.readFileSync('./data/db.json')))
 
 e.initacc = () => e.initdocs(json2js(fs.readFileSync('./data/1.json')))
 
@@ -152,26 +153,32 @@ e.updateRating = () => {
   return e.bak().then(o => {
     const games = pipe(
       filter(t => !t.isSingle),
-      map(t => t.games),
+      map(t => {
+        t.games.forEach(g => g.round = isNil(g.group) ? null : find(m => m.home == g.t1 && m.away == g.t2, find(s => s.group == g.group, t.schedules).matches).round );
+        return t.games;
+      }),
       unnest,
       filter(g => !g.isDouble),
       sortWith([
         ascend(prop('date')),
-        ascend(g => g.group || Number.POSITIVE_INFINITY),
-        descend(g => g.ko || 0),
+        ascend(g => (g.group && +g.group) || Number.POSITIVE_INFINITY),
+        ascend(g => (g.round && +g.round) || Number.POSITIVE_INFINITY),
+        descend(g => (g.ko && +g.ko) || 0),
         ascend(prop('id'))
       ])
-    )(o.tournaments);
-      map(g => {
-        if (pr[g.p1]) g.p1Rating = pr[g.p1];
-        if (pr[g.p2]) g.p2Rating = pr[g.p2];
-        g = adjustRating(g);
-        pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
-        pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
-    }).then(_ =>
-        serial(Object.keys(pr), p => db.collection('players').update({ id: +p }, { $set: { rating: +pr[p] } }))
-    );
-  }).catch(e => console.log(e));
+    )(o.tournaments);console.log(games.filter(g => g.round).length)
+    games.forEach(g => {
+      if (pr[g.p1]) g.p1Rating = pr[g.p1];
+      if (pr[g.p2]) g.p2Rating = pr[g.p2];
+      adjustRating(g, false);
+      pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
+      pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
+      Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
+      if (isNil(g.round)) delete g.round;
+    });
+    return e.initdata(o);
+  })
+  .catch(console.log);
 }
 
 module.exports = e;

@@ -17,6 +17,9 @@ const History = ({ lookup, history, player, isMobile }) =>
       <td key="id" hidden />
       <td key="month" hidden />
       <td key="isLastGameInMonth" hidden />
+      <td key="group" hidden />
+      <td key="ko" hidden />
+      <td key="round" hidden />
     </Table>
   </div>
 

@@ -122,13 +122,14 @@ const rateDiff = (r1, r2) => {
   return n === -1 ? R.last(rdiff) : rdiff[n];
 }
 
-e.adjustRating = g => {
-  if (g.isDouble) {
+e.adjustRating = (g, im = true) => {
+  if (g.isDouble || !g.result || g.result === '0:0') {
       return g;
   } else {
     const p1Win = +g.result[0] > +g.result[2];
     const d = p1Win ? rateDiff(g.p1Rating, g.p2Rating) : rateDiff(g.p2Rating, g.p1Rating);
-    return Object.assign({}, g, { p1Diff: p1Win ? d[0] : d[1], p2Diff: p1Win ? d[1] : d[0] });
+    const c = { p1Diff: p1Win ? d[0] : d[1], p2Diff: p1Win ? d[1] : d[0] };
+    return im ? Object.assign({}, g, c) : Object.assign(g, c);
   }
 }
 

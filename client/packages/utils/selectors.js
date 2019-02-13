@@ -480,8 +480,14 @@ var stats = (0, _state.createSelector)(tournament, function (t) {
 });
 
 var history = (0, _state.createSelector)(_history, players, function (h, ps) {
-  return (0, _ramda.sortWith)([(0, _ramda.descend)(function (x) {
-    return new Date(x.date);
+  return (0, _ramda.sortWith)([(0, _ramda.descend)(function (g) {
+    return new Date(g.date);
+  }), (0, _ramda.descend)(function (g) {
+    return g.group && +g.group || Number.POSITIVE_INFINITY;
+  }), (0, _ramda.descend)(function (g) {
+    return g.round && +g.round || Number.POSITIVE_INFINITY;
+  }), (0, _ramda.ascend)(function (g) {
+    return g.ko || 0;
   }), (0, _ramda.descend)((0, _ramda.prop)('id'))], h.map(function (x) {
     var g = x.games;
     var player1 = (0, _util.getNameById)(g.p1)(ps) + ' (' + g.p1Rating + ' ' + ((g.p1Diff > 0 ? '+ ' : '- ') + Math.abs(g.p1Diff)) + ' = ' + Math.max(100, g.p1Rating + g.p1Diff) + ')';
@@ -498,7 +504,10 @@ var history = (0, _state.createSelector)(_history, players, function (h, ps) {
       month: (0, _util.toMonth)(g.date),
       player1: player1,
       result: g.result,
-      player2: player2
+      player2: player2,
+      group: g.group,
+      ko: g.ko,
+      round: g.round
     };
   }));
 }

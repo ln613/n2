@@ -102,7 +102,7 @@ table.ui.striped.table tbody tr:nth-child(even) {
   padding: 2px;
 }
 
-#stats.mobile td, #stats.mobile th, #history.mobile td, #history.mobile th {
+#stats.mobile td, #stats.mobile th, #history.mobile td, #history.mobile, th, #gstanding.mobile td, #gstanding.mobile th, #gstanding1.mobile td, #gstanding1.mobile th, th, #gstanding2.mobile td, #gstanding2.mobile th, #gstanding3.mobile td, #gstanding3.mobile th, th, #gstanding4.mobile td, #gstanding4.mobile th {
   padding-left: 2px;
   padding-right: 0;
 }
