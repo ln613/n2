@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.statsSelector = exports.gameSelector = exports.scheduleSelector = exports.teamSelector = exports.standingSelector = exports.historySelector = exports.tourSelector = exports.tournamentSelector = exports.tournamentsSelector = exports.playersSelector = exports.ratingSelector = exports.productsSelector = exports.catsSelector = exports.langSelector = exports.lookupSelector = exports.successSelector = undefined;
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _ramda = require('ramda');
@@ -200,13 +202,17 @@ var tournament = (0, _state.createSelector)(_tournament, players, teams, functio
       }), (0, _ramda.descend)(function (x) {
         return x.tRating || x.rating;
       })], m.players.map(function (p) {
-        return (0, _util.findById)(p.id)(ps);
-      }).map(function (p) {
-        return _extends({}, p, { rating: p.rating, tRating: (0, _util.findById)(p.id)(m.players).rating, isSub: p.isSub, name: fullname(p)
+        return [p, (0, _util.findById)(p.id)(ps)];
+      }).map(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            mp = _ref2[0],
+            p = _ref2[1];
+
+        return _extends({}, mp, { rating: p.rating, tRating: mp.rating, name: fullname(p), firstName: p.firstName, lastName: p.lastName
         });
       }))
     });
-  });
+  });console.log(teams);
   var groups = teams.length === 0 || (0, _ramda.isNil)(teams[0].group) ? null : (0, _ramda.toPairs)((0, _ramda.groupBy)(function (x) {
     return x.group;
   }, teams));
