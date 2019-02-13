@@ -120,7 +120,7 @@ const tournament = createSelector(
       players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating || x.rating)], m.players.map(p => [p, findById(p.id)(ps)]).map(([mp, p]) => ({
         ...mp, rating: p.rating, tRating: mp.rating, name: fullname(p), firstName: p.firstName, lastName: p.lastName
       })))
-    }));console.log(teams)
+    }));
     const groups = teams.length === 0 || isNil(teams[0].group) ? null : toPairs(groupBy(x => x.group, teams));
     const players = addIndex('rank')(sortWith([descend(x => x.tRating)], (t.players || []).map(p => ({...findById(p.id)(ps), tRating: p.rating }))));
     const games = (t.games || []).map(g => {
