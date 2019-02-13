@@ -31,7 +31,7 @@ const teams = (tournament, schedule, history) =>
   );
 
 const groups = (ms, tid, sid) =>
-  <Table name="groups" link={x => `/games/${tid}/${sid}/${x}`} data={(ms || []).map(pick(['id', 'round', 'team1', 'result', 'team2']))}>
+  <Table name="groups" link={x => `/games/${tid}/${sid}/${x.id}`} data={(ms || []).map(pick(['id', 'round', 'team1', 'result', 'team2']))}>
     <td key="id" hidden />
   </Table>;
 

@@ -16,6 +16,7 @@ import Intro from './Intro';
 import Shop from './Shop';
 import Training from './Training';
 import Link from './Link';
+import Games from './Games';
 import Calendar from './Calendar';
 import { Switch, Route } from 'react-router';
 import { Menu } from '@ln613/ui/semantic';
@@ -41,6 +42,7 @@ const Content = () =>
     <Route path='/schedule/:id' component={Schedule} />
     <Route path='/standing/:id' component={Standing} />
     <Route path='/stats/:id' component={Stats} />
+    <Route path='/games/:T/:S/:M' component={Games} />
   </Switch>
 
 const Footer = () =>

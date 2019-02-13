@@ -19,7 +19,7 @@ const Schedule = ({ tournament, id, isMobile }) =>
       {(tournament.schedules || []).map((s, i) =>
         <div class="pt8">
           <div class="pv8 fs24 darkgreen">{tournament.isSingle ? 'Round ' + (i + 1) : (!isNil(s.group) ? ('Group ' + s.group) : (s.ko ? kos[Math.log2(s.ko)] : s.date)) }</div>
-          <Table name="schedule" data={mapMatches(s.matches || [], tournament, !isNil(s.group))} />
+          <Table name="schedule" data={mapMatches(s.matches || [], tournament, !isNil(s.group))} link={x => `/games/${tournament.id}/${s.id}/${x.id}`}/>
           {/* <Table name="week" data={w.matches} equalWidth>
             <td key="team1Points" hidden />  
             <td key="team2Points" hidden />  

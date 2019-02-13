@@ -45,7 +45,7 @@ export default compose(
   withParams,
   withLoad('players'),
   withLoadForce('tournament'),
-  withMount(p => p.setForm(find(x => x.id == p.id, p.tournaments), { path: 'tournament' })),
+  withMount(p => p.setForm(find(x => x.id == +p.id, (p.tournaments || [])) || { id: +p.id, name: '',  startDate: '', startDate2: '', isSingle: false, ratingDate: '' }, { path: 'tournament' })),
   withProps(({ standing }) => ({ isGroup: is(Array, standing) && standing.length > 2 })),
   withSuccess('tour', () => alert('Saved'), () => alert('Error happened!')),
   withRouter,

@@ -21,8 +21,6 @@ const Games = p =>
     <Table name="games" link={p.tournament.groups ? null : x => `/game/${p.T}/${p.S}/${p.M}/${x.id}`} data={(p.games || []).map(pick(['id', 'date', 'team1', 'player1', 'result', 'player2', 'team2' ]))}>
       {p.tournament.groups ? <td key="result" path="match.games[{i}].result" select options={resultOptions} /> : null}
     </Table>
-    <hr />
-    {!p.tournament.groups ? null : <Button primary onClick={() => save(p)}>Save</Button>}
   </div>
 
 export default compose(
@@ -42,29 +40,3 @@ export default compose(
   //withRouter,
   withSuccess('groupmatch', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!'))
 )(Games)
-
-const save = p => {
-  const gs = p.formMatch.games.filter(g => g.result);
-  const wins = gs.filter(g => +g.result[0] > +g.result[2]).length;
-  const loses = gs.filter(g => +g.result[0] < +g.result[2]).length;
-  if (wins < 3 && loses < 3)
-    alert('not valid!');
-  else
-    p.putGroupMatch({ ...p.formMatch, games: gs.map(g => toGame(g, p.schedule, p.formMatch)) }, { id: p.T, group: p.S })
-//   const isAdd = p.id[0] === '+';
-//   const g = toGame(p.game, p.schedule, p.match);
-
-//   if (isAdd) {
-//     p.postGame(g, { id1: p.tournament.id });
-//     if (!g.isDouble) {
-//       const p1 = findById(g.p1)(p.players);
-//       p.putPlayer({...p1, rating: newRating(g.p1Rating, g.p1Diff)});
-//       const p2 = findById(g.p2)(p.players);
-//       p.putPlayer({...p2, rating: newRating(g.p2Rating, g.p2Diff)});
-//     }
-//   }
-//   else {
-//     g.isDouble ? p.putGame(g, { id1: p.tournament.id }) : p.patchResult(g);
-//     //p.putGame(g, { id1: p.tournament.id });
-//   }
-}

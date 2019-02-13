@@ -10,7 +10,7 @@ import { withRouter } from "react-router-dom";
 import { Button } from 'semantic-ui-react';
 
 const teamTable = (teams, id) =>
-  <Table name="teams" link={x => `/team/${id}/${x}`} data={(teams || []).map(x => ({ 'id': x.id, 'name': x.name || (x.players[0].firstName + ' ' + x.players[0].lastName) + ' / ' + (x.players[1].firstName + ' ' + x.players[1].lastName) }))} />
+  <Table name="teams" link={x => `/team/${id}/${x.id}`} data={(teams || []).map(x => ({ 'id': x.id, 'name': x.name || (x.players[0].firstName + ' ' + x.players[0].lastName) + ' / ' + (x.players[1].firstName + ' ' + x.players[1].lastName) }))} />
 
 const Teams = ({ tournament, history, id, newId }) =>
   <div>

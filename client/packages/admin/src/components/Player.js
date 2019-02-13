@@ -1,11 +1,12 @@
 import React from 'react';
 import { compose } from 'recompose';
+import { find } from 'ramda';
 import { connect } from '@ln613/state';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { playersSelector } from 'utils/selectors';
 import { TextBox } from '@ln613/ui/semantic';
-import { withEdit, withLoad, withParams } from '@ln613/compose';
+import { withEdit, withLoad, withParams, withMount } from '@ln613/compose';
 import { withSuccess } from 'utils';
 
 const Player = ({ player, putPlayer, postPlayer, id }) =>
@@ -27,7 +28,7 @@ export default compose(
   connect(playersSelector, actions),
   withParams,
   withLoad('players'),
-  withEdit('player'),
+  withMount(p => p.setForm(find(x => x.id == +p.id, (p.players || [])) || { id: +p.id, firstName: '', lastName: '', sex: '', rating: '' }, { path: 'player' })),
   withSuccess('player', () => alert('Saved'), () => alert('Error happened!'))
 )(Player)
 
