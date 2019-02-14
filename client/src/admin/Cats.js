@@ -13,10 +13,10 @@ const Cats = ({ cats, history }) =>
   <div>
     <div class="f">
       <h1 class="fg1">Categories</h1>
-      <Button primary onClick={() => history.push('/cats/0')}>Add</Button>
+      <Button primary onClick={() => history.push('/admin/cats/0')}>Add</Button>
     </div>
     <hr/>
-    <Table name="cats" link data={(cats || []).map(pick(['id', 'name', 'name_ch']))} />
+    <Table name="cats" link={x => `/admin/cats/${x.id}`} data={(cats || []).map(pick(['id', 'name', 'name_ch']))} />
   </div>
 
 export default compose(

@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { Switch, Route } from 'react-router';
+import { Menu } from '@ln613/ui/semantic';
+
 import Header from './Header';
 import Home from './Home';
 import Products from './Products';
@@ -18,8 +21,26 @@ import Training from './Training';
 import Link from './Link';
 import Games from './Games';
 import Calendar from './Calendar';
-import { Switch, Route } from 'react-router';
-import { Menu } from '@ln613/ui/semantic';
+
+import AdminMenu from '../admin/Menu';
+import AdminHome from '../admin/Home';
+import AdminCats from '../admin/Cats';
+import AdminCat from '../admin/Cat';
+import AdminProducts from '../admin/Products';
+import AdminProduct from '../admin/Product';
+import AdminTournaments from '../admin/Tournaments';
+import AdminTournament from '../admin/Tournament';
+import AdminPlayers from '../admin/Players';
+import AdminPlayer from '../admin/Player';
+import AdminTeams from '../admin/Teams';
+import AdminTeam from '../admin/Team';
+import AdminSinglePlayers from '../admin/SinglePlayers';
+import AdminSchedules from '../admin/Schedules';
+import AdminSchedule from '../admin/Schedule';
+import AdminGames from '../admin/Games';
+import AdminGame from '../admin/Game';
+import AdminHeader from '../admin/Header';
+
 
 const menus = ['Home', 'Intro', 'Shop', 'Tournaments', 'Rating', 'Calendar', 'Links', 'Contact'];
 
@@ -51,13 +72,59 @@ const Footer = () =>
     <div class="ph16 pb16">© 2018 vttc.ca. All Rights Reserved.</div>
   </div>
 
-const App = p =>
+const MainMenu = () =>
+  <Menu menus={menus} color="blue">
+    <Content/>
+    <Footer/>
+  </Menu>
+
+const AdminContent = () =>
+  <Switch>
+    <Route exact path='/admin' component={AdminHome} />
+    <Route exact path='/admin/cats' component={AdminCats} />
+    <Route path='/admin/cats/:id' component={AdminCat} />
+    <Route exact path='/admin/products' component={AdminProducts} />
+    <Route path='/admin/products/:id' component={AdminProduct} />
+    <Route exact path='/admin/tournaments' component={AdminTournaments} />
+    <Route path='/admin/tournaments/:id' component={AdminTournament} />
+    <Route exact path='/admin/players' component={AdminPlayers} />
+    <Route path='/admin/players/:id' component={AdminPlayer} />
+    <Route path='/admin/teams/:id' component={AdminTeams} />
+    <Route path='/admin/team/:id1/:id' component={AdminTeam} />
+    <Route path='/admin/singleplayers/:id' component={AdminSinglePlayers} />
+    <Route path='/admin/schedules/:id' component={AdminSchedules} />
+    <Route path='/admin/schedule/:id1/:id' component={AdminSchedule} />
+    <Route path='/admin/games/:T/:S?/:M?' component={AdminGames} />
+    <Route path='/admin/game/:T/:S/:M/:id' component={AdminGame} />
+  </Switch>
+
+const AdminMainMenu = () =>
+  <Fragment>
+    <hr/>
+    <div class="f">
+      <AdminMenu />
+      <div class="ph16 fg1">
+        <AdminContent />
+      </div>
+    </div>
+  </Fragment>
+
+const Vttc = () =>
   <div class="ui">
-    <Header/>
-    <Menu menus={menus} color="blue">
-      <Content/>
-      <Footer/>
-    </Menu>
+    <Header />
+    <MainMenu />
   </div>
+
+const Admin = () =>
+  <div class="p16">
+    <AdminHeader />
+    <AdminMainMenu />
+  </div>
+
+const App = () =>
+  <Switch>
+    <Route path='/admin' component={Admin} />
+    <Route component={Vttc} />
+  </Switch>
 
 export default App;

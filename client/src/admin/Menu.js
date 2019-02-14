@@ -4,18 +4,18 @@ import { Link } from 'react-router-dom';
 export default () =>
   <div class="ui vertical menu">
     <div class="item">
-      <Link class="header cp" to="/">Home</Link>
+      <Link class="header cp" to="/admin">Home</Link>
     </div>
     <div class="item">
-      <Link class="header cp" to="/cats">Categories</Link>
+      <Link class="header cp" to="/admin/cats">Categories</Link>
     </div>
     <div class="item">
-      <Link class="header cp" to="/products">Products</Link>
+      <Link class="header cp" to="/admin/products">Products</Link>
     </div>
     <div class="item">
-      <Link class="header cp" to="/players">Players</Link>
+      <Link class="header cp" to="/admin/players">Players</Link>
     </div>
     <div class="item">
-      <Link class="header cp" to="/tournaments">Tournaments</Link>
+      <Link class="header cp" to="/admin/tournaments">Tournaments</Link>
     </div>
   </div>

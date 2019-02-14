@@ -29,7 +29,6 @@ export default compose(
   withParams,
   withLoad('players'),
   withLoad('tournament', ['id', 'id1']),
-  //withEdit('team', 'tournament.teams', { players: [] }),
   withMount(p => p.setForm(find(x => x.id == +p.id, (p.tournament.teams || [])) || { id: +p.id, name: '', group: undefined }, { path: 'team' })),
   withSuccess('team', () => alert('Saved'), () => alert('Error happened!'))
 )(Team)

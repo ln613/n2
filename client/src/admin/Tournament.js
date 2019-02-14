@@ -18,11 +18,11 @@ const Tournament = ({ tournament, standing, ko, isGroup, history, postTour, patc
     {+tournament.id ?
       <div>
         {tournament.isSingle
-          ? <Button primary onClick={() => history.push(`/singleplayers/${tournament.id}`)}>Players</Button>
-          : <Button primary onClick={() => history.push(`/teams/${tournament.id}`)}>Teams</Button>
+          ? <Button primary onClick={() => history.push(`/admin/singleplayers/${tournament.id}`)}>Players</Button>
+          : <Button primary onClick={() => history.push(`/admin/teams/${tournament.id}`)}>Teams</Button>
         }
-        <Button primary onClick={() => history.push(`/schedules/${tournament.id}`)}>Schedules</Button>
-        <Button primary onClick={() => history.push(`/games/${tournament.id}`)}>Games</Button>
+        <Button primary onClick={() => history.push(`/admin/schedules/${tournament.id}`)}>Schedules</Button>
+        <Button primary onClick={() => history.push(`/admin/games/${tournament.id}`)}>Games</Button>
         <Button primary onClick={() => postGengroup({ id })}>Generate Groups</Button>
         <Button primary onClick={() => postGenrr({ id })}>Generate Schedule</Button>
         {tournament.isSingle || tournament.has2half ? null :
@@ -40,16 +40,14 @@ const Tournament = ({ tournament, standing, ko, isGroup, history, postTour, patc
     <Button primary onClick={() => id[0] !== '+' ? patchTour(tournament) : postTour(tournament)}>Save</Button>
   </div>;
 
-//export default compose(
-  //connect(tourSelector, actions),
-  // withParams,
-  // withLoad('players'),
-  // withLoadForce('tournament'),
-  // withMount(p => p.setForm(find(x => x.id == +p.id, (p.tournaments || [])) || { id: +p.id, name: '',  startDate: '', startDate2: '', isSingle: false, ratingDate: '' }, { path: 'tournament' })),
-  // withProps(({ standing }) => ({ isGroup: is(Array, standing) && standing.length > 2 })),
-  // withSuccess('tour', () => alert('Saved'), () => alert('Error happened!')),
-  // withRouter,
-  // withMobile
-//)(Tournament);
-
-export default Tournament;
+export default compose(
+  connect(tourSelector, actions),
+  withParams,
+  withLoad('players'),
+  withLoadForce('tournament'),
+  withMount(p => p.setForm(find(x => x.id == +p.id, (p.tournaments || [])) || { id: +p.id, name: '',  startDate: '', startDate2: '', isSingle: false, ratingDate: '' }, { path: 'tournament' })),
+  withProps(({ standing }) => ({ isGroup: is(Array, standing) && standing.length > 2 })),
+  withSuccess('tour', () => alert('Saved'), () => alert('Error happened!')),
+  withRouter,
+  withMobile
+)(Tournament);

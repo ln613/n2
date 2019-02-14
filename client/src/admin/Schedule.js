@@ -26,12 +26,12 @@ const teams = (tournament, schedule, history) =>
       <div class="ph8">VS</div>
       <Select name={`schedule.matches[${n}].away`} options={tournament.teams} placeholder="" />
       <div class="ph8"></div>
-      <Button primary onClick={() => history.push(`/games/${tournament.id}/${schedule.id}/${n + 1}`)}>Matches</Button>
+      <Button primary onClick={() => history.push(`/admin/games/${tournament.id}/${schedule.id}/${n + 1}`)}>Matches</Button>
     </div>
   );
 
 const groups = (ms, tid, sid) =>
-  <Table name="groups" link={x => `/games/${tid}/${sid}/${x.id}`} data={(ms || []).map(pick(['id', 'round', 'team1', 'result', 'team2']))}>
+  <Table name="groups" link={x => `/admin/games/${tid}/${sid}/${x.id}`} data={(ms || []).map(pick(['id', 'round', 'team1', 'result', 'team2']))}>
     <td key="id" hidden />
   </Table>;
 
@@ -59,7 +59,6 @@ export default compose(
   withParams,
   withLoad('tournament', ['id', 'id1'], true),
   withMount(p => p.setForm({ matches: [], ...find(x => x.id == p.id, p.tournament.schedules) }, { path: 'schedule' })),
-  //withEdit('schedule', 'tournament.schedules', { matches: [] }),
   withSuccess('schedule', () => alert('Saved'), () => alert('Error happened!')),
   withRouter
 )(Schedule)

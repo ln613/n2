@@ -12,10 +12,10 @@ const Products = ({ products, history, newId }) =>
   <div>
     <div class="f">
       <h1 class="fg1">Products</h1>
-      <Button primary onClick={() => history.push(`/products/${newId}`)}>Add</Button>
+      <Button primary onClick={() => history.push(`/admin/products/${newId}`)}>Add</Button>
     </div>
     <hr/>
-    <Table name="products" link data={products.map(x => ({ 'id': x.id, 'name': x.name, 'name_ch': x.name_ch, 'cat': x.cat_name, 'cat1': x.cat1_name, 'price': x.price, 'sale': x.sale, 'desc': x.desc }))} />
+    <Table name="products" link={x => `/admin/products/${x.id}`} data={products.map(x => ({ 'id': x.id, 'name': x.name, 'name_ch': x.name_ch, 'cat': x.cat_name, 'cat1': x.cat1_name, 'price': x.price, 'sale': x.sale, 'desc': x.desc }))} />
   </div>
 
 export default compose(

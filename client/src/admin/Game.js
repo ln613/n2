@@ -55,7 +55,6 @@ export default compose(
   withLoad('players', null, true),
   withLoad('tournament', ['id', 'T'], true),
   withMount(p => p.setForm(find(x => x.id == p.id, p.tournament.games), { path: 'game' })),
-  //withEdit('game', 'tournament.games', { g1: [], g2: []}),
   withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
   withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),
   withSuccess('game', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!')),
