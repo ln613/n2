@@ -308,12 +308,12 @@ app.purge('/admin/:doc', (req, res) => {
 
 // catch all --------------------
 
-app.get('/admin', nocache, function (req, res) {
-  res.sendFile(path.resolve(__dirname, '../client/packages/admin/build/index.html'))
-});
+// app.get('/admin', nocache, function (req, res) {
+//   res.sendFile(path.resolve(__dirname, '../client/packages/admin/build/index.html'))
+// });
 
 app.get('*', function (req, res) {
-  res.sendFile(path.resolve(__dirname, '../client/packages/vttc/build/index.html'))
+  res.sendFile(path.resolve(__dirname, '../client/build/index.html'))
 });
 
 app.listen(port, ip);
