@@ -18,7 +18,7 @@ const Games = p =>
       {p.tournament.groups ? null : <Button primary onClick={() => p.history.push(`/admin/game/${p.T}/${p.S}/${p.M}/+${p.newId}`)}>Add</Button>}
     </div>
     <hr/>
-    <Table name="games" link={p.tournament.groups ? null : x => `/admin/game/${p.T}/${p.S}/${p.M}/${x.id}`} data={(p.games || []).map(pick(['id', 'date', 'team1', 'player1', 'result', 'player2', 'team2' ]))}>
+    <Table name="games" link={p.tournament.groups ? null : x => `/admin/game/${p.T}/${p.S}/${p.M}/${x.id}`} data={(tap(p.games) || []).map(pick(['id', 'date', 'team1', 'player1', 'result', 'player2', 'team2' ]))}>
       {p.tournament.groups ? <td key="result" path="match.games[{i}].result" select options={resultOptions} /> : null}
     </Table>
     <hr />
