@@ -2,7 +2,7 @@ const fs = require('fs');
 const mongodb = require('mongodb');
 const cd = require('cloudinary');
 const { sortWith, ascend, descend, prop, fromPairs, merge, filter, map, unnest, pipe, find, isNil, last } = require('ramda');
-const { tap, config, json2js, adjustRating, newRating, serial } = require('./utils');
+const { tap, config, json2js, adjustRating, newRating, serial, toDateOnly } = require('./utils');
 const moment = require('moment');
 const { findById } = require('@ln613/util');
 
@@ -150,7 +150,17 @@ e.changeResult = g1 => db.collection('tournaments').aggregate([
 
 e.updateRating = () => {
   const pr = JSON.parse(fs.readFileSync(__dirname + '/../data/initialRatings.json'));
+  
   return e.bak().then(o => {
+    o.tournaments.forEach(t => {
+      if (t.startDate) t.startDate = toDateOnly(t.startDate);
+      if (t.startDate2) t.startDate2 = toDateOnly(t.startDate2);
+    });
+
+    unnest(o.tournaments.map(t => t.schedules)).forEach(s => {
+      if (s.date) s.date = toDateOnly(s.date);
+    });
+
     const games = pipe(
       filter(t => !t.isSingle),
       map(t => {
@@ -158,7 +168,7 @@ e.updateRating = () => {
         return t.games;
       }),
       unnest,
-      filter(g => !g.isDouble),
+      //filter(g => !g.isDouble),
       sortWith([
         ascend(prop('date')),
         ascend(g => (g.group && +g.group) || Number.POSITIVE_INFINITY),
@@ -166,8 +176,10 @@ e.updateRating = () => {
         descend(g => (g.ko && +g.ko) || 0),
         ascend(prop('id'))
       ])
-    )(o.tournaments);console.log(games.filter(g => g.round).length)
-    games.forEach(g => {
+    )(o.tournaments);
+    games.forEach((g, i) => {
+      g.id = i + 1;
+      g.date = toDateOnly(g.date);
       if (pr[g.p1]) g.p1Rating = pr[g.p1];
       if (pr[g.p2]) g.p2Rating = pr[g.p2];
       adjustRating(g, false);

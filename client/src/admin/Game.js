@@ -9,7 +9,7 @@ import { withSuccess } from 'utils';
 import { TextBox, CheckBox } from '@ln613/ui/semantic';
 import { Select } from '@ln613/ui';
 import { withLoad, withEdit, withParams, withMount } from '@ln613/compose';
-import { getPropById, findById, getNameById } from '@ln613/util';
+import { getPropById, findById, getNameById, tap } from '@ln613/util';
 import { toGame, newRating, resultOptions } from 'utils';
 import { withRouter } from 'react-router-dom';
 
@@ -28,7 +28,7 @@ const Game = p =>
         <Select name={`game.p1`} placeholder="" options={getPropById('players')(p.match.home)(p.tournament.teams)} onChange={v => p.setFormGame(getPropById('rating')(+v)(p.players), { prop: 'p1Rating' })}/>
         <Select name={`game.p2`} placeholder="" options={getPropById('players')(p.match.away)(p.tournament.teams)} onChange={v => p.setFormGame(getPropById('rating')(+v)(p.players), { prop: 'p2Rating' })}/>
       </div>  
-      {p.game.isDouble ?
+      {tap(p.game).isDouble ?
       <div class="fv jcsa">
         <Select name={`game.p3`} placeholder="" options={getPropById('players')(p.match.home)(p.tournament.teams)} />
         <Select name={`game.p4`} placeholder="" options={getPropById('players')(p.match.away)(p.tournament.teams)} />
@@ -43,7 +43,7 @@ const Game = p =>
         <div class="pl8">{range(0, 5).filter(x => gg(p.game.g1, x) < gg(p.game.g2, x)).length}</div>
       </div>  
     </div>
-    Result: <Select name={`game.result`} options={resultOptions} placeholder="" />
+    Result: <Select name={`game.result`} options={resultOptions} />
     <hr />
     <Button primary onClick={() => save(p)}>Save</Button>
   </div>
@@ -54,7 +54,7 @@ export default compose(
   withParams,
   withLoad('players', null, true),
   withLoad('tournament', ['id', 'T'], true),
-  withMount(p => p.setForm(find(x => x.id == +p.id, (p.tournament.games || [])) || { id: +p.id, result: '', isDouble: false, p1: null, p2: null, p3: null, p4: null }, { path: 'game' })),
+  withMount(p => p.setForm(find(x => x.id == +p.id, (p.tournament.games || [])) || { id: +p.id, result: '', isDouble: false, p1: '', p2: '', p3: '', p4: '' }, { path: 'game' })),
   withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
   withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),
   withSuccess('game', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!')),

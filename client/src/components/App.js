@@ -80,7 +80,7 @@ const MainMenu = () =>
 
 const AdminContent = () =>
   <Switch>
-    <Route exact path='/admin' component={AdminHome} />
+    <Route exact path='/admin' component={AdminTournaments} />
     <Route exact path='/admin/cats' component={AdminCats} />
     <Route path='/admin/cats/:id' component={AdminCat} />
     <Route exact path='/admin/products' component={AdminProducts} />

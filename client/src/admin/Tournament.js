@@ -35,7 +35,7 @@ const Tournament = ({ tournament, standing, ko, isGroup, history, postTour, patc
     <CheckBox name="tournament.isSingle" label="Is Single?" />
     <TextBox name="tournament.startDate" />
     <TextBox name="tournament.startDate2" />
-    <TextBox name="tournament.ratingDate" />
+    {/* <TextBox name="tournament.ratingDate" /> */}
     <hr />
     <Button primary onClick={() => id[0] !== '+' ? patchTour(tournament) : postTour(tournament)}>Save</Button>
   </div>;

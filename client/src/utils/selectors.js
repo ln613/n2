@@ -133,7 +133,7 @@ const tournament = createSelector(
     });
     const schedules = (t.schedules || []).map(s => ({
       ...s,
-      date: s.date && toDate(s.date),
+      date: s.date,
       matches: t.isSingle ?
         s.matches.map(m => ({...m, player1: getSinglePlayer(m.home, players), player2: getSinglePlayer(m.away, players), result: m.result || ''})) :
         ((s.group || s.ko) ? s.matches : range(1, 9).map(n => findById(n)(s.matches) || {}))

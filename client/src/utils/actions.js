@@ -87,6 +87,9 @@ export const actionData = {
   history: {
     url: api + 'playergames/{id}'
   },
+  gameId: {
+    url: api + 'gameid'
+  },
   form: {
     path: 'form.{path}'
   },

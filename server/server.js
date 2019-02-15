@@ -170,7 +170,7 @@ app.post('/admin/genrr', (req, res) => {
         const s = rrSchedule(t.players, true);
         api.update('tournaments', {
           id,
-          schedules: s.map((x, i) => ({ id: i + 1, matches: x, date: moment(t.startDate).add(i, 'week').toISOString() }))
+          schedules: s.map((x, i) => ({ id: i + 1, matches: x, date: moment(t.startDate).add(i, 'week').format('YYYY-MM-DD') }))
         }).then(_ => res.json(s));
       } else {
         res.json('N/A');
@@ -183,7 +183,7 @@ app.post('/admin/genrr', (req, res) => {
         if (!t.schedules) {
           const schedules = Object.keys(groups).map(g => ({
             matches: pipe(l => rrSchedule(l, false, true), unnest, map(x => ({ ...x, games: gengames(t, x.home, x.away) })))(groups[g]),
-            date: moment(t.startDate).toISOString(),
+            date: t.startDate,
             group: g,
             id: +g
           }));
@@ -201,7 +201,7 @@ app.post('/admin/genrr', (req, res) => {
           res.json('N/A');
         }
       } else if (!t.has2half && t.teams && t.schedules) {
-        const sd = t.startDate2 || moment(last(t.schedules).date).add(1, 'week');
+        const sd = t.startDate2 || moment(last(t.schedules).date).add(1, 'week').format('YYYY-MM-DD');
         const tt = split2(standing.map(x => find(y => y.name === x.team, t.teams)));
         const s1 = rrScheduleTeam(tt[0], sd, [5, 6, 7]);
         const s2 = rrScheduleTeam(tt[1], sd, [1, 2, 3]);
@@ -209,7 +209,7 @@ app.post('/admin/genrr', (req, res) => {
         const lastId = last(t.schedules).id;
         api.update('tournaments', {
           id,
-          startDate2: is(String, sd) ? sd : sd.toISOString(),
+          startDate2: sd,
           has2half: true,
           teams: t.teams.map(x => ({...x, rank: find(y => y.team === x.name, standing).rank })),
           schedules: concat(t.schedules, s.map(x => ({ ...x, id: lastId + x.id, half: true })))
@@ -238,14 +238,14 @@ app.post('/admin/gengroup', (req, res) => {
 
 app.post('/admin/nogame', (req, res) => {
   const id = +req.body.id;
-  const date = new Date(req.body.date + 'T08:00:00').toDateString();
+  const date = req.body.date;
   api.getById('tournaments', id).then(t => {
     if (t.schedules) {
-      const n = findIndex(s => new Date(s.date).toDateString() === date, t.schedules);
+      const n = findIndex(s => s.date === date, t.schedules);
       if (n === -1) {
         res.json('N/A');
       } else {
-        const schedules = t.schedules.map((s, i) => i >= n ? {...s, date: moment(s.date).add(1, 'week').toISOString()} : s);
+        const schedules = t.schedules.map((s, i) => i >= n ? {...s, date: moment(s.date).add(1, 'week').format('YYYY-MM-DD')} : s);
         api.update('tournaments', { id, schedules }).then(r => res.json(r));
       }
     } else {

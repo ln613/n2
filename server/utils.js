@@ -105,7 +105,7 @@ e.getTeamRating = t => t.players && t.players.length > 1
   : 0;
 
 e.rrScheduleTeam = (teams, startDate, ids = [1, 2, 3, 4, 5, 6]) => R.compose(
-  rs => rs.map((w, i) => ({ id: i + 1, matches: w.map((m, j) => { m.id = ids[j]; return m; }), date: moment(startDate).add(i, 'week').toISOString() })),
+  rs => rs.map((w, i) => ({ id: i + 1, matches: w.map((m, j) => { m.id = ids[j]; return m; }), date: moment(startDate).add(i, 'week').format('YYYY-MM-DD') })),
   R.splitEvery(ids.length),
   R.unnest,
   e.rrSchedule,
@@ -160,5 +160,7 @@ e.gengames = (t, t1, t2) => {
     p4: n === 2 ? team2.players[1].id : undefined
   }));
 }
+
+e.toDateOnly = d => R.is(String, d) ? R.take(10, d) : moment(d).add(8, 'hours').format('YYYY-MM-DD');
 
 module.exports = e;
