@@ -1,8 +1,9 @@
-import { last, isNil } from 'ramda';
+import { last, isNil, pipe, filter, map, fromPairs } from 'ramda';
 import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import { successSelector } from './selectors';
 import { withNewValue } from '@ln613/compose';
+import { tap } from '@ln613/util';
 
 export const cdurl = (l, c, n) => l.cdVersion ? `http://res.cloudinary.com/vttc/image/upload/v${l.cdVersion}/${c}/${n}.jpg` : '';
 
@@ -19,6 +20,8 @@ const rateDiff = (r1, r2) => {
   const n = rdelta.findIndex(x => x <= r1 - r2);
   return n === -1 ? last(rdiff) : rdiff[n];
 }
+
+export const winner = x => x && x.result && x.result !== '0:0' ? (+x.result[0] > +x.result[2] ? 1 : 2) : 0;
 
 export const adjustRating = g => {
   if (g.isDouble) {
@@ -46,3 +49,15 @@ export const newRating = (r, d) => Math.max(r + d, 100)
 export const resultOptions = ['', '3:0', '3:1', '3:2', '2:3', '1:3', '0:3', '2:0', '2:1', '1:2', '0:2'];
 
 export const kos = ['Final', 'Semifinals', 'Quarterfinals' ];
+
+export const highlightWinner = g => {
+  const w = winner(g);
+  return !w ? g : pipe(
+    filter(k => g[k]),
+    map(k => [k, `<b>${g[k]}</b>`]),
+    fromPairs,
+    o => ({...g, ...o}),
+  )(['player' + w, 'team' + w, w === 1 ? 'home' : 'away']);
+}
+
+export const highlightSub = (n, isSub) => n + (isSub ? ' (Sub)' : '');

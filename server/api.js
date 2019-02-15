@@ -1,7 +1,7 @@
 const fs = require('fs');
 const mongodb = require('mongodb');
 const cd = require('cloudinary');
-const { sortWith, ascend, descend, prop, fromPairs, merge, filter, map, unnest, pipe, find, isNil, last } = require('ramda');
+const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, isNil, last, pick } = require('ramda');
 const { tap, config, json2js, adjustRating, newRating, serial, toDateOnly } = require('./utils');
 const moment = require('moment');
 const { findById } = require('@ln613/util');
@@ -150,7 +150,7 @@ e.changeResult = g1 => db.collection('tournaments').aggregate([
 
 e.updateRating = () => {
   const pr = JSON.parse(fs.readFileSync(__dirname + '/../data/initialRatings.json'));
-  
+console.log(pick(['8', '65', '489'], pr));  
   return e.bak().then(o => {
     o.tournaments.forEach(t => {
       if (t.startDate) t.startDate = toDateOnly(t.startDate);
@@ -177,6 +177,7 @@ e.updateRating = () => {
         ascend(prop('id'))
       ])
     )(o.tournaments);
+
     games.forEach((g, i) => {
       g.id = i + 1;
       g.date = toDateOnly(g.date);
@@ -185,9 +186,11 @@ e.updateRating = () => {
       adjustRating(g, false);
       pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
       pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
-      Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
       if (isNil(g.round)) delete g.round;
     });
+console.log(fromPairs(toPairs(pr).filter(x => !x[1])));
+    Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
+
     return e.initdata(o);
   })
   .catch(console.log);

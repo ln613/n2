@@ -2,6 +2,7 @@ import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty,
 import { createSelector, mapStateWithSelectors } from '@ln613/state';
 import { Bold, Italic } from '@ln613/ui';
 import { findById, getNameById, getPropById, toDate, toMonth, addIndex, diff, tap, split2, toAbsDate, findByName } from '@ln613/util';
+import { highlightSub } from './';
 
 const _form = s => s.form || {};
 const _filter = s => s.filter || {};
@@ -97,8 +98,10 @@ const tn = (n, g) => g['t' + (n > 2 ? n - 2 : n)];
 const findGames = (s, m, gs) => gs.filter(g => toAbsDate(g.date) === toAbsDate(s.date) && ((g.t1 === m.home && g.t2 === m.away) || (g.t2 === m.home && g.t1 === m.away)));
 const gg = (g, x) => +(g && g[x] || 0);
 const getResult = g => g.result || (range(0, 5).filter(n => gg(g.g1, n) > gg(g.g2, n)).length + ':' + range(0, 5).filter(n => gg(g.g1, n) < gg(g.g2, n)).length);
-const getPlayerName = (n, g, ps) => getNameById(pn(n, g))(ps) + (g.isDouble ? ' / ' + getNameById(pn(n + 2, g))(ps) : '');
+const getPlayerName = (n, g, ps, ts) => getNameWithSub(n, g, ps, ts) + (g.isDouble ? ' / ' + getNameWithSub(n + 2, g, ps, ts) : '');
 const getPlayer = (pid, tid, ts) => findById(pid)((findById(tid)(ts) || {}).players);
+const getIsSub = (pid, tid, ts) => getPlayer(pid, tid, ts).isSub;
+const getNameWithSub = (n, g, ps, ts) => highlightSub(getNameById(pn(n, g))(ps), getIsSub(pn(n, g), tn(n, g), ts));
 const subs = (n, g, ts) => (getPlayer(pn(n, g), tn(n, g), ts) || {}).isSub ? 1 : 0;
 const totalSubs = (g, ts) => subs(1, g, ts) + subs(3, g, ts) - subs(2, g, ts) - subs(4, g, ts);
 const isWin = (g, ts) => {
@@ -109,6 +112,7 @@ const getSinglePlayer = (id, ps) => {
   const p = findById(id)(ps);
   return `${p.rank}. ${p.name} (${p.tRating})`;
 }
+
 const tournament = createSelector(
   _tournament,
   players,
@@ -127,7 +131,7 @@ const tournament = createSelector(
       const result = getResult(g);
       const team1 = getNameById(g.t1)(teams);
       const team2 = getNameById(g.t2)(teams);
-      const game = {...g, result, player1: getPlayerName(1, g, ps), player2: getPlayerName(2, g, ps), team1, team2};
+      const game = {...g, result, player1: getPlayerName(1, g, ps, teams), player2: getPlayerName(2, g, ps, teams), team1, team2};
       game.isWin = isWin(game, teams);
       return game;
     });
@@ -145,8 +149,8 @@ const tournament = createSelector(
             ...x,
             team1: getNameById(x.t1)(teams),
             team2: getNameById(x.t2)(teams),
-            player1: getNameById(x.p1)(ps) + (x.p3 ? (' / ' + getNameById(x.p3)(ps)) : ''),
-            player2: getNameById(x.p2)(ps) + (x.p4 ? (' / ' + getNameById(x.p4)(ps)) : ''),
+            player1: getPlayerName(1, x, ps, teams),
+            player2: getPlayerName(2, x, ps, teams),
             p1Rating: getPropById('rating')(x.p1)(ps),
             p2Rating: getPropById('rating')(x.p2)(ps),
             isDouble: !!x.p3,
