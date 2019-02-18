@@ -1,7 +1,12 @@
 import React from 'react';
+import { compose } from 'recompose';
 import { Link } from 'react-router-dom';
+import { Button } from 'semantic-ui-react';
+import { connect } from '@ln613/state';
+import actions from 'utils/actions';
+import { withSuccess } from 'utils';
 
-export default () =>
+const AdminMenu = p =>
   <div class="ui vertical menu">
     <div class="item">
       <Link class="header cp" to="/admin">Home</Link>
@@ -18,4 +23,12 @@ export default () =>
     <div class="item">
       <Link class="header cp" to="/admin/tournaments">Tournaments</Link>
     </div>
+    <div class="item">
+      <Button primary onClick={() => p.patchUpdateRating()}>Update Ratings</Button>
+    </div>
   </div>
+
+export default compose(
+  connect(null, actions),
+  withSuccess('updaterating', () => alert('Ratings updated'), () => alert('Error happened!'))
+)(AdminMenu);

@@ -84,6 +84,10 @@ export const actionData = {
     url: admin + 'result/{id}',
     methods: ['post', 'patch']
   },
+  updateRating: {
+    url: admin + 'updaterating',
+    methods: ['patch']
+  },
   history: {
     url: api + 'playergames/{id}'
   },
