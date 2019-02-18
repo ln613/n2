@@ -28,7 +28,7 @@ const Game = p =>
         <Select name={`game.p1`} placeholder="" options={getPropById('players')(p.match.home)(p.tournament.teams)} onChange={v => p.setFormGame(getPropById('rating')(+v)(p.players), { prop: 'p1Rating' })}/>
         <Select name={`game.p2`} placeholder="" options={getPropById('players')(p.match.away)(p.tournament.teams)} onChange={v => p.setFormGame(getPropById('rating')(+v)(p.players), { prop: 'p2Rating' })}/>
       </div>  
-      {tap(p.game).isDouble ?
+      {p.game.isDouble ?
       <div class="fv jcsa">
         <Select name={`game.p3`} placeholder="" options={getPropById('players')(p.match.home)(p.tournament.teams)} />
         <Select name={`game.p4`} placeholder="" options={getPropById('players')(p.match.away)(p.tournament.teams)} />
@@ -77,7 +77,7 @@ const save = p => {
     }
   }
   else {
-    g.isDouble ? p.putGame(g, { id1: p.tournament.id }) : p.patchResult(g);
+    g.isDouble ? p.putGame(g, { id1: p.tournament.id }) : p.patchResult(g, { id: p.tournament.id });
     //p.putGame(g, { id1: p.tournament.id });
   }
 }

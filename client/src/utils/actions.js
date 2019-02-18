@@ -81,14 +81,14 @@ export const actionData = {
     methods: ['put']
   },
   result: {
-    url: admin + 'result',
+    url: admin + 'result/{id}',
     methods: ['post', 'patch']
   },
   history: {
     url: api + 'playergames/{id}'
   },
-  gameId: {
-    url: api + 'gameid'
+  newGameId: {
+    url: admin + 'newgameid'
   },
   form: {
     path: 'form.{path}'

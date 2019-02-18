@@ -258,12 +258,18 @@ app.get('/admin/count/:doc', (req, res) => {
   send(api.count(req.params.doc), res);
 });
 
-app.patch('/admin/result', (req, res) => {
-  done(api.changeResult(req.body), res);
-});
-
 app.patch('/admin/updaterating', (req, res) => {
   done(api.updateRating(), res);
+});
+
+app.patch('/admin/result/:id', (req, res) => {
+  api.replaceList('tournaments', req.params.id, 'games', req.body)
+    .then(() => api.updateRating())
+    .then(() => res.json('done'));
+});
+
+app.get('/admin/newgameid', (req, res) => {
+  send(api.getNewGameId(), res);
 });
 
 app.put('/admin/groupmatch/:id/:group', (req, res) => {

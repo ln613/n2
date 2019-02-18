@@ -15,10 +15,10 @@ const Games = p =>
   <div>
     <div class="f">
       <h1 class="fg1">Matches - {p.tournament.name} - {p.schedule.date}</h1>
-      {p.tournament.groups ? null : <Button primary onClick={() => p.history.push(`/admin/game/${p.T}/${p.S}/${p.M}/+${p.newId}`)}>Add</Button>}
+      {p.tournament.groups ? null : <Button primary onClick={() => p.history.push(`/admin/game/${p.T}/${p.S}/${p.M}/+${p.newGameId+1}`)}>Add</Button>}
     </div>
     <hr/>
-    <Table name="games" link={p.tournament.groups ? null : x => `/admin/game/${p.T}/${p.S}/${p.M}/${x.id}`} data={(tap(p.games) || []).map(pick(['id', 'date', 'team1', 'player1', 'result', 'player2', 'team2' ]))}>
+    <Table name="games" link={p.tournament.groups ? null : x => `/admin/game/${p.T}/${p.S}/${p.M}/${x.id}`} data={(p.games || []).map(pick(['id', 'date', 'team1', 'player1', 'result', 'player2', 'team2' ]))}>
       {p.tournament.groups ? <td key="result" path="match.games[{i}].result" select options={resultOptions} /> : null}
     </Table>
     <hr />
@@ -36,7 +36,8 @@ export default compose(
     p.tournament.groups ? p.match.games :
     (p.tournament.games || []).filter(x => (x.schedule === p.S || toAbsDate(x.date) === toAbsDate(p.schedule.date)) && (x.match === p.M || (x.t1 === p.match.home && x.t2 === p.match.away) || (x.t2 === p.match.home && x.t1 === p.match.away) ))
   )})),
-  withNewId('tournament.games'),
+  //withNewId('tournament.games'),
+  withMount(p => p.getNewGameId()),
   withMount(p => p.tournament.groups && p.setForm(find(x => x.id == p.M, find(x => x.id == p.S, p.tournament.schedules).matches), { path: 'match' })),
   withSuccess('groupmatch', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!'))
 )(Games)

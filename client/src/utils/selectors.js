@@ -22,6 +22,7 @@ const _players = s => s.players || [];
 const tournaments = s => s.tournaments || [];
 const _tournament = s => s.tournament || {};
 const _history = s => s.history || [];
+const newGameId = s => s.newGameId;
 
 const success = a => createSelector(
   isLoading,
@@ -122,7 +123,7 @@ const tournament = createSelector(
     const teams = (ts || []).map(m => ({
       ...m, text: m.name, value: m.id,
       players: sortWith([ascend(x => x.isSub ? 1 : 0), descend(x => x.tRating || x.rating)], m.players.map(p => [p, findById(p.id)(ps)]).map(([mp, p]) => ({
-        ...mp, rating: p.rating, tRating: mp.rating, name: fullname(p), firstName: p.firstName, lastName: p.lastName
+        ...mp, sex: p.sex.slice(0, 1).toUpperCase(), rating: p.rating, tRating: mp.rating, name: fullname(p), firstName: p.firstName, lastName: p.lastName
       })))
     }));
     const groups = teams.length === 0 || isNil(teams[0].group) ? null : toPairs(groupBy(x => x.group, teams));
@@ -360,7 +361,7 @@ export const productsSelector = mapStateWithSelectors({ products: filteredProduc
 export const ratingSelector = mapStateWithSelectors({ players: filteredPlayers });
 export const playersSelector = mapStateWithSelectors({ players, lookup, player: form('player') });
 export const tournamentsSelector = mapStateWithSelectors({ tournaments: tournamentsWithYears, lookup });
-export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players, formMatch: form('match') });
+export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players, formMatch: form('match'), newGameId });
 export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), tournaments, players, standing, ko });
 export const historySelector = mapStateWithSelectors({ history, lookup, players });
 export const standingSelector = mapStateWithSelectors({ standing, tournament, players });

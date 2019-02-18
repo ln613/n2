@@ -150,7 +150,7 @@ e.changeResult = g1 => db.collection('tournaments').aggregate([
 
 e.updateRating = () => {
   const pr = JSON.parse(fs.readFileSync(__dirname + '/../data/initialRatings.json'));
-console.log(pick(['8', '65', '489'], pr));  
+
   return e.bak().then(o => {
     o.tournaments.forEach(t => {
       if (t.startDate) t.startDate = toDateOnly(t.startDate);
@@ -181,19 +181,27 @@ console.log(pick(['8', '65', '489'], pr));
     games.forEach((g, i) => {
       g.id = i + 1;
       g.date = toDateOnly(g.date);
-      if (pr[g.p1]) g.p1Rating = pr[g.p1];
-      if (pr[g.p2]) g.p2Rating = pr[g.p2];
-      adjustRating(g, false);
-      pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
-      pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
-      if (isNil(g.round)) delete g.round;
+      if (!g.isDouble) {
+        if (pr[g.p1]) g.p1Rating = pr[g.p1];
+        if (pr[g.p2]) g.p2Rating = pr[g.p2];
+        adjustRating(g, false);
+        pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
+        pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
+        if (isNil(g.round)) delete g.round;
+      }
     });
-console.log(fromPairs(toPairs(pr).filter(x => !x[1])));
+
     Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
 
     return e.initdata(o);
   })
   .catch(console.log);
 }
+
+e.getNewGameId = () => db.collection('tournaments').aggregate([
+  { $project: { _id: 0, id: { $max: "$games.id" } } },
+  { $sort: { id: -1 } },
+  { $limit: 1 }
+]).toArray().then(x => x[0].id)
 
 module.exports = e;
