@@ -102,7 +102,7 @@ const gg = (g, x) => +(g && g[x] || 0);
 const getResult = g => g.result || (range(0, 5).filter(n => gg(g.g1, n) > gg(g.g2, n)).length + ':' + range(0, 5).filter(n => gg(g.g1, n) < gg(g.g2, n)).length);
 const getPlayerName = (n, g, ps, ts) => getNameWithSub(n, g, ps, ts) + (g.isDouble ? ' / ' + getNameWithSub(n + 2, g, ps, ts) : '');
 const getPlayer = (pid, tid, ts) => findById(pid)((findById(tid)(ts) || {}).players);
-const getIsSub = (pid, tid, ts) => getPlayer(pid, tid, ts).isSub;
+const getIsSub = (pid, tid, ts) => (getPlayer(pid, tid, ts) || {}).isSub;
 const getNameWithSub = (n, g, ps, ts) => highlightSub(getNameById(pn(n, g))(ps), getIsSub(pn(n, g), tn(n, g), ts));
 const subs = (n, g, ts) => (getPlayer(pn(n, g), tn(n, g), ts) || {}).isSub ? 1 : 0;
 const totalSubs = (g, ts) => subs(1, g, ts) + subs(3, g, ts) - subs(2, g, ts) - subs(4, g, ts);
@@ -163,7 +163,7 @@ const tournament = createSelector(
           return {...m, team1: getNameById(m.home)(teams), team2: getNameById(m.away)(teams), result: wn + ':' + ln, games: groupGames };
         })
     }));
-    return teams.length > 0 || players.length > 0 ? { ...t, teams, groups, players, schedules, games } : t;
+    return { ...t, teams, groups, players, schedules, games };
   }
 );
 

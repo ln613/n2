@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from '@ln613/state';
-import { compose } from 'recompose';
-import { pipe, take } from 'ramda';
+import { compose, withProps } from 'recompose';
+import { pipe, take, pick } from 'ramda';
 import actions from 'utils/actions';
 import { tournamentSelector } from 'utils/selectors';
 import { withLoad, withLoadForce, withParams } from '@ln613/compose';
@@ -43,13 +43,26 @@ const groups = gs =>
     </div>
   )
 
-const Tournament = ({ lookup, tournament, id, isMobile }) =>
+const games = gs =>
+  <Table name="games" data={(gs || []).map(pick(['player1', 'result', 'player2' ]))}>
+  </Table>
+
+const Tournament = ({ lookup, tournament, id, isOldTournament, isMobile }) =>
   <div class={`p16 ${isMobile ? 'fv' : 'f'}`}>
-    <TMenu id={id} isSingle={tournament.isSingle} isGroup={tournament.groups} isMobile={isMobile} page="tournament" />
+    {isOldTournament ? null : <TMenu id={id} isSingle={tournament.isSingle} isGroup={tournament.groups} isMobile={isMobile} page="tournament" />}
     <div class={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr/>
-      {tournament.isSingle ? single(tournament.players) : (tournament.groups ? groups(tournament.groups) : teams(tournament.teams))}
+      {isOldTournament
+        ? games(tournament.games)
+        : (tournament.isSingle
+          ? single(tournament.players)
+          : (tournament.groups
+            ? groups(tournament.groups)
+            : teams(tournament.teams)
+          )
+        )
+      }
     </div>
   </div>  
 
@@ -58,6 +71,7 @@ export default compose(
   withParams,
   withLoad('players'),
   withLoadForce('tournament'),
+  withProps(({ tournament }) => ({ isOldTournament: (tournament.teams || []).length === 0 && (tournament.schedules || []).length === 0 })),
   withMobile
 )(Tournament);
 

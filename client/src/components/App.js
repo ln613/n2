@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router';
-import { Menu } from '@ln613/ui/semantic';
+import { Menu, withMobile } from '@ln613/ui/semantic';
 import { withAuth } from 'utils';
 
 import Header from './Header';
@@ -99,16 +99,13 @@ const AdminContent = () =>
     <Route path='/admin/game/:T/:S/:M/:id' component={AdminGame} />
   </Switch>
 
-const AdminMainMenu = () =>
-  <Fragment>
-    <hr/>
-    <div class="f">
-      <AdminMenu />
-      <div class="ph16 fg1">
-        <AdminContent />
-      </div>
-    </div>
-  </Fragment>
+const AdminMainMenu = withMobile(({ isMobile }) =>
+  <div class={isMobile ? 'fv' : 'f'}>
+    <AdminMenu />
+    {isMobile ? <hr /> : null}
+    <AdminContent />
+  </div>
+);
 
 const Vttc = () =>
   <div class="ui">
@@ -119,6 +116,7 @@ const Vttc = () =>
 const Admin = () =>
   <div class="p16">
     <AdminHeader />
+    <hr/>
     <AdminMainMenu />
   </div>
 
