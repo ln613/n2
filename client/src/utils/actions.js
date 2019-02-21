@@ -1,9 +1,17 @@
 import { generateActions } from '@ln613/state';
-import { api, admin } from '@ln613/util';
+import { api, admin, host } from '@ln613/util';
 
 export const actionData = {
+  auth: {
+    url: host + 'login',
+    method: 'post',
+    after: x => x
+  },
   logout: {
-    url: '/logout'
+    url: host + 'logout',
+    method: 'post',
+    path: 'auth',
+    after: x => x
   },
   lookup: {
     url: api + 'lookup'

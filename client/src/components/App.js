@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Switch, Route } from 'react-router';
 import { Menu } from '@ln613/ui/semantic';
+import { withAuth } from 'utils';
 
 import Header from './Header';
 import Home from './Home';
@@ -123,7 +124,7 @@ const Admin = () =>
 
 const App = () =>
   <Switch>
-    <Route path='/admin' component={Admin} />
+    <Route path='/admin' component={withAuth(Admin)} />
     <Route component={Vttc} />
   </Switch>
 

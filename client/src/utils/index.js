@@ -1,9 +1,13 @@
+import React from 'react';
 import { last, isNil, pipe, filter, map, fromPairs } from 'ramda';
 import { connect } from '@ln613/state';
 import { compose } from 'recompose';
-import { successSelector } from './selectors';
+import { successSelector, authSelector } from './selectors';
 import { withNewValue } from '@ln613/compose';
 import { tap } from '@ln613/util';
+import actions from 'utils/actions';
+import { TextBox, Password } from '@ln613/ui';
+import { Button } from 'semantic-ui-react';
 
 export const cdurl = (l, c, n) => l.cdVersion ? `http://res.cloudinary.com/vttc/image/upload/v${l.cdVersion}/${c}/${n}.jpg` : '';
 
@@ -61,3 +65,17 @@ export const highlightWinner = g => {
 }
 
 export const highlightSub = (n, isSub) => n + (isSub ? ' (Sub)' : '');
+
+export const withAuth = compose(
+  connect(authSelector),
+  Comp => p => p.auth.isAuthenticated ? <Comp {...p} /> : <Login />
+);
+
+const Login = connect(authSelector, actions)(({ login, postAuth }) =>
+  <div class="p16">
+    Username: <TextBox name="login.username" />
+    Password: <Password name="login.password" />
+    <hr />
+    <Button primary onClick={() => postAuth(login)}>Login</Button>
+  </div>
+);

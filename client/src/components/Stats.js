@@ -3,7 +3,7 @@ import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import actions from 'utils/actions';
 import { statsSelector } from 'utils/selectors';
-import { withLoad, withParams } from '@ln613/compose';
+import { withLoad, withLoadForce, withParams } from '@ln613/compose';
 import { Table, withMobile } from '@ln613/ui/semantic';
 import TMenu from './TMenu';
 
@@ -37,6 +37,7 @@ const Stats = ({ stats, tournament, id, isMobile }) =>
 export default compose(
   connect(statsSelector, actions),
   withParams,
+  withLoadForce('players'),
   withLoad('tournament'),
   withMobile
 )(Stats);

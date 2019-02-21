@@ -23,6 +23,7 @@ const tournaments = s => s.tournaments || [];
 const _tournament = s => s.tournament || {};
 const _history = s => s.history || [];
 const newGameId = s => s.newGameId;
+const auth = s => s.auth || {};
 
 const success = a => createSelector(
   isLoading,
@@ -258,7 +259,7 @@ const ko = createSelector(
   }
 );
 
-const isSamePlayer = (p1, id) => p1 && id && p1.id === id || false;
+const isSamePlayer = (p1, id) => p1 && id && p1.id == id || false;
 const isHomePlayer = p => g => isSamePlayer(p, g.p1) || isSamePlayer(p, g.p3);
 const isAwayPlayer = p => g => isSamePlayer(p, g.p2) || isSamePlayer(p, g.p4);
 const isPlayerInGame = p => anyPass([isHomePlayer(p), isAwayPlayer(p)]);
@@ -267,7 +268,8 @@ const isPlayerLose = p => g => (isHomePlayer(p)(g) && !g.isWin) || (isAwayPlayer
 
 const stats = createSelector(
   tournament,
-  t => {
+  players,
+  (t, ps) => {
     const teams = t.teams || [];
 
     const players = pipe(
@@ -295,7 +297,7 @@ const stats = createSelector(
         const dloses = dgs.filter(isPlayerLose(p));
         const dw = dwins.length;
         const dl = dloses.length;
-        return { player: p.name, 'mp': total, w, l, '+/-': d > 0 ? '+' + d : d, 'win %': wpc, gw, gl, dw, dl };
+        return { player: p.name || getNameById(p.id)(ps), 'mp': total, w, l, '+/-': d > 0 ? '+' + d : d, 'win %': wpc, gw, gl, dw, dl };
       }),
       sortWith([descend(x => +x['+/-']), descend(x => +(dropLast(1, x['win %']))), descend(x => x.gw)]),
       addIndex('#')
@@ -371,3 +373,4 @@ export const teamSelector = mapStateWithSelectors({ tournament, team: form('team
 export const scheduleSelector = mapStateWithSelectors({ tournament, schedule: form('schedule'), players });
 export const gameSelector = mapStateWithSelectors({ tournament, players, game: form('game') });
 export const statsSelector = mapStateWithSelectors({ tournament, stats });
+export const authSelector = mapStateWithSelectors({ auth, login: form('login') });

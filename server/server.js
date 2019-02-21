@@ -101,22 +101,24 @@ app.copy('/admin/bak', (req, res) => {
   send(api.bak(), res);
 });
 
-app.get('/login', nocache, (req, res) => {
-  res.sendFile(path.join(__dirname, 'login.html'));
-});
+// app.get('/login', nocache, (req, res) => {
+//   res.sendFile(path.join(__dirname, 'login.html'));
+// });
+
+const returnAuth = (req, res, isAuthenticated) => res.json({ username: req.body.username, isAuthenticated });
 
 app.post('/login', (req, res) => {
   if (username != req.body.username || password != req.body.password) {
-    gotoLogin(res);
+    returnAuth(req, res, false);
   } else {
     const token = jwt.sign({}, secret, { expiresIn: '24h' });
     res.cookie('vttc_token', token);
-    res.redirect('/admin');
+    returnAuth(req, res, true);
   }
 });
 
-app.get('/logout', (req, res) => {
-  gotoLogin(res);
+app.post('/logout', (req, res) => {
+  returnAuth(req, res, false);
 });
 
 app.use('/admin', (req, res, next) => {
