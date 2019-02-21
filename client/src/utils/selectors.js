@@ -299,7 +299,7 @@ const stats = createSelector(
         const dl = dloses.length;
         return { player: p.name || getNameById(p.id)(ps), 'mp': total, w, l, '+/-': d > 0 ? '+' + d : d, 'win %': wpc, gw, gl, dw, dl };
       }),
-      sortWith([descend(x => +x['+/-']), descend(x => +(dropLast(1, x['win %']))), descend(x => x.gw)]),
+      sortWith([descend(x => +x['+/-']), descend(x => +(dropLast(1, x['win %']))), descend(x => x.gw), ascend(x => x.gl)]),
       addIndex('#')
     );
     
