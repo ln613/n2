@@ -276,7 +276,7 @@ const stats = createSelector(
       map(x => x.players.map(p => ({...p, isUpperDiv: x.rank <= teams.length / 2}))),
       unnest,
       where(x => !x.isSub),
-      uniqBy(x => x.id)
+      uniqBy(x => +x.id)
     )(teams);
 
     const st = pipe(
