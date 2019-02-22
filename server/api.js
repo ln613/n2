@@ -89,8 +89,8 @@ e.getPlayerGames = id => db.collection('tournaments').aggregate([
 
 e.getPlayerRating = (id, date) => db.collection('tournaments').aggregate([
   { $unwind: '$games' },
-  { $match: { $or: [ { 'games.p1': id }, { 'games.p2': id } ] } },
-  { $match: { 'games.date': { $lte: date === '_' ? new Date() : new Date(date) } } },
+  { $match: { $or: [ { 'games.p1': +id }, { 'games.p2': +id }, { 'games.p1': id.toString() }, { 'games.p2': id.toString() } ] } },
+  //{ $match: { 'games.date': { $lte: date === '_' ? new Date() : new Date(date) } } },
   { $sort: { 'games.date': -1, 'games.id': -1 } },
   { $limit: 1 },
   { $replaceRoot: { newRoot: '$games'} },

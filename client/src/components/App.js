@@ -103,7 +103,9 @@ const AdminMainMenu = withMobile(({ isMobile }) =>
   <div class={isMobile ? 'fv' : 'f'}>
     <AdminMenu />
     {isMobile ? <hr /> : null}
-    <AdminContent />
+    <div class={isMobile ? '' : 'ph16'}>
+      <AdminContent />
+    </div>
   </div>
 );
 

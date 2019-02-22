@@ -4,10 +4,11 @@ import { compose, withProps } from 'recompose';
 import { pipe, take, pick } from 'ramda';
 import actions from 'utils/actions';
 import { tournamentSelector } from 'utils/selectors';
-import { withLoad, withLoadForce, withParams } from '@ln613/compose';
-import { Table, withMobile } from '@ln613/ui/semantic';
+import { withLoad, withLoadForce, withParams, withMount } from '@ln613/compose';
+import { Table, withMobile, Ready } from '@ln613/ui/semantic';
 import { tap } from '@ln613/util';
 import TMenu from './TMenu';
+import { highlightWinner } from 'utils';
 
 const mapPlayer = p => ({ id: p.id, 'Name': p.firstName + ' ' + p.lastName, gender: p.sex, 'Tournament Rating': p.tRating, 'Latest Rating': p.rating, 'Is Sub': p.isSub ? '&#10004' : '' });
 const mapTeam = t => !t.players || t.players.length < 2 ? {} :
@@ -44,7 +45,7 @@ const groups = gs =>
   )
 
 const games = gs =>
-  <Table name="games" data={(gs || []).map(pick(['player1', 'result', 'player2' ]))}>
+  <Table name="games" data={(gs || []).map(highlightWinner).map(pick(['player1', 'result', 'player2' ]))}>
   </Table>
 
 const Tournament = ({ lookup, tournament, id, isOldTournament, isMobile }) =>
@@ -52,17 +53,19 @@ const Tournament = ({ lookup, tournament, id, isOldTournament, isMobile }) =>
     {isOldTournament ? null : <TMenu id={id} isSingle={tournament.isSingle} isGroup={tournament.groups} isMobile={isMobile} page="tournament" />}
     <div class={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
-      <hr/>
-      {isOldTournament
-        ? games(tournament.games)
-        : (tournament.isSingle
-          ? single(tournament.players)
-          : (tournament.groups
-            ? groups(tournament.groups)
-            : teams(tournament.teams)
+      <hr />
+      <Ready on={[tournament]}>
+        {isOldTournament
+          ? games(tournament.games)
+          : (tournament.isSingle
+            ? single(tournament.players)
+            : (tournament.groups
+              ? groups(tournament.groups)
+              : teams(tournament.teams)
+            )
           )
-        )
-      }
+        }
+      </Ready>
     </div>
   </div>  
 
@@ -72,6 +75,7 @@ export default compose(
   withLoad('players'),
   withLoadForce('tournament'),
   withProps(({ tournament }) => ({ isOldTournament: (tournament.teams || []).length === 0 && (tournament.schedules || []).length === 0 })),
+  withMount(p => p.setTournament()),
   withMobile
 )(Tournament);
 

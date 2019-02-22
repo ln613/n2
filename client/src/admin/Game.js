@@ -21,17 +21,17 @@ const Game = p =>
     <CheckBox name="game.isDouble" label="Is Double?"/>
     <div class="f ais">
       <div class="fv jcsa">  
-        <div class="pr8 pb32">{getNameById(p.match.home)(p.tournament.teams)}</div>
-        <div class="pr8">{getNameById(p.match.away)(p.tournament.teams)}</div>
+        <div class="pr8 pb32">{getNameById(p.Match.home)(p.tournament.teams)}</div>
+        <div class="pr8">{getNameById(p.Match.away)(p.tournament.teams)}</div>
       </div>  
       <div class="fv jcsa">  
-        <Select name={`game.p1`} placeholder="" options={getPropById('players')(p.match.home)(p.tournament.teams)} onChange={v => p.setFormGame(getPropById('rating')(+v)(p.players), { prop: 'p1Rating' })}/>
-        <Select name={`game.p2`} placeholder="" options={getPropById('players')(p.match.away)(p.tournament.teams)} onChange={v => p.setFormGame(getPropById('rating')(+v)(p.players), { prop: 'p2Rating' })}/>
+        <Select name={`game.p1`} placeholder="" options={getPropById('players')(p.Match.home)(p.tournament.teams)} onChange={v => p.setFormGame(getPropById('rating')(+v)(p.players), { prop: 'p1Rating' })}/>
+        <Select name={`game.p2`} placeholder="" options={getPropById('players')(p.Match.away)(p.tournament.teams)} onChange={v => p.setFormGame(getPropById('rating')(+v)(p.players), { prop: 'p2Rating' })}/>
       </div>  
       {p.game.isDouble ?
       <div class="fv jcsa">
-        <Select name={`game.p3`} placeholder="" options={getPropById('players')(p.match.home)(p.tournament.teams)} />
-        <Select name={`game.p4`} placeholder="" options={getPropById('players')(p.match.away)(p.tournament.teams)} />
+        <Select name={`game.p3`} placeholder="" options={getPropById('players')(p.Match.home)(p.tournament.teams)} />
+        <Select name={`game.p4`} placeholder="" options={getPropById('players')(p.Match.away)(p.tournament.teams)} />
       </div>
       : null}
       <div class="fv jcsa">  
@@ -46,6 +46,7 @@ const Game = p =>
     Result: <Select name={`game.result`} options={resultOptions} />
     <hr />
     <Button primary onClick={() => save(p)}>Save</Button>
+    <Button primary onClick={p.history.goBack}>Back</Button>
   </div>
 
 export default compose(
@@ -56,7 +57,8 @@ export default compose(
   withLoad('tournament', ['id', 'T'], true),
   withMount(p => p.setForm(find(x => x.id == +p.id, (p.tournament.games || [])) || { id: +p.id, result: '', isDouble: false, p1: '', p2: '', p3: '', p4: '' }, { path: 'game' })),
   withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
-  withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),
+  withProps(p => ({ Match: findById(p.M)((p.schedule || {}).matches) || {} })),
+  withRouter,
   withSuccess('game', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!')),
   withSuccess('result', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!'))
 )(Game)

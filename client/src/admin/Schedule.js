@@ -26,7 +26,7 @@ const teams = (tournament, schedule, history) =>
       <div class="ph8">VS</div>
       <Select name={`schedule.matches[${n}].away`} options={tournament.teams} placeholder="" />
       <div class="ph8"></div>
-      <Button primary onClick={() => history.push(`/admin/games/${tournament.id}/${schedule.id}/${n + 1}`)}>Matches</Button>
+      <Button primary disabled={!schedule.matches || !schedule.matches[n] || !schedule.matches[n].home} onClick={() => history.push(`/admin/games/${tournament.id}/${schedule.id}/${n + 1}`)}>Matches</Button>
     </div>
   );
 
@@ -52,6 +52,7 @@ const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id
     }
     <hr />
     {tournament.groups ? null : <Button primary onClick={() => id[0] === '+' ? postSchedule(schedule, { id1: tournament.id }) : putSchedule(schedule, { id1: tournament.id, id: schedule.id })}>Save</Button>}
+    <Button primary onClick={history.goBack}>Back</Button>
   </div>
 
 export default compose(

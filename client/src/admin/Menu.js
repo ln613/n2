@@ -15,9 +15,9 @@ const AdminMenu = p =>
       <Link class="item" to="/admin/products">Products</Link>
     </div>
     <div class={`ui bottom attached ${p.isMobile ? 'three item' : 'vertical'} menu`}>
+      <Link class="item" onClick={() => p.patchUpdateRating()} to="#">Update Ratings</Link>
       <Link class="item" to="/admin/players">Players</Link>
       <Link class="item" to="/admin/tournaments">Tournaments</Link>
-      <Link class="item" onClick={() => p.patchUpdateRating()} to="#">Update Ratings</Link>
     </div>
   </Fragment>
 

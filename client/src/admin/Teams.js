@@ -14,7 +14,7 @@ const teamTable = (teams, id) =>
 
 const Teams = ({ tournament, history, id, newId }) =>
   <div>
-    <div class="f">
+    <div class="fv">
       <h1 class="fg1">Teams - {tournament.name}</h1>
       <Button primary onClick={() => history.push(`/admin/team/${id}/+${newId}`)}>Add</Button>
     </div>
@@ -25,6 +25,8 @@ const Teams = ({ tournament, history, id, newId }) =>
         {teamTable(g[1], id)}
       </div>
     ) : teamTable(tournament.teams, id)}
+    <hr />
+    <Button primary onClick={history.goBack}>Back</Button>
   </div>
 
 export default compose(

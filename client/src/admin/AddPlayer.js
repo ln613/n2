@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Button } from 'semantic-ui-react';
 import { TextBox, Select, CheckBox } from '@ln613/ui';
+import { withMobile } from '@ln613/ui/semantic';
 
-export default ({ players, allPlayers, formPath, date, withSub, setFormPlayers, getPlayerRating, id }) =>
+const btns = (p, i) =>
+  <Fragment>
+    <Button primary onClick={() => p.getPlayerRating({id: p.players[i].id, date: p.date || '_', formPath: p.formPath})}>Get Tournament Rating</Button>
+    <Button primary onClick={() => p.getPlayerRating({id: p.players[i].id, date: '_', formPath: p.formPath})}>Get Current Rating</Button>
+  </Fragment>
+
+const AddPlayer = p =>
   <div>
-    {(players || []).map((p, i) =>
-      <div class="f aic mrc8" key={`players${i}`}>
-        <Select name={`${formPath}.players[${i}].id`} index={i} options={allPlayers} placeholder="- Select a player -" />
-        {withSub ? <CheckBox name={`${formPath}.players[${i}].isSub`} index={i} label="Is Substitute?" /> : null}
-        <TextBox name={`${formPath}.players[${i}].rating`} index={i} label="Rating" />
-        <Button primary onClick={() => getPlayerRating({id: players[i].id, date: date || '_', formPath})}>Get Tournament Rating</Button>
-        <Button primary onClick={() => getPlayerRating({id: players[i].id, date: '_', formPath})}>Get Current Rating</Button>
-      </div>
+    {(p.players || []).map((_, i) =>
+      <Fragment>
+        <div class="f aic mrc8" key={`players${i}`}>
+          <Select name={`${p.formPath}.players[${i}].id`} index={i} options={p.allPlayers} placeholder="- Select a player -" />
+          {p.withSub ? <CheckBox name={`${p.formPath}.players[${i}].isSub`} index={i} label="Is Substitute?" /> : null}
+          <TextBox name={`${p.formPath}.players[${i}].rating`} index={i} label="Rating" />
+          {p.isMobile ? null : btns(p, i)}
+        </div>
+        {p.isMobile ? btns(p, i) : null}
+      </Fragment>
     )}
-    <Button secondary onClick={() => setFormPlayers({})}>Add Player</Button>
+    {p.isMobile ? <div class="mt16" /> : null}
+    <Button secondary onClick={() => p.setFormPlayers({})}>Add Player</Button>
   </div>
+
+export default withMobile(AddPlayer)

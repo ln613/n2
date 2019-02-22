@@ -13,16 +13,18 @@ import { toGame, resultOptions, withSuccess } from 'utils';
 
 const Games = p =>
   <div>
-    <div class="f">
+    <div class="fv">
       <h1 class="fg1">Matches - {p.tournament.name} - {p.schedule.date}</h1>
+      <h3 class="fg1 mt4">{p.Match.team1} vs {p.Match.team2}</h3>
       {p.tournament.groups ? null : <Button primary onClick={() => p.history.push(`/admin/game/${p.T}/${p.S}/${p.M}/+${p.newGameId+1}`)}>Add</Button>}
     </div>
     <hr/>
-    <Table name="games" link={p.tournament.groups ? null : x => `/admin/game/${p.T}/${p.S}/${p.M}/${x.id}`} data={(p.games || []).map(pick(['id', 'date', 'team1', 'player1', 'result', 'player2', 'team2' ]))}>
+    <Table name="games" link={p.tournament.groups ? null : x => `/admin/game/${p.T}/${p.S}/${p.M}/${x.id}`} data={(p.games || []).map(pick(['id', 'player1', 'result', 'player2' ]))}>
       {p.tournament.groups ? <td key="result" path="match.games[{i}].result" select options={resultOptions} /> : null}
     </Table>
     <hr />
     {!p.tournament.groups ? null : <Button primary onClick={() => save(p)}>Save</Button>}
+    <Button primary onClick={p.history.goBack}>Back</Button>
   </div>
 
 export default compose(
@@ -31,14 +33,15 @@ export default compose(
   withLoad('players'),
   withLoadForce('tournament', 'id', 'T'),
   withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
-  withProps(p => ({ match: findById(p.M)((p.schedule || {}).matches) || {} })),
+  withProps(p => ({ Match: findById(p.M)((p.schedule || {}).matches) || {} })),
   withProps(p => ({ games: sortWith([p.tournament.groups ? ascend(prop('id')) : descend(prop('id'))],
-    p.tournament.groups ? p.match.games :
-    (p.tournament.games || []).filter(x => (x.schedule === p.S || toAbsDate(x.date) === toAbsDate(p.schedule.date)) && (x.match === p.M || (x.t1 === p.match.home && x.t2 === p.match.away) || (x.t2 === p.match.home && x.t1 === p.match.away) ))
+    p.tournament.groups ? p.Match.games :
+    (p.tournament.games || []).filter(x => (x.schedule === p.S || toAbsDate(x.date) === toAbsDate(p.schedule.date)) && (x.match === p.M || (x.t1 === p.Match.home && x.t2 === p.Match.away) || (x.t2 === p.Match.home && x.t1 === p.Match.away) ))
   )})),
   //withNewId('tournament.games'),
   withMount(p => p.getNewGameId()),
   withMount(p => p.tournament.groups && p.setForm(find(x => x.id == p.M, find(x => x.id == p.S, p.tournament.schedules).matches), { path: 'match' })),
+  withRouter,
   withSuccess('groupmatch', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!'))
 )(Games)
 

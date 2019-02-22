@@ -17,6 +17,8 @@ const Players = ({ players, history, newId }) =>
     </div>
     <hr/>
     <Table name="players" data={players.map(pick(['id', 'name', 'name_ch']))} link={x => `/admin/players/${x.id}`} />
+    <hr />
+    <Button primary onClick={history.goBack}>Back</Button>
   </div>
 
 export default compose(

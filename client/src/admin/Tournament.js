@@ -11,40 +11,41 @@ import { tap } from '@ln613/util';
 import { withRouter, Link } from "react-router-dom";
 import { withSuccess } from 'utils';
 
-const Tournament = ({ tournament, standing, ko, isGroup, history, postTour, patchTour, postGenrr, postGengroup, id, isMobile }) =>
+const b1 = tournament =>
+  <Fragment>
+    {tournament.isSingle
+      ? <Link class="item" to={`/admin/singleplayers/${tournament.id}`}>Players</Link>
+      : <Link class="item" to={`/admin/teams/${tournament.id}`}>Teams</Link>
+    }
+    <Link class="item" to={`/admin/schedules/${tournament.id}`}>Schedules</Link>
+    <Link class="item" to={`/admin/games/${tournament.id}`}>Games</Link>
+  </Fragment>;
+
+const b2 = p =>
+  <Fragment>
+    <Link class="item" onClick={() => p.postGengroup({ id: p.id })} to="#">Generate Groups</Link>
+    <Link class="item" onClick={() => p.postGenrr({ id: p.id })} to="#">Generate Schedule</Link>
+    <Link class="item" onClick={() => p.postGenrr({ id: p.id, standing: p.standing, koStanding: p.ko })} to="#">Generate {p.isGroup ? 'KO' : 'Schedule 2'}</Link>
+  </Fragment>;
+
+const Tournament = p =>
   <div>
-    <h1>Tournament - {+tournament.id ? tournament.name : 'Add New'}</h1>
+    <h1>Tournament - {+p.tournament.id ? p.tournament.name : 'Add New'}</h1>
     <hr />
-    {+tournament.id ?
+    {+p.tournament.id ? (p.isMobile ?
       <Fragment>
-        <div class={`ui top attached ${isMobile ? 'three item' : 'vertical'} menu`}>
-          {tournament.isSingle
-            ? <Link class="item" to={`/admin/singleplayers/${tournament.id}`}>Players</Link>
-            : <Link class="item" to={`/admin/teams/${tournament.id}`}>Teams</Link>
-          }
-          <Link class="item" to={`/admin/schedules/${tournament.id}`}>Schedules</Link>
-          <Link class="item" to={`/admin/games/${tournament.id}`}>Games</Link>
+        <div class={`ui top attached three item menu`}>
+          {b1(p.tournament)}
         </div>
-        <div class={`ui bottom attached ${isMobile ? 'three item' : 'vertical'} menu`}>
-          <Link class="item" onClick={() => postGengroup({ id })} to="#">Generate Groups</Link>
-          <Link class="item" onClick={() => postGenrr({ id })} to="#">Generate Schedule</Link>
-          <Link class="item" onClick={() => postGenrr({ id, standing, koStanding: ko })} to="#">Generate {isGroup ? 'KO' : 'Schedule 2'}</Link>
+        <div class={`ui bottom attached three item menu`}>
+          {b2(p)}
         </div>
-      </Fragment>
-      // <div>
-      //   {tournament.isSingle
-      //     ? <Button primary onClick={() => history.push(`/admin/singleplayers/${tournament.id}`)}>Players</Button>
-      //     : <Button primary onClick={() => history.push(`/admin/teams/${tournament.id}`)}>Teams</Button>
-      //   }
-      //   <Button primary onClick={() => history.push(`/admin/schedules/${tournament.id}`)}>Schedules</Button>
-      //   <Button primary onClick={() => history.push(`/admin/games/${tournament.id}`)}>Games</Button>
-      //   <Button primary onClick={() => postGengroup({ id })}>Generate Groups</Button>
-      //   <Button primary onClick={() => postGenrr({ id })}>Generate Schedule</Button>
-      //   {tournament.isSingle || tournament.has2half ? null :
-      //     <Button primary onClick={() => postGenrr({ id, standing, koStanding: ko })}>Generate {isGroup ? 'KO' : 'Schedule 2'}</Button>
-      //   }
-      // </div>  
-    : null}  
+      </Fragment> :
+      <div class={`ui six item menu`}>
+        {b1(p.tournament)}
+        {b2(p)}
+      </div>
+    ) : null}  
     <TextBox name="tournament.id" disabled />
     <TextBox name="tournament.name" fluid />
     <CheckBox name="tournament.isSingle" label="Is Single?" />
@@ -52,7 +53,8 @@ const Tournament = ({ tournament, standing, ko, isGroup, history, postTour, patc
     <TextBox name="tournament.startDate2" />
     {/* <TextBox name="tournament.ratingDate" /> */}
     <hr />
-    <Button primary onClick={() => id[0] !== '+' ? patchTour(tournament) : postTour(tournament)}>Save</Button>
+    <Button primary onClick={() => p.id[0] !== '+' ? p.patchTour(p.tournament) : p.postTour(p.tournament)}>Save</Button>
+    <Button primary onClick={p.history.goBack}>Back</Button>
   </div>;
 
 export default compose(

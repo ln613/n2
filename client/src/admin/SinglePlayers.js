@@ -8,14 +8,16 @@ import { tourSelector } from 'utils/selectors';
 import { withLoad, withEditList, withParams } from '@ln613/compose';
 import AddPlayer from './AddPlayer';
 import { withSuccess } from 'utils';
+import { withRouter } from "react-router-dom";
 
-const SinglePlayers = ({ tournament, date, players, patchTour, setFormTournamentPlayers, getPlayerRating, id }) =>
+const SinglePlayers = ({ tournament, date, players, patchTour, setFormTournamentPlayers, getPlayerRating, id, history }) =>
   <div>
     <h1>Players - {tournament.name}</h1>
     <hr />
     <AddPlayer players={tournament.players} allPlayers={players} formPath='tournament' date={date} setFormPlayers={setFormTournamentPlayers} getPlayerRating={getPlayerRating} />
     <hr />
     <Button primary onClick={() => patchTour(toTour(tournament), { id })}>Save</Button>
+    <Button primary onClick={history.goBack}>Back</Button>
   </div>
 
 export default compose(
@@ -25,7 +27,8 @@ export default compose(
   withLoad('players'),
   withLoad('tournament'),
   withEditList('tournament.players'),
-  withSuccess('tour', () => alert('Saved'), () => alert('Error happened!'))
+  withSuccess('tour', () => alert('Saved'), () => alert('Error happened!')),
+  withRouter
 )(SinglePlayers)
 
 const toTour = t => ({id: t.id, players: (t.players || []).map(p => ({id: +(p.id || 0), rating: +p.rating})) })

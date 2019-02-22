@@ -22,6 +22,8 @@ const Schedules = ({ tournament, history, id, newId }) =>
       'id': x.id || (isNil(x.group) ? '' : +x.group),
       [tournament.isSingle ? 'round' : (!isNil(x.group) || x.ko ? 'group' : 'date')]: tournament.isSingle ? ('Round ' + x.id) : (!isNil(x.group) ? ('Group ' + x.group) : (x.ko ? kos[Math.log2(x.ko)] : x.date)) })
     )} />
+    <hr />
+    <Button primary onClick={history.goBack}>Back</Button>
   </div>
 
 export default compose(
