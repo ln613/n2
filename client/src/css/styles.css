@@ -106,3 +106,11 @@ table.ui.striped.table tbody tr:nth-child(even) {
   padding-left: 2px;
   padding-right: 0;
 }
+
+.ui.selection.dropdown {
+  min-width: 1em;
+}
+
+.ui.selection.dropdown .menu {
+  max-height: none;
+}

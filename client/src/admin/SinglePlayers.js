@@ -16,8 +16,8 @@ const SinglePlayers = ({ tournament, date, players, patchTour, setFormTournament
     <hr />
     <AddPlayer players={tournament.players} allPlayers={players} formPath='tournament' date={date} setFormPlayers={setFormTournamentPlayers} getPlayerRating={getPlayerRating} />
     <hr />
-    <Button primary onClick={() => patchTour(toTour(tournament), { id })}>Save</Button>
     <Button primary onClick={history.goBack}>Back</Button>
+    <Button primary onClick={() => patchTour(toTour(tournament), { id })}>Save</Button>
   </div>
 
 export default compose(

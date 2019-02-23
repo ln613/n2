@@ -22,8 +22,8 @@ const Team = ({ tournament, team, players, monthRatings, putTeam, postTeam, id, 
     Players:
     <AddPlayer players={team.players} allPlayers={players} formPath='team' setFormPlayers={setFormTeamPlayers} getPlayerRating={getPlayerRating} withSub />
     <hr />
-    <Button primary onClick={() => id[0] !== '+' ? putTeam(team, { id1: tournament.id, id: team.id }) : postTeam(team, { id1: tournament.id })}>Save</Button>
     <Button primary onClick={history.goBack}>Back</Button>
+    <Button primary onClick={() => id[0] !== '+' ? putTeam(team, { id1: tournament.id, id: team.id }) : postTeam(team, { id1: tournament.id })}>Save</Button>
   </div>
 
 export default compose(

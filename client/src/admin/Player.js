@@ -22,8 +22,8 @@ const Player = ({ player, putPlayer, postPlayer, id, history }) =>
     <TextBox name="player.sex" />
     <TextBox name="player.rating" />
     <hr />
-    <Button primary onClick={() => id[0] === '+' ? postPlayer(toPlayer(player)) : putPlayer(toPlayer(player))}>Save</Button>
     <Button primary onClick={history.goBack}>Back</Button>
+    <Button primary onClick={() => id[0] === '+' ? postPlayer(toPlayer(player)) : putPlayer(toPlayer(player))}>Save</Button>
   </div>
 
 export default compose(

@@ -23,8 +23,8 @@ const Games = p =>
       {p.tournament.groups ? <td key="result" path="match.games[{i}].result" select options={resultOptions} /> : null}
     </Table>
     <hr />
-    {!p.tournament.groups ? null : <Button primary onClick={() => save(p)}>Save</Button>}
     <Button primary onClick={p.history.goBack}>Back</Button>
+    {!p.tournament.groups ? null : <Button primary onClick={() => save(p)}>Save</Button>}
   </div>
 
 export default compose(

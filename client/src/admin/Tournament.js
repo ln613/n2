@@ -53,8 +53,8 @@ const Tournament = p =>
     <TextBox name="tournament.startDate2" />
     {/* <TextBox name="tournament.ratingDate" /> */}
     <hr />
-    <Button primary onClick={() => p.id[0] !== '+' ? p.patchTour(p.tournament) : p.postTour(p.tournament)}>Save</Button>
     <Button primary onClick={p.history.goBack}>Back</Button>
+    <Button primary onClick={() => p.id[0] !== '+' ? p.patchTour(p.tournament) : p.postTour(p.tournament)}>Save</Button>
   </div>;
 
 export default compose(

@@ -45,8 +45,8 @@ const Game = p =>
     </div>
     Result: <Select name={`game.result`} options={resultOptions} />
     <hr />
-    <Button primary onClick={() => save(p)}>Save</Button>
     <Button primary onClick={p.history.goBack}>Back</Button>
+    <Button primary onClick={() => save(p)}>Save</Button>
   </div>
 
 export default compose(
