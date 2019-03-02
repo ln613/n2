@@ -67,7 +67,7 @@ const gg = (g, x) => +((g && g[x]) || 0);
 
 const save = p => {
   const isAdd = p.id[0] === '+';
-  const g = toGame(p.game, p.schedule, p.match);
+  const g = toGame(p.game, p.schedule, p.Match);
 
   if (isAdd) {
     p.postGame(g, { id1: p.tournament.id });
