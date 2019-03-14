@@ -19,7 +19,7 @@ const _Menu = ({ children, visible, menus, setVisible }) =>
   <div>
     <Mobile>
       <Sidebar.Pushable>
-        <Sidebar as={Menu} animation="overlay" icon="labeled" inverted vertical visible={visible} color="blue">
+        <Sidebar as={Menu} animation="overlay" icon="labeled" inverted vertical visible={visible} color="red">
           {items(menus, setVisible)}
         </Sidebar>
         <Sidebar.Pusher dimmed={visible} onClick={() => visible && setVisible(false)} style={{ minHeight: "100vh" }}>

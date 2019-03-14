@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
 import { Menu, withMobile } from '@ln613/ui/semantic';
+import { Menu as _Menu } from 'semantic-ui-react';
 import { withAuth } from 'utils';
 
 import Header from './Header';
@@ -74,7 +75,7 @@ const Footer = () =>
   </div>
 
 const MainMenu = () =>
-  <Menu menus={menus} color="blue">
+  <Menu menus={menus} color="blue" rightItems={<_Menu.Item onClick={()=> window.open('https://butterflyonline.com/', "_new")}><img src="images/butterfly-logo.png" /></_Menu.Item>}>
     <Content/>
     <Footer/>
   </Menu>
