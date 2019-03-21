@@ -1,4 +1,4 @@
-import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, filter as where, uniqBy, anyPass, both, dropLast, isNil, toPairs } from 'ramda';
+import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, filter as where, uniqBy, anyPass, both, dropLast, isNil, toPairs, is } from 'ramda';
 import { createSelector, mapStateWithSelectors } from '@ln613/state';
 import { Bold, Italic } from '@ln613/ui';
 import { findById, getNameById, getPropById, toDate, toMonth, addIndex, diff, tap, split2, toAbsDate, findByName } from '@ln613/util';
@@ -91,7 +91,7 @@ const sortedPlayers = createSelector(
 const filteredPlayers = createSelector(
   sortedPlayers,
   form('player'),
-  (ps, f) => ps.filter(p => !f || p.name.indexOf(f) > -1)
+  (ps, f) => ps.filter(p => !is(String, f) || p.name.indexOf(f) > -1)
 );
 
 const dsPlayers = createSelector(
