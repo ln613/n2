@@ -73,15 +73,25 @@ const filteredProducts = createSelector(
 
 const fullname = p => p.firstName + ' ' + p.lastName;
 
-const players = createSelector(
+const namedPlayers = createSelector(
   _players,
-  ps => sortWith([ascend(prop('name'))])(ps.map(p => ({ ...p, name: fullname(p) })))
+  ps => ps.map(p => ({ ...p, name: fullname(p) }))
+);
+
+const players = createSelector(
+  namedPlayers,
+  sortWith([ascend(prop('name'))])
+);
+
+const sortedPlayers = createSelector(
+  namedPlayers,
+  sortWith([descend(prop('rating'))])
 );
 
 const filteredPlayers = createSelector(
-  players,
+  sortedPlayers,
   form('player'),
-  (ps, f) => sortWith([descend(prop('rating'))])(ps.filter(p => isEmpty(f) || p.name.toLowerCase().indexOf(f.toLowerCase()) > -1))
+  (ps, f) => ps.filter(p => isEmpty(f) || p.name.toLowerCase().indexOf(f.toLowerCase()) > -1)
 );
 
 const dsPlayers = createSelector(
