@@ -3,17 +3,17 @@ import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import actions from 'utils/actions';
 import { ratingSelector } from 'utils/selectors';
-import { withLoad } from '@ln613/compose';
+import { withLoad, withState } from '@ln613/compose';
 import { TextBox, Table } from '@ln613/ui/semantic';
 
-const Rating = ({ lookup, players }) =>
+const Rating = ({ lookup, players, filter, setFilter }) =>
   <div class="p16 fv">
       <div class="f">
         <h1 class="fg1">Rating</h1>
-        <TextBox name="player" placeholder='Search player...' />
+        <input name="player" placeholder='Search player...' value={filter} onChange={e => setFilter(e.target.value.toLowerCase())} />
       </div>  
       <div class="ui divider"></div>
-    <Table name="rating" data={players} link>
+    <Table name="rating" data={players.filter(p => !filter || p.name.toLowerCase().indexOf(filter) > -1)} link>
       <td key="id" hidden />
       <td key="name" hidden />
       <td key="firstName" title="First Name"/>
@@ -26,5 +26,6 @@ const Rating = ({ lookup, players }) =>
 
 export default compose(
   connect(ratingSelector, actions),
-  withLoad('players')
+  withLoad('players'),
+  withState('filter')
 )(Rating);
