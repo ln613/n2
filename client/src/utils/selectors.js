@@ -91,7 +91,7 @@ const sortedPlayers = createSelector(
 const filteredPlayers = createSelector(
   sortedPlayers,
   form('player'),
-  (ps, f) => ps.filter(p => true)//!is(String, f) || p.name.indexOf(f) > -1)
+  (ps, f) => ps.filter(p => !is(String, f) || p.name[0] === f[0])//p.name.indexOf(f) > -1)
 );
 
 const dsPlayers = createSelector(
