@@ -114,3 +114,34 @@ table.ui.striped.table tbody tr:nth-child(even) {
 .ui.selection.dropdown .menu {
   max-height: none;
 }
+
+.ui.grid {
+  font-size: 12px;
+  border-radius: 0.28571429rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  box-sizing: border-box;
+}
+
+.ui.grid > .row {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  /* border-bottom: black 1px solid; */
+}
+
+.ui.grid > .row > .column {
+  /* border-left: black 1px solid;
+  border-right: black 1px solid; */
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin: 0;
+}
+
+.thead {
+  background-color: #2185d0;
+  color: white;
+}
+
+div.ui.striped.grid div.tbody:nth-child(odd) {
+  background-color: #ffffd8;
+}
