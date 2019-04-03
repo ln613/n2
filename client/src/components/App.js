@@ -75,7 +75,7 @@ const Footer = () =>
   </div>
 
 const MainMenu = () =>
-  <Menu menus={menus} color="blue" rightItems={<_Menu.Item onClick={()=> window.open('https://butterflyonline.com/', "_new")}><img src="images/butterfly-logo.png" title="Butterfly" /></_Menu.Item>}>
+  <Menu menus={menus} color="blue" rightItems={<_Menu.Item onClick={()=> window.open('https://butterflyonline.com/', "_new")}><img src="/images/butterfly-logo.png" title="Butterfly" /></_Menu.Item>}>
     <Content/>
     <Footer/>
   </Menu>

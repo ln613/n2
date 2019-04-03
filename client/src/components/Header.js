@@ -28,7 +28,7 @@ const Mq = ({ lookup, isMobile }) =>
     <div style={s1(isMobile)}></div>
     <div style={s2(isMobile)}></div>
   </div>  
-const Banner = m => <img src="images/banner.jpg" alt="" style={{ width: m ? '100%' : '700px'}} />;
+const Banner = m => <img src="/images/banner.jpg" alt="" style={{ width: m ? '100%' : '700px'}} />;
 
 const Header = ({ lookup, isMobile }) =>
   <div>
