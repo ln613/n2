@@ -275,6 +275,7 @@ const isAwayPlayer = p => g => isSamePlayer(p, g.p2) || isSamePlayer(p, g.p4);
 const isPlayerInGame = p => anyPass([isHomePlayer(p), isAwayPlayer(p)]);
 const isPlayerWin = p => g => (isHomePlayer(p)(g) && g.isWin) || (isAwayPlayer(p)(g) && !g.isWin);
 const isPlayerLose = p => g => (isHomePlayer(p)(g) && !g.isWin) || (isAwayPlayer(p)(g) && g.isWin);
+const isPlayerSub = p => g => teams => (isHomePlayer(p)(g) && findById(p.id)(findById(g.t1)(teams).players).isSub) || (isAwayPlayer(p)(g) && findById(p.id)(findById(g.t2)(teams).players).isSub);
 
 const stats = createSelector(
   tournament,
@@ -291,7 +292,7 @@ const stats = createSelector(
 
     const st = pipe(
       map(p => {
-        const gs = (t.games || []).filter(isPlayerInGame(p));
+        const gs = (t.games || []).filter(isPlayerInGame(p)).filter(g => !isPlayerSub(p)(g)(teams));
         const sgs = gs.filter(g => !g.isDouble);
         const dgs = gs.filter(g => g.isDouble);
         const total = sgs.length;
