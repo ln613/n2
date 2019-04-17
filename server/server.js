@@ -172,7 +172,7 @@ app.post('/admin/genrr', (req, res) => {
         const s = rrSchedule(t.players, true);
         api.update('tournaments', {
           id,
-          schedules: s.map((x, i) => ({ id: i + 1, matches: x, date: moment(t.startDate).add(i, 'week').format('YYYY-MM-DD') }))
+          schedules: s.map((x, i) => ({ id: i + 1, matches: x, date: moment(t.startDate).add(i, 'week').toDate() }))
         }).then(_ => res.json(s));
       } else {
         res.json('N/A');
@@ -203,7 +203,7 @@ app.post('/admin/genrr', (req, res) => {
           res.json('N/A');
         }
       } else if (!t.has2half && t.teams && t.schedules) {
-        const sd = t.startDate2 || moment(last(t.schedules).date).add(1, 'week').format('YYYY-MM-DD');
+        const sd = t.startDate2 || moment(last(t.schedules).date).add(1, 'week').toDate();
         const tt = split2(standing.map(x => find(y => y.name === x.team, t.teams)));
         const s1 = rrScheduleTeam(tt[0], sd, [5, 6, 7]);
         const s2 = rrScheduleTeam(tt[1], sd, [1, 2, 3]);
@@ -247,7 +247,7 @@ app.post('/admin/nogame', (req, res) => {
       if (n === -1) {
         res.json('N/A');
       } else {
-        const schedules = t.schedules.map((s, i) => i >= n ? {...s, date: moment(s.date).add(1, 'week').format('YYYY-MM-DD')} : s);
+        const schedules = t.schedules.map((s, i) => i >= n ? {...s, date: moment(s.date).add(1, 'week').toDate()} : s);
         api.update('tournaments', { id, schedules }).then(r => res.json(r));
       }
     } else {
