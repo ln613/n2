@@ -158,13 +158,13 @@ e.updateRating = () => {
     });
 
     unnest(o.tournaments.map(t => t.schedules)).forEach(s => {
-      if (s.date) s.date = toDateOnly(s.date);
+      if (s && s.date) s.date = toDateOnly(s.date);
     });
 
     const games = pipe(
       filter(t => !t.isSingle),
       map(t => {
-        t.games.forEach(g => g.round = isNil(g.group) ? null : find(m => m.home == g.t1 && m.away == g.t2, find(s => s.group == g.group, t.schedules).matches).round );
+        (t.games || []).forEach(g => g.round = isNil(g.group) ? null : find(m => m.home == g.t1 && m.away == g.t2, find(s => s.group == g.group, t.schedules).matches).round );
         return t.games;
       }),
       unnest,
@@ -179,15 +179,17 @@ e.updateRating = () => {
     )(o.tournaments);
 
     games.forEach((g, i) => {
-      g.id = i + 1;
-      g.date = toDateOnly(g.date);
-      if (!g.isDouble) {
-        if (pr[g.p1]) g.p1Rating = pr[g.p1];
-        if (pr[g.p2]) g.p2Rating = pr[g.p2];
-        adjustRating(g, false);
-        pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
-        pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
-        if (isNil(g.round)) delete g.round;
+      if (g) {
+        g.id = i + 1;
+        g.date = toDateOnly(g.date);
+        if (!g.isDouble) {
+          if (pr[g.p1]) g.p1Rating = pr[g.p1];
+          if (pr[g.p2]) g.p2Rating = pr[g.p2];
+          adjustRating(g, false);
+          pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
+          pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
+          if (isNil(g.round)) delete g.round;
+        }
       }
     });
 
