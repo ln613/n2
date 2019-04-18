@@ -163,6 +163,7 @@ app.get('/admin/cd/list', (req, res) => {
 
 app.post('/admin/genrr', (req, res) => {
   const id = +req.body.id;
+  const tables = req.body.tables;
   const standing = req.body.standing;
   const koStanding = req.body.koStanding || [];
 
@@ -205,8 +206,8 @@ app.post('/admin/genrr', (req, res) => {
       } else if (!t.has2half && t.teams && t.schedules) {
         const sd = t.startDate2 || moment(last(t.schedules).date).add(1, 'week').toDate();
         const tt = split2(standing.map(x => find(y => y.name === x.team, t.teams)));
-        const s1 = rrScheduleTeam(tt[0], sd, [5, 6, 7]);
-        const s2 = rrScheduleTeam(tt[1], sd, [1, 2, 3]);
+        const s1 = rrScheduleTeam(tt[0], sd, tables ? tables[0] : [5, 6, 7]);
+        const s2 = rrScheduleTeam(tt[1], sd, tables ? tables[1] : [1, 2, 3]);
         const s = zipWith(mergeDeepWith((a, b) => is(Array, a) ? concat(a, b) : a))(s1, s2);
         const lastId = last(t.schedules).id;
         api.update('tournaments', {
@@ -217,7 +218,7 @@ app.post('/admin/genrr', (req, res) => {
           schedules: concat(t.schedules, s.map(x => ({ ...x, id: lastId + x.id, half: true })))
         }).then(_ => res.json(s));
       } else if (t.teams && !t.schedules) {
-        const s = rrScheduleTeam(t.teams, t.startDate);
+        const s = rrScheduleTeam(t.teams, t.startDate, tables);
         api.update('tournaments', { id, schedules: s }).then(_ => res.json(s));
       } else {
         res.json('N/A');
