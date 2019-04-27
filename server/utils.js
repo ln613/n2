@@ -28,30 +28,13 @@ e.done = send('done')
 
 e.send = send()
 
-e.port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 3000
+e.port = process.env.PORT || 3000
 
-e.ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0'
+e.ip = process.env.IP || '0.0.0.0'
 
-e.getMongoURL = () => {
-  let mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL || 'mongodb://localhost:27017/vttc';
-  if (process.env.DATABASE_SERVICE_NAME) {
-    const mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase();
-    const mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'];
-    const mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'];
-    const mongoDatabase = process.env[mongoServiceName + '_DATABASE'];
-    const mongoPassword = process.env[mongoServiceName + '_PASSWORD'];
-    const mongoUser = process.env[mongoServiceName + '_USER'];
-
-    if (mongoHost && mongoPort && mongoDatabase) {
-      mongoURL = 'mongodb://';
-      if (mongoUser && mongoPassword) {
-        mongoURL += mongoUser + ':' + mongoPassword + '@';
-      }
-      mongoURL += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
-    }
-  }
-  return mongoURL;
-}
+e.getMongoURL = () => process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL
+  || 'mongodb://ln613:' + e.config.atlas_pwd + '@vttc-shard-00-00-drvhn.mongodb.net:27017,vttc-shard-00-01-drvhn.mongodb.net:27017,vttc-shard-00-02-drvhn.mongodb.net:27017/vttc?ssl=true&replicaSet=vttc-shard-0&authSource=admin&retryWrites=true';
+  //|| 'mongodb://localhost:27017/vttc';
 
 e.mongoURL = e.getMongoURL()
 

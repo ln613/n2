@@ -1,5 +1,5 @@
 const fs = require('fs');
-const mongodb = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
 const cd = require('cloudinary');
 const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, isNil, last, pick } = require('ramda');
 const { tap, config, json2js, adjustRating, newRating, serial, toDateOnly } = require('./utils');
@@ -15,9 +15,12 @@ const e = {};
 e.initdb = mongoURL => {
   if (db || mongoURL == null) return;
 
-  mongodb.connect(mongoURL).then(conn => {
-    db = conn;
-    console.log('Connected to MongoDB at: %s', mongoURL);
+  MongoClient.connect(mongoURL, (err, db1) => {
+    if (err) console.log(err);
+    else {
+      db = db1;
+      console.log('Connected to MongoDB at: %s', mongoURL.slice(mongoURL.indexOf('@') + 1));
+    }
   });
 };
 
