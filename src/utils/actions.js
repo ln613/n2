@@ -1,6 +1,6 @@
 import { generateActions } from '@ln613/state';
-console.log(process.env);
-const aws = process.env.AWS;
+
+const aws = process.env.REACT_APP_AWS;
 const api = aws + 'api?';
 const admin = aws + 'admin?';
 

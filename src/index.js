@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider, createStore } from '@ln613/state';
 import { actionData } from 'utils/actions';
-import 'semantic-ui/dist/semantic.min.js';
+import 'semantic-ui-css/semantic.min.js';
 import 'semantic-ui-css/semantic.min.css';
 import '@ln613/css';
 import 'css/styles.css';
