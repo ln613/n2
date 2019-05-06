@@ -1,14 +1,8 @@
 const R = require('ramda');
-const fs = require('fs');
-const path = require('path');
 const moment = require('moment');
 const util = require('@ln613/util');
 
 const e = {};
-
-e.isProd = process.env.NODE_ENV === 'PROD';
-
-e.cd = 'http://res.cloudinary.com/vttc/image/upload/v1522908408/';
 
 e.tap = x => R.tap(console.log, R.isNil(x) ? 'null' : x);
 
@@ -19,52 +13,6 @@ e.sort = R.sort((a, b) => a - b);
 e.sortDesc = R.sort((a, b) => b - a);
 
 e.isOdd = n => n % 2 === 1;
-
-e.config = fs.existsSync(path.join(__dirname, 'config.js')) ? require('./config') : null;
-
-const send = d => (p, res) => p.then(x => res.json(d || x)).catch(e => res.send(e))
-
-e.done = send('done')
-
-e.send = send()
-
-e.port = process.env.PORT || 3000
-
-e.ip = process.env.IP || '0.0.0.0'
-
-e.getMongoURL = () => process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL
-  || 'mongodb://ln613:' + e.config.atlas_pwd + '@vttc-shard-00-00-drvhn.mongodb.net:27017,vttc-shard-00-01-drvhn.mongodb.net:27017,vttc-shard-00-02-drvhn.mongodb.net:27017/vttc?ssl=true&replicaSet=vttc-shard-0&authSource=admin&retryWrites=true';
-  //|| 'mongodb://localhost:27017/vttc';
-
-e.mongoURL = e.getMongoURL()
-
-e.secret = e.config ? e.config.secret : process.env.secret
-e.username = e.config ? e.config.username : process.env.username
-e.password = e.config ? e.config.password : process.env.password
-
-e.cors = (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,PATCH,POST,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-
-  if ('OPTIONS' == req.method) {
-    res.send(200);
-  } else {
-    next();
-  }
-}
-
-e.nocache = (req, res, next) => {
-  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  res.header('Expires', '-1');
-  res.header('Pragma', 'no-cache');
-  next();
-}
-
-e.gotoLogin = res => {
-  res.clearCookie('vttc_token');
-  res.redirect('/login');
-}
 
 const rrCycle = (x, r, l) => x < r ? x - r + l : x - r + 1;
 
@@ -149,5 +97,20 @@ e.gengames = (t, t1, t2) => {
 }
 
 e.toDateOnly = d => R.is(String, d) ? R.take(10, d) : moment(d).add(8, 'hours').format('YYYY-MM-DD');
+
+e.res = (body, code) => ({
+  statusCode: code || 200,
+  headers: {
+    'Access-Control-Allow-Origin': '*'
+  },
+  body: JSON.stringify(body)
+});
+
+e.policy = r => ({
+  principalId: process.env.REACT_APP_PRINCIPALID,
+  policyDocument: { Statement: [ { Action: 'execute-api:Invoke', Effect: 'Allow', Resource: r }, ] }
+});
+
+e.parseCookie = r => R.fromPairs((r.multiValueHeaders.cookie || []).map(c => c.split('=')));
 
 module.exports = e;

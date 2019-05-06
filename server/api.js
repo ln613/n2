@@ -1,28 +1,20 @@
 const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;
 const cd = require('cloudinary');
-const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, isNil, last, pick } = require('ramda');
-const { tap, config, json2js, adjustRating, newRating, serial, toDateOnly } = require('./utils');
+const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, findIndex, isNil, last, pick, groupBy } = require('ramda');
+const { tap, json2js, adjustRating, newRating, serial, toDateOnly, rrSchedule, rrScheduleTeam, group, sortTeam, gengames } = require('./utils');
 const moment = require('moment');
-const { findById } = require('@ln613/util');
+const { findById, split2 } = require('@ln613/util');
+
+//require('dotenv').config({ path: './.env' });
+
+cd.config({ cloud_name: 'vttc', api_key: process.env.REACT_APP_CLOUDINARY_KEY, api_secret: process.env.REACT_APP_CLOUDINARY_SECRET });
 
 const allDocs = ['cats', 'players', 'products', 'tournaments'];
-
 let db = null;
-if (config) cd.config({ cloud_name: 'vttc', api_key: config.cloudinary_key, api_secret: config.cloudinary_secret });
 const e = {};
 
-e.initdb = mongoURL => {
-  if (db || mongoURL == null) return;
-
-  MongoClient.connect(mongoURL, (err, db1) => {
-    if (err) console.log(err);
-    else {
-      db = db1;
-      console.log('Connected to MongoDB at: %s', mongoURL.slice(mongoURL.indexOf('@') + 1));
-    }
-  });
-};
+e.connectDB = async () => db || (db = await MongoClient.connect(process.env.REACT_APP_DB).then(x => x.db()));
 
 e.initdocs = docs => {
   const f = k => r => db.collection(k).insertMany(docs[k]);
@@ -31,40 +23,24 @@ e.initdocs = docs => {
   );
 }
 
-e.initdata = d => e.initdocs(d || json2js(fs.readFileSync('./data/db.json')))
+e.initdata = d => e.initdocs(d || json2js(fs.readFileSync('../data/db.json')))
 
-e.initacc = () => e.initdocs(json2js(fs.readFileSync('./data/1.json')))
-
-e.bak = () => Promise.all(allDocs.map(e.get)).then(l => fromPairs(l.map((d, i) => [allDocs[i], d])))//.then(x => JSON.stringify(x)).then(x => { fs.writeFile('./data/db.json', x); return x; })
-
-e.fix = () => db.collection('tournaments').findOne({ id: 86 }).then(t => {
-  t.games.forEach(g => {
-    g.p1 = +g.p1;
-    g.p2 = +g.p2;
-    if (g.isDouble) {
-      g.p3 = +g.p3;
-      g.p4 = +g.p4;
-    }
-  });
-  return db.collection('tournaments').save(t);
-});
+e.backup = () => Promise.all(allDocs.map(e.get)).then(l => fromPairs(l.map((d, i) => [allDocs[i], d])))//.then(x => JSON.stringify(x)).then(x => { fs.writeFile('./data/db.json', x); return x; })
 
 e.list = () => Object.keys(db)
 
 e.count = doc => db.collection(doc).count()
 
-e.get = doc => db.collection(doc).find({}, { _id: 0 }).toArray()
+e.get = doc => db.collection(doc).find().project({ _id: 0 }).toArray()
 
-e.getIdName = doc => db.collection(doc).find({}, { _id: 0, id: 1, name: 1 }).toArray()
+e.getIdName = doc => db.collection(doc).find().project({ _id: 0, id: 1, name: 1 }).toArray()
 
-e.getIdName = doc => db.collection(doc).find({}, { _id: 0, id: 1, name: 1 }).toArray()
+e.getById = (doc, id) => db.collection(doc).findOne({ id: +id }, { projection: { _id: 0 }})
 
-e.getById = (doc, id) => db.collection(doc).findOne({ id: +id }, { _id: 0 })
-
-e.search = (doc, prop, val, fields) => db.collection(doc).find(
-    (!prop || prop === '_') ? {} : { [prop]: isNaN(+val) ? new RegExp(val, 'i') : +val},
-    merge({ _id: 0, id: 1, name: 1 }, fields ? fromPairs(fields.split(',').map(x => [x, 1])) : {})
-).toArray()
+e.search = (doc, prop, val, fields) => db.collection(doc)
+  .find(prop ? { [prop]: isNaN(+val) ? new RegExp(val, 'i') : +val } : {})
+  .project(merge({ _id: 0, id: 1, name: 1 }, fields ? fromPairs(fields.split(',').map(x => [x, 1])) : {}))
+  .toArray()
 
 e.add = (doc, obj) => db.collection(doc).insert(obj);
 
@@ -129,32 +105,10 @@ e.changeResult = g1 => db.collection('tournaments').aggregate([
     .then(_ => Promise.all(ps.map(p => db.collection('players').update({ id: p[0] }, { $set: {rating: p[1]}}))));
 }).catch(e => console.log(e))
 
-// e.updateRating = () => {
-//   const pr = JSON.parse(fs.readFileSync(__dirname + '/../data/initialRatings.json'));
-//   return db.collection('tournaments').aggregate([
-//     { $unwind: '$games' },
-//     { $match: { 'games.isDouble': { $ne: true }, isSingle: { $ne: true } } },
-//     { $sort: { 'games.date': 1, 'games.id': 1 } },
-//     { $project: { games: 1, _id: 0, id: 1 } }
-//   ]).toArray().then(ts => {
-//     return serial(ts, t => {
-//       let g = t.games;
-//       if (pr[g.p1]) g.p1Rating = pr[g.p1];
-//       if (pr[g.p2]) g.p2Rating = pr[g.p2];
-//       g = adjustRating(g);
-//       pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
-//       pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
-//       return db.collection('tournaments').update({ id: t.id, 'games.id': g.id }, { $set: { 'games.$.p1Rating': g.p1Rating, 'games.$.p1Diff': g.p1Diff, 'games.$.p2Rating': g.p2Rating, 'games.$.p2Diff': g.p2Diff } });
-//     }).then(_ =>
-//         serial(Object.keys(pr), p => db.collection('players').update({ id: +p }, { $set: { rating: +pr[p] } }))
-//     );
-//   }).catch(e => console.log(e));
-// }
-
 e.updateRating = () => {
-  const pr = JSON.parse(fs.readFileSync(__dirname + '/../data/initialRatings.json'));
+  const pr = JSON.parse(fs.readFileSync('./initialRatings.json'));
 
-  return e.bak().then(o => {
+  return e.backup().then(o => {
     o.tournaments.forEach(t => {
       if (t.startDate) t.startDate = toDateOnly(t.startDate);
       if (t.startDate2) t.startDate2 = toDateOnly(t.startDate2);
@@ -198,9 +152,9 @@ e.updateRating = () => {
 
     Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
 
-    return e.initdata(o);
+    return e.initdata(o).then(() => 'done');
   })
-  .catch(console.log);
+  .catch(e => tap(e));
 }
 
 e.getNewGameId = () => db.collection('tournaments').aggregate([
@@ -208,5 +162,110 @@ e.getNewGameId = () => db.collection('tournaments').aggregate([
   { $sort: { id: -1 } },
   { $limit: 1 }
 ]).toArray().then(x => x[0].id)
+
+e.genrr = body => {
+  const id = +body.id;
+  const tables = body.tables;
+  const standing = body.standing;
+  const koStanding = body.koStanding || [];
+
+  return e.getById('tournaments', id).then(t => {
+    if (t.isSingle) {
+      if (t.players && !t.schedules) {
+        const s = rrSchedule(t.players, true);
+        return e.update('tournaments', {
+          id,
+          schedules: s.map((x, i) => ({ id: i + 1, matches: x, date: toDateOnly(moment(t.startDate).add(i, 'week').toDate()) }))
+        }).then(_ => s);
+      } else {
+        return 'N/A';
+      }
+    } else {
+      if (t.teams && t.teams.length > 0 && !isNil(t.teams[0].group)) { // teams are grouped
+        const groups = groupBy(x => x.group, t.teams);
+        const hasKO = find(s => s.ko, t.schedules || []);
+        const hasKOStanding = find(s => s.ko === koStanding.length, t.schedules || []);
+        if (!t.schedules) {
+          const schedules = Object.keys(groups).map(g => ({
+            matches: pipe(l => rrSchedule(l, false, true), unnest, map(x => ({ ...x, games: gengames(t, x.home, x.away) })))(groups[g]),
+            date: t.startDate,
+            group: g,
+            id: +g
+          }));
+          return e.update('tournaments', { id, schedules }).then(_ => schedules);
+        } else if ((standing && !hasKO) || hasKOStanding) {
+          const matches = (hasKOStanding ?
+            range(0, koStanding.length / 2).map((n, i) => ({ home: koStanding[n], away: koStanding[koStanding.length - n - 1], id: i + 1 })) :
+            unnest(range(0, standing.length / 2).map((n, i) => [
+              { home: standing[n][0].id, away: standing[standing.length - n - 1][1].id, id: i * 2 + 1 },
+              { home: standing[n][1].id, away: standing[standing.length - n - 1][0].id, id: i * 2 + 2 }
+            ]))
+          ).map(x => ({ ...x, games: gengames(t, x.home, x.away) }));
+          const schedules = [...t.schedules, { date: t.startDate, ko: hasKOStanding ? koStanding.length / 2 : standing.length, matches, id: t.schedules.length + 1 }];
+          return e.update('tournaments', { id, schedules }).then(_ => schedules);
+        } else {
+          return 'N/A';
+        }
+      } else if (!t.has2half && t.teams && t.schedules && standing) { // generate schedule for 2nd half, already has schedule and current standing is sent
+        const sd = t.startDate2 || toDateOnly(moment(last(t.schedules).date).add(1, 'week').toDate());
+        const tt = split2(standing.map(x => find(y => y.name === x.team, t.teams)));
+        const s1 = rrScheduleTeam(tt[0], sd, tables ? tables[0] : [5, 6, 7]);
+        const s2 = rrScheduleTeam(tt[1], sd, tables ? tables[1] : [1, 2, 3]);
+        const s = zipWith(mergeDeepWith((a, b) => is(Array, a) ? concat(a, b) : a))(s1, s2);
+        const lastId = last(t.schedules).id;
+        return e.update('tournaments', {
+          id,
+          startDate2: sd,
+          has2half: true,
+          teams: t.teams.map(x => ({...x, rank: find(y => y.team === x.name, standing).rank })),
+          schedules: concat(t.schedules, s.map(x => ({ ...x, id: lastId + x.id, half: true })))
+        }).then(_ => s);
+      } else if (t.teams && !t.schedules) {
+        const s = rrScheduleTeam(t.teams, t.startDate, tables);
+        return e.update('tournaments', { id, schedules: s }).then(_ => s);
+      } else {
+        return 'N/A';
+      }
+    }
+  });
+}
+
+e.gengroup = id => e.getById('tournaments', id).then(t => {
+  if (!t.isSingle && t.teams && t.teams.length > 0 && isNil(t.teams[0].group) && isNil(t.games) && isNil(t.schedules)) { // teams are not yet grouped, no games and no schedules
+    const teams = group(sortTeam(t.teams));
+    return e.update('tournaments', { id, teams }).then(_ => teams);
+  } else {
+    return 'N/A';
+  }
+});
+
+e.nogame = body => {
+  const id = +body.id;
+  const date = body.date;
+  return e.getById('tournaments', id).then(t => {
+    if (t.schedules) {
+      const n = findIndex(s => s.date === date, t.schedules);
+      if (n === -1) {
+        return 'N/A';
+      } else {
+        const schedules = t.schedules.map((s, i) => i >= n ? {...s, date: toDateOnly(moment(s.date).add(1, 'week').toDate())} : s);
+        return e.update('tournaments', { id, schedules }).then(_ => schedules);
+      }
+    } else {
+      return 'N/A';
+    }
+  });
+};
+
+e.groupmatch = (id, grp, body) => e.getById('tournaments', id).then(t => {
+  if (t.schedules) {
+    //const games = t.games.map(() => g.group);
+    //const schedules = t.schedules.map((s, i) => s.group == group ? {...s, matches: s.matches.map(m => m.id == req.body.id ? req.body : m)} : s);
+    //api.update('tournaments', { id: +id, schedules }).then(r => res.json(r));
+    return serial(body.games.filter(g => g.result && g.result !== '0:0'), g => e.addToList('tournaments', +id, 'games', g));
+  } else {
+    return 'N/A';
+  }
+});
 
 module.exports = e;
