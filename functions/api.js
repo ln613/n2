@@ -1,5 +1,5 @@
-const { connectDB, get, getIdName, getById, search, getPlayerRating, getPlayerGames, cdList, cdVersion, initdata, backup, updateRating, genrr, gengroup, nogame, getNewGameId, addToList, add, replaceList, replace, update, count } = require('./utils/db');
-const { tap, res, policy } = require('./utils');
+const { connectDB, get, getIdName, getById, search, getPlayerRating, getPlayerGames, cdVersion } = require('./utils/db');
+const { res } = require('./utils');
 
 module.exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
