@@ -1,4 +1,4 @@
-module.exports.api = async (event, context) => {
+module.exports.handler = async (event, context) => {
   // context.callbackWaitsForEmptyEventLoop = false;
   // const { doc, id, fields, prop, val, idname, player_rating, rating_date, player_games, lookup } = event.queryStringParameters;
   // await connectDB();
@@ -23,5 +23,8 @@ module.exports.api = async (event, context) => {
   // }
 
   // return res(r);
-  return 'abc';
+  return {
+    statusCode: 200,
+    body: "123"
+  };
 };
