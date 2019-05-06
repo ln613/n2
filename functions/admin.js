@@ -1,15 +1,16 @@
 const jwt = require('jsonwebtoken');
-const { connectDB, cdList, initdata, backup, updateRating, genrr, gengroup, nogame, getNewGameId, addToList, add, replaceList, replace, update, count } = require('./api');
+const { is } = require('ramda');
+const { connectDB, cdList, initdata, backup, updateRating, genrr, gengroup, nogame, getNewGameId, addToList, add, replaceList, replace, update, count } = require('./utils/db');
 const { tap, res } = require('./utils');
 
 module.exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
 
-  if (!(await authorize(event.headers.Authorization)))
+  if (!(await authorize(event.headers.authorization)))
     return res({ isAuthenticated: false }, 401);
 
   const q = event.queryStringParameters;
-  const body = JSON.parse(event.body);
+  const body = is(String, event.body) ? event.body : JSON.parse(event.body);
   const method = event.httpMethod;
   await connectDB();
   let r = 'no action';
@@ -67,7 +68,7 @@ module.exports.handler = async (event, context) => {
 
 const authorize = async token => {
   try {
-    await jwt.verify(tap(token), process.env.REACT_APP_JWT_SECRET);
+    await jwt.verify(token, process.env.JWT_SECRET);
     return true;
   } catch (e) {
     return false;

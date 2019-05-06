@@ -5,9 +5,11 @@ import { compose } from 'recompose';
 import { successSelector, authSelector } from './selectors';
 import { withNewValue } from '@ln613/compose';
 import { tap } from '@ln613/util';
-import actions from 'utils/actions';
+import actions from './actions';
 import { TextBox, Password } from '@ln613/ui';
 import { Button } from 'semantic-ui-react';
+
+export const isDev = process.env.NODE_ENV === 'development';
 
 export const cdurl = (l, c, n) => l.cdVersion ? `http://res.cloudinary.com/vttc/image/upload/v${l.cdVersion}/${c}/${n}.jpg` : '';
 

@@ -1,6 +1,7 @@
 import { generateActions } from '@ln613/state';
+import { isDev } from '.';
 
-const aws = process.env.REACT_APP_AWS;
+const aws = isDev ? 'http://localhost:9000/' : '/.netlify/functions/';
 const api = aws + 'api?';
 const admin = aws + 'admin?';
 

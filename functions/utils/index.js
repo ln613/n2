@@ -107,7 +107,7 @@ e.res = (body, code) => ({
 });
 
 e.policy = r => ({
-  principalId: process.env.REACT_APP_PRINCIPALID,
+  principalId: process.env.PRINCIPALID,
   policyDocument: { Statement: [ { Action: 'execute-api:Invoke', Effect: 'Allow', Resource: r }, ] }
 });
 

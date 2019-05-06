@@ -8,13 +8,13 @@ const { findById, split2 } = require('@ln613/util');
 
 //require('dotenv').config({ path: './.env' });
 
-cd.config({ cloud_name: 'vttc', api_key: process.env.REACT_APP_CLOUDINARY_KEY, api_secret: process.env.REACT_APP_CLOUDINARY_SECRET });
+cd.config({ cloud_name: 'vttc', api_key: process.env.CLOUDINARY_KEY, api_secret: process.env.CLOUDINARY_SECRET });
 
 const allDocs = ['cats', 'players', 'products', 'tournaments'];
 let db = null;
 const e = {};
 
-e.connectDB = async () => db || (db = await MongoClient.connect(process.env.REACT_APP_DB).then(x => x.db()));
+e.connectDB = async () => db || (db = await MongoClient.connect(process.env.DB).then(x => x.db()));
 
 e.initdocs = docs => {
   const f = k => r => db.collection(k).insertMany(docs[k]);
