@@ -22,7 +22,7 @@ const c2 = (c, i, m) => {
     <D1 isMobile={m}>{c3}{c4}</D1>;
 }
 
-const yt = (s, m) => <iframe src={s} frameborder="0" style={{ overflow: 'hidden', height: m ? '300px' : '100%', width: '100%' }} height={m ? '300px' : '100%'} width="100%"></iframe>
+const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overflow: 'hidden', height: m ? '300px' : '100%', width: '100%' }} height={m ? '300px' : '100%'} width="100%"></iframe>
 
 const Home = ({ isMobile }) =>
   <div>
