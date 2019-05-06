@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { connectDB, cdList, initdata, backup, updateRating, genrr, gengroup, nogame, getNewGameId, addToList, add, replaceList, replace, update, count } = require('./api');
-const { res } = require('./utils');
+const { tap, res } = require('./utils');
 
 module.exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
@@ -67,7 +67,7 @@ module.exports.handler = async (event, context) => {
 
 const authorize = async token => {
   try {
-    await jwt.verify(token, process.env.REACT_APP_JWT_SECRET);
+    await jwt.verify(tap(token), process.env.REACT_APP_JWT_SECRET);
     return true;
   } catch (e) {
     return false;
