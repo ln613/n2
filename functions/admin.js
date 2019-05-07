@@ -13,7 +13,7 @@ module.exports.handler = async (event, context) => {
     return res({ isAuthenticated: false }, 401);
 
   const q = event.queryStringParameters;
-  const body = is(String, event.body) ? event.body : JSON.parse(event.body);
+  const body = JSON.parse(event.body);
   const method = event.httpMethod;
   await connectDB();
   let r = 'no action';
