@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { is } = require('ramda');
 const { connectDB, cdList, initdata, backup, updateRating, genrr, gengroup, nogame, getNewGameId, addToList, add, replaceList, replace, update, count } = require('./utils/db');
-const { tap, res } = require('./utils');
+const { tap, res, trynull } = require('./utils');
 
 module.exports.handler = async (event, context) => {
   if (event.httpMethod === 'OPTIONS')
@@ -13,7 +13,7 @@ module.exports.handler = async (event, context) => {
     return res({ isAuthenticated: false }, 401);
 
   const q = event.queryStringParameters;
-  const body = JSON.parse(event.body);
+  const body = trynull(_ => JSON.parse(event.body));
   const method = event.httpMethod;
   await connectDB();
   let r = 'no action';

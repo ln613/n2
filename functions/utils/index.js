@@ -14,6 +14,8 @@ e.sortDesc = R.sort((a, b) => b - a);
 
 e.isOdd = n => n % 2 === 1;
 
+e.trynull = f => { try { return f(); } catch { return null; } };
+
 const rrCycle = (x, r, l) => x < r ? x - r + l : x - r + 1;
 
 e.rrSchedule = (x, sorted, continuousId) => {
