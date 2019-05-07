@@ -7,7 +7,7 @@ import actions from 'utils/actions';
 import { tourSelector } from 'utils/selectors';
 import { withLoad, withEditList, withParams } from '@ln613/compose';
 import AddPlayer from './AddPlayer';
-import { withSuccess } from 'utils';
+import { withSuccess } from 'utils/ui';
 import { withRouter } from "react-router-dom";
 
 const SinglePlayers = ({ tournament, date, players, patchTour, setFormTournamentPlayers, getPlayerRating, id, history }) =>

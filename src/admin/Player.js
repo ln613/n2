@@ -7,7 +7,7 @@ import actions from 'utils/actions';
 import { playersSelector } from 'utils/selectors';
 import { TextBox } from '@ln613/ui/semantic';
 import { withEdit, withLoad, withParams, withMount } from '@ln613/compose';
-import { withSuccess } from 'utils';
+import { withSuccess } from 'utils/ui';
 import { withRouter } from "react-router-dom";
 
 const Player = ({ player, putPlayer, postPlayer, id, history }) =>

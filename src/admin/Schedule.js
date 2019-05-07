@@ -9,7 +9,8 @@ import { TextBox, Table } from '@ln613/ui/semantic';
 import { Select } from '@ln613/ui';
 import { withLoad, withEdit, withParams, withMount } from '@ln613/compose';
 import { withRouter } from "react-router-dom";
-import { withSuccess, resultOptions } from 'utils';
+import { resultOptions } from 'utils';
+import { withSuccess } from 'utils/ui';
 import { tap } from '@ln613/util';
 import { kos } from 'utils';
 

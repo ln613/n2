@@ -1,23 +1,8 @@
-import React from 'react';
 import { last, isNil, pipe, filter, map, fromPairs } from 'ramda';
-import { connect } from '@ln613/state';
-import { compose } from 'recompose';
-import { successSelector, authSelector } from './selectors';
-import { withNewValue } from '@ln613/compose';
-import { tap } from '@ln613/util';
-import actions from './actions';
-import { TextBox, Password } from '@ln613/ui';
-import { Button } from 'semantic-ui-react';
 
 export const isDev = process.env.NODE_ENV === 'development';
 
 export const cdurl = (l, c, n) => l.cdVersion ? `http://res.cloudinary.com/vttc/image/upload/v${l.cdVersion}/${c}/${n}.jpg` : '';
-
-export const withSuccess = (a, f1, f2) => compose(
-  connect(successSelector(a)),
-  withNewValue('success', true, f1),
-  withNewValue('success', false, f2),
-);
 
 const rdiff = [[3,0],[5,-2],[8,-5],[10,-7],[13,-9],[15,-11],[18,-14],[20,-16],[25,-21],[30,-26],[35,-31],[40,-36],[45,-41],[50,-45],[55,-50]];
 const rdelta = [401,301,201,151,101,51,26,-24,-49,-99,-149,-199,-299,-399];
@@ -67,17 +52,3 @@ export const highlightWinner = g => {
 }
 
 export const highlightSub = (n, isSub) => n + (isSub ? ' (Sub)' : '');
-
-export const withAuth = compose(
-  connect(authSelector),
-  Comp => p => p.auth.isAuthenticated ? <Comp {...p} /> : <Login />
-);
-
-const Login = connect(authSelector, actions)(({ login, postAuth }) =>
-  <div class="p16">
-    Username: <TextBox name="login.username" />
-    Password: <Password name="login.password" />
-    <hr />
-    <Button primary onClick={() => postAuth(login)}>Login</Button>
-  </div>
-);

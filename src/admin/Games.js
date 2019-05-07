@@ -9,7 +9,8 @@ import { tournamentSelector } from 'utils/selectors';
 import { Table } from '@ln613/ui/semantic';
 import { withRouter } from "react-router-dom";
 import { Button } from 'semantic-ui-react';
-import { toGame, resultOptions, withSuccess } from 'utils';
+import { toGame, resultOptions } from 'utils';
+import { withSuccess } from 'utils/ui';
 
 const Games = p =>
   <div>

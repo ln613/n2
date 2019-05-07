@@ -101,7 +101,8 @@ e.toDateOnly = d => R.is(String, d) ? R.take(10, d) : moment(d).add(8, 'hours').
 e.res = (body, code) => ({
   statusCode: code || 200,
   headers: {
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json'
   },
   body: JSON.stringify(body)
 });

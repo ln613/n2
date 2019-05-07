@@ -6,7 +6,7 @@ import actions from 'utils/actions';
 import { catsSelector } from 'utils/selectors';
 import { TextBox } from '@ln613/ui/semantic';
 import { withEdit } from '@ln613/compose';
-import { withSuccess } from 'utils';
+import { withSuccess } from 'utils/ui';
 
 const Cat = ({ cat, putCat, postCat }) =>
   <div>

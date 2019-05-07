@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import { connect } from '@ln613/state';
 import actions from 'utils/actions';
-import { withSuccess } from 'utils';
+import { withSuccess } from 'utils/ui';
 import { withMobile } from '@ln613/ui/semantic';
 
 const AdminMenu = p =>

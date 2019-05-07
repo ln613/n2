@@ -9,7 +9,7 @@ import { TextBox, CheckBox, withMobile } from '@ln613/ui/semantic';
 import { withMount, withParams, withLoad, withLoadForce } from '@ln613/compose';
 import { tap } from '@ln613/util';
 import { withRouter, Link } from "react-router-dom";
-import { withSuccess } from 'utils';
+import { withSuccess } from 'utils/ui';
 
 const b1 = tournament =>
   <Fragment>

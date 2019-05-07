@@ -5,7 +5,7 @@ import { connect } from '@ln613/state';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { gameSelector } from 'utils/selectors';
-import { withSuccess } from 'utils';
+import { withSuccess } from 'utils/ui';
 import { TextBox, CheckBox } from '@ln613/ui/semantic';
 import { Select } from '@ln613/ui';
 import { withLoad, withEdit, withParams, withMount } from '@ln613/compose';

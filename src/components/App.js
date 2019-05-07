@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router';
 import { Menu, withMobile } from '@ln613/ui/semantic';
 import { Menu as _Menu } from 'semantic-ui-react';
-import { withAuth } from 'utils';
+import { withAuth } from 'utils/ui';
 
 import Header from './Header';
 import Home from './Home';

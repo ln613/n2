@@ -8,7 +8,7 @@ import { teamSelector } from 'utils/selectors';
 import { TextBox } from '@ln613/ui/semantic';
 import { withLoad, withEdit, withParams, withMount } from '@ln613/compose';
 import AddPlayer from './AddPlayer';
-import { withSuccess } from 'utils';
+import { withSuccess } from 'utils/ui';
 import { withRouter } from "react-router-dom";
 
 const Team = ({ tournament, team, players, monthRatings, putTeam, postTeam, id, setFormTeamPlayers, getPlayerRating, history }) =>
