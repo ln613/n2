@@ -103,6 +103,7 @@ e.res = (body, code) => ({
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+    'Access-Control-Allow-Methods': 'GET,OPTIONS,POST,PUT,PATCH,DELETE,COPY,PURGE',
     'Content-Type': 'application/json'
   },
   body: JSON.stringify(body)
