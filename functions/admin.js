@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { is } = require('ramda');
-const { connectDB, cdList, initdata, backup, updateRating, genrr, gengroup, nogame, getNewGameId, addToList, add, replaceList, replace, update, count } = require('./utils/db');
+const { connectDB, cdList, initdata, backup, updateRating, genrr, gengroup, nogame, addToList, add, replaceList, replace, update, count } = require('./utils/db');
 const { tap, res, trynull } = require('./utils');
 
 module.exports.handler = async (event, context) => {
@@ -28,8 +28,6 @@ module.exports.handler = async (event, context) => {
   } else if (method === 'POST') {
     if (q.cd) {
       r = await cdList();
-    } else if (q.newgameid) {
-      r = await getNewGameId();
     } else if (q.genrr) {
       r = await genrr(body);
     } else if (q.gengroup) {

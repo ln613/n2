@@ -40,7 +40,7 @@ export default compose(
     (p.tournament.games || []).filter(x => (x.schedule === p.S || toAbsDate(x.date) === toAbsDate(p.schedule.date)) && (x.match === p.M || (x.t1 === p.Match.home && x.t2 === p.Match.away) || (x.t2 === p.Match.home && x.t1 === p.Match.away) ))
   )})),
   //withNewId('tournament.games'),
-  withMount(p => p.postNewGameId()),
+  withMount(p => p.getNewGameId()),
   withMount(p => p.tournament.groups && p.setForm(find(x => x.id == p.M, find(x => x.id == p.S, p.tournament.schedules).matches), { path: 'match' })),
   withRouter,
   withSuccess('groupmatch', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!'))

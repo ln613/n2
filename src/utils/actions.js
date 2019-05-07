@@ -110,8 +110,7 @@ export const actionData = {
     url: api + 'player_games=1&id={id}'
   },
   newGameId: {
-    url: admin + 'newgameid=1',
-    method: 'post'
+    url: api + 'newgameid=1'
   },
   form: {
     path: 'form.{path}'
