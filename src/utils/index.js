@@ -1,6 +1,8 @@
-import { last, isNil, pipe, filter, map, fromPairs } from 'ramda';
+import { last, isNil, pipe, filter, map, fromPairs, isEmpty as _isEmpty, either } from 'ramda';
 
 export const isDev = process.env.NODE_ENV === 'development';
+
+export const isEmpty = either(isNil, _isEmpty);
 
 export const cdurl = (l, c, n) => l.cdVersion ? `http://res.cloudinary.com/vttc/image/upload/v${l.cdVersion}/${c}/${n}.jpg` : '';
 
