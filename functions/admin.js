@@ -4,6 +4,9 @@ const { connectDB, cdList, initdata, backup, updateRating, genrr, gengroup, noga
 const { tap, res } = require('./utils');
 
 module.exports.handler = async (event, context) => {
+  if (event.httpMethod === 'OPTIONS')
+    return res({});
+
   context.callbackWaitsForEmptyEventLoop = false;
 
   if (!(await authorize(event.headers.authorization)))
