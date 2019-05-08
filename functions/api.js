@@ -1,9 +1,10 @@
+const path = require('path');
 const { connectDB, get, getIdName, getById, search, getPlayerRating, getPlayerGames, cdVersion, getNewGameId } = require('./utils/db');
 const { res } = require('./utils');
 
 module.exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
-  const { doc, id, fields, prop, val, idname, player_rating, rating_date, player_games, lookup, newgameid } = event.queryStringParameters;
+  const { doc, id, fields, prop, val, idname, player_rating, rating_date, player_games, lookup, newgameid, folder } = event.queryStringParameters;
   await connectDB();
   let r = {};
 
@@ -25,6 +26,8 @@ module.exports.handler = async (event, context) => {
     r = await getPlayerGames(id);
   } else if (doc) {
     r = await get(doc);
+  } else if (folder) {
+    r = process.cwd();
   }
 
   return res(r);
