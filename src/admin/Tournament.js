@@ -22,7 +22,7 @@ const b1 = p =>
     {/* <Link class="item" to={`/admin/games/${tournament.id}`}>Games</Link> */}
     {p.canGenerateGroup ? <Link class="item" onClick={() => !p.isLoading && p.postGengroup({ id: p.id })} to="#">Generate Groups</Link> : null}
     {p.canGenerateSchedule ? <Link class="item" onClick={() => !p.isLoading && p.postGenrr({ id: p.id })} to="#">Generate Schedule</Link> : null}
-    {p.canGenerateSchedule2 ? <Link class="item" onClick={() => !p.isLoading && p.postGenrr({ id: p.id, standing: p.standing })} to="#">Generate Schedule 2</Link> : null}
+    {p.canGenerateSchedule2 ? <Link class="item" onClick={() => !p.isLoading && p.postGenrr({ id: p.id, standing: p.standing })} to="#">Generate Sch 2</Link> : null}
     {p.canGenerateKO ? <Link class="item" onClick={() => !p.isLoading && p.postGenrr({ id: p.id, standing: p.standing, koStanding: p.ko })} to="#">Generate KO</Link> : null}
   </Fragment>;
 

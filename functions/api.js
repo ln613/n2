@@ -1,4 +1,4 @@
-const path = require('path');
+const fs = require('fs');
 const { connectDB, get, getIdName, getById, search, getPlayerRating, getPlayerGames, cdVersion, getNewGameId } = require('./utils/db');
 const { res } = require('./utils');
 
@@ -27,7 +27,7 @@ module.exports.handler = async (event, context) => {
   } else if (doc) {
     r = await get(doc);
   } else if (folder) {
-    r = process.cwd();
+    r = fs.readdirSync(process.cwd());
   }
 
   return res(r);
