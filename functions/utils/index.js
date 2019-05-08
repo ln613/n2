@@ -4,6 +4,8 @@ const util = require('@ln613/util');
 
 const e = {};
 
+e.isDev = process.env.NODE_ENV === 'development';
+
 e.tap = x => R.tap(console.log, R.isNil(x) ? 'null' : x);
 
 e.serial = (arr, func) => arr.reduce((promise, next) => promise.then(r => func(next).then(r1 => R.append(r1, r))), Promise.resolve([]));
@@ -100,12 +102,16 @@ e.gengames = (t, t1, t2) => {
 
 e.toDateOnly = d => R.is(String, d) ? R.take(10, d) : moment(d).add(8, 'hours').format('YYYY-MM-DD');
 
+const cors = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  'Access-Control-Allow-Methods': 'GET,OPTIONS,POST,PUT,PATCH,DELETE,COPY,PURGE'
+};
+
 e.res = (body, code) => ({
   statusCode: code || 200,
   headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-    'Access-Control-Allow-Methods': 'GET,OPTIONS,POST,PUT,PATCH,DELETE,COPY,PURGE',
+    ...(e.isDev ? cors : {}),
     'Content-Type': 'application/json'
   },
   body: JSON.stringify(body)
