@@ -25,7 +25,7 @@ const Games = p =>
     </Table>
     <hr />
     <Button primary onClick={p.history.goBack}>Back</Button>
-    {!p.tournament.groups ? null : <Button primary onClick={() => save(p)}>Save</Button>}
+    {!p.tournament.groups ? null : <Button primary onClick={() => save(p)} disabled={p.isLoading}>Save</Button>}
   </div>
 
 export default compose(

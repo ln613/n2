@@ -2,7 +2,7 @@ import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty,
 import { createSelector, mapStateWithSelectors } from '@ln613/state';
 import { Bold, Italic } from '@ln613/ui';
 import { findById, getNameById, getPropById, toDate, toMonth, addIndex, diff, tap, split2, toAbsDate, findByName } from '@ln613/util';
-import { highlightSub } from './';
+import { highlightSub, toSingleArray } from './';
 
 const _form = s => s.form || {};
 const _filter = s => s.filter || {};
@@ -25,11 +25,11 @@ const _history = s => s.history || [];
 const newGameId = s => s.newGameId;
 const auth = s => s.auth || {};
 
-const success = a => createSelector(
+const success = actions => createSelector(
   isLoading,
   lastAction,
   error,
-  (il, la, e) => il || la.toLowerCase() !== ('set' + a) ? null : !e
+  (il, la, e) => (il || toSingleArray(actions).every(a => la.toLowerCase() !== ('set' + a))) ? null : !e
 )
 
 const sortedList = (list, filter) => createSelector(
@@ -374,14 +374,14 @@ export const langSelector = mapStateWithSelectors({ lang });
 export const catsSelector = mapStateWithSelectors({ cats, cat: form('cat'), lang });
 export const productsSelector = mapStateWithSelectors({ products: filteredProducts, productFilter: filter('product'), lookup, lang, product: form('product'), cats: catsDD });
 export const ratingSelector = mapStateWithSelectors({ players: filteredPlayers });
-export const playersSelector = mapStateWithSelectors({ players, lookup, player: form('player') });
+export const playersSelector = mapStateWithSelectors({ players, lookup, player: form('player'), isLoading });
 export const tournamentsSelector = mapStateWithSelectors({ tournaments: tournamentsWithYears, lookup });
-export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players, formMatch: form('match'), newGameId });
-export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), t: tournament, tournaments, players, standing, ko });
+export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players, formMatch: form('match'), newGameId, isLoading });
+export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), t: tournament, tournaments, players, standing, ko, isLoading });
 export const historySelector = mapStateWithSelectors({ history, lookup, players });
 export const standingSelector = mapStateWithSelectors({ standing, tournament, players });
-export const teamSelector = mapStateWithSelectors({ tournament, team: form('team'), players, monthRatings });
-export const scheduleSelector = mapStateWithSelectors({ tournament, schedule: form('schedule'), players });
-export const gameSelector = mapStateWithSelectors({ tournament, players, game: form('game') });
+export const teamSelector = mapStateWithSelectors({ tournament, team: form('team'), players, monthRatings, isLoading });
+export const scheduleSelector = mapStateWithSelectors({ tournament, schedule: form('schedule'), players, isLoading });
+export const gameSelector = mapStateWithSelectors({ tournament, players, game: form('game'), isLoading });
 export const statsSelector = mapStateWithSelectors({ tournament, stats });
 export const authSelector = mapStateWithSelectors({ auth, login: form('login') });

@@ -23,7 +23,7 @@ const AddPlayer = p =>
       </Fragment>
     )}
     {p.isMobile ? <div class="mt16" /> : null}
-    <Button secondary onClick={() => p.setFormPlayers({})}>Add Player</Button>
+    <Button secondary onClick={() => p.setFormPlayers({})} disabled={p.isLoading}>Add Player</Button>
   </div>
 
 export default withMobile(AddPlayer)

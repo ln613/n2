@@ -36,7 +36,7 @@ const groups = (ms, tid, sid) =>
     <td key="id" hidden />
   </Table>;
 
-const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id }) =>
+const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id, isLoading }) =>
   <div>
     <h1>Schedule - {tournament.name} - {tournament.isSingle ? ('Round ' + schedule.id) : schedule.date}</h1>
     <hr />
@@ -53,7 +53,7 @@ const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id
     }
     <hr />
     <Button primary onClick={history.goBack}>Back</Button>
-    {tournament.groups ? null : <Button primary onClick={() => id[0] === '+' ? postSchedule(schedule, { id1: tournament.id }) : putSchedule(schedule, { id1: tournament.id, id: schedule.id })}>Save</Button>}
+    {tournament.groups ? null : <Button primary onClick={() => id[0] === '+' ? postSchedule(schedule, { id1: tournament.id }) : putSchedule(schedule, { id1: tournament.id, id: schedule.id })} disabled={isLoading}>Save</Button>}
   </div>
 
 export default compose(

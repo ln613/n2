@@ -10,14 +10,14 @@ import AddPlayer from './AddPlayer';
 import { withSuccess } from 'utils/ui';
 import { withRouter } from "react-router-dom";
 
-const SinglePlayers = ({ tournament, date, players, patchTour, setFormTournamentPlayers, getPlayerRating, id, history }) =>
+const SinglePlayers = ({ tournament, date, players, patchTour, setFormTournamentPlayers, getPlayerRating, id, history, isLoading }) =>
   <div>
     <h1>Players - {tournament.name}</h1>
     <hr />
     <AddPlayer players={tournament.players} allPlayers={players} formPath='tournament' date={date} setFormPlayers={setFormTournamentPlayers} getPlayerRating={getPlayerRating} />
     <hr />
     <Button primary onClick={history.goBack}>Back</Button>
-    <Button primary onClick={() => patchTour(toTour(tournament), { id })}>Save</Button>
+    <Button primary onClick={() => patchTour(toTour(tournament), { id })} disabled={isLoading}>Save</Button>
   </div>
 
 export default compose(

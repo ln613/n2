@@ -11,7 +11,7 @@ import AddPlayer from './AddPlayer';
 import { withSuccess } from 'utils/ui';
 import { withRouter } from "react-router-dom";
 
-const Team = ({ tournament, team, players, monthRatings, putTeam, postTeam, id, setFormTeamPlayers, getPlayerRating, history }) =>
+const Team = ({ tournament, team, players, monthRatings, putTeam, postTeam, id, setFormTeamPlayers, getPlayerRating, history, isLoading }) =>
   <div>
     <h1>Team - {team.name}</h1>
     <hr />
@@ -20,10 +20,10 @@ const Team = ({ tournament, team, players, monthRatings, putTeam, postTeam, id, 
     <TextBox name="team.group" />
     <br/>
     Players:
-    <AddPlayer players={team.players} allPlayers={players} formPath='team' setFormPlayers={setFormTeamPlayers} getPlayerRating={getPlayerRating} withSub />
+    <AddPlayer players={team.players} allPlayers={players} formPath='team' setFormPlayers={setFormTeamPlayers} getPlayerRating={getPlayerRating} withSub isLoading={isLoading} />
     <hr />
     <Button primary onClick={history.goBack}>Back</Button>
-    <Button primary onClick={() => id[0] !== '+' ? putTeam(team, { id1: tournament.id, id: team.id }) : postTeam(team, { id1: tournament.id })}>Save</Button>
+    <Button primary onClick={() => id[0] !== '+' ? putTeam(team, { id1: tournament.id, id: team.id }) : postTeam(team, { id1: tournament.id })} disabled={isLoading}>Save</Button>
   </div>
 
 export default compose(

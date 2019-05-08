@@ -1,7 +1,7 @@
 const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;
 const cd = require('cloudinary');
-const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, findIndex, isNil, last, pick, groupBy } = require('ramda');
+const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, findIndex, isNil, last, pick, groupBy, zipWith, mergeDeepWith, is, concat } = require('ramda');
 const { tap, json2js, adjustRating, newRating, serial, toDateOnly, rrSchedule, rrScheduleTeam, group, sortTeam, gengames } = require('.');
 const moment = require('moment');
 const { findById, split2 } = require('@ln613/util');
@@ -74,7 +74,7 @@ e.getPlayerRating = (id, date) => db.collection('tournaments').aggregate([
   { $limit: 1 },
   { $replaceRoot: { newRoot: '$games'} },
   { $project: { rating: { $cond: [{ $eq: ['$p1', id] }, { $add: ['$p1Rating', '$p1Diff'] }, { $add: ['$p2Rating', '$p2Diff'] }] } } }
-]).toArray().then(x => x[0].rating)
+]).toArray().then(x => x.length === 0 ? e.getById('players', id) : x[0]).then(x => (x || {}).rating)
 
 e.changeResult = g1 => db.collection('tournaments').aggregate([
   { $unwind: '$games' },

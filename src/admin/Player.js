@@ -10,7 +10,7 @@ import { withEdit, withLoad, withParams, withMount } from '@ln613/compose';
 import { withSuccess } from 'utils/ui';
 import { withRouter } from "react-router-dom";
 
-const Player = ({ player, putPlayer, postPlayer, id, history }) =>
+const Player = ({ player, putPlayer, postPlayer, id, history, isLoading }) =>
   <div>
     <h1>Player - {+player.id ? player.name : 'Add New'}</h1>
     <hr />
@@ -23,7 +23,7 @@ const Player = ({ player, putPlayer, postPlayer, id, history }) =>
     <TextBox name="player.rating" />
     <hr />
     <Button primary onClick={history.goBack}>Back</Button>
-    <Button primary onClick={() => id[0] === '+' ? postPlayer(toPlayer(player)) : putPlayer(toPlayer(player))}>Save</Button>
+    <Button primary onClick={() => id[0] === '+' ? postPlayer(toPlayer(player)) : putPlayer(toPlayer(player))} disabled={isLoading}>Save</Button>
   </div>
 
 export default compose(

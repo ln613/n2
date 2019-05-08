@@ -43,7 +43,7 @@ e.rrScheduleTeam = (teams, startDate, ids) => {
   if (!ids) ids = R.range(1, Math.min(Math.floor(teams.length / 2) + 1, 7));
 
   return R.compose(
-    rs => rs.map((w, i) => ({ id: i + 1, matches: w.map((m, j) => { m.id = ids[j]; return m; }), date: moment(startDate).add(i, 'week').toDate() })),
+    rs => rs.map((w, i) => ({ id: i + 1, matches: w.map((m, j) => { m.id = ids[j]; return m; }), date: e.toDateOnly(moment(startDate).add(i, 'week').toDate()) })),
     R.splitEvery(ids.length),
     R.unnest,
     e.rrSchedule,

@@ -20,15 +20,15 @@ const b1 = p =>
     }
     {!isEmpty(p.t.schedules) ? <Link class="item" to={`/admin/schedules/${p.t.id}`}>Schedules</Link> : null}
     {/* <Link class="item" to={`/admin/games/${tournament.id}`}>Games</Link> */}
-    {p.canGenerateGroup ? <Link class="item" onClick={() => p.postGengroup({ id: p.id })} to="#">Generate Groups</Link> : null}
-    {p.canGenerateSchedule ? <Link class="item" onClick={() => p.postGenrr({ id: p.id })} to="#">Generate Schedule</Link> : null}
-    {p.canGenerateSchedule2 ? <Link class="item" onClick={() => p.postGenrr({ id: p.id, standing: p.standing })} to="#">Generate Schedule 2</Link> : null}
-    {p.canGenerateKO ? <Link class="item" onClick={() => p.postGenrr({ id: p.id, standing: p.standing, koStanding: p.ko })} to="#">Generate KO</Link> : null}
+    {p.canGenerateGroup ? <Link class="item" onClick={() => !p.isLoading && p.postGengroup({ id: p.id })} to="#">Generate Groups</Link> : null}
+    {p.canGenerateSchedule ? <Link class="item" onClick={() => !p.isLoading && p.postGenrr({ id: p.id })} to="#">Generate Schedule</Link> : null}
+    {p.canGenerateSchedule2 ? <Link class="item" onClick={() => !p.isLoading && p.postGenrr({ id: p.id, standing: p.standing })} to="#">Generate Schedule 2</Link> : null}
+    {p.canGenerateKO ? <Link class="item" onClick={() => !p.isLoading && p.postGenrr({ id: p.id, standing: p.standing, koStanding: p.ko })} to="#">Generate KO</Link> : null}
   </Fragment>;
 
 const Tournament = p =>
   <div>
-    <h1>Tournament - {+p.t.id ? p.t.name : 'Add New'}</h1>
+    <h1>Tournament - {+tap(p).t.id ? p.t.name : 'Add New'}</h1>
     <hr />
     {+p.t.id ? <div class={`ui three item menu`}>{b1(p)}</div> : null}
     <TextBox name="tournament.id" disabled />
@@ -39,7 +39,7 @@ const Tournament = p =>
     {/* <TextBox name="tournament.ratingDate" /> */}
     <hr />
     <Button primary onClick={p.history.goBack}>Back</Button>
-    <Button primary onClick={() => p.id[0] !== '+' ? p.patchTour(p.tournament) : p.postTour(p.tournament)}>Save</Button>
+    <Button primary onClick={() => p.id[0] !== '+' ? p.patchTour(p.tournament) : p.postTour(p.tournament)} disabled={p.isLoading} >Save</Button>
   </div>;
 
 export default compose(
@@ -54,7 +54,7 @@ export default compose(
     canGenerateSchedule2: !t.has2half && !isEmpty(t.teams) && !isEmpty(t.schedules) && !isEmpty(standing) && standing.length > 2,
     canGenerateKO: !isEmpty(t.teams) && !isNil(t.teams[0].group) && !isEmpty(t.schedules),
   })),
-  withSuccess('tour', () => alert('Saved'), () => alert('Error happened!')),
+  withSuccess(['tour', 'genrr', 'gengroup'], () => alert('Saved'), () => alert('Error happened!')),
   withRouter,
   withMobile
 )(Tournament);
