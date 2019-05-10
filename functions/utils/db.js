@@ -1,12 +1,9 @@
-const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;
 const cd = require('cloudinary');
 const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, findIndex, isNil, last, pick, groupBy, zipWith, mergeDeepWith, is, concat } = require('ramda');
-const { tap, isDev, json2js, adjustRating, newRating, serial, toDateOnly, rrSchedule, rrScheduleTeam, group, sortTeam, gengames } = require('.');
+const { tap, httpGet, json2js, adjustRating, newRating, serial, toDateOnly, rrSchedule, rrScheduleTeam, group, sortTeam, gengames } = require('.');
 const moment = require('moment');
 const { findById, split2 } = require('@ln613/util');
-
-//require('dotenv').config({ path: './.env' });
 
 cd.config({ cloud_name: 'vttc', api_key: process.env.CLOUDINARY_KEY, api_secret: process.env.CLOUDINARY_SECRET });
 
@@ -23,9 +20,9 @@ e.initdocs = docs => {
   );
 }
 
-e.initdata = d => e.initdocs(d || json2js(fs.readFileSync(`.${isDev ? '/functions' : '.'}/data/db.json`)))
+e.initdata = async d => e.initdocs(d || await httpGet(`${process.env.GITHUB_DB}db.json`))
 
-e.backup = () => Promise.all(allDocs.map(e.get)).then(l => fromPairs(l.map((d, i) => [allDocs[i], d])))//.then(x => JSON.stringify(x)).then(x => { fs.writeFile('./data/db.json', x); return x; })
+e.backup = () => Promise.all(allDocs.map(e.get)).then(l => fromPairs(l.map((d, i) => [allDocs[i], d])))
 
 e.list = () => Object.keys(db)
 
@@ -105,8 +102,8 @@ e.changeResult = g1 => db.collection('tournaments').aggregate([
     .then(_ => Promise.all(ps.map(p => db.collection('players').update({ id: p[0] }, { $set: {rating: p[1]}}))));
 }).catch(e => console.log(e))
 
-e.updateRating = () => {
-  const pr = JSON.parse(fs.readFileSync(`.${isDev ? '/functions' : '.'}/data/initialRatings.json`));
+e.updateRating = async () => {
+  const pr = await httpGet(`${process.env.GITHUB_DB}initialRatings.json`);
 
   return e.backup().then(o => {
     o.tournaments.forEach(t => {

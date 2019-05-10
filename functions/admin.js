@@ -51,7 +51,7 @@ module.exports.handler = async (event, context) => {
     }
   } else if (method === 'PATCH') {
     if (q.updaterating) {
-      r = await updaterating();
+      r = await updateRating();
     } else if (q.result) {
       await replaceList('tournaments', q.id, 'games', body);
       r = await updaterating();

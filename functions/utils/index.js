@@ -1,4 +1,5 @@
 const R = require('ramda');
+const axios = require("axios");
 const moment = require('moment');
 const util = require('@ln613/util');
 
@@ -17,6 +18,8 @@ e.sortDesc = R.sort((a, b) => b - a);
 e.isOdd = n => n % 2 === 1;
 
 e.trynull = f => { try { return f(); } catch (e) { return null; } };
+
+e.httpGet = url => axios.get(url).then(r => r.data)
 
 const rrCycle = (x, r, l) => x < r ? x - r + l : x - r + 1;
 
