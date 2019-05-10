@@ -27,7 +27,8 @@
   "scripts": {
     "start": "cross-env NODE_PATH=./src react-scripts start",
     "build": "cross-env NODE_PATH=./src react-scripts build",
-    "func": "watch \"netlify-lambda serve functions\" functions",
+    "func": "cross-env DB_LOCAL=mongodb://localhost:27017/vttc netlify-lambda serve functions",
+    "func-live": "netlify-lambda serve functions",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
