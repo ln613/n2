@@ -19,6 +19,7 @@ const Cats = ({ cats, history }) =>
     <Table name="cats" link={x => `/admin/cats/${x.id}`} data={(cats || []).map(pick(['id', 'name', 'name_ch']))} />
 
     <form name="f1" method="POST" netlify>
+      <input type="hidden" name="form-name" value="f1" />
       <input name="n1"/>
       <button type="submit">Send</button>
     </form>
