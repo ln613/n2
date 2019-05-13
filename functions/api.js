@@ -28,7 +28,7 @@ module.exports.handler = async (event, context) => {
     r = await get(doc);
   } else if (folder) {
     //r = fs.readdirSync(process.cwd());
-    r = fs.writeFileSync('/tmp/1.txt', 'abc')
+    r = fs.writeFileSync(process.cwd() + '/tmp/1.txt', 'abc')
   }
 
   return res(r);
