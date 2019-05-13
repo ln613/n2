@@ -20,7 +20,7 @@ const Cats = ({ cats, history }) =>
 
     <form name="f1" method="POST" netlify>
       <input type="hidden" name="form-name" value="f1" />
-      <input name="n1"/>
+      <input name="n1" type="file"/>
       <button type="submit">Send</button>
     </form>
   </div>
