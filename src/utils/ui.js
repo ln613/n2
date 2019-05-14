@@ -1,15 +1,20 @@
 import React from 'react';
 import { connect } from '@ln613/state';
 import { compose } from 'recompose';
+import { isNil } from 'ramda';
 import { successSelector, authSelector } from './selectors';
 import actions from './actions';
-import { withNewValue } from '@ln613/compose';
+import { withNewValue, withMount } from '@ln613/compose';
 import { TextBox, Password } from '@ln613/ui';
 import { Button } from 'semantic-ui-react';
 import { tap } from '@ln613/util';
 
 export const withAuth = compose(
-  connect(authSelector),
+  connect(authSelector, actions),
+  withMount(p => {
+    if (isNil(p.auth.isAuthenticated))
+      p.patchAuth();
+  }),
   Comp => p => p.auth.isAuthenticated ? <Comp {...p} /> : <Login />
 );
 

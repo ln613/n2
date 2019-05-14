@@ -8,10 +8,10 @@ const admin = aws + 'admin?';
 export const actionData = {
   auth: {
     url: aws + 'login',
-    method: 'post',
+    methods: ['post', 'patch'],
     after: x => {
       if (x.isAuthenticated)
-        localStorage.setItem('token', x.token);
+        x.token && localStorage.setItem('token', x.token);
       else
         localStorage.removeItem('token');
       return { isAuthenticated: x.isAuthenticated };
@@ -21,7 +21,10 @@ export const actionData = {
     url: aws + 'logout',
     method: 'post',
     path: 'auth',
-    after: x => x
+    after: x => {
+      localStorage.removeItem('token');
+      return x;
+    }
   },
   lookup: {
     url: api + 'lookup=1'

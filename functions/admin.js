@@ -1,7 +1,6 @@
-const jwt = require('jsonwebtoken');
 const { is } = require('ramda');
 const { connectDB, cdList, initdata, backup, updateRating, genrr, gengroup, nogame, addToList, add, replaceList, replace, update, count } = require('./utils/db');
-const { tap, res, trynull } = require('./utils');
+const { tap, res, trynull, authorize } = require('./utils');
 
 module.exports.handler = async (event, context) => {
   if (event.httpMethod === 'OPTIONS')
@@ -65,13 +64,4 @@ module.exports.handler = async (event, context) => {
   }
 
   return res(r);
-};
-
-const authorize = async token => {
-  try {
-    await jwt.verify(token, process.env.JWT_SECRET);
-    return true;
-  } catch (e) {
-    return false;
-  }
 };

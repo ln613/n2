@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const R = require('ramda');
 const axios = require("axios");
 const moment = require('moment');
@@ -19,7 +20,17 @@ e.isOdd = n => n % 2 === 1;
 
 e.trynull = f => { try { return f(); } catch (e) { return null; } };
 
-e.httpGet = url => axios.get(url).then(r => r.data)
+e.httpGet = url => axios.get(url).then(r => r.data);
+
+e.authorize = async token => {
+  try {
+    await jwt.verify(token, process.env.JWT_SECRET);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+
 
 const rrCycle = (x, r, l) => x < r ? x - r + l : x - r + 1;
 
@@ -119,6 +130,10 @@ e.res = (body, code) => ({
   },
   body: JSON.stringify(body)
 });
+
+e.res401 = () => e.res({ isAuthenticated: false }, 401);
+
+e.resAuth = token => e.res({ isAuthenticated: true, token });
 
 e.policy = r => ({
   principalId: process.env.PRINCIPALID,
