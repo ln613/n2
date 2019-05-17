@@ -11,7 +11,7 @@ const AdminMenu = p =>
   <Fragment>
     <div class={`ui top attached ${p.isMobile ? 'three item' : 'vertical'} menu`}>
       <Link class="item" to="/admin">Home</Link>
-      <Link class="item" to="/admin/cats">Categories</Link>
+      <Link class="item" to="/admin/convert">Convert</Link>
       <Link class="item" to="/admin/products">Products</Link>
     </div>
     <div class={`ui bottom attached ${p.isMobile ? 'three item' : 'vertical'} menu`}>
