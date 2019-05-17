@@ -1,13 +1,14 @@
-import React, { Fragment } from 'react';
-import { withMount, withState } from '@ln613/compose';
+import React from 'react';
+import { withState } from '@ln613/compose';
 import { tap } from '@ln613/util';
 import { compose, withHandlers } from 'recompose';
 import { Label, Button, Icon } from 'semantic-ui-react';
+import { admin } from 'utils/actions';
 
 const Convert = ({ file, selectFile, convert, inProgress }) =>
   <div>
     <div>
-      <Label width="4" as="label" htmlFor="file" color="orange" size="big" className="cp">
+      <Label width="4" as="label" htmlFor="file" color="orange" size="large" className="cp">
         <Icon name="file" />
         Select a file...
       </Label>
@@ -32,18 +33,19 @@ export default compose(
       fd.append('upload_preset', 'baicr6sd');
       fd.append('file', file);
       const c = await post('https://api.cloudinary.com/v1_1/vttc/raw/upload', fd, true);
-      const p = await post('https://api.cloudconvert.com/v1/process', { inputformat: 'docx', outputformat: 'png' }, false, true);
-      const s = await post(p.url, { outputformat: 'png', input: 'download', file: c.url, wait: true, filename: '1.docx', converteroptions: { resize: '2100x700', resizemode: 'scale' } });
-      await post('https://api.cloudinary.com/v1_1/vttc/image/upload', { upload_preset: 'baicr6sd', file: 'https:' + s.output.url });
+      const p = await post('https://api.cloudconvert.com/v1/process', { inputformat: 'docx', outputformat: 'png' }, false, 'Bearer bpeNFC52jeIx3SkL6VHjhqjYamwGjvK8RCm5Gg2fAtqIKysMmjuhx6Hb2B6oHa3i');
+      const s = await post(p.url, { outputformat: 'png', input: 'download', file: c.url, wait: true, filename: '1.docx', converteroptions: { resize: '1500x500', resizemode: 'scale', quality: 75 } });
+      tap(await post(admin + 'cdupload=1', { url: 'https:' + s.output.url }, false, localStorage.getItem('token')));
+      //await post('https://api.cloudinary.com/v1_1/vttc/image/upload', { upload_preset: 'baicr6sd', file: 'https:' + s.output.url });
       setInProgress(false);
     }
   })),
 )(Convert);
 
-const post = (url, params, isUpload, withKey) => fetch(url, {
+const post = (url, params, isUpload, key) => fetch(url, {
   method: 'post',
   headers: {
-    ...(withKey ? { Authorization: 'Bearer eOgfamMWkKHQSkHwerVGWc6jvrWUrCC2SOh7J3oA8IrsYVkNuJoNyJI10fNbaBfZ' } : {}),
+    ...(key ? { Authorization: key } : {}),
     ...(isUpload ? {} : { 'Content-Type': 'application/json' }),
   },
   body: isUpload ? params : JSON.stringify(params)

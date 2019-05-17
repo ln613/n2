@@ -2,8 +2,8 @@ import { generateActions } from '@ln613/state';
 import { isDev } from '.';
 
 const aws = isDev ? 'http://localhost:9000/' : '/.netlify/functions/';
-const api = aws + 'api?';
-const admin = aws + 'admin?';
+export const api = aws + 'api?';
+export const admin = aws + 'admin?';
 
 export const actionData = {
   auth: {
