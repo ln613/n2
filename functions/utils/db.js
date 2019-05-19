@@ -57,7 +57,7 @@ e.cdList = () => cd.v2.api.resources({ max_results: 500 }).then(r => sortWith([a
 
 e.cdVersion = () => cd.v2.api.resources({ max_results: 500 }).then(r => sortWith([descend(prop('version'))], r.resources)[0].version)
 
-e.cdupload = url => cd.v2.uploader.upload(url, { public_id: 'slider/1', use_filename: true, unique_filename: false, overwrite: true })
+e.cdupload = ({ url, folder, name }) => cd.v2.uploader.upload(url, { public_id: folder + '/' + name, use_filename: true, unique_filename: false, overwrite: true })
 
 e.getPlayerGames = id => db.collection('tournaments').aggregate([
   { $unwind: '$games' },

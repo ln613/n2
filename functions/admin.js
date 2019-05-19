@@ -28,7 +28,7 @@ module.exports.handler = async (event, context) => {
     if (q.cd) {
       r = await cdList();
     } else if (q.cdupload) {
-      r = await cdupload(body.url);
+      r = await cdupload(body);
     } else if (q.genrr) {
       r = await genrr(body);
     } else if (q.gengroup) {
