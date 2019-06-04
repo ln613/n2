@@ -1,8 +1,8 @@
 import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, filter as where, uniqBy, anyPass, both, dropLast, isNil, toPairs, is } from 'ramda';
 import { createSelector, mapStateWithSelectors } from '@ln613/state';
 import { Bold, Italic } from '@ln613/ui';
-import { findById, getNameById, getPropById, toDate, toMonth, addIndex, diff, tap, split2, toAbsDate, findByName } from '@ln613/util';
-import { highlightSub, toSingleArray } from './';
+import { findById, getNameById, getPropById, toMonth, addIndex, diff, tap, split2, toAbsDate, findByName } from '@ln613/util';
+import { highlightSub, toSingleArray, toDateOnly } from './';
 
 const _form = s => s.form || {};
 const _filter = s => s.filter || {};
@@ -204,7 +204,7 @@ const gamesWithTeams = createSelector(
   games,
   (ts, ps, gs) => gs.map(g => ({
     ...g,
-    date: toDate(g.date),
+    date: toDateOnly(g.date),
     player1: (findById(g.p1)(ps) || {}).name,
     player2: (findById(g.p2)(ps) || {}).name,
     team1: find(x => findById(g.p1)(x.players), ts),
@@ -348,7 +348,7 @@ const history = createSelector(
 
       return {
         id: g.id,
-        date: toDate(g.date),
+        date: toDateOnly(g.date),
         tournament: x.name,
         month: toMonth(g.date),
         player1,

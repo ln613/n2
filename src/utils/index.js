@@ -1,4 +1,5 @@
-import { last, isNil, pipe, filter, map, fromPairs, isEmpty as _isEmpty, either, is } from 'ramda';
+import { last, isNil, pipe, filter, map, fromPairs, isEmpty as _isEmpty, either, is, take } from 'ramda';
+import moment from 'moment';
 
 export const isDev = process.env.NODE_ENV === 'development';
 
@@ -56,3 +57,5 @@ export const highlightWinner = g => {
 }
 
 export const highlightSub = (n, isSub) => n + (isSub ? ' (Sub)' : '');
+
+export const toDateOnly = d => (is(String, d) ? moment(take(10, d)) : moment(d).add(8, 'hours')).format('M/D/YYYY');
