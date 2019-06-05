@@ -104,8 +104,8 @@ e.changeResult = g1 => db.collection('tournaments').aggregate([
     .then(_ => Promise.all(ps.map(p => db.collection('players').update({ id: p[0] }, { $set: {rating: p[1]}}))));
 }).catch(e => console.log(e))
 
-e.updateRating = async () => {
-  const pr = await httpGet(`${process.env.GITHUB_DB}initialRatings.json`);
+e.updateRating = async body => {
+  const pr = body || await httpGet(`${process.env.GITHUB_DB}initialRatings.json`);
 
   return e.backup().then(o => {
     o.tournaments.forEach(t => {
