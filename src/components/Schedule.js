@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from '@ln613/state';
 import { compose } from 'recompose';
 import { pick, isNil } from 'ramda';
@@ -16,6 +16,7 @@ const Schedule = ({ tournament, id, isMobile }) =>
     <div class={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr/>
+      {(id == 90 || id == 96) && <Fragment><i>*The schedule for the 2nd round will be generated after all 1st round matches are finished.</i><hr/></Fragment>}
       {(tournament.schedules || []).map((s, i) =>
         <div class="pt8">
           <div class="pv8 fs24 darkgreen">{tournament.isSingle ? 'Round ' + (i + 1) : (!isNil(s.group) ? ('Group ' + s.group) : (s.ko ? kos[Math.log2(s.ko)] : s.date)) }</div>
