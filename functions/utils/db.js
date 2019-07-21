@@ -206,9 +206,9 @@ e.genrr = body => {
           return 'N/A';
         }
       } else if (!t.has2half && t.teams && t.schedules && standing) { // generate schedule for 2nd half, already has schedule and current standing is sent
-        const sd = t.startDate2 || toDateOnly(moment(last(t.schedules).date).add(1, 'week').toDate());
-        const tt = split2(standing.map(x => find(y => y.name === x.team, t.teams)));
-        const s1 = rrScheduleTeam(tt[0], sd, tables ? tables[0] : [5, 6, 7]);
+        const sd = t.startDate2 || toDateOnly(moment(last(t.schedules).date).add(3, 'week').toDate());
+        const tt = split2(t.isCeil)(standing.map(x => find(y => y.name === x.team, t.teams)));
+        const s1 = rrScheduleTeam(tap(tt)[0], sd, tables ? tables[0] : [5, 6, 7]);
         const s2 = rrScheduleTeam(tt[1], sd, tables ? tables[1] : [1, 2, 3]);
         const s = zipWith(mergeDeepWith((a, b) => is(Array, a) ? concat(a, b) : a))(s1, s2);
         const lastId = last(t.schedules).id;
