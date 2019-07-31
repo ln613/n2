@@ -252,7 +252,7 @@ const standing = createSelector(
       addIndex('rank')
     );
 
-    return tt.has2half ? pipe(sortBy(prop('rank')), split2, map(p))(st) :
+    return tt.has2half ? pipe(sortBy(prop('rank')), split2(tt.isCeil), map(p))(tap(st)) :
       (tt.teams && tt.teams.length > 0 && !isNil(tt.teams[0].group) ? pipe(groupBy(t => t.group), toPairs, map(x => x[1]), map(p))(st) :
       p(st));
   }
@@ -284,7 +284,7 @@ const stats = createSelector(
     const teams = t.teams || [];
 
     const players = pipe(
-      map(x => x.players.map(p => ({...p, isUpperDiv: x.rank <= teams.length / 2}))),
+      map(x => x.players.map(p => ({...p, isUpperDiv: x.rank <= (t.isCeil ? Math.ceil : Math.floor)(teams.length / 2)}))),
       unnest,
       where(x => !x.isSub),
       uniqBy(x => +x.id)
