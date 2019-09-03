@@ -26,12 +26,12 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 
 const Home = ({ isMobile }) =>
   <div>
-    <div class="p16">
+    {/* <div class="p16">
       <h2>Notice:</h2>
       <div>
         From Aug. 30th (Friday) to Sep. 2nd (Monday), we are open from 12pm to 6pm. 从8月30日到9月2日，开放时间为12pm到6pm. 不便之处，敬请见谅.  
       </div>
-    </div>  
+    </div>   */}
 
     <ImageSlider n={3} t={6} />
 
