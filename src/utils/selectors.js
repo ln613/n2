@@ -1,4 +1,7 @@
-import { reduce, prop, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, filter as where, uniqBy, anyPass, both, dropLast, isNil, toPairs, is } from 'ramda';
+import {
+  reduce, prop, sort, sortWith, sortBy, ascend, descend, unnest, find, isEmpty, groupBy, groupWith, join, sum, range, pipe, map, filter as where, uniqBy, anyPass, both, dropLast, isNil,
+  toPairs, is, uniq
+} from 'ramda';
 import { createSelector, mapStateWithSelectors } from '@ln613/state';
 import { Bold, Italic } from '@ln613/ui';
 import { findById, getNameById, getPropById, toMonth, addIndex, diff, tap, split2, toAbsDate, findByName } from '@ln613/util';
@@ -324,7 +327,7 @@ const stats = createSelector(
   }
 );
 
-const history = createSelector(
+const allHistory = createSelector(
   _history,
   players,
   (h, ps) => sortWith(
@@ -347,12 +350,14 @@ const history = createSelector(
       else player2 = Bold(player2);
 
       return {
-        id: g.id,
+        id: tap(g).id,
         date: toDateOnly(g.date),
         tournament: x.name,
         month: toMonth(g.date),
+        p1: g.p1,
         player1,
         result: g.result,
+        p2: g.p2,
         player2,
         group: g.group,
         ko: g.ko,
@@ -363,8 +368,33 @@ const history = createSelector(
   //groupWith((a, b) => a.month === b.month, gs).forEach(x => x[0].isLastGameInMonth = true);
 );
 
-const monthRatings = createSelector(
+const history = createSelector(
+  allHistory,
+  _form,
+  (h, f) => h.filter(x => (!f.oppo || x.p1 == f.oppo || x.p2 == f.oppo) && (!f.tour || x.tournament === f.tour))
+);
+
+const oppoList = createSelector(
   history,
+  players,
+  (h, ps) => pipe(
+    map(x => [x.p1, x.p2]),
+    unnest,
+    uniq,
+    l => ps.filter(p => l.indexOf(p.id) > -1)
+  )(h)
+);
+
+const tourList = createSelector(
+  history,
+  h => pipe(
+    map(x => x.tournament),
+    uniq,
+  )(h)
+);
+
+const monthRatings = createSelector(
+  allHistory,
   h => h.filter(x => x.isLastGameInMonth).map(x => ({ text: x.month, value: x.rating }))
 );
 
@@ -378,7 +408,7 @@ export const playersSelector = mapStateWithSelectors({ players, lookup, player: 
 export const tournamentsSelector = mapStateWithSelectors({ tournaments: tournamentsWithYears, lookup });
 export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players, formMatch: form('match'), newGameId, isLoading });
 export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), t: tournament, tournaments, players, standing, ko, isLoading });
-export const historySelector = mapStateWithSelectors({ history, lookup, players });
+export const historySelector = mapStateWithSelectors({ history, lookup, players, oppoList, tourList });
 export const standingSelector = mapStateWithSelectors({ standing, tournament, players });
 export const teamSelector = mapStateWithSelectors({ tournament, team: form('team'), players, monthRatings, isLoading });
 export const scheduleSelector = mapStateWithSelectors({ tournament, schedule: form('schedule'), players, isLoading });

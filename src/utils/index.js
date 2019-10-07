@@ -1,6 +1,8 @@
 import { last, isNil, pipe, filter, map, fromPairs, isEmpty as _isEmpty, either, is, take } from 'ramda';
 import moment from 'moment';
 
+export const tap = x => { console.log(x); return x; };
+
 export const isDev = process.env.NODE_ENV === 'development';
 
 export const isEmpty = either(isNil, _isEmpty);

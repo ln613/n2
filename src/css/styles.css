@@ -145,3 +145,7 @@ table.ui.striped.table tbody tr:nth-child(even) {
 div.ui.striped.grid div.tbody:nth-child(odd) {
   background-color: #ffffd8;
 }
+
+.fixdd div.visible.menu.transition {
+  height: 300px;
+}
