@@ -14,7 +14,7 @@ const D1 = ({ isMobile, children }) => <div class={`${isMobile ? '' : 'card'} fv
 
 const c2 = (c, i, m) => {
   if (c.slice(0, 4) === 'http') return <D1 isMobile={m}>{yt(c, m)}</D1>;
-  const c3 = <ImageSlider n={num[i]} f={i} name={c} t={6} filter="c_scale,w_300" />;
+  const c3 = <ImageSlider n={num[i]} f={i} name={c} t={6} filter="c_scale,w_600" />;
   const c4 = <div class="p8 fs18 tac">{c}</div>;
 
   return m ?
