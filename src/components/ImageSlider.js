@@ -8,11 +8,11 @@ import { lookupSelector } from 'utils/selectors';
 
 const sl = n => 'slider' + (isNil(n) ? '' : ('-' + n));
 
-const ImageList = ({ n, f, name, index, lookup }) =>
+const ImageList = ({ n, f, name, index, lookup, filter }) =>
   <div class="pr">
-    <img src={cdurl(lookup, sl(f), 1)} class="op0 w100" alt="" />
+    <img src={cdurl(lookup, sl(f), 1, filter)} class="op0 w100" alt="" />
     {range(0, n).map((x, i) =>
-      <img src={cdurl(lookup, sl(f), i + 1)} class={`fade ${index === i ? 'show' : ''}`} alt="" />
+      <img src={cdurl(lookup, sl(f), i + 1, filter)} class={`fade ${index === i ? 'show' : ''}`} alt="" />
     )}
   </div>
 
