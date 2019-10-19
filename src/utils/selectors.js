@@ -14,6 +14,7 @@ const form = p => s => _form(s)[p] || {};
 const filter = p => s => _filter(s)[p] || {};
 
 const isLoading = s => s.isLoading;
+const isUpdating = s => s.isUpdating;
 const isMobile = s => s.isMobile;
 const lastAction = s => s.lastAction || '';
 const error = s => s.error;
@@ -415,4 +416,4 @@ export const scheduleSelector = mapStateWithSelectors({ tournament, schedule: fo
 export const gameSelector = mapStateWithSelectors({ tournament, players, game: form('game'), isLoading });
 export const statsSelector = mapStateWithSelectors({ tournament, stats });
 export const authSelector = mapStateWithSelectors({ auth, login: form('login') });
-export const adminSelector = mapStateWithSelectors({ isLoading });
+export const adminSelector = mapStateWithSelectors({ isUpdating });

@@ -18,7 +18,7 @@ const AdminMenu = p =>
       <Link class="item" to="/admin/products">Products</Link>
     </div>
     <div class={`ui bottom attached ${p.isMobile ? 'three item' : 'vertical'} menu`}>
-      {p.isLoading ? <Loader active inline /> : <Link class="item" onClick={() => p.patchUpdateRating(initialRatings)} to="#">Update Ratings</Link>}
+      {p.isUpdating ? <Loader active inline="centered" /> : <Link class="item" onClick={() => { p.setIsUpdating(true); p.patchUpdateRating(initialRatings); }} to="#">Update Ratings</Link>}
       <Link class="item" to="/admin/players">Players</Link>
       <Link class="item" to="/admin/tournaments">Tournaments</Link>
     </div>
@@ -26,6 +26,6 @@ const AdminMenu = p =>
 
 export default compose(
   connect(adminSelector, actions),
-  withSuccess('updaterating', () => alert('Ratings updated'), () => alert('Error happened!')),
+  withSuccess('updaterating', () => { alert('Ratings updated'); p.setIsUpdating(false); }, () => alert('Error happened!')),
   withMobile
 )(AdminMenu);

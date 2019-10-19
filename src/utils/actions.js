@@ -129,6 +129,7 @@ export const actionData = {
   },
   filter: {},
   lang: {},
+  isUpdating: {},
 }
 
 export default generateActions(actionData);
