@@ -26,6 +26,6 @@ const AdminMenu = p =>
 
 export default compose(
   connect(adminSelector, actions),
-  withSuccess('updaterating', () => { alert('Ratings updated'); p.setIsUpdating(false); }, () => alert('Error happened!')),
+  withSuccess('updaterating', p => { alert('Ratings updated'); p.setIsUpdating(false); }, () => alert('Error happened!')),
   withMobile
 )(AdminMenu);
