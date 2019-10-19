@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button, Loader } from 'semantic-ui-react';
 import { connect } from '@ln613/state';
 import actions from 'utils/actions';
+import { adminSelector } from 'utils/selectors';
 import { withSuccess } from 'utils/ui';
 import { withMobile } from '@ln613/ui/semantic';
 
@@ -25,7 +26,7 @@ const AdminMenu = p =>
   </Fragment>
 
 export default compose(
-  connect(null, actions),
+  connect(adminSelector, actions),
   withSuccess('updaterating', () => alert('Ratings updated'), () => alert('Error happened!')),
   withMobile
 )(AdminMenu);
