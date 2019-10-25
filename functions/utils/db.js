@@ -72,7 +72,7 @@ e.getPlayerRating = (id, date) => db.collection('tournaments').aggregate([
   { $sort: { 'games.date': -1, 'games.id': -1 } },
   { $limit: 1 },
   { $replaceRoot: { newRoot: '$games'} },
-  { $project: { rating: { $cond: [{ $eq: ['$p1', id] }, { $add: ['$p1Rating', '$p1Diff'] }, { $add: ['$p2Rating', '$p2Diff'] }] } } }
+  { $project: { rating: { $cond: [{ $or: [{ $eq: ['$p1', id.toString()] }, { $eq: ['$p1', +id] }] }, { $add: ['$p1Rating', '$p1Diff'] }, { $add: ['$p2Rating', '$p2Diff'] }] } } }
 ]).toArray().then(x => x.length === 0 ? e.getById('players', id) : x[0]).then(x => (x || {}).rating)
 
 e.changeResult = g1 => db.collection('tournaments').aggregate([
