@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from '@ln613/state';
 import { compose, withProps } from 'recompose';
 import actions from 'utils/actions';
@@ -12,14 +12,25 @@ const History = ({ lookup, history, player, oppoList, tourList, isMobile }) =>
   <div class="p16 fv">
     <div class="f">
       <h1 class="fg1">History - {player.name} ({player.rating})</h1>
-    </div>  
+      {!isMobile &&
+        <div class="f">
+          <Select fluid name="oppo" options={oppoList} placeholder="All players" clearable></Select>
+          <div class="pr16"/>
+          <Select fluid name="tour" options={tourList} placeholder="All tournaments" clearable></Select>
+        </div>
+      }
+    </div>
     <div class="ui divider"></div>
-    <div class="f fg1 fixdd">
-      <Select fluid name="oppo" options={oppoList} placeholder="All players" clearable></Select>
-    </div>  
-    <div class="f fg1 fixdd">
-      <Select fluid name="tour" options={tourList} placeholder="All tournaments" clearable></Select>
-    </div>  
+    {isMobile &&
+      <Fragment>
+        <div class="f fg1 fixdd">
+          <Select fluid name="oppo" options={oppoList} placeholder="All players" clearable></Select>
+        </div>  
+        <div class="f fg1 fixdd">
+          <Select fluid name="tour" options={tourList} placeholder="All tournaments" clearable></Select>
+        </div>
+      </Fragment>
+    }
     <Table name="history" data={history} isMobile={isMobile}>
       <td key="id" hidden />
       <td key="month" hidden />

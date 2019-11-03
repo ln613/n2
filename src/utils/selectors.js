@@ -133,7 +133,8 @@ const tournament = createSelector(
   _tournament,
   players,
   teams,
-  (t, ps, ts) => {
+  _form,
+  (t, ps, ts, form) => {
     if (ps.length === 0) return t;
     const teams = (ts || []).map(m => ({
       ...m, text: m.name, value: m.id,
@@ -154,28 +155,31 @@ const tournament = createSelector(
     const schedules = (t.schedules || []).map(s => ({
       ...s,
       date: s.date,
-      matches: t.isSingle ?
-        s.matches.map(m => ({...m, player1: getSinglePlayer(m.home, players), player2: getSinglePlayer(m.away, players), result: m.result || ''})) :
-        ((s.group || s.ko) ? s.matches : range(1, 9).map(n => findById(n)(s.matches) || {}))
-        .map(m => {
-          const gs = findGames(s, m, games).filter(g => s.group ? s.group == g.group : (s.ko ? s.ko == g.ko : true));
-          const wn = gs.filter(g => (g.isWin && g.t1 === m.home) || (!g.isWin && g.t1 === m.away)).length;
-          const ln = gs.length - wn;
-          const groupGames = (m.games || [])
-            .map(x => ({...x, isDouble: x.p3 && x.p4}))
-            .map(x => ({
-              ...x,
-              team1: getNameById(x.t1)(teams),
-              team2: getNameById(x.t2)(teams),
-              player1: getPlayerName(1, x, ps, teams),
-              player2: getPlayerName(2, x, ps, teams),
-              p1Rating: getPropById('rating')(x.p1)(ps),
-              p2Rating: getPropById('rating')(x.p2)(ps),
-              isDouble: !!x.p3,
-              result: (find(g1 => g1.t1 == x.t1 && g1.t2 == x.t2 && g1.p1 == x.p1 && g1.p2 == x.p2 && g1.p3 == x.p3 && g1.p4 == x.p4, gs) || {}).result
-            }));
-          return {...m, team1: getNameById(m.home)(teams), team2: getNameById(m.away)(teams), result: wn + ':' + ln, games: groupGames };
-        })
+      matches: t.isSingle
+        ? s.matches
+          .filter(m => !form.player || m.home == form.player || m.away == form.player)
+          .map(m => ({...m, player1: getSinglePlayer(m.home, players), player2: getSinglePlayer(m.away, players), result: m.result || ''}))
+        : ((s.group || s.ko) ? s.matches : range(1, 9).map(n => findById(n)(s.matches) || {}))
+          .filter(m => !form.team || m.home == form.team || m.away == form.team)
+          .map(m => {
+            const gs = findGames(s, m, games).filter(g => s.group ? s.group == g.group : (s.ko ? s.ko == g.ko : true));
+            const wn = gs.filter(g => (g.isWin && g.t1 === m.home) || (!g.isWin && g.t1 === m.away)).length;
+            const ln = gs.length - wn;
+            const groupGames = (m.games || [])
+              .map(x => ({...x, isDouble: x.p3 && x.p4}))
+              .map(x => ({
+                ...x,
+                team1: getNameById(x.t1)(teams),
+                team2: getNameById(x.t2)(teams),
+                player1: getPlayerName(1, x, ps, teams),
+                player2: getPlayerName(2, x, ps, teams),
+                p1Rating: getPropById('rating')(x.p1)(ps),
+                p2Rating: getPropById('rating')(x.p2)(ps),
+                isDouble: !!x.p3,
+                result: (find(g1 => g1.t1 == x.t1 && g1.t2 == x.t2 && g1.p1 == x.p1 && g1.p2 == x.p2 && g1.p3 == x.p3 && g1.p4 == x.p4, gs) || {}).result
+              }));
+            return {...m, team1: getNameById(m.home)(teams), team2: getNameById(m.away)(teams), result: wn + ':' + ln, games: groupGames };
+          })
     }));
     return { ...t, teams, groups, players, schedules, games };
   }
