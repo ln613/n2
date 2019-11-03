@@ -14,11 +14,11 @@ const History = ({ lookup, history, player, oppoList, tourList, isMobile }) =>
       <h1 class="fg1">History - {player.name} ({player.rating})</h1>
     </div>  
     <div class="ui divider"></div>
-    <div class="f">
-      <Select class="fg1" fixdd fluid name="oppo" options={oppoList} placeholder="All players" clearable></Select>
+    <div class="f fg1 fixdd">
+      <Select fluid name="oppo" options={oppoList} placeholder="All players" clearable></Select>
     </div>  
-    <div class="f">
-      <Select class="fg1" fixdd fluid name="tour" options={tourList} placeholder="All tournaments" clearable></Select>
+    <div class="f fg1 fixdd">
+      <Select fluid name="tour" options={tourList} placeholder="All tournaments" clearable></Select>
     </div>  
     <Table name="history" data={history} isMobile={isMobile}>
       <td key="id" hidden />
