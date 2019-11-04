@@ -47,7 +47,7 @@ export default compose(
   withLoad('tournament'),
   withMobile,
   lifecycle({
-    componentWillUnmount: () => {
+    componentWillUnmount: function() {
       this.props.setForm(null, { path: 'player' })
       this.props.setForm(null, { path: 'team' })
     }

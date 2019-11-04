@@ -51,7 +51,7 @@ export default compose(
   withProps(p => ({ player: findById(p.id)(p.players) || {} })),
   withMobile,
   lifecycle({
-    componentWillUnmount: () => {
+    componentWillUnmount: function() {
       this.props.setForm(null, { path: 'oppo' })
       this.props.setForm(null, { path: 'tour' })
     }
