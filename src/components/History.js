@@ -49,5 +49,11 @@ export default compose(
   withLoad('players'),
   withLoadForce('history'),
   withProps(p => ({ player: findById(p.id)(p.players) || {} })),
-  withMobile
+  withMobile,
+  lifecycle({
+    componentWillUnmount: () => {
+      this.props.setForm(null, { path: 'oppo' })
+      this.props.setForm(null, { path: 'tour' })
+    }
+  })
 )(History);

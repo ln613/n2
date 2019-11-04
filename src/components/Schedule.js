@@ -45,7 +45,13 @@ export default compose(
   withParams,
   withLoad('players'),
   withLoad('tournament'),
-  withMobile
+  withMobile,
+  lifecycle({
+    componentWillUnmount: () => {
+      this.props.setForm(null, { path: 'player' })
+      this.props.setForm(null, { path: 'team' })
+    }
+  })
 )(Schedule);
 
 const mapMatches = (ms, t, isGroup) => (t.isSingle ? ms.map(pick(['id', 'player1', 'result', 'player2'])) :
