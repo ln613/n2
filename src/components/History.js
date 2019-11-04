@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from '@ln613/state';
-import { compose, withProps } from 'recompose';
+import { compose, withProps, lifecycle } from 'recompose';
 import actions from 'utils/actions';
 import { historySelector } from 'utils/selectors';
 import { findById } from '@ln613/util';

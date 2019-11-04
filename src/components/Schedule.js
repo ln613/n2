@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from '@ln613/state';
-import { compose } from 'recompose';
+import { compose, lifecycle } from 'recompose';
 import { pick, isNil, sortWith, ascend } from 'ramda';
 import actions from 'utils/actions';
 import { tournamentSelector } from 'utils/selectors';
