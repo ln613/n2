@@ -238,6 +238,33 @@ e.gengroup = id => e.getById('tournaments', id).then(t => {
   }
 });
 
+e.changePlayer = (tid, p1, p2) => e.getById('tournaments', tid).then(t => e.get('players').then(ps => {
+  if (t.isSingle && ps.find(x => x.id == p1) && ps.find(x => x.id == p2) && t.players.find(x => x.id == p1) && !t.players.find(x => x.id == p2)) {
+    const ms = unnest(t.schedules.map(s => s.matches.filter(m => m.home == p1 || m.away == p1)));
+    if (ms.every(m => !m.result)) {
+      const tplayers = sortWith([descend(x => +x.rating)], t.players);
+      const p = ps.find(x => x.id == p2);
+      const tp = tplayers.find(x => x.id == p1);
+      const tpi = tplayers.findIndex(x => x.id == p1) + 1;
+      tp.id = +p2;
+      tp.rating = p.rating;
+      ms.forEach(m => {
+        if (m.home == p1) {
+          m.home = +p2;
+          m.player1 = `${tpi}. ${p.firstName} ${p.lastName} (${p.rating})`;
+        }
+        if (m.away == p1) {
+          m.away = +p2;
+          m.player2 = `${tpi}. ${p.firstName} ${p.lastName} (${p.rating})`;
+        }
+      })
+      e.replace('tournaments', t)
+      return 'done'
+    }
+  }
+  return 'N/A';
+}));
+
 e.nogame = body => {
   const id = +body.id;
   const date = body.date;
