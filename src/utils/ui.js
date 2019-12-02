@@ -33,19 +33,24 @@ export const withSuccess = (a, f1, f2) => compose(
   withNewValue('success', false, f2),
 );
 
-// export const enlargeCanvas = async url => {tap(url);
-//   const img = await loadImage(url);
-//   const w1 = img.width;
-//   const h1 = img.height;
-//   const w = 300;
-//   const h = 100;
-//   const w2 = (w1 * h) / h1;
-//   const h2 = h;
-//   const x2 = (w - w2) / 2;
-//   const canvas = createCanvas(w, h);
-//   const ctx = canvas.getContext("2d");
-//   ctx.fillStyle = "white";
-//   ctx.fillRect(0, 0, w, h);
-//   ctx.drawImage(img, x2, 0, w2, h2);
-//   return canvas.toDataURL();
-// }
+export const enlargeCanvas = url => {
+  const img = new Image();
+  img.onload = () => {
+    const w1 = img.width;
+    const h1 = img.height;
+    const w = 300;
+    const h = 100;
+    const w2 = (w1 * h) / h1;
+    const h2 = h;
+    const x2 = (w - w2) / 2;
+    const canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, w, h);
+    ctx.drawImage(img, x2, 0, w2, h2);
+    return canvas.toDataURL();
+  }
+  img.src = url;
+}
