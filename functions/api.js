@@ -1,17 +1,17 @@
 const fs = require('fs');
 const { connectDB, get, getIdName, getById, search, getPlayerRating, getPlayerGames, cdVersion, getNewGameId } = require('./utils/db');
-const { res, tap } = require('./utils');
+const { res } = require('./utils');
 
 module.exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
   const { doc, id, fields, prop, val, idname, player_rating, rating_date, player_games, lookup, newgameid, folder } = event.queryStringParameters;
   await connectDB();
   let r = {};
-  console.log(event.queryStringParameters)
+
   if (lookup) {
     const version = await cdVersion();
     const cats = await get('cats');
-    r = { cdVersion: version };
+    r = { cats, cdVersion: version };
   } else if (newgameid) {
     r = await getNewGameId();
   } else if (idname) {

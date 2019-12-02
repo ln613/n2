@@ -1,11 +1,11 @@
 const { is } = require('ramda');
 const { connectDB, cdList, cdupload, initdata, backup, updateRating, genrr, gengroup, nogame, changePlayer, addToList, add, replaceList, replace, update, count } = require('./utils/db');
-const { tap, res, trynull, authorize, enlargeCanvas } = require('./utils');
+const { tap, res, trynull, authorize } = require('./utils');
 
 module.exports.handler = async (event, context) => {
   if (event.httpMethod === 'OPTIONS')
     return res({});
-  tap(event.queryStringParameters)
+
   context.callbackWaitsForEmptyEventLoop = false;
 
   if (!(await authorize(event.headers.authorization)))
@@ -24,14 +24,11 @@ module.exports.handler = async (event, context) => {
     } else if (q.bak) {
       r = await backup();
     }
-  } else if (method === 'POST') {tap(q)
+  } else if (method === 'POST') {
     if (q.cd) {
       r = await cdList();
     } else if (q.cdupload) {
       r = await cdupload(body);
-    // } else if (q.enlargecanvas) {tap(body)
-    //   r = await enlargeCanvas(body.url);
-    //   r = await cdupload({ url: r, folder: body.folder, name: body.name });
     } else if (q.genrr) {
       r = await genrr(body);
     } else if (q.gengroup) {
