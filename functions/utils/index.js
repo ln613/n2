@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const R = require('ramda');
 const axios = require("axios");
 const moment = require('moment');
+const { createCanvas, loadImage } = require("canvas");
 const util = require('@ln613/util');
 
 const e = {};
@@ -141,5 +142,22 @@ e.policy = r => ({
 });
 
 e.parseCookie = r => R.fromPairs((r.multiValueHeaders.cookie || []).map(c => c.split('=')));
+
+e.enlargeCanvas = async url => {e.tap(url);
+  const img = await loadImage(url);
+  const w1 = img.width;
+  const h1 = img.height;
+  const w = 300;
+  const h = 100;
+  const w2 = (w1 * h) / h1;
+  const h2 = h;
+  const x2 = (w - w2) / 2;
+  const canvas = createCanvas(w, h);
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, w, h);
+  ctx.drawImage(img, x2, 0, w2, h2);
+  return canvas.toDataURL();
+}
 
 module.exports = e;
