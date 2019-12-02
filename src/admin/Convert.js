@@ -5,6 +5,7 @@ import { range } from 'ramda';
 import { compose, withHandlers } from 'recompose';
 import { Label, Button, Icon, Dropdown } from 'semantic-ui-react';
 import { admin } from 'utils/actions';
+import { enlargeCanvas } from 'utils/ui';
 
 const Convert = ({ file, selectFile, convert, inProgress, folder, setFolder, name, setName, resize, setResize }) =>
   <div>
@@ -47,8 +48,13 @@ export default compose(
         const s = await post(p.url, { outputformat: 'png', input: 'download', file: c.url, wait: true, filename: '1.docx', converteroptions: { resize, resizemode: 'scale', quality: 75 } });
         tap(await post(admin + 'cdupload=1', { url: 'https:' + s.output.url, folder, name }, false, localStorage.getItem('token')));
         //await post('https://api.cloudinary.com/v1_1/vttc/image/upload', { upload_preset: 'baicr6sd', file: 'https:' + s.output.url });
-      } else if (file.name.slice(-5).toLowerCase() === '.jpeg' || file.name.slice(-4).toLowerCase() === '.jpg' || file.name.slice(-4).toLowerCase() === '.png') {
-        await post(admin + 'enlargecanvas=1', { url: c.url, folder, name }, false, localStorage.getItem('token'));
+      } else if (folder === 'slider' && (file.name.slice(-5).toLowerCase() === '.jpeg' || file.name.slice(-4).toLowerCase() === '.jpg' || file.name.slice(-4).toLowerCase() === '.png')) {
+        enlargeCanvas(
+          c.url,
+          async data => await post(admin + 'cdupload=1', { url: data, folder, name }, false, localStorage.getItem('token')),
+          () => setInProgress(false)
+        );
+        return;
       }
 
       setInProgress(false);

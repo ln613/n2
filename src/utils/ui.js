@@ -33,13 +33,13 @@ export const withSuccess = (a, f1, f2) => compose(
   withNewValue('success', false, f2),
 );
 
-export const enlargeCanvas = url => {
+export const enlargeCanvas = (url, upload, cleanup) => {
   const img = new Image();
-  img.onload = () => {
+  img.onload = async () => {
     const w1 = img.width;
     const h1 = img.height;
-    const w = 300;
-    const h = 100;
+    const w = 1500;
+    const h = 500;
     const w2 = (w1 * h) / h1;
     const h2 = h;
     const x2 = (w - w2) / 2;
@@ -50,7 +50,8 @@ export const enlargeCanvas = url => {
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, w, h);
     ctx.drawImage(img, x2, 0, w2, h2);
-    return canvas.toDataURL();
+    await upload(canvas.toDataURL());
+    cleanup();
   }
   img.src = url;
 }
