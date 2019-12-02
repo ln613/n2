@@ -29,9 +29,9 @@ module.exports.handler = async (event, context) => {
       r = await cdList();
     } else if (q.cdupload) {
       r = await cdupload(body);
-    } else if (q.enlargecanvas) {tap(body)
-      r = await enlargeCanvas(body.url);
-      r = await cdupload({ url: r, folder: body.folder, name: body.name });
+    // } else if (q.enlargecanvas) {tap(body)
+    //   r = await enlargeCanvas(body.url);
+    //   r = await cdupload({ url: r, folder: body.folder, name: body.name });
     } else if (q.genrr) {
       r = await genrr(body);
     } else if (q.gengroup) {
