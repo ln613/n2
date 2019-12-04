@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from '@ln613/state';
 import { compose } from 'recompose';
-import { isNil, range } from 'ramda';
+import { isNil, range, sum } from 'ramda';
 import { successSelector, authSelector } from './selectors';
 import actions from './actions';
 import { withNewValue, withMount } from '@ln613/compose';
@@ -53,40 +53,61 @@ const createCanvas = (w, h) => {
   return [canvas, ctx];
 }
 
-const drawBoundingImage = (ctx, img, x, y, w, h) => {
+const getBoundingSize = (img, w, h) => {
   const w1 = img.width;
   const h1 = img.height;
   const landscape = (w1 / h1) > (w / h);
-  const w2 = landscape ? w : (w1 * h / h1);
-  const h2 = landscape ? (w * h1 / w1) : h;
+  return [
+    landscape ? w : (w1 * h / h1),
+    landscape ? (w * h1 / w1) : h,
+    landscape
+  ];
+}
+
+const drawBoundingImage = (ctx, img, x, y, w, h, txts) => {
+  const [w2, h2, landscape] = getBoundingSize(img, w, h);
   const x2 = landscape ? x : (x + (w - w2) / 2);
   const y2 = landscape ? (y + (h - h2) / 2) : y;
   ctx.drawImage(img, x2, y2, w2, h2);
+  if (txts && txts.length > 0) {
+    txts.forEach((t, i) => {
+      ctx.font = '48px serif';
+      ctx.fillText(t, x2 + 10, y2 + 10 + i * 30);
+    });
+  }
 }
 
-export const enlargeCanvas = async (url, w, h) => {
+export const enlargeCanvas = async (url, w, h, txts) => {
   const img = await loadImage(url);
   const [canvas, ctx] = createCanvas(w, h);
-  drawBoundingImage(ctx, img, 0, 0, w, h);
+  drawBoundingImage(ctx, img, 0, 0, w, h, txts);
   return canvas.toDataURL();
 }
 
-const getLines = n => n < 4 ? 1 : 2;
-const getLine = (n, l) => (n < 4 || (n < Math.ceil(l / 2))) ? 1 : 2;
-const getImagesInLine = (l, n) => n < 4 ? n : (l === 1 ? Math.ceil : Math.floor)(n / 2);
+const getLines = len => len < 4 ? 1 : 2;
+const getLine = (idx, len) => (len < 4 || (idx < Math.ceil(len / 2))) ? 1 : 2;
+const getImagesInLine = (line, len) => len < 4 ? len : (line === 1 ? Math.ceil : Math.floor)(len / 2);
 
-export const combineImages = async (v, n, W, H) => {
-  const imgs = await Promise.all(range(1, n + 1).map(x => loadImage(cdurl(v, 'tmp', x))));
+export const combineImages = async (l, n, W, H) => {
+  const imgs = await Promise.all(range(1, n + 1).map(x => loadImage(cdurl(l, 'tmp', x))));
   const [canvas, ctx] = createCanvas(W, H);
   const lines = getLines(n);
   const h = H / lines;
+  const imgWidths = imgs.map((img, i) => {
+    const l = getLine(i, n);
+    const ps = getImagesInLine(l, n);
+    return getBoundingSize(img, W / ps, h)[0];
+  });
+  const line1Imgs = getImagesInLine(1, n);
+  const lineWidths = [sum(imgWidths.slice(0, line1Imgs)), sum(imgWidths.slice(line1Imgs))];
   imgs.forEach((img, i) => {
     const l = getLine(i, n);
     const ps = getImagesInLine(l, n);
     const w = W / ps;
-    const x = w * (l === 1 ? i : (i - Math.ceil(l / 2)));
+    const left = (W - lineWidths[l - 1]) / 2;
+    const x = left + sum(imgWidths.slice(l === 1 ? 0 : line1Imgs, i));
     const y = (l - 1) * h;
-    drawBoundingImage(ctx, img, x, y, w, h);
+    drawBoundingImage(ctx, img, x, y, imgWidths[i], h);
   });
   return canvas.toDataURL();
 } 

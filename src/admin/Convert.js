@@ -1,11 +1,14 @@
 import React from 'react';
-import { withState } from '@ln613/compose';
+import { withState, withMount } from '@ln613/compose';
 import { tap } from '@ln613/util';
 import { range } from 'ramda';
 import { compose, withHandlers } from 'recompose';
 import { Label, Button, Icon, Dropdown } from 'semantic-ui-react';
 import { admin } from 'utils/actions';
 import { enlargeCanvas, combineImages } from 'utils/ui';
+import { connect } from '@ln613/state';
+import actions from 'utils/actions';
+import { lookupSelector } from 'utils/selectors';
 
 const W1 = 1500
 const H1 = 500
@@ -44,6 +47,8 @@ const Convert = ({ file, selectFile, convert, combine, inProgress, combineInProg
   </div>
 
 export default compose(
+  connect(lookupSelector, actions),
+  withMount(p => p.getLookup()),
   withState('file'),
   withState('inProgress'),
   withState('combineInProgress'),
@@ -67,15 +72,16 @@ export default compose(
         tap(await post(admin + 'cdupload=1', { url: 'https:' + s.output.url, folder, name }, false, localStorage.getItem('token')));
         //await post('https://api.cloudinary.com/v1_1/vttc/image/upload', { upload_preset: 'baicr6sd', file: 'https:' + s.output.url });
       } else if (file.name.slice(-5).toLowerCase() === '.jpeg' || file.name.slice(-4).toLowerCase() === '.jpg' || file.name.slice(-4).toLowerCase() === '.png') {
-        const imgData = await enlargeCanvas(c.url, folder === 'slider' ? W1 : W2, folder === 'slider' ? H1 : H2);
+        const [w, h] = resize.split('x')
+        const imgData = await enlargeCanvas(c.url, w, h, ['Div C', '2 Yue Liang']);
         await post(admin + 'cdupload=1', { url: imgData, folder, name }, false, localStorage.getItem('token'));
       }
 
       setInProgress(false);
     },
-    combine: ({ setCombineInProgress }) => async (numOfImgs, name) => {
+    combine: ({ setCombineInProgress, lookup }) => async (numOfImgs, name) => {
       setCombineInProgress(true);
-      const imgData = await combineImages(numOfImgs, W1, H1);
+      const imgData = await combineImages(lookup, numOfImgs, W1, H1);
       await post(admin + 'cdupload=1', { url: imgData, folder: 'slider', name }, false, localStorage.getItem('token'));
       setCombineInProgress(false);
     }
