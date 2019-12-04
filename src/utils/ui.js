@@ -64,15 +64,19 @@ const getBoundingSize = (img, w, h) => {
   ];
 }
 
-const drawBoundingImage = (ctx, img, x, y, w, h, txts) => {
+const drawBoundingImage = (ctx, img, x, y, w, h, txts, font = 'Tohoma', size = 48) => {
   const [w2, h2, landscape] = getBoundingSize(img, w, h);
   const x2 = landscape ? x : (x + (w - w2) / 2);
   const y2 = landscape ? (y + (h - h2) / 2) : y;
   ctx.drawImage(img, x2, y2, w2, h2);
   if (txts && txts.length > 0) {
+    ctx.font = `${size}px ${font}`;
+    const th = ctx.measureText('A').height;
+    const mh = 10;
+    const l = 30;
+    const t = 30;
     txts.forEach((t, i) => {
-      ctx.font = '48px serif';
-      ctx.fillText(t, x2 + 10, y2 + 10 + i * 30);
+      ctx.fillText(t, x2 + l, y2 + t + i * (th + mh));
     });
   }
 }
