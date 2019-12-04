@@ -40,6 +40,7 @@ export const loadImage = url => new Promise((resolve, reject) => {
   img.addEventListener('error', () => {
     reject(new Error(`Failed to load image's URL: ${url}`));
   });
+  img.crossOrigin = true;
   img.src = url;
 });
 
@@ -64,7 +65,7 @@ const getBoundingSize = (img, w, h) => {
   ];
 }
 
-const drawBoundingImage = (ctx, img, x, y, w, h, txts, font = 'Tohoma', size = 48) => {
+const drawBoundingImage = (ctx, img, x, y, w, h, txts, font = 'Serif', size = 48) => {
   const [w2, h2, landscape] = getBoundingSize(img, w, h);
   const x2 = landscape ? x : (x + (w - w2) / 2);
   const y2 = landscape ? (y + (h - h2) / 2) : y;
