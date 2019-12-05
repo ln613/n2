@@ -65,27 +65,34 @@ const getBoundingSize = (img, w, h) => {
   ];
 }
 
-const drawBoundingImage = (ctx, img, x, y, w, h, txts, font = 'Serif', size = 48) => {
+const drawBoundingImage = (ctx, img, x, y, w, h, { txts, font = 'Arial', size = 24, weight = 900, color = 'black' } = {}) => {
   const [w2, h2, landscape] = getBoundingSize(img, w, h);
   const x2 = landscape ? x : (x + (w - w2) / 2);
   const y2 = landscape ? (y + (h - h2) / 2) : y;
+  console.log(x, y, w, h)
+  console.log(x2, y2, w2, h2)
   ctx.drawImage(img, x2, y2, w2, h2);
   if (txts && txts.length > 0) {
-    ctx.font = `${size}px ${font}`;
-    const th = ctx.measureText('A').height;
+    ctx.font = `${weight} ${size}px ${font}`;
+    ctx.fillStyle = color;
+    const th = ctx.measureText('M').width;
     const mh = 10;
-    const l = 30;
-    const t = 30;
+    const left = th / 2;
+    const top = th + th / 2;
     txts.forEach((t, i) => {
-      ctx.fillText(t, x2 + l, y2 + t + i * (th + mh));
+      ctx.fillText(t, x2 + left, y2 + top + i * (th + mh));
     });
   }
 }
 
-export const enlargeCanvas = async (url, w, h, txts) => {
+export const enlargeCanvas = async (url, w, h, isEnlarge, txt) => {
   const img = await loadImage(url);
+  if (!isEnlarge) {
+    w = img.width;
+    h = img.height;
+  }
   const [canvas, ctx] = createCanvas(w, h);
-  drawBoundingImage(ctx, img, 0, 0, w, h, txts);
+  drawBoundingImage(ctx, img, 0, 0, w, h, txt);
   return canvas.toDataURL();
 }
 

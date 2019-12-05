@@ -3,7 +3,7 @@ import { withState, withMount } from '@ln613/compose';
 import { tap } from '@ln613/util';
 import { range } from 'ramda';
 import { compose, withHandlers } from 'recompose';
-import { Label, Button, Icon, Dropdown } from 'semantic-ui-react';
+import { Label, Button, Icon, Dropdown, Checkbox, Input } from 'semantic-ui-react';
 import { admin } from 'utils/actions';
 import { enlargeCanvas, combineImages } from 'utils/ui';
 import { connect } from '@ln613/state';
@@ -17,7 +17,7 @@ const H2 = 500
 const W1H1 = W1 + 'x' + H1
 const W2H2 = W2 + 'x' + H2
 
-const Convert = ({ file, selectFile, convert, combine, inProgress, combineInProgress, folder, setFolder, name, setName, resize, setResize, numOfImgs, setNumOfImgs }) =>
+const Convert = ({ file, selectFile, convert, combine, inProgress, combineInProgress, folder, setFolder, name, setName, resize, setResize, numOfImgs, setNumOfImgs, setIsEnlarge, setSize, setWeight, setColor, txt0, setTxt0, txt1, setTxt1, txt2, setTxt2 }) =>
   <div>
     <div>
       <Label width="4" as="label" htmlFor="file" color="orange" size="large" className="cp">
@@ -26,9 +26,16 @@ const Convert = ({ file, selectFile, convert, combine, inProgress, combineInProg
       </Label>
       <div>{(file || {}).name}</div>
       <input id="file" hidden type="file" onChange={selectFile} />
-      <div class="mt8">Folder: <Dropdown selection options={range(1, 10).map(x => ({ text: `slider${x === 1 ? '' : ('-' + x)}`, value: `slider${x === 1 ? '' : ('-' + x)}` }))} defaultValue="slider" style={{ width: '100px'}} onChange={(e, x) => setFolder(x.value)} /></div>
+      <div class="mt8">Folder: <Dropdown selection options={range(1, 10).map(x => ({ text: `slider${x === 1 ? '' : ('-' + x)}`, value: `slider${x === 1 ? '' : ('-' + x)}` })).concat(['doc', 'tmp'].map(x => ({ text: x, value: x })))} defaultValue="slider" style={{ width: '100px'}} onChange={(e, x) => setFolder(x.value)} /></div>
       <div class="mt8">File: <Dropdown selection options={range(1, 10).map(x => ({ text: x, value: x }))} defaultValue={1} onChange={(e, x) => setName(x.value)} /></div>
       <div class="mt8">Resize: <Dropdown selection options={[W1H1, W2H2].map(x => ({ text: x, value: x }))} defaultValue={W1H1} onChange={(e, x) => setResize(x.value)} /></div>
+      <div class="mt8">Add white border: <Checkbox style={{paddingTop: '5px'}} onChange={(e, x) => setIsEnlarge(x.checked)} /> </div>
+      <div class="mt8">Font size: <Dropdown selection options={range(1, 13).map(x => ({ text: x * 6, value: x * 6 }))} defaultValue={24} onChange={(e, x) => setSize(x.value)} /></div>
+      <div class="mt8">Font weight: <Dropdown selection options={range(1, 10).map(x => ({ text: x * 100, value: x * 100 }))} defaultValue={900} onChange={(e, x) => setWeight(x.value)} /></div>
+      <div class="mt8">Font color: <Dropdown selection options={['black', 'white', 'blue', 'red', 'yellow', 'green', 'orange', 'purple', 'pink'].map(x => ({ text: x, value: x }))} defaultValue={'black'} onChange={(e, x) => setColor(x.value)} /></div>
+      <div class="mt8">Line 1: <Input value={txt0} onChange={(e, x) => setTxt0(x.value)} /></div>
+      <div class="mt8">Line 2: <Input value={txt1} onChange={(e, x) => setTxt1(x.value)} /></div>
+      <div class="mt8">Line 3: <Input value={txt2} onChange={(e, x) => setTxt2(x.value)} /></div>
     </div>
     <div class="mt8">
       <Button primary onClick={() => convert(file, folder, name, resize)} disabled={!file || inProgress}>Convert &amp; Upload</Button>
@@ -37,7 +44,7 @@ const Convert = ({ file, selectFile, convert, combine, inProgress, combineInProg
     
     <hr/>
     
-    <h3>Combine Images:</h3>
+    <h3>Combine Images: (from 'tmp' to 'slider')</h3>
     <div class="mt8">Number of images: <Dropdown selection options={range(1, 10).map(x => ({ text: x, value: x }))} defaultValue={1} onChange={(e, x) => setNumOfImgs(x.value)} /></div>
     <div class="mt8">File name: <Dropdown selection options={range(1, 10).map(x => ({ text: x, value: x }))} defaultValue={1} onChange={(e, x) => setName(x.value)} /></div>
     <div class="mt8">
@@ -56,10 +63,16 @@ export default compose(
   withState('name', '1'),
   withState('numOfImgs', '1'),
   withState('resize', W1H1),
+  withState('isEnlarge', false),
+  withState('size', '24'),
+  withState('weight', '900'),
+  withState('color', 'black'),
+  withState('txt0', ''),
+  withState('txt1', ''),
+  withState('txt2', ''),
   withHandlers(({
     selectFile: p => () => p.setFile(((document.getElementById('file') || {}).files || [])[0]),
-    convert: ({ setInProgress }) => async (file, folder, name, resize) => {
-      tap(folder); tap(name); tap(resize);
+    convert: ({ setInProgress, isEnlarge, size, weight, color, txt0, txt1, txt2 }) => async (file, folder, name, resize) => {
       setInProgress(true);
       const fd = new FormData();
       fd.append('upload_preset', 'baicr6sd');
@@ -73,7 +86,7 @@ export default compose(
         //await post('https://api.cloudinary.com/v1_1/vttc/image/upload', { upload_preset: 'baicr6sd', file: 'https:' + s.output.url });
       } else if (file.name.slice(-5).toLowerCase() === '.jpeg' || file.name.slice(-4).toLowerCase() === '.jpg' || file.name.slice(-4).toLowerCase() === '.png') {
         const [w, h] = resize.split('x')
-        const imgData = await enlargeCanvas(c.url, w, h, ['Div C', '2 Yue Liang']);
+        const imgData = await enlargeCanvas(c.url, w, h, tap(isEnlarge), tap({ txts: [txt0, txt1, txt2].filter(x => x), size, weight, color }));
         await post(admin + 'cdupload=1', { url: imgData, folder, name }, false, localStorage.getItem('token'));
       }
 
