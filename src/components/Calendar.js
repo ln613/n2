@@ -59,7 +59,7 @@ const Calendar = ({ lookup , isMobile }) =>
         <div class={`fv ${thisMonth(x.d) ? '' : 'op30'}`}>
           <div>{x.date}</div>
           {x.schedules.map(s =>
-            <div class={`br4 mv4 white p4 ${bg[s[0]]}`}>{`${s[1]} - ${s[2]}`}</div>
+            <div class={`br4 mv4 white p4 ${bg[s[0]]}`}>{`${s[1]} - ${s[2]} pm`}</div>
           )}
         </div>
       }</td>   
