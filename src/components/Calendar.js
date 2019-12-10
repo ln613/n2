@@ -18,8 +18,8 @@ const tt = {
   Fri: { schedules: [[0, '12:30', '11'], [2, '7:30', '9:30']] },
   Sat: { schedules: [[0, '12:30', '6:30'], [1, '6:30', '9:30'], [0, '9:30', '11']] }
 }
-const sm13 = [[0, '12', '6']];
-const ssun3 = [[0, '3', '7']];
+const sm13 = [[0, '12:30', '6']];
+const ssun3 = [[0, '3', '11']];
 
 const getDates = () => {
   const s1 = moment().startOf('month');
@@ -34,7 +34,7 @@ const getDates = () => {
   const rs = splitEvery(7, dates).map(x => fromPairs(x.map(d => [d.format('ddd'), { date: d.date(), d }]))).map(x => mergeDeepLeft(x, tt));
   rs.forEach(r => {
     Object.keys(r).filter(k => r[k].d.isSame(m1) || r[k].d.isSame(m3)).forEach(k => r[k].schedules = sm13);
-    Object.keys(r).filter(k => r[k].d.isSame(sun3)).forEach(k => r[k].schedules = ssun3.concat(drop(1, tt.Sun.schedules)));
+    Object.keys(r).filter(k => r[k].d.isSame(sun3)).forEach(k => r[k].schedules = ssun3.concat(drop(2, tt.Sun.schedules)));
   });
   return rs;
 }
@@ -59,7 +59,7 @@ const Calendar = ({ lookup , isMobile }) =>
         <div class={`fv ${thisMonth(x.d) ? '' : 'op30'}`}>
           <div>{x.date}</div>
           {x.schedules.map(s =>
-            <div class={`br4 mv4 white p4 ${bg[s[0]]}`}>{`${s[1]}pm - ${s[2]}pm`}</div>
+            <div class={`br4 mv4 white p4 ${bg[s[0]]}`}>{`${s[1]} - ${s[2]}`}</div>
           )}
         </div>
       }</td>   
