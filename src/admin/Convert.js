@@ -1,7 +1,7 @@
 import React from 'react';
 import { withState, withMount } from '@ln613/compose';
 import { tap } from '@ln613/util';
-import { range } from 'ramda';
+import { range, sortBy } from 'ramda';
 import { compose, withHandlers } from 'recompose';
 import { Label, Button, Icon, Dropdown, Checkbox, Input } from 'semantic-ui-react';
 import { admin } from 'utils/actions';
@@ -16,6 +16,7 @@ const W2 = 666
 const H2 = 500
 const W1H1 = W1 + 'x' + H1
 const W2H2 = W2 + 'x' + H2
+const colors = ['black', 'blue', 'green', 'pink', 'white', 'red', 'yellow', 'orange', 'purple', 'yellowgreen', 'maroon', 'olive', 'darkgreen', 'aqua', 'deepskyblue', 'gold', 'greenyellow', 'violet'];
 
 const Convert = ({ file, selectFile, convert, combine, inProgress, combineInProgress, folder, setFolder, name, setName, resize, setResize, numOfImgs, setNumOfImgs, setIsEnlarge, setSize, setWeight, setColor, txt0, setTxt0, txt1, setTxt1, txt2, setTxt2 }) =>
   <div>
@@ -32,7 +33,9 @@ const Convert = ({ file, selectFile, convert, combine, inProgress, combineInProg
       <div class="mt8">Add white border: <Checkbox style={{paddingTop: '5px'}} onChange={(e, x) => setIsEnlarge(x.checked)} /> </div>
       <div class="mt8">Font size: <Dropdown selection options={range(1, 13).map(x => ({ text: x * 6, value: x * 6 }))} defaultValue={24} onChange={(e, x) => setSize(x.value)} /></div>
       <div class="mt8">Font weight: <Dropdown selection options={range(1, 10).map(x => ({ text: x * 100, value: x * 100 }))} defaultValue={900} onChange={(e, x) => setWeight(x.value)} /></div>
-      <div class="mt8">Font color: <Dropdown selection options={['black', 'white', 'blue', 'red', 'yellow', 'green', 'orange', 'purple', 'pink'].map(x => ({ text: x, value: x }))} defaultValue={'black'} onChange={(e, x) => setColor(x.value)} /></div>
+      <div class="mt8">Font color:
+        <Dropdown selection style={{width: '150px'}} options={sortBy(c => c, colors).map(x => ({ text: x, value: x, label: { color: x, empty: true, circular: true } }))} defaultValue={'black'} onChange={(e, x) => setColor(x.value)} />
+      </div>
       <div class="mt8">Line 1: <Input value={txt0} onChange={(e, x) => setTxt0(x.value)} /></div>
       <div class="mt8">Line 2: <Input value={txt1} onChange={(e, x) => setTxt1(x.value)} /></div>
       <div class="mt8">Line 3: <Input value={txt2} onChange={(e, x) => setTxt2(x.value)} /></div>
