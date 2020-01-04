@@ -26,12 +26,15 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 
 const Home = ({ isMobile }) =>
   <div>
-    {/* <div class="p16">
-      <h2>Notice:</h2>
+    <div class="p16">
+      <h2>Tournament Notice:</h2>
       <div>
-        From Aug. 30th (Friday) to Sep. 2nd (Monday), we are open from 12pm to 6pm. 从8月30日到9月2日，开放时间为12pm到6pm. 不便之处，敬请见谅.  
+        The <b>2020 VTTC AKBAR Open and FW Team Challenge</b> will be held on Feb 15, 16 and 17. To register, download and fill the form, send it back in person or through email vttc@vttc.ca
       </div>
-    </div>   */}
+      <div>
+        <a href="/docs/2020 VTTC AKBAR Open and FW Team Challenge.doc">Registration Form</a>
+      </div>
+    </div>  
 
     <ImageSlider n={3} t={6} />
 
