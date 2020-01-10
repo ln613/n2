@@ -84,7 +84,7 @@ export default compose(
 
       if (file.name.slice(-5).toLowerCase() === '.docx') {
         const p = await post('https://api.cloudconvert.com/v1/process', { inputformat: 'docx', outputformat: 'png' }, false, 'Bearer bpeNFC52jeIx3SkL6VHjhqjYamwGjvK8RCm5Gg2fAtqIKysMmjuhx6Hb2B6oHa3i');
-        const s = await post(p.url, { outputformat: 'png', input: 'download', file: c.url, wait: true, filename: '1.docx', converteroptions: { resize, resizemode: 'scale', quality: 75 } });
+        const s = await post(p.url, { outputformat: 'png', input: 'download', file: c.url, wait: true, filename: '1.docx', converteroptions: { resize, resizemode: 'max', quality: 75 } });
         tap(await post(admin + 'cdupload=1', { url: 'https:' + s.output.url, folder, name }, false, localStorage.getItem('token')));
         //await post('https://api.cloudinary.com/v1_1/vttc/image/upload', { upload_preset: 'baicr6sd', file: 'https:' + s.output.url });
       } else if (file.name.slice(-5).toLowerCase() === '.jpeg' || file.name.slice(-4).toLowerCase() === '.jpg' || file.name.slice(-4).toLowerCase() === '.png') {
