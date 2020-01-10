@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from '@ln613/state';
 import { compose, withProps } from 'recompose';
-import { pipe, take, pick } from 'ramda';
+import { pipe, take, pick, sortWith, ascend } from 'ramda';
 import actions from 'utils/actions';
 import { tournamentSelector } from 'utils/selectors';
 import { withLoad, withLoadForce, withParams, withMount } from '@ln613/compose';
@@ -25,7 +25,7 @@ const single = players =>
   </Table>
 
 const teams = ts =>
-  (ts || []).map(t =>
+  sortWith([ascend(x => x.name)], (ts || [])).map(t =>
     <div class="pt8" key={t.id}>
       <div class="pv8 fs24 darkgreen">{t.name}</div>
       <Table name="team" data={(t.players || []).map(mapPlayer)}>
