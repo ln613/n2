@@ -36,7 +36,7 @@ const Home = ({ isMobile }) =>
       </div>
     </div>  
 
-    <ImageSlider n={3} t={6} />
+    <ImageSlider n={3} t={6} isBanner={true} isMobile={isMobile}/>
 
     <div class="p16">
       <h2>Introduction</h2>

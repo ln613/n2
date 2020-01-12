@@ -149,3 +149,10 @@ div.ui.striped.grid div.tbody:nth-child(odd) {
 .fixdd div.visible.menu.transition {
   height: 300px;
 }
+
+img.fitHeight {
+  display: block;
+  width: auto;
+  height: 500px;
+  margin: 0 auto;
+}
