@@ -12,7 +12,7 @@ const ImageList = ({ n, f, name, index, lookup, filter, isBanner, isMobile }) =>
   <div class="pr">
     <img src={cdurl(lookup, sl(f), 1, filter)} class={`op0 ${isBanner && !isMobile ? 'fitHeight' : 'w100'}`} alt="" />
     {range(0, n).map((x, i) =>
-      <img src={cdurl(lookup, sl(f), i + 1, filter)} class={`fade ${index === i ? 'show' : ''}`} alt="" />
+      <img src={cdurl(lookup, sl(f), i + 1, filter)} class={`fade ${index === i ? 'show' : ''} ${isBanner && !isMobile ? 'fitHeight' : 'w100'}`} alt="" />
     )}
   </div>
 
