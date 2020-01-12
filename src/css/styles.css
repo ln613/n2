@@ -22,16 +22,12 @@ body.pushable {
 
 img.fade {
   position: absolute;
-  left: 0;
+  left: 50%;
   top: 0;
   width: 100%;
   transition: opacity 1.5s ease-in-out;
   opacity: 0;
-}
-
-img.fade1 {
-  transition: opacity 1.5s ease-in-out;
-  opacity: 0;
+  transform: translateX(-50%);
 }
 
 img.show {
@@ -159,5 +155,4 @@ img.fitHeight {
   display: block;
   width: auto;
   height: 500px;
-  margin: 0 auto;
 }

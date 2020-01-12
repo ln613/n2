@@ -11,7 +11,7 @@ const allDocs = ['cats', 'players', 'products', 'tournaments'];
 let db = null;
 const e = {};
 
-e.connectDB = async () => db || (db = await MongoClient.connect(process.env.DB_LOCAL || process.env.DB).then(x => x.db()));
+e.connectDB = async () => db || (db = await MongoClient.connect(tap(process.env.DB_LOCAL || process.env.DB)).then(x => x.db()));
 
 e.initdocs = docs => {
   const f = k => r => db.collection(k).insertMany(docs[k]);
