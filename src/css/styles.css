@@ -29,6 +29,11 @@ img.fade {
   opacity: 0;
 }
 
+img.fade1 {
+  transition: opacity 1.5s ease-in-out;
+  opacity: 0;
+}
+
 img.show {
   opacity: 1;
 }
