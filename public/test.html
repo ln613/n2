@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>Memo</title>
+</head>
+<body class="m-3">
+
+  <div name="memo" class="form-row">
+    <div class="form-group col-md-1">
+      <label for="type">Type</label>
+      <select id="type" name="type" class="form-control">
+        <option value="password">Password</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="title">Title</label>
+      <input class="form-control" id="title" name="title" placeholder="Title" />
+    </div>
+    <div class="form-group col-md-2">
+      <label for="username">User Name</label>
+      <input class="form-control" id="username" name="username" placeholder="User Name" />
+    </div>
+    <div class="form-group col-md-2">
+      <label for="password">Password</label>
+      <input class="form-control" id="password" name="password" placeholder="Password" />
+    </div>
+    <div class="form-group col-md-2">
+      <label for="card">Card #</label>
+      <input class="form-control" id="card" name="card" placeholder="Card #" />
+    </div>
+    <div class="form-group col-md-2">
+      <label for="date">Date</label>
+      <input class="form-control" id="date" name="date" placeholder="Date" />
+    </div>
+  </div>
+  <button name="addMemo" class="btn btn-primary">Add Memo</button>
+
+    <!-- <div>
+      <input type="radio" id="type_password" name="type" value="password" checked>
+      <label for="type_password">Password</label>
+      <input type="radio" id="type_card" name="type" value="card">
+      <label for="type_card">Card</label>
+    </div> -->
+
+  <hr />
+
+  <div class="d-flex pb-2">
+    <input type="checkbox" class="form-control" id="passwordFilter" name="passwordFilter" />
+    <label for="passwordFilter">Password</label>
+    <input name="keyword" class="form-control flex-grow-1" placeholder="keyword" />
+    <button name="search" class="btn btn-info">Search</button>
+  </div>
+
+  <table class="table table-sm table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Type</th>
+        <th name="sortByTitle">Title</th>
+        <th>User</th>
+        <th>Pass</th>
+        <th>Card</th>
+        <th>Date</th>
+        <th>Save</th>
+        <th>Del</th>
+      </tr>
+    </thead>
+    <tbody name="memos">
+      <tr>
+        <td name="type"></td>
+        <td name="title"></td>
+        <td name="username"></td>
+        <td name="password"></td>
+        <td name="card"></td>
+        <td name="date"></td>
+        <td><button name="save" class="btn btn-success btn-sm">Save</button></td>
+        <td><button name="delTodo" class="btn btn-danger btn-sm">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <button name="__sync" class="btn btn-info">Sync</button>
+
+  <script src="/bundle.js"></script>
+
+</body>
+</html>
