@@ -9,7 +9,7 @@ export const isEmpty = either(isNil, _isEmpty);
 
 export const toSingleArray = x => is(Array, x) ? x : [x];
 
-export const cdurl = (l, c, n, f) => l.cdVersion ? `http://res.cloudinary.com/vttc/image/upload/${f ? (f + '/') : ''}v${l.cdVersion}/${c}/${n}.jpg` : '';
+export const cdurl = (l, c, n, f) => l.cdVersion ? `http://res.cloudinary.com/vttc/image/upload/${f ? (f + '/') : ''}v${l.cdVersion}/${c}/${n}.png` : '';
 
 const rdiff = [[3,0],[5,-2],[8,-5],[10,-7],[13,-9],[15,-11],[18,-14],[20,-16],[25,-21],[30,-26],[35,-31],[40,-36],[45,-41],[50,-45],[55,-50]];
 const rdelta = [401,301,201,151,101,51,26,-24,-49,-99,-149,-199,-299,-399];
