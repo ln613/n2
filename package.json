@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "description": "Vancouver Table Tennis Club",
   "dependencies": {
+    "@craco/craco": "^5.6.3",
     "@ln613/compose": "^1.1.0",
     "@ln613/css": "^1.1.0",
     "@ln613/state": "^1.1.0",
@@ -27,8 +28,8 @@
     "semantic-ui-react": "^0.88.2"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=./src react-scripts start",
-    "build": "cross-env NODE_PATH=./src react-scripts build",
+    "start": "cross-env NODE_PATH=./src craco start",
+    "build": "cross-env NODE_PATH=./src craco build",
     "func": "cross-env DB_LOCAL=mongodb://localhost:27017/vttc netlify-lambda serve functions",
     "func-live": "netlify-lambda serve functions",
     "test": "react-scripts test --env=jsdom",
