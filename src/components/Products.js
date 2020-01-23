@@ -1,9 +1,10 @@
 import React from 'react';
 import { cdurl } from 'utils';
 import CatMenu from './CatMenu';
-//import 'products.bundle';
+import { compose, withEffect } from 'hookompose';
+import 'products.bundle';
 
-export default ({ lookup, n, d, history }) =>
+const Products = ({ lookup, n, d, history }) =>
   <div class="p16 f">
     <CatMenu />
     <div class="pl32 w90">
@@ -28,3 +29,7 @@ export default ({ lookup, n, d, history }) =>
       </div>
     </div>
   </div>
+
+export default compose(
+  withEffect(() => console.log('m - p'))
+)(Products)
