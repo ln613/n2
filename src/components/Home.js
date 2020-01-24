@@ -29,7 +29,7 @@ const Home = ({ isMobile }) =>
     <div class="p16">
       <h2>Chinese New Year Eve Opening Hour:</h2>
       <div>
-        We will open on Friday Jan 23rd until 6pm. Happy Chinese new year!
+        We will open on Friday Jan 24th until 6pm. Happy Chinese new year!
       </div>
       <h2>Tournament Notice:</h2>
       <div>

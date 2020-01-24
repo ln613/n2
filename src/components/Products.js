@@ -21,8 +21,8 @@ const Products = ({ lookup, n, d, history }) =>
             </div>
             <hr class="w100" />
             <div class="f p8">
-              <div class="fs24 blue">$100</div>
-              <div class="fs24 red pl8">$80</div>
+              <div class="fs24 blue" name="price">$100</div>
+              <div class="fs24 red pl8" name="sale">$80</div>
             </div>  
           </div>
         </div>  
