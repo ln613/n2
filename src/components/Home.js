@@ -27,6 +27,10 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 const Home = ({ isMobile }) =>
   <div>
     <div class="p16">
+      <h2>Chinese New Year Eve Opening Hour:</h2>
+      <div>
+        We will open on Friday Jan 23rd until 6pm. Happy Chinese new year!
+      </div>
       <h2>Tournament Notice:</h2>
       <div>
         The <b>2020 VTTC AKBAR Open and FW Team Challenge</b> will be held on Feb 15, 16 and 17. To register, download and fill the form, send it back in person or through email vttc@vttc.ca
