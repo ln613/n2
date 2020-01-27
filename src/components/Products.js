@@ -9,11 +9,18 @@ const Products = ({ lookup, n, d, history }) =>
     <CatMenu />
     <div class="pl32 w90">
       <h1>Products</h1>
+      <div class="f mrc8">
+        <div>Sort:</div>
+        <a href="#" name="sort_price_up">Price low to high</a>
+        <a href="#" name="sort_price_down">Price high to low</a>
+        <a href="#" name="sort_name_up">Name A-Z</a>
+        <a href="#" name="sort_name_down">Name Z-A</a>
+      </div>
       <div class="ui divider"></div>
       <div class="fw w100" name="products">
         <div class="f w20 p8">  
           <div class="card fv cp">
-            <img class="w100" alt="" />
+            <img class="w100" alt="" name="image"/>
             <hr />
             <div class="p8 fg1">
               <h3 name="name">Tenergy 5</h3>
