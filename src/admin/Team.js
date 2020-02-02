@@ -2,6 +2,7 @@ import React from 'react';
 import { compose } from 'recompose';
 import { find } from 'ramda';
 import { connect } from '@ln613/state';
+import { tap } from '@ln613/util';
 import { Button } from 'semantic-ui-react';
 import actions from 'utils/actions';
 import { teamSelector } from 'utils/selectors';
@@ -24,7 +25,7 @@ const Team = ({ tournament, team, players, monthRatings, putTeam, postTeam, id, 
     <hr />
     <Button primary onClick={history.goBack}>Back</Button>
     <Button primary disabled={isLoading || (team.players || []).some(p => !p.id || !p.rating)}
-      onClick={() => id[0] !== '+' ? putTeam(team, { id1: tournament.id, id: team.id }) : postTeam(team, { id1: tournament.id })}>Save</Button>
+      onClick={() => id[0] !== '+' ? putTeam(team, { id1: tournament.id, id: team.id }) : postTeam(teamWithName(team, players), { id1: tournament.id })}>Save</Button>
   </div>
 
 export default compose(
@@ -42,3 +43,6 @@ export default compose(
 //   name: t.name,
 //   players: (t.players || []).map((p, i) => is(Object, p) ? p : {id: +p, rating: getPropById('rating')(+p)(ps) })
 // })
+
+const teamWithName = (t, ps) =>
+  t.name ? t : {...t, name: t.players.map(p => ps.find(x => x.id == p.id)).map(p => p.firstName + ' ' + p.lastName).join(' / ')}

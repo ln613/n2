@@ -1,5 +1,5 @@
 import React from 'react';
-import { compose } from 'recompose';
+import { compose, lifecycle } from 'recompose';
 import { range, pick, find, isNil } from 'ramda';
 import { connect } from '@ln613/state';
 import { Button } from 'semantic-ui-react';
@@ -32,7 +32,7 @@ const teams = (tournament, schedule, history) =>
   );
 
 const groups = (ms, tid, sid) =>
-  <Table name="groups" link={x => `/admin/games/${tid}/${sid}/${x.id}`} data={(ms || []).map(pick(['id', 'round', 'team1', 'result', 'team2']))}>
+  <Table name="groups" link={x => `/admin/games/${tid}/${sid}/${x.id}`} data={(ms || []).map(fixResult).map(pick(['id', 'round', 'team1', 'result', 'team2']))}>
     <td key="id" hidden />
   </Table>;
 
@@ -62,5 +62,12 @@ export default compose(
   withLoad('tournament', ['id', 'id1'], true),
   withMount(p => p.setForm({ matches: [], ...find(x => x.id == p.id, p.tournament.schedules) }, { path: 'schedule' })),
   withSuccess('schedule', () => alert('Saved'), () => alert('Error happened!')),
-  withRouter
+  withRouter,
+  lifecycle({
+    componentWillReceiveProps: function() {
+      console.log('b')
+    }
+  })
 )(Schedule)
+
+const fixResult = m => ({ ...m, result: m.games.length === 1 ? m.games[0].result : m.result })

@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 const cd = require('cloudinary');
-const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, findIndex, isNil, last, pick, groupBy, zipWith, mergeDeepWith, is, concat } = require('ramda');
+const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, findIndex, isNil, last, pick, groupBy, zipWith, mergeDeepWith, is, concat, range } = require('ramda');
 const { tap, httpGet, json2js, adjustRating, newRating, serial, toDateOnly, rrSchedule, rrScheduleTeam, group, sortTeam, gengames } = require('.');
 const moment = require('moment');
 const { findById, split2 } = require('@ln613/util');

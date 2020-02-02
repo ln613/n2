@@ -58,7 +58,7 @@ const mapMatches = (ms, t, isGroup) => (t.isSingle ? ms.map(pick(['id', 'player1
   ms.filter(m => m && m.id).map(m => ({
     [isGroup ? 'round' : 'table']: isGroup ? m.round : m.id,
     'home': getNameById(m.home)(t.teams),
-    'result': m.result === '0:0' ? '' : m.result,
+    'result': m.result === '0:0' ? '' : (isGroup && m.games.length === 1 ? m.games[0].result : m.result),
     'away': getNameById(m.away)(t.teams)
   }))
 ).map(highlightWinner);

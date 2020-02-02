@@ -16,7 +16,7 @@ const Games = p =>
   <div>
     <div class="fv">
       <h1 class="fg1">Matches - {p.tournament.name} - {p.schedule.date}</h1>
-      <h3 class="fg1 mt4">{p.Match.team1} vs {p.Match.team2}</h3>
+      <h3 class="fg1 mt4">{tap(p.Match).team1} vs {p.Match.team2}</h3>
       {p.tournament.groups ? null : <Button primary onClick={() => p.history.push(`/admin/game/${p.T}/${p.S}/${p.M}/+${p.newGameId+1}`)}>Add</Button>}
     </div>
     <hr/>
@@ -34,7 +34,7 @@ export default compose(
   withLoad('players'),
   withLoadForce('tournament', 'id', 'T'),
   withProps(p => ({ schedule: findById(p.S)(p.tournament.schedules) || {} })),
-  withProps(p => ({ Match: findById(p.M)((p.schedule || {}).matches) || {} })),
+  withProps(p => ({ Match: fixResult(findById(p.M)((p.schedule || {}).matches) || {}) })),
   withProps(p => ({ games: sortWith([p.tournament.groups ? ascend(prop('id')) : descend(prop('id'))],
     p.tournament.groups ? p.Match.games :
     (p.tournament.games || []).filter(x => (x.schedule === p.S || toAbsDate(x.date) === toAbsDate(p.schedule.date)) && (x.match === p.M || (x.t1 === p.Match.home && x.t2 === p.Match.away) || (x.t2 === p.Match.home && x.t1 === p.Match.away) ))
@@ -50,7 +50,7 @@ const save = p => {
   const gs = p.formMatch.games.filter(g => g.result);
   const wins = gs.filter(g => +g.result[0] > +g.result[2]).length;
   const loses = gs.filter(g => +g.result[0] < +g.result[2]).length;
-  if (wins < 3 && loses < 3)
+  if (p.formMatch.games.length === 5 && wins < 3 && loses < 3)
     alert('not valid!');
   else
     p.putGroupMatch({ ...p.formMatch, games: gs.map(g => toGame(g, p.schedule, p.formMatch)) }, { id: p.T, group: p.S })
@@ -71,3 +71,5 @@ const save = p => {
 //     //p.putGame(g, { id1: p.tournament.id });
 //   }
 }
+
+const fixResult = m => m.games && m.games.length === 1 && !m.games[0].result ? ({ ...m, games: [{ ...m.games[0], result: '0:0' }] }) : m;

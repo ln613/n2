@@ -106,6 +106,13 @@ e.group = ts => {
 e.gengames = (t, t1, t2) => {
   const team1 = util.findById(t1)(t.teams);
   const team2 = util.findById(t2)(t.teams);
+  const ps1 = team1.players;
+  const ps2 = team2.players;
+
+  if (ps1.length === 1 && ps2.length === 1) {
+    return [{ id: 1, date: t.startDate, t1, t2, p1: +ps1[0].id, p2: +ps2[0].id }];
+  }
+
   return R.range(0, 5).map(n => ({ id: n + 1, date: t.startDate, t1, t2,
     p1: +team1.players[n === 1 || n === 4 ? 1 : 0].id,
     p2: +team2.players[n === 0 || n === 4 ? 1 : 0].id,

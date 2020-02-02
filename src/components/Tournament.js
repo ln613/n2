@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from '@ln613/state';
 import { compose, withProps } from 'recompose';
-import { pipe, take, pick, sortWith, ascend } from 'ramda';
+import { pipe, take, pick, sortWith, ascend, descend } from 'ramda';
 import actions from 'utils/actions';
 import { tournamentSelector } from 'utils/selectors';
 import { withLoad, withLoadForce, withParams, withMount } from '@ln613/compose';
@@ -11,7 +11,7 @@ import TMenu from './TMenu';
 import { highlightWinner } from 'utils';
 
 const mapPlayer = p => ({ id: p.id, 'Name': p.firstName + ' ' + p.lastName, gender: p.sex, 'Tournament Rating': p.tRating, 'Latest Rating': p.rating, 'Is Sub': p.isSub ? '&#10004' : '' });
-const mapTeam = t => !t.players || t.players.length < 2 ? {} :
+const mapTeam = t => !t.players || t.players.length < 2 ? { id: t.id, name: t.players[0].name, 'Rating': t.players[0].tRating || t.players[0].rating } :
   pipe(take(2), x => ({
     id: t.id,
     name: x[0].name + ' / ' + x[1].name,
@@ -38,7 +38,7 @@ const groups = gs =>
   (gs || []).map(g =>
     <div class="pt8" key={g[0]}>
       <div class="pv8 fs24 darkgreen">Group {g[0]}</div>
-      <Table name="team" data={(g[1] || []).map(mapTeam)}>
+      <Table name="team" data={sortWith([descend(x => x['Combined Rating'] || x['Rating'])], (g[1] || []).map(mapTeam))}>
         <td key="id" hidden />  
       </Table>
     </div>

@@ -1,5 +1,5 @@
 const { is } = require('ramda');
-const { connectDB, cdList, cdupload, initdata, backup, updateRating, genrr, gengroup, nogame, changePlayer, addToList, add, replaceList, replace, update, count } = require('./utils/db');
+const { connectDB, cdList, cdupload, initdata, backup, updateRating, genrr, gengroup, nogame, changePlayer, addToList, add, replaceList, replace, update, count, groupmatch } = require('./utils/db');
 const { tap, res, trynull, authorize } = require('./utils');
 
 module.exports.handler = async (event, context) => {
