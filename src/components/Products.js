@@ -11,9 +11,11 @@ const Products = ({ lookup, n, d, history }) =>
       <div>
       <div class="item">
       <a class="header cp" name="name">Cat</a>
-        <div class="menu">
-            <a class="item">SubCat</a>
+      <div class="menu" name="sub_categories">
+        <div>
+        <a class="item" name="name">SubCat</a>
         </div>
+      </div>
       </div>
       </div>
     </div>
