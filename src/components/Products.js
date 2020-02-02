@@ -6,7 +6,17 @@ import 'products.bundle';
 
 const Products = ({ lookup, n, d, history }) =>
   <div class="p16 f">
-    <CatMenu />
+    {/* <CatMenu /> */}
+    <div class="ui vertical menu" name="categories">
+      <div>
+      <div class="item">
+      <a class="header cp" name="name">Cat</a>
+        <div class="menu">
+            <a class="item">SubCat</a>
+        </div>
+      </div>
+      </div>
+    </div>
     <div class="pl32 w90">
       <h1>Products</h1>
       <div class="f mrc8">
