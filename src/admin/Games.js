@@ -16,7 +16,7 @@ const Games = p =>
   <div>
     <div class="fv">
       <h1 class="fg1">Matches - {p.tournament.name} - {p.schedule.date}</h1>
-      <h3 class="fg1 mt4">{tap(p.Match).team1} vs {p.Match.team2}</h3>
+      <h3 class="fg1 mt4">{p.Match.team1} vs {p.Match.team2}</h3>
       {p.tournament.groups ? null : <Button primary onClick={() => p.history.push(`/admin/game/${p.T}/${p.S}/${p.M}/+${p.newGameId+1}`)}>Add</Button>}
     </div>
     <hr/>
@@ -41,9 +41,9 @@ export default compose(
   )})),
   //withNewId('tournament.games'),
   withMount(p => p.getNewGameId()),
-  withMount(p => p.tournament.groups && p.setForm(find(x => x.id == p.M, find(x => x.id == p.S, p.tournament.schedules).matches), { path: 'match' })),
+  withMount(p => p.tournament.groups && p.setForm(fixResult(find(x => x.id == p.M, find(x => x.id == p.S, p.tournament.schedules).matches)), { path: 'match' })),
   withRouter,
-  withSuccess('groupmatch', p => { alert('Saved'); p.history.goBack(); }, () => alert('Error happened!'))
+  withSuccess('groupmatch', p => { alert('Saved'); p.getTournament({ id: p.tournament.id }); p.history.goBack(); }, () => alert('Error happened!'))
 )(Games)
 
 const save = p => {
@@ -72,4 +72,4 @@ const save = p => {
 //   }
 }
 
-const fixResult = m => m.games && m.games.length === 1 && !m.games[0].result ? ({ ...m, games: [{ ...m.games[0], result: '0:0' }] }) : m;
+const fixResult = m => m.games && m.games.length === 1 && !m.games[0].result ? ({ ...m, games: [{ ...m.games[0], result: '' }] }) : m;

@@ -62,12 +62,7 @@ export default compose(
   withLoad('tournament', ['id', 'id1'], true),
   withMount(p => p.setForm({ matches: [], ...find(x => x.id == p.id, p.tournament.schedules) }, { path: 'schedule' })),
   withSuccess('schedule', () => alert('Saved'), () => alert('Error happened!')),
-  withRouter,
-  lifecycle({
-    componentWillReceiveProps: function() {
-      console.log('b')
-    }
-  })
+  withRouter
 )(Schedule)
 
 const fixResult = m => ({ ...m, result: m.games.length === 1 ? m.games[0].result : m.result })
