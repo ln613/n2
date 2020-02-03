@@ -27,6 +27,10 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 const Home = ({ isMobile }) =>
   <div>
     <div class="p16">
+      <h2>Notice:</h2>
+      <div>
+        In order to reduce the possibility of the spreading of the coronavirus, anyone who just came back from China please remain at home for 2 weeks before coming to the club.
+      </div>
       <h2>Tournament Notice:</h2>
       <div>
         The <b>2020 VTTC AKBAR Open and FW Team Challenge</b> will be held on Feb 15, 16 and 17. To register, download and fill the form, send it back in person or through email vttc@vttc.ca
