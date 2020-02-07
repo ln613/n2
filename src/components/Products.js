@@ -9,42 +9,70 @@ const Products = ({ lookup, n, d, history }) =>
     {/* <CatMenu /> */}
     <div class="ui vertical menu" name="categories">
       <div>
-      <div class="item">
-      <a class="header cp" name="name">Cat</a>
-      <div class="menu" name="sub_categories">
-        <div>
-        <a class="item" name="name">SubCat</a>
+        <div class="item">
+          <a class="header cp" name="name">Cat</a>
+          <div class="menu" name="sub_categories">
+            <div>
+              <a class="item" name="name">SubCat</a>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+    <div class="fv pl32 w90">
+      <div>
+        <h1>Products</h1>
+        <div class="f mrc8">
+          <div>Sort:</div>
+          <a href="#" name="sort_price_up">Price low to high</a>
+          <a href="#" name="sort_price_down">Price high to low</a>
+          <a href="#" name="sort_name_up">Name A-Z</a>
+          <a href="#" name="sort_name_down">Name Z-A</a>
+        </div>
+        <div class="ui divider"></div>
+        <div class="fw w100" name="products">
+          <div class="f w20 p8">  
+            <div class="card fv">
+              <img class="w100" alt="" name="image"/>
+              <hr />
+              <div class="p8 fg1">
+                <h3 name="name">Tenergy 5</h3>
+                <div name="description">abc</div>
+              </div>
+              <hr class="w100" />
+              <div class="f p8">
+                <div class="fs24 blue" name="price">$100</div>
+                <div class="fs24 red pl8" name="sale">$80</div>
+                <div class="fg1"></div>
+                <i aria-hidden="true" class="darkgreen add to cart link icon" name="add_to_cart"></i>
+              </div>  
+            </div>
+          </div>  
+        </div>
       </div>
+      <div>
+        <h1>Carts</h1>
+        <div class="f w100">
+          <div class="fv mbc16" name="cart">
+            <div class="card f" name="product">
+              <img class="w10" alt="" name="image"/>
+              <div class="w40 p8 fv">
+                <h3 name="name">Tenergy 5</h3>
+                <div name="description">abc</div>
+              </div>
+              <div class="f p8">
+                <div class="fs24 blue" name="price">$100</div>
+                <div class="fs24 red pl8" name="sale">$80</div>
+              </div>  
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="pl32 w90">
-      <h1>Products</h1>
-      <div class="f mrc8">
-        <div>Sort:</div>
-        <a href="#" name="sort_price_up">Price low to high</a>
-        <a href="#" name="sort_price_down">Price high to low</a>
-        <a href="#" name="sort_name_up">Name A-Z</a>
-        <a href="#" name="sort_name_down">Name Z-A</a>
-      </div>
-      <div class="ui divider"></div>
-      <div class="fw w100" name="products">
-        <div class="f w20 p8">  
-          <div class="card fv cp">
-            <img class="w100" alt="" name="image"/>
-            <hr />
-            <div class="p8 fg1">
-              <h3 name="name">Tenergy 5</h3>
-              <div name="description">abc</div>
-            </div>
-            <hr class="w100" />
-            <div class="f p8">
-              <div class="fs24 blue" name="price">$100</div>
-              <div class="fs24 red pl8" name="sale">$80</div>
-            </div>  
-          </div>
-        </div>  
+    <div class="pl32">
+      <div class="fv ui menu p16">
+        <h4 name="name">Total:</h4>
+        <button class="ui button orange">Proceed to Checkout</button>
       </div>
     </div>
   </div>
