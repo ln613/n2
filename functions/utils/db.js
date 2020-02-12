@@ -13,7 +13,7 @@ const e = {};
 
 e.connectDB = async () => db || (db = await MongoClient.connect(tap(process.env.DB_LOCAL || process.env.DB)).then(x => x.db()));
 
-e.initdocs = docs => {
+e.initdocs = docs => {tap(Object.keys(docs))
   const f = k => r => db.collection(k).insertMany(docs[k]);
   return Promise.all(
     Object.keys(docs).map(k => db.collection(k).drop().then(f(k)).catch(f(k)))

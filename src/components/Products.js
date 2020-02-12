@@ -2,7 +2,7 @@ import React from 'react';
 import { cdurl } from 'utils';
 import CatMenu from './CatMenu';
 import { compose, withEffect } from 'hookompose';
-//import 'products.bundle';
+import 'products.bundle';
 
 const Products = ({ lookup, n, d, history }) =>
   <div class="p16 f">
@@ -20,14 +20,24 @@ const Products = ({ lookup, n, d, history }) =>
       </div>
     </div>
     <div class="fv pl32 w90">
-      <div>
-        <h1>Products</h1>
-        <div class="f mrc8">
-          <div>Sort:</div>
-          <a href="#" name="sort_price_up">Price low to high</a>
-          <a href="#" name="sort_price_down">Price high to low</a>
-          <a href="#" name="sort_name_up">Name A-Z</a>
-          <a href="#" name="sort_name_down">Name Z-A</a>
+      <div name="Products">
+        <div class="f">
+          <div class="fv fg1">
+            <h1>Products</h1>
+            <div class="f mrc8">
+              <div>Sort:</div>
+              <a href="#" name="sort_price_up">Price low to high</a>
+              <a href="#" name="sort_price_down">Price high to low</a>
+              <a href="#" name="sort_name_up">Name A-Z</a>
+              <a href="#" name="sort_name_down">Name Z-A</a>
+            </div>
+          </div>
+          <div class="pr">
+            <i aria-hidden="true" class="darkgreen cart link big icon pt8" name="view_cart"></i>
+            <div class="floating ui red label" style={{ borderRadius: '50%', top: '-8px' }}>
+              <span class="fs15" name="cart_count">0</span>
+            </div>
+          </div>
         </div>
         <div class="ui divider"></div>
         <div class="fw w100" name="products">
@@ -42,16 +52,30 @@ const Products = ({ lookup, n, d, history }) =>
               <hr class="w100" />
               <div class="f p8">
                 <div class="fs24 blue" name="price">$100</div>
-                <div class="fs24 red pl8" name="sale">$80</div>
+                {/* <div class="fs24 red pl8" name="sale">$80</div> */}
                 <div class="fg1"></div>
-                <i aria-hidden="true" class="darkgreen add to cart link icon" name="add_to_cart"></i>
+                <div class="pr cp" name="add_to_cart">
+                  <i aria-hidden="true" class="cart link large icon"></i>
+                  <div class="floating ui green label" style={{ borderRadius: '50%', top: '-10px', padding: '1px 5px 3px 5px' }}>
+                    <span class="fs15">+</span>
+                  </div>
+                </div>
+                <div class="pr cp" name="remove_from_cart" style={{display: 'none'}}>
+                  <i aria-hidden="true" class="cart link large icon"></i>
+                  <div class="floating ui red label" style={{ borderRadius: '50%', top: '-10px', padding: '1px 7px 3.5px 7px' }}>
+                    <span class="fs15">-</span>
+                  </div>
+                </div>
               </div>  
             </div>
           </div>  
         </div>
       </div>
-      <div>
-        <h1>Carts</h1>
+      <div name="Cart" style={{display: 'none'}}>
+        <div class="f">
+          <h1 class="fg1">Cart</h1>
+          <i aria-hidden="true" class="darkgreen grid layout link big icon" name="view_products"></i>
+        </div>
         <div class="f w100">
           <div class="fv mbc16" name="cart">
             <div class="card f" name="product">
@@ -62,7 +86,7 @@ const Products = ({ lookup, n, d, history }) =>
               </div>
               <div class="f p8">
                 <div class="fs24 blue" name="price">$100</div>
-                <div class="fs24 red pl8" name="sale">$80</div>
+                {/* <div class="fs24 red pl8" name="sale">$80</div> */}
               </div>  
             </div>
           </div>
@@ -71,7 +95,7 @@ const Products = ({ lookup, n, d, history }) =>
     </div>
     <div class="pl32">
       <div class="fv ui menu p16">
-        <h4 name="name">Total:</h4>
+        <h4 name="name">Total: <span name="sub_total">$1</span></h4>
         <button class="ui button orange">Proceed to Checkout</button>
       </div>
     </div>
