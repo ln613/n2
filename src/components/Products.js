@@ -2,7 +2,7 @@ import React from 'react';
 import { cdurl } from 'utils';
 import CatMenu from './CatMenu';
 import { compose, withEffect } from 'hookompose';
-//import 'products.bundle';
+import 'products.bundle';
 
 const Products = ({ lookup, n, d, history }) =>
   <div class="p16 f">
