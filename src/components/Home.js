@@ -27,6 +27,10 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 const Home = ({ isMobile }) =>
   <div>
     <div class="p16">
+      <h2>U-2000 Notice:</h2>
+      <div>
+        For U-2000 tournament on Feb. 16, 2020, Groups 1 to Group 4 will start at 2:30pm.
+      </div>
       <h2>Notice:</h2>
       <div>
         In order to reduce the possibility of the spreading of the coronavirus, anyone who just came back from China please remain at home for 2 weeks before coming to the club.
