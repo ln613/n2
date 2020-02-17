@@ -49,8 +49,10 @@ e.rrSchedule = (x, sorted, continuousId) => {
   })
 }
 
-e.getTeamRating = t => t.players && t.players.length > 1
-  ? R.pipe(R.map(x => +(x.isSub ? 0 : (x.tRating || x.rating))), e.sort, R.takeLast(2), R.sum)(t.players)
+e.getTeamRating = t => t.players
+  ? (t.players.length > 1
+    ? R.pipe(R.map(x => +(x.isSub ? 0 : (x.tRating || x.rating))), e.sort, R.takeLast(2), R.sum)(t.players)
+    : (t.players.length === 1 ? t.players[0].rating : 0))
   : 0;
 
 e.rrScheduleTeam = (teams, startDate, ids) => {
