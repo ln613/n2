@@ -156,3 +156,11 @@ img.fitHeight {
   width: auto;
   height: 500px;
 }
+
+td.result-select .ui.selection.dropdown {
+  width: 60px;
+}
+
+td.result-select .visible.menu.transition {
+  height: 400px;
+}
