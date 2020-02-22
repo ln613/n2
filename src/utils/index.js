@@ -1,7 +1,10 @@
 import { last, isNil, pipe, filter, map, fromPairs, isEmpty as _isEmpty, either, is, take } from 'ramda';
 import moment from 'moment';
 
-export const tap = x => { console.log(x); return x; };
+export const tap = (x, title = '', f = t => t, pred = true) => {
+  (is(Function, pred) ? pred(x) : pred) && console.log(title ? `${title} - ` : '', f(x))
+  return x
+}
 
 export const isDev = process.env.NODE_ENV === 'development';
 

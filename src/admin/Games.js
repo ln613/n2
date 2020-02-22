@@ -1,15 +1,15 @@
 import React from 'react';
-import { compose, withProps } from 'recompose';
+import { compose, withProps, lifecycle } from 'recompose';
 import { pick, sortWith, ascend, descend, prop, find } from 'ramda';
 import { connect } from '@ln613/state';
 import actions from 'utils/actions';
 import { withLoad, withLoadForce, withParams, withNewId, withEdit, withMount } from '@ln613/compose';
-import { findById, findByProp, toAbsDate, tap } from '@ln613/util';
+import { findById, findByProp, toAbsDate } from '@ln613/util';
 import { tournamentSelector } from 'utils/selectors';
 import { Table } from '@ln613/ui/semantic';
 import { withRouter } from "react-router-dom";
 import { Button } from 'semantic-ui-react';
-import { toGame, resultOptions } from 'utils';
+import { toGame, resultOptions, tap } from 'utils';
 import { withSuccess } from 'utils/ui';
 
 const Games = p =>
@@ -40,10 +40,14 @@ export default compose(
     (p.tournament.games || []).filter(x => (x.schedule === p.S || toAbsDate(x.date) === toAbsDate(p.schedule.date)) && (x.match === p.M || (x.t1 === p.Match.home && x.t2 === p.Match.away) || (x.t2 === p.Match.home && x.t1 === p.Match.away) ))
   )})),
   //withNewId('tournament.games'),
+  //withMount(p => window.$('.ui.selection.dropdown').dropdown('clear')),
   withMount(p => p.getNewGameId()),
   withMount(p => p.tournament.groups && p.setForm(fixResult(find(x => x.id == p.M, find(x => x.id == p.S, p.tournament.schedules).matches)), { path: 'match' })),
   withRouter,
-  withSuccess('groupmatch', p => { alert('Saved'); p.getTournament({ id: p.tournament.id }); p.history.goBack(); }, () => alert('Error happened!'))
+  withSuccess('groupmatch', p => { alert('Saved'); p.getTournament({ id: p.tournament.id }); p.history.goBack(); }, () => alert('Error happened!')),
+  lifecycle({
+    componentWillUnmount: function () { this.props.setForm(null, { path: 'match' }) }
+  })
 )(Games)
 
 const save = p => {
