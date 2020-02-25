@@ -6,6 +6,7 @@ import { withAuth } from 'utils/ui';
 
 import Header from './Header';
 import Home from './Home';
+import Checkout from './Checkout';
 import Products from './Products';
 import Product from './Product';
 import Players from './Players';
@@ -56,6 +57,7 @@ const Content = () =>
     <Route path='/training' component={Training} />
     <Route path='/links' component={Link} />
     <Route path='/calendar' component={Calendar} />
+    <Route exact path='/checkout' component={Checkout} />
     <Route exact path='/products' component={Products} />
     <Route path='/products/:id' component={Product} />
     <Route exact path='/players' component={Players} />

@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 const cd = require('cloudinary');
-const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, findIndex, isNil, last, pick, groupBy, zipWith, mergeDeepWith, is, concat, range } = require('ramda');
+const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, findIndex, isNil, last, pick, groupBy, zipWith, mergeDeepWith, is, concat, range, uniq } = require('ramda');
 const { tap, httpGet, json2js, adjustRating, newRating, serial, toDateOnly, rrSchedule, rrScheduleTeam, group, sortTeam, gengames } = require('.');
 const moment = require('moment');
 const { findById, split2 } = require('@ln613/util');
@@ -46,6 +46,8 @@ e.replace = (doc, obj) => db.collection(doc).replaceOne({ id: obj.id }, obj)
 e.addToList = (doc, id, list, obj) => db.collection(doc).update({ id: +id }, { $addToSet: { [list]: obj } })
 
 e.replaceList = (doc, id, list, obj) => db.collection(doc).update({ id: +id, [list + '.id']: obj.id }, { $set: { [list + '.$']:obj } })
+
+e.clearList = (doc, id, list) => db.collection(doc).update({ id: +id }, { $set: { [list]: [] } })
 
 e.update = (doc, obj) => db.collection(doc).update({ id: obj.id }, { $set: obj })
 
@@ -285,13 +287,21 @@ e.nogame = body => {
 
 e.groupmatch = (id, grp, body) => e.getById('tournaments', id).then(t => {
   if (t.schedules) {
-    //const games = t.games.map(() => g.group);
-    //const schedules = t.schedules.map((s, i) => s.group == group ? {...s, matches: s.matches.map(m => m.id == req.body.id ? req.body : m)} : s);
-    //api.update('tournaments', { id: +id, schedules }).then(r => res.json(r));
-    return serial(body.games.filter(g => g.result && g.result !== '0:0'), g => e.addToList('tournaments', +id, 'games', g));
+    const games = body.games.filter(g => g.result && g.result !== '0:0');
+    const group = getUniqProp('group', games);
+    const ko = getUniqProp('ko', games);
+    const t1 = getUniqProp('t1', games);
+    const t2 = getUniqProp('t2', games);
+    const newGames = t.games.filter(g => (!g.group || g.group != group || g.t1 != t1 || g.t2 != t2) && (!g.ko || g.ko != ko || g.t1 != t1 || g.t2 != t2));
+    return e.clearList('tournaments', +id, 'games').then(r => serial(newGames.concat(games), g => e.addToList('tournaments', +id, 'games', g)));
   } else {
     return 'N/A';
   }
 });
 
 module.exports = e;
+
+const getUniqProp = (p, l) => {
+  const ps = uniq(l.map(x => x[p]).filter(x => x));
+  return ps.length === 1 ? ps[0] : null; 
+}
