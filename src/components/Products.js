@@ -2,7 +2,7 @@ import React from 'react';
 import { cdurl } from 'utils';
 import CatMenu from './CatMenu';
 import { compose, withEffect } from 'hookompose';
-//import 'products.bundle';
+import 'products.bundle';
 
 const Products = ({ lookup, n, d, history }) =>
   <div class="p16 f">
@@ -87,6 +87,9 @@ const Products = ({ lookup, n, d, history }) =>
               <div class="f p8">
                 <div class="fs24 blue" name="price">$100</div>
                 {/* <div class="fs24 red pl8" name="sale">$80</div> */}
+              </div>  
+              <div>
+                <button class="ui button red" name="remove_from_cart">Delete</button>
               </div>  
             </div>
           </div>
