@@ -31,16 +31,6 @@ const Home = ({ isMobile }) =>
       <div>
         In order to reduce the possibility of the spreading of the coronavirus, anyone who just came back from China please remain at home for 2 weeks before coming to the club.
       </div>
-      <h2>Tournament Notice:</h2>
-      <div>
-        The <b>2020 VTTC AKBAR Open and FW Team Challenge</b> will be held on Feb 15, 16 and 17. To register, download and fill the form, send it back in person or through email vttc@vttc.ca
-      </div>
-      <div>
-        <a href="/docs/2020 VTTC AKBAR Open and FW Team Challenge.doc">Registration Form</a>
-      </div>
-      <div>
-        <i>VTTC reserves the right to adjust the rating of players who haven't played any rated matches at VTTC for the past 2 years or whose current level is much higher than their rating. This rule will not apply to players/teams already registered for the event before Jan 20, 2020.</i>
-      </div>
     </div>  
 
     <ImageSlider n={3} t={6} fitHeight={!isMobile}/>
