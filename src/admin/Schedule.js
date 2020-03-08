@@ -14,9 +14,15 @@ import { withSuccess } from 'utils/ui';
 import { tap } from '@ln613/util';
 import { kos } from 'utils';
 
-const single = ms =>
-  <Table name="schedule" data={(ms || []).map(pick(['id', 'player1', 'result', 'player2']))}>
-    <td key="result" path="schedule.matches[{i}].result" select options={resultOptions}/>
+const single = (ms, ko) =>
+  <Table name="schedule" data={(ms || []).map(pick(['id', ko ? 'team1' : 'player1', 'result', ko ? 'team2' : 'player2']))}>
+    <td
+      key="result"
+      path={'schedule.matches[{i}].' + (ko ? 'games[0].result' : 'result')}
+      select
+      options={resultOptions}
+      class="result-select"
+    />
   </Table>;
 
 const teams = (tournament, schedule, history) =>
@@ -36,7 +42,9 @@ const groups = (ms, tid, sid) =>
     <td key="id" hidden />
   </Table>;
 
-const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id, isLoading }) =>
+const isSingleGroup = t => t.teams[0].players.length === 1;
+
+const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, putGroupMatch, id, isLoading }) =>
   <div>
     <h1>Schedule - {tournament.name} - {tournament.isSingle ? ('Round ' + schedule.id) : schedule.date}</h1>
     <hr />
@@ -44,16 +52,35 @@ const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, id
       {schedule.ko ? kos[Math.log2(schedule.ko)] : (schedule.group ? ('Group ' + schedule.group) : ('Id ' + schedule.id))}
     </div>
     <TextBox name="schedule.date" />
-    {tournament.isSingle ?
-      single(schedule.matches) :
-      (tournament.groups ?
-        groups(find(x => x.id == id, tournament.schedules).matches, tournament.id, id) :
-        teams(tournament, schedule, history)
+    {tournament.isSingle
+      ? single(schedule.matches)
+      : (tournament.groups
+        ? (isSingleGroup(tournament)
+          ? single(schedule.matches, true)
+          : groups(find(x => x.id == id, tournament.schedules).matches, tournament.id, id))
+        : teams(tournament, schedule, history)
       )
     }
     <hr />
     <Button primary onClick={history.goBack}>Back</Button>
-    {tournament.groups ? null : <Button primary onClick={() => id[0] === '+' ? postSchedule(schedule, { id1: tournament.id }) : putSchedule(schedule, { id1: tournament.id, id: schedule.id })} disabled={isLoading}>Save</Button>}
+    {tournament.groups && !isSingleGroup(tournament) ? null :
+      <Button
+        primary
+        onClick={() => isSingleGroup(tournament)
+          ? putGroupMatch(
+              { games: schedule.matches.map(x => ({...x.games[0], group: schedule.group, ko: schedule.ko })) },
+              { id: tournament.id, group: schedule.group }
+            )
+          : (id[0] === '+'
+            ? postSchedule(schedule, { id1: tournament.id })
+            : putSchedule(schedule, { id1: tournament.id, id: schedule.id })
+          )
+        }
+        disabled={isLoading}
+      >
+        Save
+      </Button>
+    }
   </div>
 
 export default compose(
@@ -62,6 +89,10 @@ export default compose(
   withLoad('tournament', ['id', 'id1'], true),
   withMount(p => p.setForm({ matches: [], ...find(x => x.id == p.id, p.tournament.schedules) }, { path: 'schedule' })),
   withSuccess('schedule', () => alert('Saved'), () => alert('Error happened!')),
+  withSuccess('groupmatch', () => alert('Saved'), () => alert('Error happened!')),
+  lifecycle({
+    componentWillUnmount: function () { this.props.setForm(null, { path: 'schedule' }) }
+  }),
   withRouter
 )(Schedule)
 

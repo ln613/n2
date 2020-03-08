@@ -294,7 +294,7 @@ e.groupmatch = (id, grp, body) => e.getById('tournaments', id).then(t => {
     const ko = getUniqProp('ko', games);
     const t1 = getUniqProp('t1', games);
     const t2 = getUniqProp('t2', games);
-    const newGames = t.games.filter(g => (!g.group || g.group != group || g.t1 != t1 || g.t2 != t2) && (!g.ko || g.ko != ko || g.t1 != t1 || g.t2 != t2));
+    const newGames = (t.games || []).filter(g => (!g.group || g.group != group || g.t1 != t1 || g.t2 != t2) && (!g.ko || g.ko != ko || g.t1 != t1 || g.t2 != t2));
     return e.clearList('tournaments', +id, 'games').then(r => serial(newGames.concat(games), g => e.addToList('tournaments', +id, 'games', g)));
   } else {
     return 'N/A';
