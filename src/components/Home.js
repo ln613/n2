@@ -29,7 +29,12 @@ const Home = ({ isMobile }) =>
     <div class="p16">
       <h2>Notice:</h2>
       <div>
-        In order to reduce the possibility of the spreading of the coronavirus, anyone who just came back from China please remain at home for 2 weeks before coming to the club.
+FOR THE SAFETY OF ALL CUSTOMERS AND STAFF:
+<br/>
+<ul>
+<li>Anyone travelling outside of Vancouver including USA are asked not to visit the club for 21 days upon arrival. </li>
+<li>Anyone who have been in close contact with someone who has been diagnosed with COVID-19 are asked to stay home for 21 days after their last encounter.</li>
+</ul>
       </div>
     </div>  
 
