@@ -8,9 +8,14 @@ import 'semantic-ui-css/semantic.min.css';
 import '@ln613/css';
 import 'css/styles.css';
 import App from './components/App';
+import { init } from 'fiona';
+
+const store = createStore(actionData);
+
+init({ store });
 
 ReactDOM.render(
-  <Provider store={createStore(actionData)}>
+  <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>

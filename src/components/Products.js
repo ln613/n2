@@ -1,10 +1,11 @@
 import React from 'react';
-import { cdurl } from 'utils';
+import { cdurl, tap } from 'utils';
 import CatMenu from './CatMenu';
 import { compose, withEffect } from 'hookompose';
 //import 'products.bundle';
+import { read, withRules } from 'fiona';
 
-const Products = ({ lookup, n, d, history }) =>
+const Products = p =>
   <div class="p16 f">
     {/* <CatMenu /> */}
     <div class="ui vertical menu" name="categories">
@@ -23,7 +24,7 @@ const Products = ({ lookup, n, d, history }) =>
       <div name="Products">
         <div class="f">
           <div class="fv fg1">
-            <h1>Products</h1>
+            <h1>Products - {tap(p).state.isLoading.toString()}</h1>
             <div class="f mrc8">
               <div>Sort:</div>
               <a href="#" name="sort_price_up">Price low to high</a>
@@ -105,5 +106,6 @@ const Products = ({ lookup, n, d, history }) =>
   </div>
 
 export default compose(
-  withEffect(() => console.log('m - p'))
+  //withEffect(() => console.log(read())),
+  withRules([], { isLoading: null })
 )(Products)
