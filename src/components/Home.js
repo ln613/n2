@@ -32,9 +32,13 @@ const Home = ({ isMobile }) =>
 FOR THE SAFETY OF ALL CUSTOMERS AND STAFF:
 <br/>
 <ul>
-<li>Anyone travelling outside of Vancouver including USA are asked not to visit the club for 21 days upon arrival. </li>
-<li>Anyone who have been in close contact with someone who has been diagnosed with COVID-19 are asked to stay home for 21 days after their last encounter.</li>
+<li>Anyone travelling outside of BC including USA or sick is asked not to visit the club for 21 days upon arrival. </li>
+<li>Anyone who has been in close contact with someone who has been diagnosed with COVID-19 is asked to stay home for 21 days after their last encounter.</li>
 </ul>
+<br/>
+Thank you for your understanding
+<br/>
+VTTC Management
       </div>
     </div>  
 
