@@ -8,11 +8,11 @@ import 'semantic-ui-css/semantic.min.css';
 import '@ln613/css';
 import 'css/styles.css';
 import App from './components/App';
-import { init } from 'fiona';
+//import { init } from 'fiona';
 
 const store = createStore(actionData);
 
-init({ store });
+//init({ store });
 
 ReactDOM.render(
   <Provider store={store}>
