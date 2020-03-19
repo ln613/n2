@@ -4,7 +4,7 @@ import CatMenu from './CatMenu';
 import { compose, withEffect } from 'hookompose';
 //import { compose } from 'recompose';
 //import 'products.bundle';
-import { read, withRules } from 'fiona';
+//import { read, withRules } from 'fiona';
 
 const Products = p =>
   <div class="p16 f">
@@ -108,5 +108,5 @@ const Products = p =>
 
 export default compose(
   //withEffect(() => console.log(read())),
-  withRules([], { isLoading: null })
+  //withRules([], { isLoading: null })
 )(Products)
