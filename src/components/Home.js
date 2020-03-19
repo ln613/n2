@@ -29,18 +29,11 @@ const Home = ({ isMobile }) =>
     <div class="p16">
       <h2>Notice:</h2>
       <div>
-FOR THE SAFETY OF ALL CUSTOMERS AND STAFF:
-<br/>
-<ul>
-<li>Anyone travelling outside of BC including USA or sick is asked not to visit the club for 21 days upon arrival. </li>
-<li>Anyone who has been in close contact with someone who has been diagnosed with COVID-19 is asked to stay home for 21 days after their last encounter.</li>
-</ul>
-<br/>
-Thank you for your understanding
-<br/>
-VTTC Management
-      </div>
-    </div>  
+        Due to the COVID-19 outbreak, VTTC will be closed from March 19 to March 31. If no further notice, we will reopen on April 1st. Thanks for your understanding.       </div>
+      </div>  
+      <div>
+        因為新冠狀病毒的疫情嚴重，為了保障大家的安全，本中心決定暫時停放兩周（包括中心所有项目）由3月19日到3月31日，如果沒有特別情況4月1日會重新開放，有关各項聯賽的開賽時間，請大家留意䋞站的公布，如有不便之处，請各位原諒！有問題請call: 604-7719188.
+      </div>  
 
     <ImageSlider n={3} t={6} fitHeight={!isMobile}/>
 

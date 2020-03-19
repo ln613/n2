@@ -2,6 +2,7 @@ import React from 'react';
 import { cdurl, tap } from 'utils';
 import CatMenu from './CatMenu';
 import { compose, withEffect } from 'hookompose';
+//import { compose } from 'recompose';
 //import 'products.bundle';
 import { read, withRules } from 'fiona';
 
@@ -24,7 +25,7 @@ const Products = p =>
       <div name="Products">
         <div class="f">
           <div class="fv fg1">
-            <h1>Products - {tap(p).state.isLoading.toString()}</h1>
+            <h1>Products - {tap(p).state.tournaments.length}</h1>
             <div class="f mrc8">
               <div>Sort:</div>
               <a href="#" name="sort_price_up">Price low to high</a>
