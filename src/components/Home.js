@@ -29,10 +29,10 @@ const Home = ({ isMobile }) =>
     <div class="p16">
       <h2>Notice:</h2>
       <div>
-        Due to the COVID-19 outbreak, VTTC will be closed from March 19 to March 31. If no further notice, we will reopen on April 1st. Thanks for your understanding.       </div>
+        Due to the COVID-19 outbreak, VTTC will be closed until furthur notice. We will post our opening time online. Thanks for your understanding.       </div>
       </div>  
-    <div style={{paddingLeft: '16px', paddingRight: '16px'}}>
-        因為新冠狀病毒的疫情嚴重，為了保障大家的安全，本中心決定暫時停放兩周（包括中心所有项目）由3月19日到3月31日，如果沒有特別情況4月1日會重新開放，有关各項聯賽的開賽時間，請大家留意䋞站的公布，如有不便之处，請各位原諒！有問題請call: 604-7719188.
+      <div style={{paddingLeft: '16px', paddingRight: '16px'}}>
+        由於疫情繼續放大，政府也沒有通告让我們开门營業，球友們請留意我們綱站公布開放時間，謝謝。VTTC
       </div>  
 
     <ImageSlider n={3} t={6} fitHeight={!isMobile}/>
