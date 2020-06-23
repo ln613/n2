@@ -59,7 +59,7 @@ export default p =>
 
 <li>Discounted Package:     $63 (11 Drop-Ins, valid 1 year from date of issue)</li>
 
-<li>Senior:                 $50 (Tu, Th, 12pm-5pm ) (Mon, We, Fr, 12pm-3pm)(valid 1 year from date of issue)</li>
+<li>Senior:                 $50 (Tu, Th, 11am-5pm ) (Mon, We, Fr, 11am-3pm)(valid 1 year from date of issue)</li>
 
 <li>Monthly pass:           $65 (valid 1 year from date of issue)</li>
 
