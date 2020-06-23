@@ -29,7 +29,7 @@ const Home = ({ isMobile }) =>
     <div class="p16">
       <h2>Reopening Update:</h2>
       <div>
-        Our club will reopen on July 1st, and our regular opening time will be changed to 11am, in order to regain the time lost due to the pandemic and give everyone more time to execise. We will follow all the government health regulations, keep our club clean and ensure good air circulation with our ventilation and air conditioning system. We will create a safe environment for everyone to enjoy playing here.
+        Our club will reopen on July 1st, and our regular opening time will be changed to 11am, in order to help our club members and players regain the time lost due to the pandemic and give everyone more time to execise. We will follow all the government health regulations, keep our club clean and ensure good air circulation with our ventilation and air conditioning system. We will create a safe environment for everyone to enjoy playing here.
       </div>
       <br />
       <div style={{paddingRight: '16px'}}>
