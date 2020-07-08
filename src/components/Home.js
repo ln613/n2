@@ -27,6 +27,23 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 const Home = ({ isMobile }) =>
   <div>
     <div class="p16">
+      <h2>League Update:</h2>
+      <div>
+        2020 MVTTL U-2000 will resume on July 17th. In order to keep distance between players, the double game will be replaced by a single game between a pre-determined player from each team.
+      </div>
+      <br />
+      <div>
+        BCD Singles RR will start on July 19th.
+      </div>
+      <br />
+      <div style={{paddingRight: '16px'}}>
+        2020 MVTTL U-2000 联赛将于7月17日恢复比赛。为保持社交距离，双打比赛将改为单打，由每队事先选出一名选手进行。
+      </div>  
+      <br />
+      <div style={{paddingRight: '16px'}}>
+        BCD 单打大循环的比赛将于7月19日开始。
+      </div>  
+      <br />
       <h2>Reopening Update:</h2>
       <div>
         Our club will reopen on July 1st, and our regular opening time will be changed to 11am, in order to help our club members and players regain the time lost due to the pandemic and give everyone more time to execise. We will follow all the government health regulations, keep our club clean and ensure good air circulation with our ventilation and air conditioning system. We will create a safe environment for everyone to enjoy playing here.
