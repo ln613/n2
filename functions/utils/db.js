@@ -272,13 +272,14 @@ e.changePlayer = (tid, p1, p2) => e.getById('tournaments', tid).then(t => e.get(
 e.nogame = body => {
   const id = +body.id;
   const date = body.date;
+  const weeks = +(body.weeks || '1');
   return e.getById('tournaments', id).then(t => {
     if (t.schedules) {
       const n = findIndex(s => s.date === date, t.schedules);
       if (n === -1) {
         return 'N/A';
       } else {
-        const schedules = t.schedules.map((s, i) => i >= n ? {...s, date: toDateOnly(moment(s.date).add(1, 'week').toDate())} : s);
+        const schedules = t.schedules.map((s, i) => i >= n ? {...s, date: toDateOnly(moment(s.date).add(weeks, 'week').toDate())} : s);
         return e.update('tournaments', { id, schedules }).then(_ => schedules);
       }
     } else {
