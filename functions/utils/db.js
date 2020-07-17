@@ -3,7 +3,7 @@ const cd = require('cloudinary');
 const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, findIndex, isNil, last, pick, groupBy, zipWith, mergeDeepWith, is, concat, range, uniq } = require('ramda');
 const { tap, httpGet, json2js, adjustRating, newRating, serial, toDateOnly, rrSchedule, rrScheduleTeam, group, sortTeam, gengames } = require('.');
 const moment = require('moment');
-const { findById, split2 } = require('@ln613/util');
+const { findById, split2, getNameById } = require('@ln613/util');
 
 cd.config({ cloud_name: 'vttc', api_key: process.env.CLOUDINARY_KEY, api_secret: process.env.CLOUDINARY_SECRET });
 
@@ -301,6 +301,14 @@ e.groupmatch = (id, grp, body) => e.getById('tournaments', id).then(t => {
     return 'N/A';
   }
 });
+
+e.getDetail = id => e.getById('tournaments', id).then(t => e.get('players').then(ps => {
+  return {
+    name: t.name,
+    schedules: t.schedules.map(s => `${s.id}, ${s.date}, ${s.matches.map(m => `${m.home} ${getNameById(m.home)(t.teams)} - ${m.away} ${getNameById(m.away)(t.teams)}`).join(', ')}`),
+    games: t.games.map((g, i) => `${i}, ${g.id}, ${g.date}, ${g.t1} ${getNameById(g.t1)(t.teams)} - ${g.t2} ${getNameById(g.t2)(t.teams)}, ${g.p1} ${getNameById(g.p1)(ps)} - ${g.p2} ${getNameById(g.p2)(ps)}`)
+  };
+}));
 
 module.exports = e;
 
