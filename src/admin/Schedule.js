@@ -42,7 +42,7 @@ const groups = (ms, tid, sid) =>
     <td key="id" hidden />
   </Table>;
 
-const isSingleGroup = t => t.teams && t.teams[0].players.length === 1;
+const isSingleGroup = t => t.teams.length > 0 && t.teams[0].players.length === 1;
 
 const Schedule = ({ tournament, schedule, history, putSchedule, postSchedule, putGroupMatch, id, isLoading }) =>
   <div>
