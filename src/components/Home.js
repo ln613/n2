@@ -29,28 +29,11 @@ const Home = ({ isMobile }) =>
     <div class="p16">
       <h2>League Update:</h2>
       <div>
-        2020 MVTTL U-2000 will resume on July 17th. In order to keep distance between players, the double game will be replaced by a single game between a pre-determined player from each team.
-      </div>
-      <br />
-      <div>
-        BCD Singles RR will start on July 19th.
+        2020 MVTTL U-3200 will start on Sep. 6th. In order to keep distance between players, the double game will be replaced by a single game. Registration opens now.
       </div>
       <br />
       <div style={{paddingRight: '16px'}}>
-        2020 MVTTL U-2000 联赛将于7月17日恢复比赛。为保持社交距离，双打比赛将改为单打，由每队事先选出一名选手进行。
-      </div>  
-      <br />
-      <div style={{paddingRight: '16px'}}>
-        BCD 单打大循环的比赛将于7月19日开始。
-      </div>  
-      <br />
-      <h2>Reopening Update:</h2>
-      <div>
-        Our club will reopen on July 1st, and our regular opening time will be changed to 11am, in order to help our club members and players regain the time lost due to the pandemic and give everyone more time to execise. We will follow all the government health regulations, keep our club clean and ensure good air circulation with our ventilation and air conditioning system. We will create a safe environment for everyone to enjoy playing here.
-      </div>
-      <br />
-      <div style={{paddingRight: '16px'}}>
-      春雷过後，大地回春，疫情過後人們更加精神换發，為了更好的让我們具樂部所以的會員和球友們更快夺回増經失去的炼習時间，决定7月1日全面灰复正常，同時開放時間提前到11奌早上，让大家多奌時間練鍛，但疫情時間大家也要遵守政府規定的衛生條例，長情到中心场地會有安排，一切都是为大家生體健康，中心也做好一切准备，我們有安全抽風和冷氣系統，新裝修飄亮高貴的衛生间，實在的衛生查驗服務，會让所以的球員們玩的安心，练得安心，會盡情享受這個運動帶來的無比快樂。
+        2020 MVTTL U-3200 联赛将于9月6日开始。为保持社交距离，双打比赛将改为单打。请大家踊跃报名。
       </div>  
     </div>  
 
