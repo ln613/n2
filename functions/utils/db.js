@@ -3,7 +3,7 @@ const cd = require('cloudinary');
 const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, findIndex, isNil, last, pick, groupBy, zipWith, mergeDeepWith, is, concat, range, uniq } = require('ramda');
 const { tap, httpGet, json2js, adjustRating, newRating, serial, toDateOnly, rrSchedule, rrScheduleTeam, group, sortTeam, gengames } = require('.');
 const moment = require('moment');
-const { findById, split2, getNameById } = require('@ln613/util');
+const { findById, split2, getNameById, use, sortBy } = require('@ln613/util');
 
 cd.config({ cloud_name: 'vttc', api_key: process.env.CLOUDINARY_KEY, api_secret: process.env.CLOUDINARY_SECRET });
 
@@ -67,15 +67,16 @@ e.getPlayerGames = id => db.collection('tournaments').aggregate([
   { $project: { games: 1, _id: 0, name: 1 } }
 ]).toArray().then(r => r.map(x => ({name: x.name, games: x.games, pid: id})))
 
-e.getPlayerRating = (id, date) => db.collection('tournaments').aggregate([
-  { $unwind: '$games' },
-  { $match: { $or: [ { 'games.p1': +id }, { 'games.p2': +id }, { 'games.p1': id.toString() }, { 'games.p2': id.toString() } ] } },
-  //{ $match: { 'games.date': { $lte: date === '_' ? new Date() : new Date(date) } } },
-  { $sort: { 'games.date': -1, 'games.id': -1 } },
-  { $limit: 1 },
-  { $replaceRoot: { newRoot: '$games'} },
-  { $project: { rating: { $cond: [{ $or: [{ $eq: ['$p1', id.toString()] }, { $eq: ['$p1', +id] }] }, { $add: ['$p1Rating', '$p1Diff'] }, { $add: ['$p2Rating', '$p2Diff'] }] } } }
-]).toArray().then(x => x.length === 0 ? e.getById('players', id) : x[0]).then(x => (x || {}).rating)
+e.getPlayerRating = (id, date) => use(toDateOnly(moment().add(-1, 'M').startOf('month')))(d =>
+  db.collection('tournaments').aggregate([
+    { $unwind: '$games' },
+    { $match: { $or: [ { 'games.p1': +id }, { 'games.p2': +id }, { 'games.p1': id.toString() }, { 'games.p2': id.toString() } ] } },
+    { $match: { 'games.date': { $gte: d } } },
+    { $sort: { 'games.date': -1, 'games.id': -1 } },
+    { $replaceRoot: { newRoot: '$games'} },
+    { $project: { rating: { $cond: [{ $or: [{ $eq: ['$p1', id.toString()] }, { $eq: ['$p1', +id] }] }, { $add: ['$p1Rating', '$p1Diff'] }, { $add: ['$p2Rating', '$p2Diff'] }] } } }
+  ]).toArray()
+).then(x => x.filter(y => y.rating)).then(x => x.length === 0 ? e.getById('players', id) : sortBy('rating', x)[0]).then(x => (x || {}).rating)
 
 e.changeResult = g1 => db.collection('tournaments').aggregate([
   { $unwind: '$games' },
