@@ -10,7 +10,7 @@ import { tap } from '@ln613/util';
 import TMenu from './TMenu';
 import { highlightWinner } from 'utils';
 
-const mapPlayer = p => ({ id: p.id, 'Name': p.firstName + ' ' + p.lastName, gender: p.sex, 'Tournament Rating': p.tRating, 'Latest Rating': p.rating, 'Is Sub': p.isSub ? '&#10004' : '' });
+const mapPlayer = p => ({ id: p.id, 'Name': p.firstName + ' ' + p.lastName, gender: p.sex, start: p.tRating, current: p.rating, sub: p.isSub ? '&#10004' : '' });
 const mapTeam = t => !t.players || t.players.length < 2 ? { id: t.id, name: t.players[0].name, 'Rating': t.players[0].tRating || t.players[0].rating } :
   pipe(take(2), x => ({
     id: t.id,
@@ -21,15 +21,15 @@ const mapTeam = t => !t.players || t.players.length < 2 ? { id: t.id, name: t.pl
 const single = players =>
   <Table name="players" data={(players || []).map(mapPlayer)}>
     <td key="id" hidden />  
-    <td key="Is Sub" hidden />  
+    <td key="sub" hidden />  
   </Table>
 
-const teams = ts =>
+const teams = (ts, isMobile) =>
   sortWith([ascend(x => x.name)], (ts || [])).map(t =>
     <div class="pt8" key={t.id}>
       <div class="pv8 fs24 darkgreen">{t.name}</div>
-      <Table name="team" data={(t.players || []).map(mapPlayer)}>
-        <td key="id" hidden />  
+      <Table name="team" data={(t.players || []).map(mapPlayer)} isMobile={isMobile}>
+        <td key="id" hidden />
       </Table>
     </div>
   )
@@ -61,7 +61,7 @@ const Tournament = ({ lookup, tournament, id, isOldTournament, isMobile }) =>
             ? single(tournament.players)
             : (tournament.groups
               ? groups(tournament.groups)
-              : teams(tournament.teams)
+              : teams(tournament.teams, isMobile)
             )
           )
         }
