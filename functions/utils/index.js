@@ -56,13 +56,13 @@ e.getTeamRating = t => t.players
   : 0;
 
 const changeTable = (i, j, n, sids) => {
-  const j1 = sids[j];
+  const j1 = sids[i % n];
   return j === 0 ? j1 : (j === j1 ? 0 : j);
 }
 
 e.rrScheduleTeam = (teams, startDate, ids) => {
   if (!ids) ids = R.range(1, Math.min(Math.floor(teams.length / 2) + 1, 7));
-  const sids = util.shuffle(ids);
+  const sids = util.shuffle(R.range(0, ids.length));
 
   return R.compose(
     rs => rs.map((w, i) => ({ id: i + 1, matches: w.map((m, j) => { m.round = i + 1; m.id = ids[changeTable(i, j, ids.length, sids)]; return m; }), date: e.toDateOnly(moment(startDate).add(i, 'week').toDate()) })),
