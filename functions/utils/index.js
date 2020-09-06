@@ -56,9 +56,7 @@ e.getTeamRating = t => t.players
   : 0;
 
 const changeTable = (i, j, n, sids) => {
-  const i1 = i % n;
-  if (i1 === 0) return j;
-  const j1 = sids[n - i1];
+  const j1 = sids[j];
   return j === 0 ? j1 : (j === j1 ? 0 : j);
 }
 
