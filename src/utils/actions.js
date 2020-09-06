@@ -1,7 +1,7 @@
 import { generateActions } from '@ln613/state';
 import { isDev } from '.';
 
-const aws = isDev ? 'http://localhost:9000/' : '/.netlify/functions/';
+const aws = isDev ? 'http://localhost:9001/' : '/.netlify/functions/';
 export const api = aws + 'api?';
 export const admin = aws + 'admin?';
 

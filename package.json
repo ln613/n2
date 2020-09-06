@@ -29,10 +29,9 @@
     "semantic-ui-react": "^0.88.2"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=./src craco start",
+    "start": "cross-env NODE_PATH=./src PORT=3001 craco start",
     "build": "cross-env NODE_PATH=./src craco build",
-    "func": "cross-env DB_LOCAL=mongodb://localhost:27017/vttc netlify-lambda serve functions",
-    "func-live": "netlify-lambda serve functions",
+    "func": "netlify-lambda serve functions -t 10000 -p 9001",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
