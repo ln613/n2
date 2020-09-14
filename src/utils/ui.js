@@ -74,11 +74,17 @@ const drawBoundingImage = (ctx, img, x, y, w, h, { txts, font = 'Arial', size = 
   ctx.drawImage(img, x2, y2, w2, h2);
   if (txts && txts.length > 0) {
     ctx.font = `${weight} ${size}px ${font}`;
-    ctx.fillStyle = color;
     const th = ctx.measureText('M').width;
     const mh = 10;
     const left = th / 2;
     const top = th + th / 2;
+    const rl = x2 + left - mh;
+    const rw = Math.max(...txts.map(x => ctx.measureText(x).width)) + 2 * mh;
+    const rt = y2 + top - th - mh;
+    const rh = txts.length * (th + mh) + 2 * mh;
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.fillRect(rl, rt, rw, rh);
+    ctx.fillStyle = color;
     txts.forEach((t, i) => {
       ctx.fillText(t, x2 + left, y2 + top + i * (th + mh));
     });
