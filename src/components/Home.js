@@ -27,14 +27,14 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 const Home = ({ isMobile }) =>
   <div>
     <div class="p16">
-      <h2>League Update:</h2>
+      <h2>Emergency Announcement Update:</h2>
       <div>
-        2020 MVTTL U-3200 will start on Sep. 6th. In order to keep distance between players, the double game will be replaced by a single game. Registration opens now.
+      We hope everyone is safe and healthy, due to the Covid-19 Government Update we are unable to open from Nov, 7 10pm to Nov 23 at midnight. We are sorry for any inconvenience and wish everyone can understand this requirement by the government of Canada. We will be open back on Tuesday, November, 24, 12:30PM. Hope to see you all back if the Government of Canada permits this.
       </div>
       <br />
-      <div style={{paddingRight: '16px'}}>
+      {/* <div style={{paddingRight: '16px'}}>
         2020 MVTTL U-3200 联赛将于9月6日开始。为保持社交距离，双打比赛将改为单打。请大家踊跃报名。
-      </div>  
+      </div>   */}
     </div>  
 
     <ImageSlider n={2} t={6} fitHeight={!isMobile}/>
