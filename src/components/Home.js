@@ -29,7 +29,7 @@ const Home = ({ isMobile }) =>
     <div class="p16">
       <h2>Emergency Announcement Update:</h2>
       <div>
-      We hope everyone is safe and healthy, due to the Covid-19 Government Update we are unable to open from Nov, 7 10pm to Nov 23 at midnight. We are sorry for any inconvenience and wish everyone can understand this requirement by the government of Canada. We will be open back on Tuesday, November, 24, 12:30PM. Hope to see you all back if the Government of Canada permits this.
+      We hope everyone is safe and healthy, due to the Covid-19 Government Update we will stop all training sessions and Friday night league games from Nov, 7 10pm to Nov 23 at midnight. Regular drop-in and Sunday night single league games are still open. We will be closed on Nov 10, Tue. We are sorry for any inconvenience and wish everyone can understand this requirement by the government of Canada.
       </div>
       <br />
       {/* <div style={{paddingRight: '16px'}}>
