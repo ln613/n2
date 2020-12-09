@@ -29,7 +29,7 @@ const Home = ({ isMobile }) =>
     <div class="p16">
       <h2>Emergency Announcement Update:</h2>
       <div>
-      We hope everyone is safe and healthy, due to the Covid-19 Government Update we will stop all training sessions and Friday night league games from Nov, 7 10pm to Nov 23 at midnight. Regular drop-in and Sunday night single league games are still open. We will be closed on Nov 10, Tue. We are sorry for any inconvenience and wish everyone can understand this requirement by the government of Canada.
+      Due to the Covid-19 Government Update we will reduce the number of matches on every game night to 3. U-3200 will resume on Dec 19th, and will be played on both Saturdays and Sundays. U-2000 will resume on Dec 18th. Please check the schedule page for your game schedule. If any team member cannot come on the scheduled date, please give us one or two days advanced notice, so we can reschedule or help you find a replacement.
       </div>
       <br />
       {/* <div style={{paddingRight: '16px'}}>
