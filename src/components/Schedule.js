@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { connect } from '@ln613/state';
 import { compose, lifecycle } from 'recompose';
-import { pick, isNil, sortWith, ascend } from 'ramda';
+import { pick, isNil, sortWith, ascend, sort } from 'ramda';
 import actions from 'utils/actions';
 import { tournamentSelector } from 'utils/selectors';
 import { kos, highlightWinner } from 'utils';
@@ -24,7 +24,7 @@ const Schedule = ({ tournament, id, isMobile }) =>
       </div>  
       <hr />
       {/* {(id == 96) && <Fragment><i>*The schedule for the 2nd round will be generated after all 1st round matches are finished.</i><hr/></Fragment>} */}
-      {(tournament.schedules || []).filter(s => s.matches && s.matches.length > 0).map((s, i) =>
+      {sortWith([ascend(x => x.date)], (tournament.schedules || [])).filter(s => s.matches && s.matches.length > 0).map((s, i) =>
         <div class="pt8">
           <div class="pv8 fs24 darkgreen">{tournament.isSingle ? 'Round ' + (i + 1) : (!isNil(s.group) ? ('Group ' + s.group) : (s.ko ? kos[Math.log2(s.ko)] : s.date)) }</div>
           <Table name="schedule" data={mapMatches(s.matches || [], tournament, !isNil(s.group), !isNil(s.ko))} link={tournament.isSingle ? null : x => `/games/${tournament.id}/${s.id}/${x.id || x.table || x.round}`}/>
