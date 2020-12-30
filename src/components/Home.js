@@ -34,7 +34,7 @@ const Home = ({ isMobile }) =>
       <br />
       <h2>Holiday Closures:</h2>
       <div>
-      We will close on Dec. 25th and Dec. 26th. Happy Holidays!
+      We will open from 1pm to 6pm on Jan. 1st, 2021. Happy Holidays!
       </div>
       <br />
       {/* <div style={{paddingRight: '16px'}}>

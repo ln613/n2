@@ -10,15 +10,15 @@ import { update } from 'ipath';
 const names = ['Drop In', 'Training', 'League'];
 const bg = ['Green', 'Orange', 'Cornflowerblue'];
 const tt = {
-  Sun: { schedules: [[0, '12:30', '2:30'], [0, '4:30', '11'], [2, '7:30', '9:30']] },
-  Mon: { schedules: [[0, '12:30', '11']] },
-  Tue: { schedules: [[0, '12:30', '6']] },
-  Wed: { schedules: [[0, '12:30', '11']] },
-  Thu: { schedules: [[0, '12:30', '6']] },
-  Fri: { schedules: [[0, '12:30', '11'], [2, '7:30', '9:30']] },
-  Sat: { schedules: [[0, '12:30', '6:30'], [1, '6:30', '9:30'], [0, '9:30', '11']] }
+  Sun: { schedules: [[0, '1:00', '2:30'], [0, '4:30', '11'], [2, '7:30', '9:30']] },
+  Mon: { schedules: [[0, '1:00', '11']] },
+  Tue: { schedules: [[0, '1:00', '6']] },
+  Wed: { schedules: [[0, '1:00', '11']] },
+  Thu: { schedules: [[0, '1:00', '6']] },
+  Fri: { schedules: [[0, '1:00', '11'], [2, '7:30', '9:30']] },
+  Sat: { schedules: [[0, '1:00', '6:30'], [1, '6:30', '9:30'], [0, '9:30', '11']] }
 }
-const sm13 = [[0, '12:30', '6']];
+const sm13 = [[0, '1:00', '6']];
 const ssun3 = [[0, '3', '11']];
 
 const getDates = () => {
