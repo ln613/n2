@@ -27,7 +27,7 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 const Home = ({ isMobile }) =>
   <div>
     <div class="p16">
-      <h2>Emergency Announcement Update:</h2>
+      {/* <h2>Emergency Announcement Update:</h2>
       <div>
       Due to the Covid-19 Government Update we will reduce the number of matches on every game night to 3. U-3200 will resume on Dec 19th, and will be played on both Saturdays and Sundays. U-2000 will resume on Dec 18th. Please check the schedule page for your game schedule. If any team member cannot come on the scheduled date, please give us one or two days advanced notice, so we can reschedule or help you find a replacement.
       </div>
@@ -36,7 +36,7 @@ const Home = ({ isMobile }) =>
       <div>
       We will open from 1pm to 6pm on Jan. 1st, 2021. Happy Holidays!
       </div>
-      <br />
+      <br /> */}
       {/* <div style={{paddingRight: '16px'}}>
         2020 MVTTL U-3200 联赛将于9月6日开始。为保持社交距离，双打比赛将改为单打。请大家踊跃报名。
       </div>   */}
