@@ -29,13 +29,12 @@ const Home = ({ isMobile }) =>
     <div class="p16">
       <h2>Update:</h2>
       <div>
-      2021 MVTTL U-2000 will start on Mar. 26th. The doubles game will be replaced by a single game in order to keep social distance.
       No drop in for new customers. Must reserve a time slot over the phone before coming.
       </div>
       <br />
-      <div style={{paddingRight: '16px'}}>
+      {/* <div style={{paddingRight: '16px'}}>
         2021 MVTTL U-2000 联赛将于3月26日开始。为保持社交距离，双打比赛将改为单打。
-      </div>  
+      </div>   */}
       <div style={{paddingRight: '16px'}}>
         新客户必须电话预约。
       </div>  
@@ -54,3 +53,6 @@ const Home = ({ isMobile }) =>
   </div>
 
 export default withMobile(Home);
+
+
+//2021 MVTTL U-2000 will start on Mar. 26th. The doubles game will be replaced by a single game in order to keep social distance.
