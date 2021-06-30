@@ -27,16 +27,16 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 const Home = ({ isMobile }) =>
   <div>
     <div class="p16">
-      <h2>Update:</h2>
+      <h2>2021 VTTC AKBAR Open & Team Challenge</h2>
+      The following events will be held on Aug 21/22: Teams U-4000/U-2000, Open Singles, Singles U-2100/U-1600/U-1200/U-1000/U-700/U-500/U-200, Juniors U-13. Please see the <a href="/docs/2021 VTTC OPEN August 21 - 22 V6.pdf">registration form</a> for details. 
       <div>
-      No drop in for new customers. Must reserve a time slot over the phone before coming.
       </div>
       <br />
       {/* <div style={{paddingRight: '16px'}}>
         2021 MVTTL U-2000 联赛将于3月26日开始。为保持社交距离，双打比赛将改为单打。
       </div>   */}
       <div style={{paddingRight: '16px'}}>
-        新客户必须电话预约。
+        本中心将于8月21/22日举行团体及单打赛事。详情请见<a href="/docs/2021 VTTC OPEN August 21 - 22 V6.pdf">报名表</a>。
       </div>  
     </div>  
 
