@@ -27,7 +27,7 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 const Home = ({ isMobile }) =>
   <div>
     <div class="p16">
-      <h2>2021 VTTC AKBAR Open & Team Challenge</h2>
+      <h2>2021 VTTC AKBER Open & Team Challenge</h2>
       The following events will be held on Aug 21/22: Teams U-4000/U-2000, Open Singles, Singles U-2100/U-1600/U-1200/U-1000/U-700/U-500/U-200, Juniors U-13. Please see the <a href="/docs/2021 VTTC OPEN August 21 - 22 V6.pdf">registration form</a> for details. 
       <div>
       </div>
