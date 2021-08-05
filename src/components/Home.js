@@ -36,7 +36,7 @@ const Home = ({ isMobile }) =>
         2021 MVTTL U-2000 联赛将于3月26日开始。为保持社交距离，双打比赛将改为单打。
       </div>   */}
       <div style={{paddingRight: '16px'}}>
-        本中心将于8月21/22日举行团体及单打赛事。详情请见<a href="/docs/2021 VTTC OPEN August 21 - 22 V6.pdf">报名表</a>。
+        本中心将于8月21/22日举行团体及单打赛事。详情请见<a href="/docs/2021 VTTC OPEN August 21 - 22 V12.pdf">报名表</a>。
       </div>  
     </div>  
 
