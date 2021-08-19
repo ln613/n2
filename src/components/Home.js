@@ -31,9 +31,9 @@ const Home = ({ isMobile }) =>
       The following events will be held on Aug 21/22: Teams U-4000/U-2000, Open Singles, Singles U-2100/U-1600/U-1200/U-1000/U-700/U-500/U-200, Juniors U-13. Please see the <a href="/docs/2021 VTTC OPEN August 21 - 22 V15.pdf">registration form</a> for details. 
       <br />
       Note:
-      &nbsp;&nbsp;1. The starting time on Sun 8/22 has been changed to 12pm.
-      &nbsp;&nbsp;2. There will be a daily lucky draw during the event.
-      &nbsp;&nbsp;3. For singles events, in addition to regular rewards, female players will be ranked and awarded among female players. 
+      &nbsp;&nbsp;1. The starting time on Sun 8/22 has been changed to 12pm. <br />
+      &nbsp;&nbsp;2. There will be a daily lucky draw during the event. <br />
+      &nbsp;&nbsp;3. For singles events, in addition to regular rewards, female players will be ranked and awarded among female players.
       <div>
       </div>
       {/* <div style={{paddingRight: '16px'}}>
