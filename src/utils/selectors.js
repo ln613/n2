@@ -247,6 +247,7 @@ const standing = createSelector(
       const ps1 = sum(ms.map(m => +m.result[m.home == t.id ? 2 : 0]));
       const s = { [tt.isSingle ? 'player' : 'team']: t.name, id: t.id, total: ms.length, w: wn, l: ln, [tt.isSingle ? 'gw' : (tt.groups ? 'mw' : 'points')]: ps, rank: t.rank, group: t.group };
       if (tt.isSingle) s.gl = ps1;
+      s.losers = ws.map(m => m.home === t.id ? m.away : m.home);
       if (tt.groups) {
         s.ml = ps1;
         s.gw = sum(ms.map(m => sum(m.games.filter(g => g.result).map(g => +g.result[m.home == t.id ? 0 : 2]))));
@@ -255,8 +256,18 @@ const standing = createSelector(
       return s;
     });
     
+    const stg = pipe(groupBy(prop('group')), map(groupBy(prop('w'))))(st);
+    const de = descend(x => {
+      const stg1 = stg[x.group][x.w] || [];
+      return stg1.length === 2
+        ? (x.losers.indexOf((stg1[0].id === x.id
+            ? stg1[1].id
+            : stg1[0].id
+          )) > -1) ? 2 : 1
+        : 0;
+    });
     const p = pipe(
-      sortWith(tt.isSingle ? [dw, at, dp(1), al] : (tt.groups ? [dw, at, dm, am, dl, al] : [dp(0), at, dw])),
+      sortWith(tt.isSingle ? [dw, at, dp(1), al] : (tt.groups ? [dw, at, de, dm, am, dl, al] : [dp(0), at, dw])),
       addIndex('rank')
     );
 

@@ -10,12 +10,13 @@ import TMenu from './TMenu';
 import { tap } from '@ln613/util';
 
 const table = (n, d, isMobile, isGroup) =>
-  <Table name={(isGroup ? 'g' : '') + 'standing' + n} data={d} isMobile={isMobile}>
+  <Table name={(isGroup ? 'g' : '') + 'standing' + n} data={tap(d)} isMobile={isMobile}>
     <td key="group" hidden />
     <td key="id" hidden />
     <td key="team" title={isGroup ? `Player${d && d[0].team.indexOf('/') > -1 ? 's' : ''}` : 'Team'}/>
-    <td key="mw" title="MW"/>
-    <td key="ml" title="ML"/>
+    <td key="mw" title="MW"  />
+    <td key="ml" title="ML"  />
+    <td key="losers" hidden />
     <td key="gw" title="GW"/>
     <td key="gl" title="GL"/>
   </Table>
