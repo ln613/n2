@@ -27,6 +27,7 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 const Home = ({ isMobile }) =>
   <div>
     <div class="p16">
+      The Singles RR will be postponed until further notice.
       {/* <h2>2021 Butterfly AKBER Open & Team Challenge</h2> */}
       {/* <div style={{paddingRight: '16px'}}>
         2021 MVTTL U-2000 联赛将于3月26日开始。为保持社交距离，双打比赛将改为单打。
