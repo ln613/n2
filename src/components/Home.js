@@ -27,21 +27,10 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 const Home = ({ isMobile }) =>
   <div>
     <div class="p16">
-      <h2>2021 Butterfly AKBER Open & Team Challenge</h2>
-      The following events will be held on Aug 21/22: Teams U-4000/U-2000, Open Singles, Singles U-2100/U-1600/U-1200/U-1000/U-700/U-500/U-200, Juniors U-13. Please see the <a href="/docs/2021 VTTC OPEN August 21 - 22 V15.pdf">registration form</a> for details. 
-      <br />
-      Note: <br />
-      &nbsp;&nbsp;1. The starting time on Sun 8/22 has been changed to 12pm. <br />
-      &nbsp;&nbsp;2. There will be a daily lucky draw during the event. <br />
-      &nbsp;&nbsp;3. For singles events, in addition to regular rewards, female players will be ranked and awarded among female players.
-      <div>
-      </div>
+      {/* <h2>2021 Butterfly AKBER Open & Team Challenge</h2> */}
       {/* <div style={{paddingRight: '16px'}}>
         2021 MVTTL U-2000 联赛将于3月26日开始。为保持社交距离，双打比赛将改为单打。
       </div>   */}
-      <div style={{paddingRight: '16px'}}>
-        本中心将于8月21/22日举行团体及单打赛事。详情请见<a href="/docs/2021 VTTC OPEN August 21 - 22 V15.pdf">报名表</a>。
-      </div>  
     </div>  
 
     <ImageSlider n={2} t={6} fitHeight={!isMobile}/>
