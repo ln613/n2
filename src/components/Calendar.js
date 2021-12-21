@@ -10,7 +10,7 @@ import { update } from 'ipath';
 const names = ['Drop In', 'Training', 'League'];
 const bg = ['Green', 'Orange', 'Cornflowerblue'];
 const tt = {
-  Sun: { schedules: [[0, '1:00', '11'], [0, '2', '6']] },
+  Sun: { schedules: [[0, '1:00', '11'], [1, '2', '6']] },
   Mon: { schedules: [[0, '1:00', '11']] },
   Tue: { schedules: [[0, '1:00', '6']] },
   Wed: { schedules: [[0, '1:00', '11']] },
