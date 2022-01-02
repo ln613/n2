@@ -3,7 +3,7 @@ import ImageSlider from './ImageSlider';
 import { withMobile } from '@ln613/ui/semantic';
 
 const cards = ['https://www.youtube.com/embed/Bb1R3HeYcyA', 'https://www.youtube.com/embed/nmcOpuBDWRM', 'News', 'Court', 'Club', 'Sales', 'Products', 'League', 'Students', 'VIP'];
-const num   = [1, 1, 6, 8, 3, 3, 2, 8, 3, 4];
+const num   = [1, 1, 6, 8, 3, 3, 2, 8, 6, 4];
 
 const c1 = m =>
   <div class={`fw pb16 ${m ? '' : 'ph8'}`}>
@@ -27,7 +27,7 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 const Home = ({ isMobile }) =>
   <div>
     <div class="p16">
-      The Singles RR will be postponed until further notice.
+      {/* The Singles RR will be postponed until further notice. */}
       {/* <h2>2021 Butterfly AKBER Open & Team Challenge</h2> */}
       {/* <div style={{paddingRight: '16px'}}>
         2021 MVTTL U-2000 联赛将于3月26日开始。为保持社交距离，双打比赛将改为单打。
