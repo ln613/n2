@@ -29,7 +29,7 @@ const Home = ({ isMobile }) =>
     <div class="p16">
       <h2>2022 Butterfly AKBER Open & Team Challenge</h2>
       <div style={{paddingRight: '16px'}}>
-        一年一度的 Butterfly AKBER Open & Team 比赛又来了。奖金总值6000元和价值2000多元的水机在比赛中送出, 请尽快报名吧! <a href="~/docs/2022 May vttc open.pdf">报名表 (Registration Form)</a>
+        一年一度的 Butterfly AKBER Open & Team 比赛又来了。奖金总值6000元和价值2000多元的水机在比赛中送出, 请尽快报名吧! <a href="/docs/2022 May vttc open.pdf">报名表 (Registration Form)</a>
       </div>  
     </div>  
 
