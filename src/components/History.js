@@ -41,6 +41,7 @@ const History = ({ lookup, history, player, oppoList, tourList, isMobile, tourna
       <td key="round" hidden />
       <td key="p1" hidden />
       <td key="p2" hidden />
+      <td key="result" title="" />
     </Table>
   </div>
 
@@ -50,7 +51,7 @@ export default compose(
   withLoad('players'),
   withLoadForce('tournamentRating'),
   withLoadForce('history'),
-  withProps(p => { tap(p); return ({ player: findById(p.id)(p.players) || {} }); }),
+  withProps(p => ({ player: findById(p.id)(p.players) || {} })),
   withMobile,
   lifecycle({
     componentWillUnmount: function() {
