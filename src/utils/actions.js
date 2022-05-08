@@ -36,6 +36,9 @@ export const actionData = {
     url: api + 'player_rating=1&id={id}&rating_date={date}',
     path: 'form.{formPath}.players[id].rating'
   },
+  tournamentRating: {
+    url: api + 'player_rating=1&id={id}'
+  },
   player: {
     url: admin + 'doc=players',
     path: 'players[id]',

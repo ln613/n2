@@ -48,6 +48,7 @@ export default compose(
   connect(historySelector, actions),
   withParams,
   withLoad('players'),
+  withLoadForce('tournamentRating'),
   withLoadForce('history'),
   withProps(p => { tap(p); return ({ player: findById(p.id)(p.players) || {} }); }),
   withMobile,

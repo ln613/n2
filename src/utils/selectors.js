@@ -28,6 +28,7 @@ const _tournament = s => s.tournament || {};
 const _history = s => s.history || [];
 const newGameId = s => s.newGameId;
 const auth = s => s.auth || {};
+const tournamentRating = s => s.tournamentRating;
 
 const success = actions => createSelector(
   isLoading,
@@ -424,7 +425,7 @@ export const playersSelector = mapStateWithSelectors({ players, lookup, player: 
 export const tournamentsSelector = mapStateWithSelectors({ tournaments: tournamentsWithYears, lookup });
 export const tournamentSelector = mapStateWithSelectors({ tournament, lookup, players, formMatch: form('match'), newGameId, isLoading });
 export const tourSelector = mapStateWithSelectors({ tournament: form('tournament'), t: tournament, tournaments, players, standing, ko, isLoading });
-export const historySelector = mapStateWithSelectors({ history, lookup, players, oppoList, tourList });
+export const historySelector = mapStateWithSelectors({ history, lookup, players, oppoList, tourList, tournamentRating });
 export const standingSelector = mapStateWithSelectors({ standing, tournament, players });
 export const teamSelector = mapStateWithSelectors({ tournament, team: form('team'), players, monthRatings, isLoading });
 export const scheduleSelector = mapStateWithSelectors({ tournament, schedule: form('schedule'), players, isLoading });
