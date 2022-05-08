@@ -50,8 +50,7 @@ export default compose(
   withLoad('players'),
   withLoadForce('tournamentRating'),
   withLoadForce('history'),
-  withProps(p => ({ player: findById(p.id)(p.players) || {} })),
-  tap,
+  withProps(p => { tap(p); return ({ player: findById(p.id)(p.players) || {} }); }),
   withMobile,
   lifecycle({
     componentWillUnmount: function() {
