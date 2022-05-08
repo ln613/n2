@@ -41,7 +41,6 @@ const History = ({ lookup, history, player, oppoList, tourList, isMobile, tourna
       <td key="round" hidden />
       <td key="p1" hidden />
       <td key="p2" hidden />
-      <td key="result" title="" />
     </Table>
   </div>
 
