@@ -38,7 +38,7 @@ export const actionData = {
   },
   tournamentRating: {
     url: api + 'player_rating=1&id={id}',
-    path: 'tournamentRating'
+    path: 'pr'
   },
   player: {
     url: admin + 'doc=players',
