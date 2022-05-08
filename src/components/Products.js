@@ -25,7 +25,7 @@ const Products = p =>
       <div name="Products">
         <div class="f">
           <div class="fv fg1">
-            <h1>Products - {tap(p).state.tournaments.length}</h1>
+            <h1>Products - {p.state.tournaments.length}</h1>
             <div class="f mrc8">
               <div>Sort:</div>
               <a href="#" name="sort_price_up">Price low to high</a>

@@ -271,7 +271,7 @@ const standing = createSelector(
       addIndex('rank')
     );
 
-    return tt.has2half ? pipe(sortBy(prop('rank')), split2(tt.isCeil), map(p))(tap(st)) :
+    return tt.has2half ? pipe(sortBy(prop('rank')), split2(tt.isCeil), map(p))(st) :
       (tt.teams && tt.teams.length > 0 && !isNil(tt.teams[0].group) ? pipe(groupBy(t => t.group), toPairs, map(x => x[1]), map(p))(st) :
       p(st));
   }
@@ -366,7 +366,7 @@ const allHistory = createSelector(
       else player2 = Bold(player2);
 
       return {
-        id: tap(g).id,
+        id: g.id,
         date: toDateOnly(g.date),
         tournament: x.name,
         month: toMonth(g.date),
