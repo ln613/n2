@@ -47,6 +47,7 @@ const History = ({ lookup, history, player, oppoList, tourList, isMobile, tourna
 export default compose(
   connect(historySelector, actions),
   withParams,
+  withProps(p => ({ date: Date.now().toLocaleString() })),
   withLoad('players'),
   withLoadForce('playerRating'),
   withLoadForce('history'),
