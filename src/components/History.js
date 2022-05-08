@@ -8,7 +8,7 @@ import { withLoad, withParams, withLoadForce } from '@ln613/compose';
 import { Table, withMobile, Select } from '@ln613/ui/semantic';
 import { tap } from '../utils';
 
-const History = ({ lookup, history, player, oppoList, tourList, isMobile }) =>
+const History = ({ lookup, history, player, oppoList, tourList, isMobile, tournamentRating }) =>
   <div class="p16 fv">
     <div class="f">
       <h1 class="fg1">History - {player.name} ({player.rating})</h1>
@@ -21,6 +21,7 @@ const History = ({ lookup, history, player, oppoList, tourList, isMobile }) =>
       }
     </div>
     <div class="ui divider"></div>
+    <div>Tournament Rating (lowest in previous month): {tournamentRating}</div>
     {isMobile &&
       <Fragment>
         <div class="f fg1 fixdd">
@@ -47,6 +48,7 @@ export default compose(
   connect(historySelector, actions),
   withParams,
   withLoad('players'),
+  withLoadForce('tournamentRating'),
   withLoadForce('history'),
   withProps(p => ({ player: findById(p.id)(p.players) || {} })),
   withMobile,
