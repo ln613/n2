@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from '@ln613/state';
 import { compose, withProps } from 'recompose';
-import { pipe, take, pick, sortWith, ascend, descend } from 'ramda';
+import { pipe, take, pick, sortWith, ascend, descend, sum } from 'ramda';
 import actions from 'utils/actions';
 import { tournamentSelector } from 'utils/selectors';
 import { withLoad, withLoadForce, withParams, withMount } from '@ln613/compose';
@@ -11,11 +11,11 @@ import TMenu from './TMenu';
 import { highlightWinner } from 'utils';
 
 const mapPlayer = p => ({ id: p.id, 'Name': p.firstName + ' ' + p.lastName, gender: p.sex, start: p.tRating, current: p.rating, sub: p.isSub ? '&#10004' : '' });
-const mapTeam = t => !t.players || t.players.length < 2 ? { id: t.id, name: t.players[0].name, 'Rating': t.players[0].tRating || t.players[0].rating } :
-  pipe(take(t.p3 ? 3 : 2), x => ({
+const mapTeam = (t, p3) => !t.players || t.players.length < 2 ? { id: t.id, name: t.players[0].name, 'Rating': t.players[0].tRating || t.players[0].rating } :
+  pipe(take(p3 ? 3 : 2), x => ({
     id: t.id,
     name: x.map(y => y.name).join(' / '),
-    'Combined Rating': (+x[0].tRating || +x[0].rating) + (+x[1].tRating || +x[1].rating)
+    'Combined Rating': sum(x.map(y => (+y.tRating || +y.rating)))
   }))(t.players);
 
 const single = players =>
@@ -34,11 +34,11 @@ const teams = (ts, isMobile) =>
     </div>
   )
 
-const groups = gs =>
+const groups = (gs, p3) =>
   (gs || []).map(g =>
     <div class="pt8" key={g[0]}>
       <div class="pv8 fs24 darkgreen">Group {g[0]}</div>
-      <Table name="team" data={sortWith([descend(x => x['Combined Rating'] || x['Rating'])], (g[1] || []).map(mapTeam))}>
+      <Table name="team" data={sortWith([descend(x => x['Combined Rating'] || x['Rating'])], (g[1] || []).map(x => mapTeam(x, p3)))}>
         <td key="id" hidden />  
       </Table>
     </div>
@@ -60,7 +60,7 @@ const Tournament = ({ lookup, tournament, id, isOldTournament, isMobile }) =>
           : (tournament.isSingle
             ? single(tournament.players)
             : (tournament.groups
-              ? groups(tournament.groups)
+              ? groups(tournament.groups, tournament.p3)
               : teams(tournament.teams, isMobile)
             )
           )
