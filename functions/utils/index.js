@@ -49,9 +49,9 @@ e.rrSchedule = (x, sorted, continuousId) => {
   })
 }
 
-e.getTeamRating = t => t.players
+e.getTeamRating = (t, p3) => t.players
   ? (t.players.length > 1
-    ? R.pipe(R.map(x => +(x.isSub ? 0 : (x.tRating || x.rating))), e.sort, R.takeLast(2), R.sum)(t.players)
+    ? R.pipe(R.map(x => +(x.isSub ? 0 : (x.tRating || x.rating))), e.sort, R.takeLast(p3 ? 3 : 2), R.sum)(t.players)
     : (t.players.length === 1 ? t.players[0].rating : 0))
   : 0;
 
@@ -96,7 +96,7 @@ e.adjustRating = (g, im = true) => {
 
 e.newRating = (r, d) => Math.max(r + d, 100)
 
-e.sortTeam = R.pipe(R.map(t => [e.getTeamRating(t), t]), R.sortWith([R.descend(R.nth(0))]), R.map(R.nth(1)))
+e.sortTeam = (team, p3) => R.pipe(R.map(t => [e.getTeamRating(t, p3), t]), R.sortWith([R.descend(R.nth(0))]), R.map(R.nth(1)))(team)
 
 e.numOfGroups = n => Math.pow(2, Math.floor(Math.log10(n / 3) / Math.log10(2)))
 

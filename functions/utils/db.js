@@ -236,7 +236,7 @@ e.genrr = body => {
 
 e.gengroup = id => e.getById('tournaments', id).then(t => {
   if (!t.isSingle && t.teams && t.teams.length > 0 && isNil(t.teams[0].group) && isNil(t.games) && isNil(t.schedules)) { // teams are not yet grouped, no games and no schedules
-    const teams = group(sortTeam(t.teams));
+    const teams = group(sortTeam(t.teams, t.p3));
     return e.update('tournaments', { id, teams }).then(_ => teams);
   } else {
     return 'N/A';
