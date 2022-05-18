@@ -12,9 +12,9 @@ import { highlightWinner } from 'utils';
 
 const mapPlayer = p => ({ id: p.id, 'Name': p.firstName + ' ' + p.lastName, gender: p.sex, start: p.tRating, current: p.rating, sub: p.isSub ? '&#10004' : '' });
 const mapTeam = t => !t.players || t.players.length < 2 ? { id: t.id, name: t.players[0].name, 'Rating': t.players[0].tRating || t.players[0].rating } :
-  pipe(take(2), x => ({
+  pipe(take(t.p3 ? 3 : 2), x => ({
     id: t.id,
-    name: x[0].name + ' / ' + x[1].name,
+    name: x.map(y => y.name).join(' / '),
     'Combined Rating': (+x[0].tRating || +x[0].rating) + (+x[1].tRating || +x[1].rating)
   }))(t.players);
 
