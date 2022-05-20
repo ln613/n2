@@ -289,6 +289,18 @@ e.nogame = body => {
   });
 };
 
+e.resetTeams = body => {
+  const id = +body.id;
+  return e.getById('tournaments', id).then(t => {
+    if (t.teams) {
+      const teams = t.teams.map(x => ({...x, group: null }));
+      return e.update('tournaments', { id, teams, schedules: null, games: null });
+    } else {
+      return 'N/A';
+    }
+  });
+};
+
 e.groupmatch = (id, grp, body) => e.getById('tournaments', id).then(t => {
   if (t.schedules) {
     const games = body.games.filter(g => g.result && g.result !== '0:0');

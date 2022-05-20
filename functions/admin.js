@@ -1,5 +1,5 @@
 const { is } = require('ramda');
-const { connectDB, cdList, cdupload, initdata, backup, updateRating, genrr, gengroup, nogame, changePlayer, addToList, add, replaceList, replace, update, count, groupmatch } = require('./utils/db');
+const { connectDB, cdList, cdupload, initdata, backup, updateRating, genrr, gengroup, nogame, changePlayer, addToList, add, replaceList, replace, update, count, groupmatch, resetTeams } = require('./utils/db');
 const { tap, res, trynull, authorize } = require('./utils');
 
 module.exports.handler = async (event, context) => {
@@ -35,6 +35,8 @@ module.exports.handler = async (event, context) => {
       r = await gengroup(+body.id);
     } else if (q.nogame) {
       r = await nogame(body);
+    } else if (q.reset) {
+      r = await resetTeams(body);
     } else if (q.doc && q.id && q.list) {
       r = await addToList(q.doc, q.id, q.list, body);
     } else if (q.doc && q.count) {

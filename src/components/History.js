@@ -33,7 +33,7 @@ const History = ({ lookup, history, player, oppoList, tourList, isMobile, tourna
       </Fragment>
     }
     <Table name="history" data={history} isMobile={isMobile}>
-      <td key="id" hidden />
+      {/* <td key="id" hidden /> */}
       <td key="month" hidden />
       <td key="isLastGameInMonth" hidden />
       <td key="group" hidden />

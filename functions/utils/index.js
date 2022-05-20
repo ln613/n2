@@ -114,11 +114,19 @@ e.group = ts => {
 e.gengames = (t, t1, t2) => {
   const team1 = util.findById(t1)(t.teams);
   const team2 = util.findById(t2)(t.teams);
-  const ps1 = team1.players;
-  const ps2 = team2.players;
+  const ps1 = team1.players.map(x => +x.id);
+  const ps2 = team2.players.map(x => +x.id);
 
   if (ps1.length === 1 && ps2.length === 1) {
-    return [{ id: 1, date: t.startDate, t1, t2, p1: +ps1[0].id, p2: +ps2[0].id }];
+    return [{ id: 1, date: t.startDate, t1, t2, p1: ps1[0], p2: ps2[0] }];
+  }
+
+  if (t.p3) {
+    const p23 = [[0,1],[0,2],[1,2]];
+    const pm = ps => p23.map(x => [ps[x[0]], ps[x[1]]]);
+    const gs1 = R.xprod(pm(ps1), pm(ps2)).map((x, n) => ({ id: n + 1, date: t.startDate, t1, t2, p1: x[0][0], p2: x[1][0], p3: x[0][1], p4: x[1][1] }));
+    const gs2 = R.xprod(ps1, ps2).map((x, n) => ({ id: n + 10, date: t.startDate, t1, t2, p1: x[0], p2: x[1] }));
+    return gs1.concat(gs2);
   }
 
   return R.range(0, 5).map(n => ({ id: n + 1, date: t.startDate, t1, t2,
