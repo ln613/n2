@@ -54,7 +54,7 @@ const save = p => {
   const gs = p.formMatch.games.filter(g => g.result);
   const wins = gs.filter(g => +g.result[0] > +g.result[2]).length;
   const loses = gs.filter(g => +g.result[0] < +g.result[2]).length;
-  if (p.formMatch.games.length === 5 && wins < 3 && loses < 3)
+  if (p.formMatch.games.length === 5 && wins < 2 && loses < 2)
     alert('not valid!');
   else
     p.putGroupMatch({ ...p.formMatch, games: gs.map(g => toGame(g, p.schedule, p.formMatch)) }, { id: p.T, group: p.S })
