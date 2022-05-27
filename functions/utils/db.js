@@ -64,14 +64,17 @@ e.cdupload = ({ url, folder, name }) => cd.v2.uploader.upload(url, { public_id: 
 e.getPlayerGames = id => db.collection('tournaments').aggregate([
   { $unwind: '$games' },
   { $match: { $or: [ { 'games.p1': +id }, { 'games.p2': +id } ], 'games.isDouble': { $ne: true }, isSingle: { $ne: true } } },
-  { $project: { games: 1, _id: 0, name: 1 } }
-]).toArray().then(r => r.map(x => ({name: x.name, games: x.games, pid: id})))
+  { $project: { games: 1, _id: 0, name: 1, startTime: 1 } }
+]).toArray().then(r => r.map(x => ({name: x.name, games: x.games, pid: id, startTime: x.startTime})))
 
-e.getPlayerRating = (id, date) => use(toDateOnly(moment().add(-1, 'M').startOf('month')))(d =>
+e.getPlayerRating = (id, date) => use(
+  toDateOnly(moment().add(-1, 'M').startOf('month')),
+  toDateOnly(moment().add(-1, 'M').endOf('month'))
+)((d1, d2) =>
   db.collection('tournaments').aggregate([
     { $unwind: '$games' },
     { $match: { $or: [ { 'games.p1': +id }, { 'games.p2': +id }, { 'games.p1': id.toString() }, { 'games.p2': id.toString() } ] } },
-    { $match: { 'games.date': { $gte: d } } },
+    { $match: { 'games.date': { $gte: d1, $lte: d2 } } },
     { $sort: { 'games.date': -1, 'games.id': -1 } },
     { $replaceRoot: { newRoot: '$games'} },
     { $project: { rating: { $cond: [{ $or: [{ $eq: ['$p1', id.toString()] }, { $eq: ['$p1', +id] }] }, { $add: ['$p1Rating', '$p1Diff'] }, { $add: ['$p2Rating', '$p2Diff'] }] } } }
@@ -126,20 +129,22 @@ e.updateRating = async body => {
       filter(t => !t.isSingle),
       map(t => {
         (t.games || []).forEach(g => g.round = isNil(g.group) ? null : find(m => m.home == g.t1 && m.away == g.t2, find(s => s.group == g.group, t.schedules).matches).round );
-        return t.games;
+        return t.games.map(g => [g, { tournament: t.name, startTime: t.startTime }]);
       }),
       unnest,
       //filter(g => !g.isDouble),
       sortWith([
-        ascend(prop('date')),
-        ascend(g => (g.group && +g.group) || Number.POSITIVE_INFINITY),
-        ascend(g => (g.round && +g.round) || Number.POSITIVE_INFINITY),
-        descend(g => (g.ko && +g.ko) || 0),
-        ascend(prop('id'))
+        ascend(([g, x]) => new Date(toDateOnly(g.date))),
+        ascend(([g, x]) => x.startTime || Number.POSITIVE_INFINITY),
+        ascend(([g, x]) => x.tournament),
+        ascend(([g, x]) => (g.group && +g.group) || Number.POSITIVE_INFINITY),
+        ascend(([g, x]) => (g.round && +g.round) || Number.POSITIVE_INFINITY),
+        descend(([g, x]) => (g.ko && +g.ko) || 0),
+        ascend(([g, x]) => g.id)
       ])
     )(o.tournaments);
 
-    games.forEach((g, i) => {
+    games.forEach(([g, x], i) => {
       if (g) {
         g.id = i + 1;
         g.date = toDateOnly(g.date);

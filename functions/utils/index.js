@@ -137,7 +137,7 @@ e.gengames = (t, t1, t2) => {
   }));
 }
 
-e.toDateOnly = d => R.is(String, d) ? R.take(10, d) : moment(d).add(8, 'hours').format('YYYY-MM-DD');
+e.toDateOnly = d => R.is(String, d) ? R.take(10, d).replace(/\//g, '-') : moment(d).add(8, 'hours').format('YYYY-MM-DD');
 
 const cors = {
   'Access-Control-Allow-Origin': '*',

@@ -350,6 +350,8 @@ const allHistory = createSelector(
   (h, ps) => sortWith(
     [
       descend(g => new Date(g.date)),
+      descend(g => g.startTime || Number.POSITIVE_INFINITY),
+      descend(g => g.tournament),
       descend(g => (g.group && +g.group) || Number.POSITIVE_INFINITY),
       descend(g => (g.round && +g.round) || Number.POSITIVE_INFINITY),
       ascend(g => g.ko || 0),
@@ -370,6 +372,7 @@ const allHistory = createSelector(
         id: g.id,
         date: toDateOnly(g.date),
         tournament: x.name,
+        startTime: x.startTime,
         month: toMonth(g.date),
         p1: g.p1,
         player1,
