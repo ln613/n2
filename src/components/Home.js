@@ -26,14 +26,14 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 
 const Home = ({ isMobile }) =>
   <div>
-    <div class="p16">
+    {/* <div class="p16">
       <h2>2022 Butterfly AKBER Open & Team Challenge</h2>
       <div style={{paddingRight: '16px'}}>
         一年一度的 Butterfly AKBER Open & Team 比赛又来了。奖金总值6000元和价值2000多元的水机在比赛中送出, 请尽快报名吧! <a href="/docs/2022 May vttc open.pdf">报名表 (Registration Form)</a>
       </div>  
-    </div>  
+    </div>   */}
 
-    <ImageSlider n={2} t={6} fitHeight={!isMobile}/>
+    <ImageSlider n={3} t={6} fitHeight={!isMobile}/>
 
     <div class="p16">
       <h2>Introduction</h2>
