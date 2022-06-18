@@ -33,6 +33,7 @@ const Home = ({ isMobile }) =>
       </div>  
     </div>   */}
 
+    <div class="p8"></div>
     <ImageSlider n={3} t={6} fitHeight={!isMobile}/>
 
     <div class="p16">

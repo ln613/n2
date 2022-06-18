@@ -83,7 +83,7 @@ export default compose(
       const c = await post('https://api.cloudinary.com/v1_1/vttc/raw/upload', fd, true);
 
       if (file.name.slice(-5).toLowerCase() === '.docx') {
-        const p = await post('https://api.cloudconvert.com/v1/process', { inputformat: 'docx', outputformat: 'png' }, false, 'Bearer bpeNFC52jeIx3SkL6VHjhqjYamwGjvK8RCm5Gg2fAtqIKysMmjuhx6Hb2B6oHa3i');
+        const p = await post('https://api.cloudconvert.com/v2/convert', { inputformat: 'docx', outputformat: 'png' }, false, 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNmExMDU2NWJiNzVjODgyMjM5NWRhMjVhYTI0ODVhM2IyZDZiNDc3ODkyZjg3NmFiODQ0YzA5OWU2NWZhN2JiNGFiMGRkNWFhZjBjNGYzZDIiLCJpYXQiOjE2NTU1NDgzNjQuNDkxMzE2LCJuYmYiOjE2NTU1NDgzNjQuNDkxMzE3LCJleHAiOjQ4MTEyMjE5NjQuNDg2Nzg5LCJzdWIiOiIzNjkyMjQ0NCIsInNjb3BlcyI6WyJ1c2VyLnJlYWQiLCJ1c2VyLndyaXRlIiwidGFzay5yZWFkIiwidGFzay53cml0ZSIsIndlYmhvb2sucmVhZCIsIndlYmhvb2sud3JpdGUiLCJwcmVzZXQucmVhZCIsInByZXNldC53cml0ZSJdfQ.aeitK5-rapbOT-WGMr9dkcyX2ECjEsExBvYFQbAZ0QEl5VukSTMsoW_ZN_Y9OSKOf_Oey37Gshg1MtvM3LrW1Tv-qstuu87GbFdoYPR5FwcVbBi0guQ0llNU3rKEctnsCmAqM01ls-XmroxwmH_k01RikmrXKf3LcXSqeuNzOaBGM7FMr-kMiqxMRYbIp2_xYKYwsI1w3ixjNP__RBI6zGA-XmrW6jXd-JvYvGeYG9_8SD8lo7A8tmSeXZZuehpccGTQZyhlWKRK4ryBJaIyZHx8JeUX1wbYtDK7VbkJl91ORqfCSI4AiKv6vslWS09PonEg4P_F3Du9kUSwRs4gKqf3M6BxJyvcC--');
         const s = await post(p.url, { outputformat: 'png', input: 'download', file: c.url, wait: true, filename: '1.docx', converteroptions: { resize, resizemode: 'max', quality: 75 } });
         const url = 'https:' + s.output.url;
         if (isEnlarge) {
