@@ -49,37 +49,33 @@ export default p =>
 
 <br/>
 
-<b>Fees:</b>
+<b>We Provide:</b>
 
 <ul>
 
-<li>Drop-in:                $8</li>
+<li>Drop-in</li>
 
-<li>Discounted Package:     $75 (11 Drop-Ins)</li>
+<li>Discounted Package (11 Drop-Ins)</li>
 
-<li>Monthly pass:           $78</li>
+<li>Monthly pass</li>
 
-<li>Annual pass:            $480</li>
+<li>Annual pass</li>
 
-<li>Senior Monthly Pass:    $65 (Tue/Thu 1pm-6pm) (Mon/Wed/Fri 1pm-3:30pm)</li>
+<li>Senior Monthly Pass (Tue/Thu 1pm-6pm) (Mon/Wed/Fri 1pm-3:30pm)</li>
 
-<li>Group buy or tournament: Call</li>
+<li>Group buy or tournament</li>
 
-<li>Racket rental:          $3($20 deposit or valid ID)</li>
+<li>Racket rental</li>
 
-<li>Ball rental:            $1</li>
+<li>Ball rental</li>
 
-<li>Training class:         Beginner & Advanced - $260 (10 lessons) or $28/lesson</li>
+<li>Training class: Beginner & Advanced</li>
 
-<li>Private lesson:         Joe Law: $48/hour (Package:$480, 11 lessons) (drop-in fee included, 1/2 hour drop-in fee not included)</li>
-  
-<li>Other coach:            $42-$45-$48/hour (drop-in fee included, 1/2 hour drop-in fee not included)</li>
+<li>Private lesson</li>
 
-<li>Group buy or Tournaments: Call</li>
+<li>Lockers rental</li>
 
-<li>Lockers rental:         $3/day, $60/month, $180/year (without locks) </li>
-
-<li>Table Rental:           each table $28/hour (2 players included, additional player $8/person)</li>
+<li>Table Rental</li>
 
 <li>Cancellation for private lessons and group training lessons must be made 24 hours in advance, otherwise there will be no refund. All passes and packages are valid 1 year from date of issue.</li>
 
