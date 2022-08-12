@@ -26,12 +26,14 @@ const yt = (s, m) => <iframe title="home" src={s} frameborder="0" style={{ overf
 
 const Home = ({ isMobile }) =>
   <div>
-    {/* <div class="p16">
-      <h2>2022 Butterfly AKBER Open & Team Challenge</h2>
+    <div class="p16">
+      <h2>VTTC Monthly Tournaments</h2>
       <div style={{paddingRight: '16px'}}>
-        一年一度的 Butterfly AKBER Open & Team 比赛又来了。奖金总值6000元和价值2000多元的水机在比赛中送出, 请尽快报名吧! <a href="/docs/2022 May vttc open.pdf">报名表 (Registration Form)</a>
+        全新理念, 全新设计. 为满足所有乒乓球迷浓厚的热情, 本中心推出一系列的比赛, 每月举办一场不同类型的比赛来满足不同球友的需求, 使得我们的比赛更加丰富多彩. 这里是9月和10月比赛的信息和报名表.
+        <a href="/docs/2022 VTTC Monthly Teams Sep.pdf">9月团体赛报名表 (Sep. Teams Challenge Registration Form)</a>
+        <a href="/docs/2022 VTTC Monthly Singles Oct.pdf">10月单打报名表 (Oct. Singles Registration Form)</a>
       </div>  
-    </div>   */}
+    </div>  
 
     <div class="p8"></div>
     <ImageSlider n={3} t={6} fitHeight={!isMobile}/>
