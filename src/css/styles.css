@@ -166,7 +166,7 @@ td.result-select .visible.menu.transition {
 }
 
 .news {
-  font-size: 24px;
+  font-size: larger;
   font-weight: bolder;
-  padding-bottom: 8px;
+  margin-bottom: 8px;
 }
