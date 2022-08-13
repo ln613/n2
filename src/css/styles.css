@@ -164,3 +164,8 @@ td.result-select .ui.selection.dropdown {
 td.result-select .visible.menu.transition {
   height: 400px;
 }
+
+.news {
+  font-size: larger;
+  font-weight: bolder;
+}
