@@ -21,7 +21,7 @@ const History = ({ lookup, history, player, oppoList, tourList, isMobile, tourna
       }
     </div>
     <div class="ui divider"></div>
-    <div>Tournament Rating (lowest in previous month): {tournamentRating}</div>
+    {/* <div>Tournament Rating (lowest in previous month): {tournamentRating}</div> */}
     {isMobile &&
       <Fragment>
         <div class="f fg1 fixdd">
