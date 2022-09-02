@@ -192,7 +192,7 @@ const tournamentsWithYears = createSelector(
     [descend(prop('year')), ascend(prop('name'))],
     ts.map(t => { 
       const year = +find(x => !isNaN(+x), unnest(t.name.split(' ').map(x => x.split('/'))))
-      const month = x.startDate ? x.startDate.split('-')[1] : ''
+      const month = t.startDate ? t.startDate.split('-')[1] : ''
       return { year: `${year}${month ? ` / ${month}` : ''}`, ...t }
     })
   )
