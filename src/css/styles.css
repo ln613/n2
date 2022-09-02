@@ -170,3 +170,7 @@ td.result-select .visible.menu.transition {
   font-weight: bolder;
   margin-bottom: 8px;
 }
+
+.wsn {
+  white-space: nowrap;
+}
