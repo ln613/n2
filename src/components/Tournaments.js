@@ -13,6 +13,7 @@ const Tournaments = ({ lookup, tournaments }) =>
     <hr/>
     <Table name="tournaments" data={tournaments.map(pick(['id', 'year', 'name']))} link>
       <td key="id" hidden/>   
+      <td key="year" title="Year / Month"/>   
     </Table>
   </div>
 
