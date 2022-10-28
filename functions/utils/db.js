@@ -163,7 +163,10 @@ e.updateRating = async body => {
 
     // return e.initdata(o).then(() => 'done');
 
-    return unnest(o.tournaments.filter(t => !t.isSingle && t.games).map(t => t.games)).slice(25000);
+    return sortWith(
+      [ascend(g => new Date(toDateOnly(g.date)))],
+      unnest(o.tournaments.filter(t => !t.isSingle && t.games).map(t => t.games))
+    ).slice(25000);
   })
   .catch(e => tap(e));
 }
