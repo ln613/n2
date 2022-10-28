@@ -331,6 +331,16 @@ e.getDetail = id => e.getById('tournaments', id).then(t => e.get('players').then
   };
 }));
 
+e.rr2single = id => e.getById('tournaments', id).then(t => {
+  if (t.players && !t.teams) {
+    t.teams = t.players
+    delete t.players
+    return e.update('tournaments', t);
+  } else {
+    return 'N/A';
+  }
+});
+
 module.exports = e;
 
 const getUniqProp = (p, l) => {
