@@ -127,28 +127,30 @@ e.updateRating = async body => {
 
     const games = pipe(
       filter(t => !t.isSingle),
-      map(t => {
-        (t.games || []).forEach(g => {
-          g.round = isNil(g.group)
-            ? null
-            : find(
-                m => m.home == g.t1 && m.away == g.t2,
-                find(s => s.group == g.group, t.schedules).matches
-              ).round
-        })
-        return t.games.map(g => [g, { tournament: t.name, startTime: t.startTime }]);
-      }),
+      map(t => t.games),
+      // map(t => {
+      //   (t.games || []).forEach(g => {
+      //     g.round = isNil(g.group)
+      //       ? null
+      //       : find(
+      //           m => m.home == g.t1 && m.away == g.t2,
+      //           find(s => s.group == g.group, t.schedules).matches
+      //         ).round
+      //   })
+      //   return t.games.map(g => [g, { tournament: t.name, startTime: t.startTime }]);
+      // }),
       flatten,
       //filter(g => !g.isDouble),
-      sortWith([
-        ascend(([g, x]) => new Date(toDateOnly(g.date))),
-        ascend(([g, x]) => x.startTime || Number.POSITIVE_INFINITY),
-        ascend(([g, x]) => x.tournament),
-        ascend(([g, x]) => (g.group && +g.group) || Number.POSITIVE_INFINITY),
-        ascend(([g, x]) => (g.round && +g.round) || Number.POSITIVE_INFINITY),
-        descend(([g, x]) => (g.ko && +g.ko) || 0),
-        ascend(([g, x]) => g.id)
-      ])
+      // sortWith([
+      //   ascend(([g, x]) => new Date(toDateOnly(g.date))),
+      //   ascend(([g, x]) => x.startTime || Number.POSITIVE_INFINITY),
+      //   ascend(([g, x]) => x.tournament),
+      //   ascend(([g, x]) => (g.group && +g.group) || Number.POSITIVE_INFINITY),
+      //   ascend(([g, x]) => (g.round && +g.round) || Number.POSITIVE_INFINITY),
+      //   descend(([g, x]) => (g.ko && +g.ko) || 0),
+      //   ascend(([g, x]) => g.id)
+      // ])
+      x => x.slice(25000)
     )(o.tournaments);
 
     // games.forEach(([g, x], i) => {
