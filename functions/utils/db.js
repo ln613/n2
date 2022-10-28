@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 const cd = require('cloudinary');
-const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, findIndex, isNil, last, pick, groupBy, zipWith, mergeDeepWith, is, concat, range, uniq } = require('ramda');
+const { sortWith, ascend, descend, prop, fromPairs, toPairs, merge, filter, map, unnest, pipe, find, findIndex, isNil, last, pick, groupBy, zipWith, mergeDeepWith, is, concat, range, uniq, slice } = require('ramda');
 const { tap, httpGet, json2js, adjustRating, newRating, serial, toDateOnly, rrSchedule, rrScheduleTeam, group, sortTeam, gengames } = require('.');
 const moment = require('moment');
 const { findById, split2, getNameById, use, sortBy } = require('@ln613/util');
@@ -163,7 +163,7 @@ e.updateRating = async body => {
 
     // return e.initdata(o).then(() => 'done');
 
-    return unnest(o.tournaments.filter(t => !t.isSingle && t.games).map(t => t.games)).length;
+    return unnest(o.tournaments.filter(t => !t.isSingle && t.games).map(t => t.games)).slice(25000);
   })
   .catch(e => tap(e));
 }
