@@ -177,7 +177,7 @@ e.updateRating = async body => {
     //   unnest(o.tournaments.filter(t => !t.isSingle && t.games).map(t => t.games)).filter(g => g.date === "2022-08-26" || g.date === "2022-08-19")
     // );
 
-    return games;
+    return games.map(x => x[0]);
   })
   .catch(e => tap(e));
 }
