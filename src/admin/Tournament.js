@@ -35,7 +35,7 @@ const Tournament = p =>
     {+p.t.id ? <div class={`ui ${NUMBERS[p.numOfButtons]} item menu`}>{b1(p)}</div> : null}
     <TextBox name="tournament.id" disabled />
     <TextBox name="tournament.name" fluid />
-    <CheckBox name="tournament.isSingle" label="Is Single?" />
+    <CheckBox name="tournament.isSingle" label="Is Non-Rated Single RR?" />
     <TextBox name="tournament.startDate" />
     <TextBox name="tournament.startDate2" />
     {/* <TextBox name="tournament.ratingDate" /> */}
