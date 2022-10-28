@@ -127,7 +127,7 @@ e.updateRating = async body => {
 
     const games = pipe(
       filter(t => !t.isSingle),
-      map(t => t.games),
+      map(t => t.games.map(g => g)),
       // map(t => {
       //   (t.games || []).forEach(g => {
       //     g.round = isNil(g.group)
