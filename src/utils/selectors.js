@@ -107,7 +107,7 @@ const dsPlayers = createSelector(
 const teams = createSelector(
   _tournament,
   players,
-  (t, ps) => (t.teams || []).map(x => ({ ...x, name: x.name || (getNameById(x.players[0].id)(ps) + " / " + getNameById(x.players[1].id)(ps))}))
+  (t, ps) => (t.teams || []).map(x => ({ ...x, name: x.name || (getNameById(x.players[0].id)(ps) + (x.players.length > 1 ? (' / ' + getNameById(x.players[1].id)(ps)) : ''))}))
 );
 
 const pn = (n, g) => g['p' + n];

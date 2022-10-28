@@ -43,8 +43,6 @@ module.exports.handler = async (event, context) => {
       r = await count(q.doc);
     } else if (q.doc) {
       r = await add(q.doc, body);
-    } else if (q.rr2single) {
-      r = await rr2single(+body.id);
     }
   } else if (method === 'PUT') {
     if (q.groupmatch) {
