@@ -128,56 +128,51 @@ e.updateRating = async body => {
     const games = pipe(
       filter(t => !t.isSingle),
       map(t => t.games.map(g => g)),
-      // map(t => {
-      //   (t.games || []).forEach(g => {
-      //     g.round = isNil(g.group)
-      //       ? null
-      //       : find(
-      //           m => m.home == g.t1 && m.away == g.t2,
-      //           find(s => s.group == g.group, t.schedules).matches
-      //         ).round
-      //   })
-      //   return t.games.map(g => [g, { tournament: t.name, startTime: t.startTime }]);
-      // }),
+      map(t => {
+        (t.games || []).forEach(g => {
+          g.round = isNil(g.group)
+            ? null
+            : find(
+                m => m.home == g.t1 && m.away == g.t2,
+                find(s => s.group == g.group, t.schedules).matches
+              ).round
+        })
+        return t.games.map(g => [g, { tournament: t.name, startTime: t.startTime }]);
+      }),
       flatten,
-      //filter(g => !g.isDouble),
-      // sortWith([
-      //   ascend(([g, x]) => new Date(toDateOnly(g.date))),
-      //   ascend(([g, x]) => x.startTime || Number.POSITIVE_INFINITY),
-      //   ascend(([g, x]) => x.tournament),
-      //   ascend(([g, x]) => (g.group && +g.group) || Number.POSITIVE_INFINITY),
-      //   ascend(([g, x]) => (g.round && +g.round) || Number.POSITIVE_INFINITY),
-      //   descend(([g, x]) => (g.ko && +g.ko) || 0),
-      //   ascend(([g, x]) => g.id)
-      // ])
-      x => x.slice(25000)
+      filter(g => !g.isDouble),
+      sortWith([
+        ascend(([g, x]) => new Date(toDateOnly(g.date))),
+        ascend(([g, x]) => x.startTime || Number.POSITIVE_INFINITY),
+        ascend(([g, x]) => x.tournament),
+        ascend(([g, x]) => (g.group && +g.group) || Number.POSITIVE_INFINITY),
+        ascend(([g, x]) => (g.round && +g.round) || Number.POSITIVE_INFINITY),
+        descend(([g, x]) => (g.ko && +g.ko) || 0),
+        ascend(([g, x]) => g.id)
+      ])
+      // x => x.slice(25000)
     )(o.tournaments);
 
-    // games.forEach(([g, x], i) => {
-    //   if (g) {
-    //     g.id = i + 1;
-    //     g.date = toDateOnly(g.date);
-    //     if (!g.isDouble) {
-    //       if (pr[g.p1]) g.p1Rating = pr[g.p1];
-    //       if (pr[g.p2]) g.p2Rating = pr[g.p2];
-    //       adjustRating(g, false);
-    //       pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
-    //       pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
-    //       if (isNil(g.round)) delete g.round;
-    //     }
-    //   }
-    // });
+    games.forEach(([g, x], i) => {
+      if (g) {
+        g.id = i + 1;
+        g.date = toDateOnly(g.date);
+        if (!g.isDouble) {
+          if (pr[g.p1]) g.p1Rating = pr[g.p1];
+          if (pr[g.p2]) g.p2Rating = pr[g.p2];
+          adjustRating(g, false);
+          pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
+          pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
+          if (isNil(g.round)) delete g.round;
+        }
+      }
+    });
 
-    // Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
+    Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
 
-    // return e.initdata(o).then(() => 'done');
+    return e.initdata(o).then(() => 'done');
 
-    // return sortWith(
-    //   [ascend(g => new Date(toDateOnly(g.date)))],
-    //   unnest(o.tournaments.filter(t => !t.isSingle && t.games).map(t => t.games)).filter(g => g.date === "2022-08-26" || g.date === "2022-08-19")
-    // );
-
-    return games;
+    // return games;
   })
   .catch(e => tap(e));
 }
