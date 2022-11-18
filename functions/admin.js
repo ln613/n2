@@ -1,6 +1,7 @@
 const { is } = require('ramda');
 const { connectDB, cdList, cdupload, initdata, backup, updateRating, genrr, gengroup, nogame, changePlayer, addToList, add, replaceList, replace, update, count, groupmatch, resetTeams, rr2single } = require('./utils/db');
 const { tap, res, trynull, authorize } = require('./utils');
+const { updateSex } = require('./bl/player')
 
 module.exports.handler = async (event, context) => {
   if (event.httpMethod === 'OPTIONS')
@@ -43,6 +44,8 @@ module.exports.handler = async (event, context) => {
       r = await count(q.doc);
     } else if (q.doc) {
       r = await add(q.doc, body);
+    } else if (q.test) {
+      r = await updateSex('male');
     }
   } else if (method === 'PUT') {
     if (q.groupmatch) {
