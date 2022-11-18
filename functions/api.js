@@ -33,7 +33,7 @@ module.exports.handler = async (event, context) => {
     //r = fs.readdirSync(process.cwd());
     r = fs.writeFileSync(process.cwd() + '/tmp/1.txt', 'abc')
   } else if (test) {
-    r = await updateSex('male');
+    r = updateSex('male');
   }
 
   return res(r);
