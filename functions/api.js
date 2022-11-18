@@ -1,10 +1,11 @@
 const fs = require('fs');
 const { connectDB, get, getIdName, getById, search, getPlayerRating, getPlayerGames, cdVersion, getNewGameId, getDetail } = require('./utils/db');
 const { res } = require('./utils');
+const { updateSex } = require('./bl/player')
 
 module.exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
-  const { doc, id, fields, prop, val, idname, player_rating, rating_date, player_games, lookup, newgameid, folder, detail } = event.queryStringParameters;
+  const { test, doc, id, fields, prop, val, idname, player_rating, rating_date, player_games, lookup, newgameid, folder, detail } = event.queryStringParameters;
   await connectDB();
   let r = {};
 
@@ -31,6 +32,8 @@ module.exports.handler = async (event, context) => {
   } else if (folder) {
     //r = fs.readdirSync(process.cwd());
     r = fs.writeFileSync(process.cwd() + '/tmp/1.txt', 'abc')
+  } else if (test) {
+    r = await updateSex('male');
   }
 
   return res(r);
