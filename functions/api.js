@@ -1,7 +1,7 @@
 const fs = require('fs');
-const { connectDB, get, getIdName, getById, search, getPlayerRating, getPlayerGames, cdVersion, getNewGameId, getDetail } = require('./utils/db');
+const { connectDB, get, getIdName, getById, search, getPlayerRating, getPlayerGames, cdVersion, getNewGameId, getDetail, update } = require('./utils/db');
 const { res } = require('./utils');
-const { updateSex } = require('./bl/player')
+const { updatePlayerSex } = require('./bl/player')
 
 module.exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false;
@@ -34,7 +34,8 @@ module.exports.handler = async (event, context) => {
     r = fs.writeFileSync(process.cwd() + '/tmp/1.txt', 'abc')
   } else if (test) {
     const p1 = await getById('players', 642)
-    r = p1;
+    updatePlayerSex(p1);
+    update('players', p1)
   }
 
   return res(r);
