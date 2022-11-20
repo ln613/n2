@@ -116,7 +116,7 @@ e.updateRating = async body => {
   return await e.backup().then(o => {
     o.players.forEach(p => p.sex = p.sex && p.sex.length > 0 ? p.sex.slice(0, 1).toUpperCase(): '');
     
-    o.tournaments.forEach(t => {
+    o.tournaments.filter(t => t.id !== 146).forEach(t => {
       if (t.startDate) t.startDate = toDateOnly(t.startDate);
       if (t.startDate2) t.startDate2 = toDateOnly(t.startDate2);
     });
