@@ -162,7 +162,7 @@ e.updateRating = async body => {
     // Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
     
     //return e.initdata(o).then(() => games.length);
-    return games[0];
+    return games.slice(-2);
   })
   .catch(err => { tap(err); return err; });
 }
