@@ -126,7 +126,7 @@ e.updateRating = async body => {
     });
 
     const games = pipe(
-      filter(t => !t.isSingle),
+      filter(t => !t.isSingle && t.id < 152),
       map(t => {
         (t.games || []).forEach(g => g.round = isNil(g.group) ? null : find(m => m.home == g.t1 && m.away == g.t2, find(s => s.group == g.group, t.schedules).matches).round );
         return t.games.map(g => [g, { tournament: t.name, startTime: t.startTime }]);
@@ -144,26 +144,22 @@ e.updateRating = async body => {
       ])
     )(o.tournaments);
 
-    try {
-      games.forEach(([g, x], i) => {
-        if (g) {
-          g.id = i + 1;
-          g.date = toDateOnly(g.date);
-          if (!g.isDouble) {
-            if (pr[g.p1]) g.p1Rating = pr[g.p1];
-            if (pr[g.p2]) g.p2Rating = pr[g.p2];
-            adjustRating(g, false);
-            pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
-            pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
-            if (isNil(g.round)) delete g.round;
-          }
+    games.forEach(([g, x], i) => {
+      if (g) {
+        g.id = i + 1;
+        g.date = toDateOnly(g.date);
+        if (!g.isDouble) {
+          if (pr[g.p1]) g.p1Rating = pr[g.p1];
+          if (pr[g.p2]) g.p2Rating = pr[g.p2];
+          adjustRating(g, false);
+          pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
+          pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
+          if (isNil(g.round)) delete g.round;
         }
-      });
+      }
+    });
 
-      Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
-    } catch (err) {
-      return err;
-    }
+    Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
     
     return e.initdata(o).then(() => games.length);
   })
