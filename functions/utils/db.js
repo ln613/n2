@@ -112,58 +112,58 @@ e.changeResult = g1 => db.collection('tournaments').aggregate([
 
 e.updateRating = async body => {
   const pr = body || await httpGet(`${process.env.GITHUB_DB}initialRatings.json`);
-
-  return e.backup().then(o => {
-    o.players.forEach(p => p.sex = p.sex && p.sex.length > 0 ? p.sex.slice(0, 1).toUpperCase(): '');
+return pr;
+  // return e.backup().then(o => {
+  //   o.players.forEach(p => p.sex = p.sex && p.sex.length > 0 ? p.sex.slice(0, 1).toUpperCase(): '');
     
-    o.tournaments.forEach(t => {
-      if (t.startDate) t.startDate = toDateOnly(t.startDate);
-      if (t.startDate2) t.startDate2 = toDateOnly(t.startDate2);
-    });
+  //   o.tournaments.forEach(t => {
+  //     if (t.startDate) t.startDate = toDateOnly(t.startDate);
+  //     if (t.startDate2) t.startDate2 = toDateOnly(t.startDate2);
+  //   });
 
-    unnest(o.tournaments.map(t => t.schedules)).forEach(s => {
-      if (s && s.date) s.date = toDateOnly(s.date);
-    });
+  //   unnest(o.tournaments.map(t => t.schedules)).forEach(s => {
+  //     if (s && s.date) s.date = toDateOnly(s.date);
+  //   });
 
-    const games = pipe(
-      filter(t => !t.isSingle),
-      map(t => {
-        (t.games || []).forEach(g => g.round = isNil(g.group) ? null : find(m => m.home == g.t1 && m.away == g.t2, find(s => s.group == g.group, t.schedules).matches).round );
-        return t.games.map(g => [g, { tournament: t.name, startTime: t.startTime }]);
-      }),
-      unnest,
-      //filter(g => !g.isDouble),
-      sortWith([
-        ascend(([g, x]) => new Date(toDateOnly(g.date))),
-        ascend(([g, x]) => x.startTime || Number.POSITIVE_INFINITY),
-        ascend(([g, x]) => x.tournament),
-        ascend(([g, x]) => (g.group && +g.group) || Number.POSITIVE_INFINITY),
-        ascend(([g, x]) => (g.round && +g.round) || Number.POSITIVE_INFINITY),
-        descend(([g, x]) => (g.ko && +g.ko) || 0),
-        ascend(([g, x]) => g.id)
-      ])
-    )(o.tournaments);
+  //   const games = pipe(
+  //     filter(t => !t.isSingle),
+  //     map(t => {
+  //       (t.games || []).forEach(g => g.round = isNil(g.group) ? null : find(m => m.home == g.t1 && m.away == g.t2, find(s => s.group == g.group, t.schedules).matches).round );
+  //       return t.games.map(g => [g, { tournament: t.name, startTime: t.startTime }]);
+  //     }),
+  //     unnest,
+  //     //filter(g => !g.isDouble),
+  //     sortWith([
+  //       ascend(([g, x]) => new Date(toDateOnly(g.date))),
+  //       ascend(([g, x]) => x.startTime || Number.POSITIVE_INFINITY),
+  //       ascend(([g, x]) => x.tournament),
+  //       ascend(([g, x]) => (g.group && +g.group) || Number.POSITIVE_INFINITY),
+  //       ascend(([g, x]) => (g.round && +g.round) || Number.POSITIVE_INFINITY),
+  //       descend(([g, x]) => (g.ko && +g.ko) || 0),
+  //       ascend(([g, x]) => g.id)
+  //     ])
+  //   )(o.tournaments);
 
-    games.forEach(([g, x], i) => {
-      if (g) {
-        g.id = i + 1;
-        g.date = toDateOnly(g.date);
-        if (!g.isDouble) {
-          if (pr[g.p1]) g.p1Rating = pr[g.p1];
-          if (pr[g.p2]) g.p2Rating = pr[g.p2];
-          adjustRating(g, false);
-          pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
-          pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
-          if (isNil(g.round)) delete g.round;
-        }
-      }
-    });
+  //   games.forEach(([g, x], i) => {
+  //     if (g) {
+  //       g.id = i + 1;
+  //       g.date = toDateOnly(g.date);
+  //       if (!g.isDouble) {
+  //         if (pr[g.p1]) g.p1Rating = pr[g.p1];
+  //         if (pr[g.p2]) g.p2Rating = pr[g.p2];
+  //         adjustRating(g, false);
+  //         pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
+  //         pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
+  //         if (isNil(g.round)) delete g.round;
+  //       }
+  //     }
+  //   });
 
-    Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
+  //   Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
 
-    return e.initdata(o).then(() => 'done');
-  })
-  .catch(e => tap(e));
+  //   return e.initdata(o).then(() => 'done');
+  // })
+  // .catch(e => tap(e));
 }
 e.getNewGameId = () => db.collection('tournaments').aggregate([
   { $project: { _id: 0, id: { $max: "$games.id" } } },
