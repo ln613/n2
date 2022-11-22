@@ -144,7 +144,7 @@ e.updateRating = async body => {
       ])
     )(o.tournaments);
 
-    games.slice(-2).forEach(([g, x], i) => {
+    games.slice(-200).forEach(([g, x], i) => {
       if (g) {
         g.id = i + 1;
         g.date = toDateOnly(g.date);
