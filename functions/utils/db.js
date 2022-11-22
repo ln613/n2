@@ -159,10 +159,10 @@ e.updateRating = async body => {
       }
     });
 
-    // Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
+    Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
     
     //return e.initdata(o).then(() => games.length);
-    return games.slice(-2);
+    return games.length;
   })
   .catch(err => { tap(err); return err; });
 }
