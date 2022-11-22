@@ -144,20 +144,20 @@ e.updateRating = async body => {
       ])
     )(o.tournaments);
 
-    // games.forEach(([g, x], i) => {
-    //   if (g) {
-    //     g.id = i + 1;
-    //     g.date = toDateOnly(g.date);
-    //     if (!g.isDouble) {
-    //       if (pr[g.p1]) g.p1Rating = pr[g.p1];
-    //       if (pr[g.p2]) g.p2Rating = pr[g.p2];
-    //       adjustRating(g, false);
-    //       pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
-    //       pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
-    //       if (isNil(g.round)) delete g.round;
-    //     }
-    //   }
-    // });
+    games.slice(-2).forEach(([g, x], i) => {
+      if (g) {
+        g.id = i + 1;
+        g.date = toDateOnly(g.date);
+        if (!g.isDouble) {
+          if (pr[g.p1]) g.p1Rating = pr[g.p1];
+          if (pr[g.p2]) g.p2Rating = pr[g.p2];
+          adjustRating(g, false);
+          pr[g.p1] = newRating(g.p1Rating, g.p1Diff);
+          pr[g.p2] = newRating(g.p2Rating, g.p2Diff);
+          if (isNil(g.round)) delete g.round;
+        }
+      }
+    });
 
     // Object.keys(pr).forEach(p => findById(p)(o.players).rating = +pr[p]);
     
