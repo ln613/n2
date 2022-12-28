@@ -38,6 +38,8 @@ const Home = ({ isMobile }) =>
       <div><a href="/docs/2022 VTTC Monthly Singles Oct.pdf">10月单打报名表 (Oct. Singles Registration Form)</a></div> */}
       <h2>U4800 League 2023 Jan 6</h2>
       <div><a href="/docs/U4800 LEAGUE 2023 Jan 6.pdf">Registration Form</a></div>
+      <h2>U800 League 2023 Jan 27</h2>
+      <div><a href="/docs/2023-U800.pdf">Registration Form</a></div>
     </div>
 
     <div class="p8"></div>
