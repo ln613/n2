@@ -232,7 +232,7 @@ e.genrr = body => {
           schedules: concat(t.schedules, s.map(x => ({ ...x, id: lastId + x.id, half: true })))
         }).then(_ => s);
       } else if (t.teams && !t.schedules) {
-        const s = rrScheduleTeam(t.teams, t.startDate, tables || [5,6,2,3]);
+        const s = rrScheduleTeam(t.teams, t.startDate, tables || [1,4,7,8]);
         return e.update('tournaments', { id, schedules: s }).then(_ => s);
       } else {
         return 'N/A';
