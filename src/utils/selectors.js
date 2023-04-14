@@ -41,6 +41,7 @@ import {
   highlightSub,
   toSingleArray,
   toDateOnly,
+  tap,
 } from './'
 
 const _form = s => s.form || {}
@@ -366,6 +367,7 @@ const dl = descend(prop('gw'))
 const al = ascend(prop('gl'))
 const dm = descend(prop('mw'))
 const am = ascend(prop('ml'))
+const da = descend(x => (x.total > 0 ? 1 : 0)) // absent rank last
 
 const standing = createSelector(tournament, teams, (tt, ts) => {
   const st = (tt.isSingle ? tt.players : ts).map(t => {
@@ -426,6 +428,7 @@ const standing = createSelector(tournament, teams, (tt, ts) => {
   })
 
   const stg = pipe(groupBy(prop('group')), map(groupBy(prop('w'))))(st)
+  // 2-way tie in group, whoever wins rank higher
   const de = descend(x => {
     const stg1 = stg[x.group][x.w] || []
     return stg1.length === 2
@@ -439,7 +442,7 @@ const standing = createSelector(tournament, teams, (tt, ts) => {
       tt.isSingle
         ? [dw, at, dp(1), al]
         : tt.groups
-        ? [dw, at, de, dm, am, dl, al]
+        ? [da, dw, at, de, dm, am, dl, al]
         : tt.isBestOfN
         ? [
             descend(x => +x['+/-']),
