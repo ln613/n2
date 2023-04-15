@@ -417,18 +417,28 @@ e.genrr = body => {
                   id: i + 1,
                 }))
               : unnest(
-                  range(0, standing.length / 2).map((n, i) => [
-                    {
-                      home: standing[n][0].id,
-                      away: standing[standing.length - n - 1][1].id,
-                      id: i * 2 + 1,
-                    },
-                    {
-                      home: standing[n][1].id,
-                      away: standing[standing.length - n - 1][0].id,
-                      id: i * 2 + 2,
-                    },
-                  ])
+                  range(0, standing.length / 2).map((n, i) =>
+                    t.isOneAdvance
+                      ? [
+                          {
+                            home: standing[n][0].id,
+                            away: standing[standing.length - n - 1][0].id,
+                            id: i + 1,
+                          },
+                        ]
+                      : [
+                          {
+                            home: standing[n][0].id,
+                            away: standing[standing.length - n - 1][1].id,
+                            id: i * 2 + 1,
+                          },
+                          {
+                            home: standing[n][1].id,
+                            away: standing[standing.length - n - 1][0].id,
+                            id: i * 2 + 2,
+                          },
+                        ]
+                  )
                 )
           ).map(x => ({ ...x, games: gengames(t, x.home, x.away) }))
           const schedules = [
