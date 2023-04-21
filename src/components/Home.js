@@ -4,7 +4,7 @@ import { withMobile } from '@ln613/ui/semantic'
 
 const cards = [
   'https://www.youtube.com/embed/Bb1R3HeYcyA',
-  'https://www.youtube.com/embed/ptAFk867BQY',
+  'https://www.youtube.com/embed/l9yc6ZWVLs4',
   'News',
   'Court',
   'Club',
@@ -71,12 +71,12 @@ const Home = ({ isMobile }) => (
       </div>  
       <div><a href="/docs/2022 VTTC Monthly Teams Sep.pdf">9月团体赛报名表 (Sep. Teams Challenge Registration Form)</a></div>
       <div><a href="/docs/2022 VTTC Monthly Singles Oct.pdf">10月单打报名表 (Oct. Singles Registration Form)</a></div> */}
-      <h2>2023 April Butterfly Akber Open & Team Challenge</h2>
+      {/* <h2>2023 April Butterfly Akber Open & Team Challenge</h2>
       <div>
         <a href="/docs/2023 April Butterfly Akber open & Team Challenge.pdf">
           Registration Form
         </a>
-      </div>
+      </div> */}
     </div>
 
     <div class="p8"></div>

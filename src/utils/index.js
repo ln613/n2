@@ -133,7 +133,13 @@ export const resultOptions = [
   '0:2',
 ]
 
-export const kos = ['Final', 'Semifinals', 'Quarterfinals', 'Round of 16']
+export const kos = [
+  'Final',
+  'Semifinals',
+  'Quarterfinals',
+  'Round of 16',
+  'Round of 32',
+]
 
 export const highlightWinner = g => {
   const w = winner(g)

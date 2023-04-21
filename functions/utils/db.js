@@ -445,7 +445,9 @@ e.genrr = body => {
             ...t.schedules,
             {
               date: t.startDate,
-              ko: hasKOStanding ? koStanding.length / 2 : standing.length,
+              ko: hasKOStanding
+                ? koStanding.length / 2
+                : standing.length / (t.isOneAdvance ? 2 : 1),
               matches,
               id: t.schedules.length + 1,
             },
