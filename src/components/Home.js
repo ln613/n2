@@ -62,6 +62,19 @@ const yt = (s, m) => (
 const Home = ({ isMobile }) => (
   <div>
     <div class="p16">
+      <h2>2023 Judy Giant RR & VTTC Student Cup</h2>
+      <div class="news">
+        The Giant Round Robin event is coming!. There will be 2 phases in the
+        event. In the 1st phase 48 players will be divided into 8 groups of 6
+        players. Then based on the results, players will be divided into 3
+        divisions and play group and elimination matches. Registration is now
+        open. Please refer to the registration form for more detials.
+      </div>
+      <div>
+        <a href="/docs/2023 Judy Giant RR & Student Cup.pdf">
+          2023 Judy Giant RR & VTTC Student Cup Registration Form
+        </a>
+      </div>
       {/* <h2>VTTC Monthly Tournaments</h2>
       <div class="news">
         All new monthly tournaments series! Starting from Sep., every month at VTTC there will be a tournament of different type to meet the need of different players of all levels. In Sep. there will be a team event, Oct. will be singles and Nov. is round robin. Registration is now open. Please refer to the registration form for more detials.
