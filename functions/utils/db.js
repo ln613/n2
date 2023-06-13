@@ -486,7 +486,7 @@ e.genrr = body => {
           })
           .then(_ => s)
       } else if (t.teams && !t.schedules) {
-        const s = rrScheduleTeam(t.teams, t.startDate, tables || [1, 4, 7, 8])
+        const s = rrScheduleTeam(t.teams, t.startDate, tables || [2, 3, 5, 6])
         return e.update('tournaments', { id, schedules: s }).then(_ => s)
       } else {
         return 'N/A'
