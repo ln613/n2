@@ -486,7 +486,7 @@ e.genrr = body => {
           })
           .then(_ => s)
       } else if (t.teams && !t.schedules) {
-        const s = rrScheduleTeam(t.teams, t.startDate, tables || [2, 3, 5, 6])
+        const s = rrScheduleTeam(t.teams, t.startDate, tables || [1, 4, 7, 8])
         return e.update('tournaments', { id, schedules: s }).then(_ => s)
       } else {
         return 'N/A'
@@ -495,7 +495,7 @@ e.genrr = body => {
   })
 }
 
-e.gengroup = id =>
+e.gengroup = (id, nog) =>
   e.getById('tournaments', id).then(t => {
     if (
       !t.isSingle &&
@@ -506,7 +506,7 @@ e.gengroup = id =>
       isNil(t.schedules)
     ) {
       // teams are not yet grouped, no games and no schedules
-      const teams = group(sortTeam(t.teams, t.p3))
+      const teams = group(sortTeam(t.teams, t.p3), nog)
       return e.update('tournaments', { id, teams }).then(_ => teams)
     } else {
       return 'N/A'
@@ -594,6 +594,34 @@ e.resetTeams = body => {
       return 'N/A'
     }
   })
+}
+
+e.giant = async body => {
+  const id = +body.id
+  const t = await e.getById('tournaments', id)
+  const ts = await e.getIdName('tournaments')
+  const mid = Math.max(...ts.map(x => x.id))
+  const standing = body.standing
+
+  for (const i of [1, 2, 3]) {
+    const teamIds = unnest(
+      standing.map(g => g.slice((i - 1) * 2, i * 2).map(x => x.id))
+    )
+    const nt = {
+      id: mid + i,
+      name: `${t.name} - Div ${i}`,
+      startDate: t.startDate,
+      isSingle: t.isSingle,
+      teams: teamIds.map(x => ({
+        ...t.teams.find(y => y.id === x),
+        group: null,
+      })),
+    }
+    await e.add('tournaments', nt)
+    await e.gengroup(nt.id)
+    await e.genrr({ id: nt.id })
+  }
+  return 'N/A'
 }
 
 e.groupmatch = (id, grp, body) =>

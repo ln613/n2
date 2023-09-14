@@ -18,6 +18,7 @@ const {
   count,
   groupmatch,
   resetTeams,
+  giant,
   rr2single,
 } = require('./utils/db')
 const { res, trynull, authorize } = require('./utils')
@@ -51,11 +52,13 @@ module.exports.handler = async (event, context) => {
     } else if (q.genrr) {
       r = await genrr(body)
     } else if (q.gengroup) {
-      r = await gengroup(+body.id)
+      r = await gengroup(+body.id, +body.nog)
     } else if (q.nogame) {
       r = await nogame(body)
     } else if (q.reset) {
       r = await resetTeams(body)
+    } else if (q.giant) {
+      r = await giant(body)
     } else if (q.doc && q.id && q.list) {
       r = await addToList(q.doc, q.id, q.list, body)
     } else if (q.doc && q.count) {

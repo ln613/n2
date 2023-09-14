@@ -161,9 +161,9 @@ e.sortTeam = (team, p3) =>
 
 e.numOfGroups = n => Math.pow(2, Math.floor(Math.log10(n / 3) / Math.log10(2)))
 
-e.group = ts => {
+e.group = (ts, nog) => {
   const n = ts.length
-  const g = e.numOfGroups(n)
+  const g = nog || e.numOfGroups(n)
   return ts.map((t, i) => {
     const l = Math.floor(i / g)
     const c = i % g
