@@ -299,7 +299,8 @@ e.updateRating = async body => {
       const games = pipe(
         filter(t => !t.isSingle),
         map(t => {
-          ;(t.games || []).forEach(
+          const gs = t.games || []
+          gs.forEach(
             g =>
               (g.round = isNil(g.group)
                 ? null
@@ -308,7 +309,7 @@ e.updateRating = async body => {
                     find(s => s.group == g.group, t.schedules).matches
                   ).round)
           )
-          return t.games.map(g => [
+          return gs.map(g => [
             g,
             { tournament: t.name, startTime: t.startTime },
           ])
