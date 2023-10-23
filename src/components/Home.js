@@ -62,17 +62,28 @@ const yt = (s, m) => (
 const Home = ({ isMobile }) => (
   <div>
     <div class="p16">
-      <h2>2023 Judy Giant RR & VTTC Student Cup</h2>
+      <h2>2023 Fall League with Golden Game!</h2>
       <div class="news">
-        The Giant Round Robin event is coming!. There will be 2 phases in the
-        event. In the 1st phase 48 players will be divided into 8 groups of 6
-        players. Then based on the results, players will be divided into 3
-        divisions and play group and elimination matches. Registration is now
-        open. Please refer to the registration form for more detials.
+        New league format!
+        <br />
+        Each team has 4 players. Everyone will play 1 single game, 1 double game
+        and participate in the Golden Game.
+        <br />
+        The Golden Game is 21 points, all 4 players play in turn, rotating every
+        4 points.
+        <br />
+        The team wins more games in the end wins the match (The Golden Game
+        counts as 5 games).
+        <br />
+        Matches will be much more close and teams with super strong players will
+        not have a big edge over other teams since every player equally
+        contributes to the final result.
+        <br />
+        Come register and experience the new exciting format!
       </div>
       <div>
-        <a href="/docs/2023 Judy Giant RR & Student Cup.pdf">
-          2023 Judy Giant RR & VTTC Student Cup Registration Form
+        <a href="/docs/2023-U5000.pdf">
+          2023 Fall League with Golden Game Registration Form
         </a>
       </div>
       {/* <h2>VTTC Monthly Tournaments</h2>
