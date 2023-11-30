@@ -84,6 +84,7 @@ const Tournament = p => (
     <TextBox name="tournament.id" disabled />
     <TextBox name="tournament.name" fluid />
     <CheckBox name="tournament.isSingle" label="Is Non-Rated Single RR?" />
+    <CheckBox name="tournament.isHidden" label="Is Hidden?" />
     <TextBox name="tournament.startDate" />
     <TextBox name="tournament.startDate2" />
     {/* <TextBox name="tournament.ratingDate" /> */}
