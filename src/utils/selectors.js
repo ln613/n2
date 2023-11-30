@@ -60,7 +60,7 @@ const lang = s => s.lang || {}
 const cats = s => s.cats || []
 const products = s => s.products || []
 const _players = s => s.players || []
-const tournaments = s => s.tournaments || []
+const tournaments = s => s.tournaments.filter(x => !x.isHidden) || []
 const _tournament = s => s.tournament || {}
 const _history = s => s.history || []
 const newGameId = s => s.newGameId
