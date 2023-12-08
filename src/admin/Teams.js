@@ -7,6 +7,7 @@ import { tournamentSelector } from 'utils/selectors'
 import { Table } from '@ln613/ui/semantic'
 import { withRouter } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
+import { sum } from 'ramda'
 
 const teamTable = (teams, id) => (
   <Table
@@ -21,6 +22,7 @@ const teamTable = (teams, id) => (
           x.players[0].lastName +
           ' / ' +
           (x.players[1].firstName + ' ' + x.players[1].lastName),
+      'Combined Rating': sum(x.players.map(y => +y.tRating || +y.rating)) 
     }))}
   />
 )

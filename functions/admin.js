@@ -28,8 +28,9 @@ module.exports.handler = async (event, context) => {
 
   context.callbackWaitsForEmptyEventLoop = false
 
-  if (!(await authorize(event.headers.authorization)))
-    return res({ isAuthenticated: false }, 401)
+  const auth = await authorize(event.headers.authorization)
+  if (auth !== true)
+    return res({ isAuthenticated: auth }, 401)
 
   const q = event.queryStringParameters
   const body = trynull(_ => JSON.parse(event.body))
