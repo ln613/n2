@@ -28,7 +28,7 @@ module.exports.handler = async (event, context) => {
 
   context.callbackWaitsForEmptyEventLoop = false
 
-  const auth = await authorize(event.headers.authorization)
+  const auth = await authorize(event.headers)
   if (auth !== true)
     return res({ isAuthenticated: auth }, 401)
 
