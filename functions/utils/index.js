@@ -37,7 +37,7 @@ e.authorize = async token => {
     await jwt.verify(token, process.env.JWT_SECRET)
     return true
   } catch (e) {
-    return e.toString()
+    return `${e.toString()} - ${token}`
   }
 }
 
