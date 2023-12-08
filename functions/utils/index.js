@@ -37,7 +37,7 @@ e.authorize = async headers => {
     await jwt.verify(headers.token, process.env.JWT_SECRET)
     return true
   } catch (e) {
-    return `${e.toString()} - ${headers.toString()}`
+    return `${e.toString()} - ${JSON.stringify(headers)}`
   }
 }
 
