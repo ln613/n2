@@ -32,12 +32,12 @@ e.trynull = f => {
 
 e.httpGet = url => axios.get(url).then(r => r.data)
 
-e.authorize = async headers => {
+e.authorize = async event => {
   try {
-    await jwt.verify(headers.token || headers['x-nf-geo'], process.env.JWT_SECRET)
+    await jwt.verify(event.headers.token || event.body.token, process.env.JWT_SECRET)
     return true
   } catch (e) {
-    return `${e.toString()} - ${JSON.stringify(headers)}`
+    return `${e.toString()} - ${JSON.stringify(event)}`
   }
 }
 
