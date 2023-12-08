@@ -34,7 +34,7 @@ e.httpGet = url => axios.get(url).then(r => r.data)
 
 e.authorize = async (headers, body) => {
   try {
-    await jwt.verify(headers.token || body.token, process.env.JWT_SECRET)
+    await jwt.verify(headers.authorization || body.token, process.env.JWT_SECRET)
     return true
   } catch (e) {
     return `${e.toString()} - ${JSON.stringify(headers)} - ${JSON.stringify(body)}`
