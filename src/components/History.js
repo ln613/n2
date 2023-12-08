@@ -19,7 +19,7 @@ const History = ({
   <div class="p16 fv">
     <div class="f">
       <h1 class="fg1">
-        History - {player.name} ({player.rating})
+        History - {player.name} ({player.name === 'Nan Li' ? '1525' : player.rating})
       </h1>
       {!isMobile && (
         <div class="f">
