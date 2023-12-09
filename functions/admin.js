@@ -32,9 +32,8 @@ module.exports.handler = async (event, context) => {
   const body = trynull(_ => JSON.parse(event.body))
   const method = event.httpMethod
 
-  const auth = await authorize(event.headers, body)
-  if (auth !== true)
-    return res({ isAuthenticated: auth }, 401)
+ if (!(await authorize(event.headers.authorization)))
+    return res({ isAuthenticated: false }, 401)
 
   await connectDB()
   let r = 'no action'
