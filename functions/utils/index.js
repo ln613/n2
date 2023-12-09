@@ -32,12 +32,12 @@ e.trynull = f => {
 
 e.httpGet = url => axios.get(url).then(r => r.data)
 
-e.authorize = async (headers, body) => {
+e.authorize = async token => {
   try {
-    await jwt.verify(headers.authorization || body.token, process.env.JWT_SECRET)
+    await jwt.verify(token, process.env.JWT_SECRET)
     return true
   } catch (e) {
-    return `${e.toString()} - ${JSON.stringify(headers)} - ${JSON.stringify(body)}`
+    return false
   }
 }
 
