@@ -104,6 +104,7 @@ const mapMatches = (ms, t, isGroup, isKo) =>
     : ms
         .filter(m => m && m.id)
         .map(m => ({
+          id: m.id,
           [isGroup ? 'round' : 'table']: isGroup ? m.round : m.id,
           home: getNameById(m.home)(t.teams),
           result:

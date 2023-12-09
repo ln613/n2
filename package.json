@@ -28,9 +28,10 @@
     "semantic-ui-react": "^0.88.2"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=./src PORT=3001 craco start",
+    "dev": "cross-env NODE_PATH=./src PORT=3001 craco start",
     "build": "cross-env NODE_PATH=./src craco build",
     "func": "netlify-lambda serve functions -t 10000 -p 9001",
+    "start": "run-p func dev",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

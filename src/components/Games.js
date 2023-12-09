@@ -53,7 +53,7 @@ export default compose(
   withProps(p => ({
     Match:
       find(
-        m => (p.tournament.groups ? m.round || m.table || m.id : m.id) == p.M,
+        m => (m.id || m.table || m.round) == p.M,
         (p.schedule || {}).matches || []
       ) || {},
   })),
