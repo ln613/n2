@@ -175,7 +175,10 @@ const getPlayer = (pid, tid, ts) =>
   findById(pid)((findById(tid)(ts) || {}).players)
 const getIsSub = (pid, tid, ts) => (getPlayer(pid, tid, ts) || {}).isSub
 const getNameWithSub = (n, g, ps, ts) =>
-  highlightSub(getNameById(pn(n, g))(ps), getIsSub(pn(n, g), tn(n, g), ts))
+  highlightSub(
+    getNameById(pn(n, g))(ps) || (g.isGolden ? 'All' : ''),
+    getIsSub(pn(n, g), tn(n, g), ts)
+  )
 const subs = (n, g, ts) =>
   (getPlayer(pn(n, g), tn(n, g), ts) || {}).isSub ? 1 : 0
 const totalSubs = (g, ts) =>
@@ -187,6 +190,18 @@ const isWin = (g, ts) => {
 const getSinglePlayer = (id, ps) => {
   const p = findById(id)(ps)
   return `${p.rank}. ${p.name} (${p.tRating})`
+}
+const homeResult = r => +r.split(':')[0]
+const awayResult = r => +r.split(':')[1]
+const selfResult = (r, isHome) => (isHome ? homeResult : awayResult)(r)
+const oppoResult = (r, isHome) => (isHome ? awayResult : homeResult)(r)
+const homeWin = r => {
+  const rs = r.split(':')
+  return +rs[0] > +rs[1]
+}
+const awayWin = r => {
+  const rs = r.split(':')
+  return +rs[0] < +rs[1]
 }
 
 const tournament = createSelector(
@@ -243,6 +258,12 @@ const tournament = createSelector(
       game.isWin = isWin(game, teams)
       return game
     })
+    ;(t.schedules || []).forEach(s =>
+      (s.matches || []).forEach(m => {
+        m.home = +m.home
+        m.away = +m.away
+      })
+    )
     const schedules = (t.schedules || []).map(s => ({
       ...s,
       date: s.date,
@@ -269,11 +290,16 @@ const tournament = createSelector(
               const gs = findGames(s, m, games).filter(g =>
                 s.group ? s.group == g.group : s.ko ? s.ko == g.ko : true
               )
-              const wn = gs.filter(
-                g =>
-                  (g.isWin && g.t1 === m.home) || (!g.isWin && g.t1 === m.away)
-              ).length
-              const ln = gs.length - wn
+              const wn = t.isGolden
+                ? sum(gs.map(g => homeResult(g.result)))
+                : gs.filter(
+                    g =>
+                      (g.isWin && g.t1 === m.home) ||
+                      (!g.isWin && g.t1 === m.away)
+                  ).length
+              const ln = t.isGolden
+                ? sum(gs.map(g => awayResult(g.result)))
+                : gs.length - wn
               const groupGames = (m.games || [])
                 .map(x => ({ ...x, isDouble: x.p3 && x.p4 }))
                 .map(x => ({
@@ -379,15 +405,15 @@ const standing = createSelector(tournament, teams, (tt, ts) => {
     const total = ms.length
     const ws = ms.filter(
       m =>
-        (m.home === t.id && m.result[0] > m.result[2]) ||
-        (m.away === t.id && m.result[0] < m.result[2])
+        (m.home === t.id && homeWin(m.result)) ||
+        (m.away === t.id && awayWin(m.result))
     )
     const wn = ws.length
     const ln = ms.length - wn
     const d = wn - ln
     const wpc = ((total && wn / total) * 100).toFixed(1) + '%'
-    const ps = sum(ms.map(m => +m.result[m.home == t.id ? 0 : 2]))
-    const ps1 = sum(ms.map(m => +m.result[m.home == t.id ? 2 : 0]))
+    const ps = sum(ms.map(m => selfResult(m.result, m.home == t.id)))
+    const ps1 = sum(ms.map(m => oppoResult(m.result, m.home == t.id)))
     const s = {
       [tt.isSingle ? 'player' : 'team']: t.name,
       id: t.id,
@@ -410,7 +436,7 @@ const standing = createSelector(tournament, teams, (tt, ts) => {
           sum(
             m.games
               .filter(g => g.result)
-              .map(g => +g.result[m.home == t.id ? 0 : 2])
+              .map(g => selfResult(g.result, m.home == t.id))
           )
         )
       )
@@ -419,7 +445,7 @@ const standing = createSelector(tournament, teams, (tt, ts) => {
           sum(
             m.games
               .filter(g => g.result)
-              .map(g => +g.result[m.home == t.id ? 2 : 0])
+              .map(g => oppoResult(g.result, m.home == t.id))
           )
         )
       )
@@ -441,6 +467,8 @@ const standing = createSelector(tournament, teams, (tt, ts) => {
     sortWith(
       tt.isSingle
         ? [dw, at, dp(1), al]
+        : tt.isGolden
+        ? [dw, at, dp(0), al]
         : tt.groups
         ? [da, dw, at, de, dm, am, dl, al]
         : tt.isBestOfN
@@ -473,7 +501,7 @@ const ko = createSelector(tournament, t => {
   const ms = sortBy(s => s.ko, kos)[0].matches
   if (ms.length === 1 || ms.some(m => !m.result || m.result == '0:0'))
     return null
-  return ms.map(m => (m.result[0] > m.result[2] ? m.home : m.away))
+  return ms.map(m => (homeWin(m.result) ? m.home : m.away))
 })
 
 const isSamePlayer = (p1, id) => (p1 && id && p1.id == id) || false
@@ -514,8 +542,8 @@ const stats = createSelector(tournament, players, (t, ps) => {
       const total = sgs.length
       const wins = sgs.filter(isPlayerWin(p))
       const loses = sgs.filter(isPlayerLose(p))
-      const gw = sum(sgs.map(g => +g.result[isHomePlayer(p)(g) ? 0 : 2]))
-      const gl = sum(sgs.map(g => +g.result[isHomePlayer(p)(g) ? 2 : 0]))
+      const gw = sum(sgs.map(g => selfResult(g.result, isHomePlayer(p)(g))))
+      const gl = sum(sgs.map(g => oppoResult(g.result, isHomePlayer(p)(g))))
       const w = wins.length
       const l = loses.length
       const d = w - l
@@ -581,7 +609,7 @@ const allHistory = createSelector(
         if (g.p1 === +x.pid) player1 = Italic(player1)
         else player2 = Italic(player2)
 
-        if (+g.result[0] > +g.result[2]) player1 = Bold(player1)
+        if (homeWin(g.result)) player1 = Bold(player1)
         else player2 = Bold(player2)
 
         return {

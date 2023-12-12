@@ -83,7 +83,16 @@ const Tournament = p => (
     ) : null}
     <TextBox name="tournament.id" disabled />
     <TextBox name="tournament.name" fluid />
-    <CheckBox name="tournament.isSingle" label="Is Non-Rated Single RR?" />
+    <CheckBox
+      name="tournament.isSingle"
+      label="Is Non-Rated Single RR?"
+      disabled={p.tournament.isGolden}
+    />
+    <CheckBox
+      name="tournament.isGolden"
+      label="Is Golden?"
+      disabled={p.tournament.isSingle}
+    />
     <CheckBox name="tournament.isHidden" label="Is Hidden?" />
     <TextBox name="tournament.startDate" />
     <TextBox name="tournament.startDate2" />
@@ -117,6 +126,8 @@ export default compose(
         startDate: '',
         startDate2: '',
         isSingle: false,
+        isGolden: false,
+        isHidden: false,
         ratingDate: '',
       },
       { path: 'tournament' }

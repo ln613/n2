@@ -96,25 +96,33 @@ export const adjustRating = g => {
 }
 
 export const toGame = (g, s, m) => {
-  const g1 = adjustRating({
+  const g0 = {
     id: g.id,
-    isDouble: g.isDouble,
     date: s.date,
     t1: +m.home,
     t2: +m.away,
-    p1: +g.p1,
-    p2: +g.p2,
-    p1Rating: g.p1Rating,
-    p2Rating: g.p2Rating,
     result: g.result,
-  })
-  if (g.isDouble) {
-    g1.p3 = +g.p3
-    g1.p4 = +g.p4
   }
-  if (!isNil(s.group)) g1.group = s.group
-  if (s.ko) g1.ko = s.ko
-  return g1
+
+  if (g.isGolden) {
+    return { ...g0, isGolden: g.isGolden }
+  } else {
+    const g1 = adjustRating({
+      ...g0,
+      isDouble: g.isDouble,
+      p1: +g.p1,
+      p2: +g.p2,
+      p1Rating: g.p1Rating,
+      p2Rating: g.p2Rating,
+    })
+    if (g.isDouble) {
+      g1.p3 = +g.p3
+      g1.p4 = +g.p4
+    }
+    if (!isNil(s.group)) g1.group = s.group
+    if (s.ko) g1.ko = s.ko
+    return g1
+  }
 }
 
 export const newRating = (r, d) => Math.max(r + d, 100)
@@ -132,6 +140,8 @@ export const resultOptions = [
   '1:2',
   '0:2',
 ]
+
+export const goldenResultOptions = ['', '5:0', '0:5']
 
 export const kos = [
   'Final',

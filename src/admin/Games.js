@@ -158,7 +158,10 @@ const save = p => {
   //   }
 }
 
-const fixResult = m =>
-  m.games && m.games.length === 1 && !m.games[0].result
-    ? { ...m, games: [{ ...m.games[0], result: '' }] }
-    : m
+const fixResult = m => {
+  m.home = +m.home
+  m.away = +m.away
+  if (m.games && m.games.length === 1 && !m.games[0].result)
+    m.games = [{ ...m.games[0], result: '' }]
+  return m
+}

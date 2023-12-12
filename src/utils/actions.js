@@ -45,7 +45,7 @@ export const actionData = {
   tournaments: {
     url:
       api +
-      'doc=tournaments&fields=isSingle,isHidden,startDate,startDate2,ratingDate,players',
+      'doc=tournaments&fields=isSingle,isGolden,isHidden,startDate,startDate2,ratingDate,players',
   },
   tour: {
     url: admin + 'doc=tournaments',

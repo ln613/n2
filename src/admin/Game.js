@@ -13,6 +13,7 @@ import {
   toGame,
   newRating,
   resultOptions,
+  goldenResultOptions,
   getPropById,
   findById,
   getNameById,
@@ -26,7 +27,8 @@ const Game = p => (
     </h1>
     <hr />
     <TextBox name="game.id" disabled class="mr16" />
-    <CheckBox name="game.isDouble" label="Is Double?" />
+    <CheckBox name="game.isDouble" label="Is Double?" disabled={p.game.isGolden}  />
+    <CheckBox name="game.isGolden" label="Is Golden?" disabled={p.game.isDouble} />
     <div class="f ais">
       <div class="fv jcsa">
         <div class="pr8 pb32">
@@ -91,7 +93,7 @@ const Game = p => (
         </div>
       </div>
     </div>
-    Result: <Select name={`game.result`} options={resultOptions} />
+    Result: <Select name={`game.result`} options={p.game.isGolden ? goldenResultOptions : resultOptions} />
     <hr />
     <Button primary onClick={p.history.goBack}>
       Back
@@ -151,7 +153,7 @@ const save = p => {
 
   if (isAdd) {
     p.postGame(g, { id1: p.tournament.id })
-    if (!g.isDouble) {
+    if (!g.isDouble && !g.isGolden) {
       const p1 = findById(g.p1)(p.players)
       p.putPlayer({ ...p1, rating: newRating(g.p1Rating, g.p1Diff) })
       const p2 = findById(g.p2)(p.players)
