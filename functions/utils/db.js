@@ -629,10 +629,10 @@ e.groupmatch = (id, grp, body) =>
   e.getById('tournaments', id).then(t => {
     if (t.schedules) {
       const games = body.games.filter(g => g.result && g.result !== '0:0')
-      const group = getUniqProp('group', games)
-      const ko = getUniqProp('ko', games)
-      const t1 = getUniqProp('t1', games)
-      const t2 = getUniqProp('t2', games)
+      const group = getUniqProp('group', body.games)
+      const ko = getUniqProp('ko', body.games)
+      const t1 = getUniqProp('t1', body.games)
+      const t2 = getUniqProp('t2', body.games)
       const isSingleTournament = t.teams.every(x => x.players.length === 1)
       const isOldGroup = g =>
         g.group &&

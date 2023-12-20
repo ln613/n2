@@ -4,7 +4,7 @@ import { withMobile } from '@ln613/ui/semantic'
 
 const cards = [
   'https://www.youtube.com/embed/Bb1R3HeYcyA',
-  'https://www.youtube.com/embed/l9yc6ZWVLs4',
+  'https://www.youtube.com/embed/mrxmQ-fMn7Q',
   'News',
   'Court',
   'Club',
