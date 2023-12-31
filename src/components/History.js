@@ -16,13 +16,13 @@ const History = ({
   isMobile,
   tournamentRating,
 }) => (
-  <div class="p16 fv">
-    <div class="f">
-      <h1 class="fg1">
+  <div className="p16 fv">
+    <div className="f">
+      <h1 className="fg1">
         History - {player.name} ({player.rating})
       </h1>
       {!isMobile && (
-        <div class="f">
+        <div className="f">
           <Select
             fluid
             name="oppo"
@@ -30,7 +30,7 @@ const History = ({
             placeholder="All players"
             clearable
           ></Select>
-          <div class="pr16" />
+          <div className="pr16" />
           <Select
             fluid
             name="tour"
@@ -41,11 +41,11 @@ const History = ({
         </div>
       )}
     </div>
-    <div class="ui divider"></div>
+    <div className="ui divider"></div>
     {/* <div>Tournament Rating (lowest in previous month): {tournamentRating}</div> */}
     {isMobile && (
       <Fragment>
-        <div class="f fg1 fixdd">
+        <div className="f fg1 fixdd">
           <Select
             fluid
             name="oppo"
@@ -54,7 +54,7 @@ const History = ({
             clearable
           ></Select>
         </div>
-        <div class="f fg1 fixdd">
+        <div className="f fg1 fixdd">
           <Select
             fluid
             name="tour"

@@ -1,17 +1,13 @@
 import {
   reduce,
   prop,
-  sort,
   sortWith,
   sortBy,
   ascend,
   descend,
   unnest,
   find,
-  isEmpty,
   groupBy,
-  groupWith,
-  join,
   sum,
   range,
   pipe,
@@ -19,7 +15,6 @@ import {
   filter as where,
   uniqBy,
   anyPass,
-  both,
   dropLast,
   isNil,
   toPairs,
@@ -34,14 +29,11 @@ import {
   getPropById,
   toMonth,
   addIndex,
-  diff,
   split2,
   toAbsDate,
-  findByName,
   highlightSub,
   toSingleArray,
   toDateOnly,
-  tap,
 } from './'
 
 const _form = s => s.form || {}
@@ -74,14 +66,14 @@ const success = actions =>
       : !e
   )
 
-const sortedList = (list, filter) =>
-  createSelector(list, filter, (l, f) => {
-    const sort = f.sort
-    if (!sort || sort.length < 2) return l
+// const sortedList = (list, filter) =>
+//   createSelector(list, filter, (l, f) => {
+//     const sort = f.sort
+//     if (!sort || sort.length < 2) return l
 
-    const by = prop(sort[0])
-    return sortWith([sort[1] === 2 ? descend(by) : ascend(by)], l)
-  })
+//     const by = prop(sort[0])
+//     return sortWith([sort[1] === 2 ? descend(by) : ascend(by)], l)
+//   })
 
 const catsDD = createSelector(cats, cs =>
   cs.map(c => ({
@@ -139,9 +131,9 @@ const filteredPlayers = createSelector(sortedPlayers, form('player'), (ps, f) =>
   )
 )
 
-const dsPlayers = createSelector(filteredPlayers, ps =>
-  ps.map(p => ({ ...p, text: `${p.name} (${p.rating})` }))
-)
+// const dsPlayers = createSelector(filteredPlayers, ps =>
+//   ps.map(p => ({ ...p, text: `${p.name} (${p.rating})` }))
+// )
 
 const teams = createSelector(_tournament, players, (t, ps) =>
   (t.teams || []).map(x => ({
@@ -351,40 +343,40 @@ const tournamentsWithYears = createSelector(tournaments, ts =>
   )
 )
 
-const games = createSelector(_tournament, t => t.games || [])
+// const games = createSelector(_tournament, t => t.games || [])
 
-const gameDetail = (n, g) => {
-  const r1 = +g.result.split(':')[n]
-  const r2 = 5 - r1
-  const g1 = range(0, r1).map(x => 11)
-  const g2 = range(0, r2).map(x => 0)
-  return r1 > 2 ? g1.concat(g2) : g2.concat(g1)
-}
+// const gameDetail = (n, g) => {
+//   const r1 = +g.result.split(':')[n]
+//   const r2 = 5 - r1
+//   const g1 = range(0, r1).map(x => 11)
+//   const g2 = range(0, r2).map(x => 0)
+//   return r1 > 2 ? g1.concat(g2) : g2.concat(g1)
+// }
 
-const gamesWithTeams = createSelector(teams, players, games, (ts, ps, gs) =>
-  gs
-    .map(g => ({
-      ...g,
-      date: toDateOnly(g.date),
-      player1: (findById(g.p1)(ps) || {}).name,
-      player2: (findById(g.p2)(ps) || {}).name,
-      team1: find(x => findById(g.p1)(x.players), ts),
-      team2: find(x => findById(g.p2)(x.players), ts),
-      g1: g.g1 || gameDetail(0, g),
-      g2: g.g2 || gameDetail(1, g),
-    }))
-    .map(g => ({
-      ...g,
-      t1: (g.team1 || {}).id,
-      t2: (g.team2 || {}).id,
-      team1: (g.team1 || {}).name,
-      team2: (g.team2 || {}).name,
-    }))
-)
+// const gamesWithTeams = createSelector(teams, players, games, (ts, ps, gs) =>
+//   gs
+//     .map(g => ({
+//       ...g,
+//       date: toDateOnly(g.date),
+//       player1: (findById(g.p1)(ps) || {}).name,
+//       player2: (findById(g.p2)(ps) || {}).name,
+//       team1: find(x => findById(g.p1)(x.players), ts),
+//       team2: find(x => findById(g.p2)(x.players), ts),
+//       g1: g.g1 || gameDetail(0, g),
+//       g2: g.g2 || gameDetail(1, g),
+//     }))
+//     .map(g => ({
+//       ...g,
+//       t1: (g.team1 || {}).id,
+//       t2: (g.team2 || {}).id,
+//       team1: (g.team1 || {}).name,
+//       team2: (g.team2 || {}).name,
+//     }))
+// )
 
-const redSpan = x => `<span class="red">${x}</span>`
+// const redSpan = x => `<span className="red">${x}</span>`
 
-const getPoints = (m, t, v) => (m[t] === v ? m[t + 'Points'] : 0)
+// const getPoints = (m, t, v) => (m[t] === v ? m[t + 'Points'] : 0)
 
 const dp = s => descend(prop(s ? 'gw' : 'points'))
 const at = ascend(prop('total'))

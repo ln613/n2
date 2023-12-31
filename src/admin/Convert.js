@@ -84,7 +84,7 @@ const Convert = ({
       </Label>
       <div>{(file || {}).name}</div>
       <input id="file" hidden type="file" onChange={selectFile} />
-      <div class="mt8">
+      <div className="mt8">
         Folder:{' '}
         <Dropdown
           selection
@@ -99,7 +99,7 @@ const Convert = ({
           onChange={(e, x) => setFolder(x.value)}
         />
       </div>
-      <div class="mt8">
+      <div className="mt8">
         File:{' '}
         <Dropdown
           selection
@@ -108,7 +108,7 @@ const Convert = ({
           onChange={(e, x) => setName(x.value)}
         />
       </div>
-      <div class="mt8">
+      <div className="mt8">
         Resize:{' '}
         <Dropdown
           selection
@@ -117,14 +117,14 @@ const Convert = ({
           onChange={(e, x) => setResize(x.value)}
         />
       </div>
-      <div class="mt8">
+      <div className="mt8">
         Add white border:{' '}
         <Checkbox
           style={{ paddingTop: '5px' }}
           onChange={(e, x) => setIsEnlarge(x.checked)}
         />{' '}
       </div>
-      <div class="mt8">
+      <div className="mt8">
         Font size:{' '}
         <Dropdown
           selection
@@ -133,7 +133,7 @@ const Convert = ({
           onChange={(e, x) => setSize(x.value)}
         />
       </div>
-      <div class="mt8">
+      <div className="mt8">
         Font weight:{' '}
         <Dropdown
           selection
@@ -142,7 +142,7 @@ const Convert = ({
           onChange={(e, x) => setWeight(x.value)}
         />
       </div>
-      <div class="mt8">
+      <div className="mt8">
         Font color:
         <Dropdown
           selection
@@ -156,17 +156,17 @@ const Convert = ({
           onChange={(e, x) => setColor(x.value)}
         />
       </div>
-      <div class="mt8">
+      <div className="mt8">
         Line 1: <Input value={txt0} onChange={(e, x) => setTxt0(x.value)} />
       </div>
-      <div class="mt8">
+      <div className="mt8">
         Line 2: <Input value={txt1} onChange={(e, x) => setTxt1(x.value)} />
       </div>
-      <div class="mt8">
+      <div className="mt8">
         Line 3: <Input value={txt2} onChange={(e, x) => setTxt2(x.value)} />
       </div>
     </div>
-    <div class="mt8">
+    <div className="mt8">
       <Button
         primary
         onClick={() => convert(file, folder, name, resize)}
@@ -174,13 +174,13 @@ const Convert = ({
       >
         Convert &amp; Upload
       </Button>
-      {inProgress && <div class="ui active inline loader medium"></div>}
+      {inProgress && <div className="ui active inline loader medium"></div>}
     </div>
 
     <hr />
 
     <h3>Combine Images: (from 'tmp' to 'slider')</h3>
-    <div class="mt8">
+    <div className="mt8">
       Number of images:{' '}
       <Dropdown
         selection
@@ -189,7 +189,7 @@ const Convert = ({
         onChange={(e, x) => setNumOfImgs(x.value)}
       />
     </div>
-    <div class="mt8">
+    <div className="mt8">
       File name:{' '}
       <Dropdown
         selection
@@ -198,7 +198,7 @@ const Convert = ({
         onChange={(e, x) => setName(x.value)}
       />
     </div>
-    <div class="mt8">
+    <div className="mt8">
       <Button
         primary
         onClick={() => combine(numOfImgs, name)}
@@ -206,7 +206,9 @@ const Convert = ({
       >
         Combine &amp; Upload
       </Button>
-      {combineInProgress && <div class="ui active inline loader medium"></div>}
+      {combineInProgress && (
+        <div className="ui active inline loader medium"></div>
+      )}
     </div>
   </div>
 )

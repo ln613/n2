@@ -1,13 +1,11 @@
 import React from 'react'
 import { connect } from '@ln613/state'
 import { compose, lifecycle } from 'recompose'
-import { isNil, omit } from 'ramda'
 import actions from 'utils/actions'
 import { standingSelector } from 'utils/selectors'
 import { withLoad, withParams } from '@ln613/compose'
 import { Table, withMobile, Ready } from '@ln613/ui/semantic'
 import TMenu from './TMenu'
-import { tap } from 'utils'
 
 const table = (n, d, isMobile, isGroup) => (
   <Table
@@ -34,21 +32,21 @@ const table = (n, d, isMobile, isGroup) => (
 )
 
 const Standing = ({ standing, tournament, players, id, isMobile }) => (
-  <div class={`p16 ${isMobile ? 'fv' : 'f'}`}>
+  <div className={`p16 ${isMobile ? 'fv' : 'f'}`}>
     <TMenu
       id={id}
       isSingle={tournament.isSingle}
       isMobile={isMobile}
       page="standing"
     />
-    <div class={`${isMobile ? '' : 'ph32'} fv`}>
+    <div className={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr />
       {tournament.has2half ? (
         <Ready on={[players, tournament]}>
-          <div class="fs18 fw6 pt8">Upper Division</div>
+          <div className="fs18 fw6 pt8">Upper Division</div>
           {table(1, standing[0], isMobile)}
-          <div class="fs18 fw6">Lower Division</div>
+          <div className="fs18 fw6">Lower Division</div>
           {table(2, standing[1], isMobile)}
           <hr />
           <div>
@@ -60,8 +58,8 @@ const Standing = ({ standing, tournament, players, id, isMobile }) => (
         <Ready on={[players, tournament]}>
           {tournament.groups
             ? standing.map((s, i) => (
-                <div class="pt8" key={i}>
-                  <div class="pv8 fs24 darkgreen">
+                <div className="pt8" key={i}>
+                  <div className="pv8 fs24 darkgreen">
                     Group {s && s.length > 0 && s[0].group}
                   </div>
                   {table(i + 1, s, isMobile, true)}

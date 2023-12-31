@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { compose, withProps } from 'recompose'
-import { find, is, isNil } from 'ramda'
+import { find, isNil } from 'ramda'
 import { connect } from '@ln613/state'
 import { Button } from 'semantic-ui-react'
 import actions from 'utils/actions'
@@ -16,23 +16,23 @@ const NUMBERS = ['', 'one', 'two', 'three', 'four', 'five', 'six']
 const b1 = p => (
   <Fragment>
     {p.t.isSingle ? (
-      <Link class="item" to={`/admin/singleplayers/${p.t.id}`}>
+      <Link className="item" to={`/admin/singleplayers/${p.t.id}`}>
         Players
       </Link>
     ) : (
-      <Link class="item" to={`/admin/teams/${p.t.id}`}>
+      <Link className="item" to={`/admin/teams/${p.t.id}`}>
         Teams
       </Link>
     )}
     {p.canDisplaySchedule ? (
-      <Link class="item" to={`/admin/schedules/${p.t.id}`}>
+      <Link className="item" to={`/admin/schedules/${p.t.id}`}>
         Schedules
       </Link>
     ) : null}
-    {/* <Link class="item" to={`/admin/games/${tournament.id}`}>Games</Link> */}
+    {/* <Link className="item" to={`/admin/games/${tournament.id}`}>Games</Link> */}
     {p.canGenerateGroup ? (
       <Link
-        class="item"
+        className="item"
         onClick={() => !p.isLoading && p.postGengroup({ id: p.id })}
         to="#"
       >
@@ -41,7 +41,7 @@ const b1 = p => (
     ) : null}
     {p.canGenerateSchedule ? (
       <Link
-        class="item"
+        className="item"
         onClick={() => !p.isLoading && p.postGenrr({ id: p.id })}
         to="#"
       >
@@ -50,7 +50,7 @@ const b1 = p => (
     ) : null}
     {p.canGenerateSchedule2 ? (
       <Link
-        class="item"
+        className="item"
         onClick={() =>
           !p.isLoading && p.postGenrr({ id: p.id, standing: p.standing })
         }
@@ -61,7 +61,7 @@ const b1 = p => (
     ) : null}
     {p.canGenerateKO ? (
       <Link
-        class="item"
+        className="item"
         onClick={() =>
           !p.isLoading &&
           p.postGenrr({ id: p.id, standing: p.standing, koStanding: p.ko })
@@ -79,7 +79,7 @@ const Tournament = p => (
     <h1>Tournament - {+p.t.id ? p.t.name : 'Add New'}</h1>
     <hr />
     {+p.t.id ? (
-      <div class={`ui ${NUMBERS[p.numOfButtons]} item menu`}>{b1(p)}</div>
+      <div className={`ui ${NUMBERS[p.numOfButtons]} item menu`}>{b1(p)}</div>
     ) : null}
     <TextBox name="tournament.id" disabled />
     <TextBox name="tournament.name" fluid />

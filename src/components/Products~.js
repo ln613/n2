@@ -9,30 +9,34 @@ import CatMenu from './CatMenu'
 import { withRouter } from 'react-router-dom'
 
 const Products = ({ products, productFilter, lookup, n, d, history }) => (
-  <div class="p16 f">
+  <div className="p16 f">
     <CatMenu />
-    <div class="pl32 w90">
+    <div className="pl32 w90">
       <h1>{header(lookup.cats, productFilter, n)}</h1>
-      <div class="ui divider"></div>
-      <div class="fw w100">
+      <div className="ui divider"></div>
+      <div className="fw w100">
         {products.map((x, i) => (
-          <div class="f w20 p8">
+          <div className="f w20 p8">
             <div
-              class="card fv cp"
+              className="card fv cp"
               onClick={() => history.push('/products/' + x.id)}
             >
-              <img class="w100" src={cdurl(lookup, 'products', x.id)} alt="" />
+              <img
+                className="w100"
+                src={cdurl(lookup, 'products', x.id)}
+                alt=""
+              />
               <hr />
-              <div class="p8 fg1">
+              <div className="p8 fg1">
                 <h3>{n(x)}</h3>
                 <div>{d(x)}</div>
               </div>
-              <hr class="w100" />
-              <div class="f p8">
-                <div class={`fs24 blue ${x.sale ? 'tdlt' : ''}`}>
+              <hr className="w100" />
+              <div className="f p8">
+                <div className={`fs24 blue ${x.sale ? 'tdlt' : ''}`}>
                   ${x.price}
                 </div>
-                <div class="fs24 red pl8">{x.sale && '$' + x.sale}</div>
+                <div className="fs24 red pl8">{x.sale && '$' + x.sale}</div>
               </div>
             </div>
           </div>

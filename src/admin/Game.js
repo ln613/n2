@@ -8,7 +8,7 @@ import { gameSelector } from 'utils/selectors'
 import { withSuccess } from 'utils/ui'
 import { TextBox, CheckBox } from '@ln613/ui/semantic'
 import { Select } from '@ln613/ui'
-import { withLoad, withEdit, withParams, withMount } from '@ln613/compose'
+import { withLoad, withParams, withMount } from '@ln613/compose'
 import {
   toGame,
   newRating,
@@ -26,17 +26,27 @@ const Game = p => (
       Match - {p.tournament.name} - {p.schedule.date}
     </h1>
     <hr />
-    <TextBox name="game.id" disabled class="mr16" />
-    <CheckBox name="game.isDouble" label="Is Double?" disabled={p.game.isGolden}  />
-    <CheckBox name="game.isGolden" label="Is Golden?" disabled={p.game.isDouble} />
-    <div class="f ais">
-      <div class="fv jcsa">
-        <div class="pr8 pb32">
+    <TextBox name="game.id" disabled className="mr16" />
+    <CheckBox
+      name="game.isDouble"
+      label="Is Double?"
+      disabled={p.game.isGolden}
+    />
+    <CheckBox
+      name="game.isGolden"
+      label="Is Golden?"
+      disabled={p.game.isDouble}
+    />
+    <div className="f ais">
+      <div className="fv jcsa">
+        <div className="pr8 pb32">
           {getNameById(p.Match.home)(p.tournament.teams)}
         </div>
-        <div class="pr8">{getNameById(p.Match.away)(p.tournament.teams)}</div>
+        <div className="pr8">
+          {getNameById(p.Match.away)(p.tournament.teams)}
+        </div>
       </div>
-      <div class="fv jcsa">
+      <div className="fv jcsa">
         <Select
           name={`game.p1`}
           placeholder=""
@@ -59,7 +69,7 @@ const Game = p => (
         />
       </div>
       {p.game.isDouble ? (
-        <div class="fv jcsa">
+        <div className="fv jcsa">
           <Select
             name={`game.p3`}
             placeholder=""
@@ -72,28 +82,32 @@ const Game = p => (
           />
         </div>
       ) : null}
-      <div class="fv jcsa">
-        <div class="f aic">
+      <div className="fv jcsa">
+        <div className="f aic">
           {range(0, 5).map(n => (
             <TextBox name={`game.g1[${n}]`} noLabel style={{ width: '50px' }} />
           ))}
         </div>
-        <div class="f aic">
+        <div className="f aic">
           {range(0, 5).map(n => (
             <TextBox name={`game.g2[${n}]`} noLabel style={{ width: '50px' }} />
           ))}
         </div>
       </div>
-      <div class="fv jcsa">
-        <div class="pl8 pb32">
+      <div className="fv jcsa">
+        <div className="pl8 pb32">
           {range(0, 5).filter(x => gg(p.game.g1, x) > gg(p.game.g2, x)).length}
         </div>
-        <div class="pl8">
+        <div className="pl8">
           {range(0, 5).filter(x => gg(p.game.g1, x) < gg(p.game.g2, x)).length}
         </div>
       </div>
     </div>
-    Result: <Select name={`game.result`} options={p.game.isGolden ? goldenResultOptions : resultOptions} />
+    Result:{' '}
+    <Select
+      name={`game.result`}
+      options={p.game.isGolden ? goldenResultOptions : resultOptions}
+    />
     <hr />
     <Button primary onClick={p.history.goBack}>
       Back

@@ -230,7 +230,7 @@ export const toTitleCase = s =>
     t => t.charAt(0).toUpperCase() + t.substr(1).toLowerCase()
   )
 export const toLowerDash = s => s.toLowerCase().replace(/ /g, '-')
-export const escapeRegex = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+export const escapeRegex = s => s.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')
 export const isStringNumber = s => !isNaN(+s)
 export const padStart = curry((s1, n, s) => s.toString().padStart(n, s1))
 export const pad0s = padStart('0')
@@ -240,7 +240,7 @@ export const pad0e = padEnd('0')
 export const replace = (s, params) =>
   params && is(Object, params)
     ? reduce(
-        (p, c) => p.replace(new RegExp(`\{${c}\}`, 'g'), params[c]),
+        (p, c) => p.replace(new RegExp(`{${c}}`, 'g'), params[c]),
         s,
         Object.keys(params)
       )

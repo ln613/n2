@@ -39,8 +39,8 @@ const single = players => (
 
 const teams = (ts, isMobile) =>
   sortWith([ascend(x => x.name)], ts || []).map(t => (
-    <div class="pt8" key={t.id}>
-      <div class="pv8 fs24 darkgreen">{t.name}</div>
+    <div className="pt8" key={t.id}>
+      <div className="pv8 fs24 darkgreen">{t.name}</div>
       <Table
         name="team"
         data={(t.players || []).map(mapPlayer)}
@@ -53,8 +53,8 @@ const teams = (ts, isMobile) =>
 
 const groups = (gs, p3) =>
   (gs || []).map(g => (
-    <div class="pt8" key={g[0]}>
-      <div class="pv8 fs24 darkgreen">Group {g[0]}</div>
+    <div className="pt8" key={g[0]}>
+      <div className="pv8 fs24 darkgreen">Group {g[0]}</div>
       <Table
         name="team"
         data={sortWith(
@@ -77,7 +77,7 @@ const games = gs => (
 )
 
 const Tournament = ({ lookup, tournament, id, isOldTournament, isMobile }) => (
-  <div class={`p16 ${isMobile ? 'fv' : 'f'}`}>
+  <div className={`p16 ${isMobile ? 'fv' : 'f'}`}>
     {isOldTournament ? null : (
       <TMenu
         id={id}
@@ -87,7 +87,7 @@ const Tournament = ({ lookup, tournament, id, isOldTournament, isMobile }) => (
         page="tournament"
       />
     )}
-    <div class={`${isMobile ? '' : 'ph32'} fv`}>
+    <div className={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr />
       <Ready on={[tournament]}>

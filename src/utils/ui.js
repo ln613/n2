@@ -21,7 +21,7 @@ const Login = connect(
   authSelector,
   actions
 )(({ login, postAuth }) => (
-  <div class="p16">
+  <div className="p16">
     Username: <TextBox name="login.username" />
     Password: <Password name="login.password" />
     <hr />
@@ -139,8 +139,8 @@ export const combineImages = async (l, n, W, H) => {
   ]
   imgs.forEach((img, i) => {
     const l = getLine(i, n)
-    const ps = getImagesInLine(l, n)
-    const w = W / ps
+    // const ps = getImagesInLine(l, n)
+    // const w = W / ps
     const left = (W - lineWidths[l - 1]) / 2
     const x = left + sum(imgWidths.slice(l === 1 ? 0 : line1Imgs, i))
     const y = (l - 1) * h

@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { connect } from '@ln613/state'
 import { compose, lifecycle } from 'recompose'
-import { pick, isNil, sortWith, ascend, sort } from 'ramda'
+import { pick, isNil, sortWith, ascend } from 'ramda'
 import actions from 'utils/actions'
 import { tournamentSelector } from 'utils/selectors'
 import { kos, highlightWinner, getNameById } from 'utils'
@@ -10,17 +10,17 @@ import { Table, withMobile, Select } from '@ln613/ui/semantic'
 import TMenu from './TMenu'
 
 const Schedule = ({ tournament, id, isMobile }) => (
-  <div class={`p16 ${isMobile ? 'fv' : 'f'}`}>
+  <div className={`p16 ${isMobile ? 'fv' : 'f'}`}>
     <TMenu
       id={id}
       isSingle={tournament.isSingle}
       isMobile={isMobile}
       page="schedule"
     />
-    <div class={`${isMobile ? '' : 'ph32'} fv`}>
+    <div className={`${isMobile ? '' : 'ph32'} fv`}>
       <h1>{tournament.name}</h1>
       <hr />
-      <div class="f fg1 fixdd">
+      <div className="f fg1 fixdd">
         {tournament.isSingle ? (
           <Select
             fluid
@@ -44,8 +44,8 @@ const Schedule = ({ tournament, id, isMobile }) => (
       {sortWith([ascend(x => x.date)], tournament.schedules || [])
         .filter(s => s.matches && s.matches.length > 0)
         .map((s, i) => (
-          <div class="pt8">
-            <div class="pv8 fs24 darkgreen">
+          <div className="pt8" key={i}>
+            <div className="pv8 fs24 darkgreen">
               {tournament.isSingle
                 ? 'Round ' + (i + 1)
                 : !isNil(s.group)

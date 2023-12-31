@@ -22,15 +22,15 @@ const teamTable = (teams, id) => (
           x.players[0].lastName +
           ' / ' +
           (x.players[1].firstName + ' ' + x.players[1].lastName),
-      'Combined Rating': sum(x.players.map(y => +y.tRating || +y.rating)) 
+      'Combined Rating': sum(x.players.map(y => +y.tRating || +y.rating)),
     }))}
   />
 )
 
 const Teams = ({ tournament, history, id, newId }) => (
   <div>
-    <div class="fv">
-      <h1 class="fg1">Teams - {tournament.name}</h1>
+    <div className="fv">
+      <h1 className="fg1">Teams - {tournament.name}</h1>
       <Button
         primary
         onClick={() => history.push(`/admin/team/${id}/+${newId}`)}
@@ -41,8 +41,8 @@ const Teams = ({ tournament, history, id, newId }) => (
     <hr />
     {tournament.groups
       ? tournament.groups.map(g => (
-          <div class="pt8" key={g[0]}>
-            <div class="pv8 fs24 darkgreen">Group {g[0]}</div>
+          <div className="pt8" key={g[0]}>
+            <div className="pv8 fs24 darkgreen">Group {g[0]}</div>
             {teamTable(g[1], id)}
           </div>
         ))

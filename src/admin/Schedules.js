@@ -12,8 +12,8 @@ import { Button } from 'semantic-ui-react'
 
 const Schedules = ({ tournament, history, id, newId }) => (
   <div>
-    <div class="f">
-      <h1 class="fg1">Schedules - {tournament.name}</h1>
+    <div className="f">
+      <h1 className="fg1">Schedules - {tournament.name}</h1>
       {/* <Button primary onClick={() => history.push(`/schedule/${id}/+${newId}`)}>Add</Button> */}
     </div>
     <hr />

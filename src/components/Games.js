@@ -21,12 +21,12 @@ import { withRouter } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
 
 const Games = p => (
-  <div class="p16">
-    <div class="fv">
-      <h1 class="fg1">
+  <div className="p16">
+    <div className="fv">
+      <h1 className="fg1">
         {p.tournament.name} - {p.schedule.date}
       </h1>
-      <h3 class="fg1 mt4">
+      <h3 className="fg1 mt4">
         {p.Match.team1} vs {p.Match.team2}
       </h3>
     </div>

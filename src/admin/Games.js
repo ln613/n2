@@ -3,14 +3,7 @@ import { compose, withProps, lifecycle } from 'recompose'
 import { pick, sortWith, ascend, descend, prop, find } from 'ramda'
 import { connect } from '@ln613/state'
 import actions from 'utils/actions'
-import {
-  withLoad,
-  withLoadForce,
-  withParams,
-  withNewId,
-  withEdit,
-  withMount,
-} from '@ln613/compose'
+import { withLoad, withLoadForce, withParams, withMount } from '@ln613/compose'
 import { tournamentSelector } from 'utils/selectors'
 import { Table } from '@ln613/ui/semantic'
 import { withRouter } from 'react-router-dom'
@@ -20,11 +13,11 @@ import { withSuccess } from 'utils/ui'
 
 const Games = p => (
   <div>
-    <div class="fv">
-      <h1 class="fg1">
+    <div className="fv">
+      <h1 className="fg1">
         Matches - {p.tournament.name} - {p.schedule.date}
       </h1>
-      <h3 class="fg1 mt4">
+      <h3 className="fg1 mt4">
         {p.Match.team1} vs {p.Match.team2}
       </h3>
       {p.tournament.groups ? null : (
@@ -56,7 +49,7 @@ const Games = p => (
           path="match.games[{i}].result"
           select
           options={resultOptions}
-          class="result-select"
+          className="result-select"
         />
       ) : null}
     </Table>
@@ -131,8 +124,8 @@ export default compose(
 
 const save = p => {
   const gs = p.formMatch.games.filter(g => g.result)
-  const wins = gs.filter(g => +g.result[0] > +g.result[2]).length
-  const loses = gs.filter(g => +g.result[0] < +g.result[2]).length
+  // const wins = gs.filter(g => +g.result[0] > +g.result[2]).length
+  // const loses = gs.filter(g => +g.result[0] < +g.result[2]).length
   // if (p.formMatch.games.length === 5 && wins < 2 && loses < 2)
   //   alert('not valid!');
   // else

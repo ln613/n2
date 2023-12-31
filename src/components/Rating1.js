@@ -13,11 +13,11 @@ const Row =
   ({ index, style }) =>
     (
       <div
-        class="four column row tbody cp"
+        className="four column row tbody cp"
         onClick={() => history.push('/rating/' + ps[index].id)}
       >
         {['firstName', 'lastName', 'sex', 'rating'].map((x, j) => (
-          <div class={`${j < 2 ? 'five' : 'three'} wide column`}>
+          <div className={`${j < 2 ? 'five' : 'three'} wide column`}>
             {ps[index][x]}
           </div>
         ))}
@@ -25,14 +25,14 @@ const Row =
     )
 
 const Rating = ({ lookup, players, history }) => (
-  <div class="p16 fv">
-    <div class="f">
-      <h1 class="fg1">Rating</h1>
+  <div className="p16 fv">
+    <div className="f">
+      <h1 className="fg1">Rating</h1>
       <TextBox name="player" placeholder="Search player..." />
     </div>
-    <div class="ui divider"></div>
+    <div className="ui divider"></div>
     <List
-      class="ui padded striped grid"
+      className="ui padded striped grid"
       height={300}
       width={300}
       itemCount={players.length}
@@ -62,7 +62,7 @@ export default compose(
 }
 
 {
-  /* <div class="four column row thead">
-{['First Name', 'Last Name', 'Gender', 'Rating'].map((x, i) => <div class={`${i < 2 ? 'five' : 'three'} wide column`}>{x}</div>)}
+  /* <div className="four column row thead">
+{['First Name', 'Last Name', 'Gender', 'Rating'].map((x, i) => <div className={`${i < 2 ? 'five' : 'three'} wide column`}>{x}</div>)}
 </div> */
 }

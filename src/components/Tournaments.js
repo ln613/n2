@@ -8,7 +8,7 @@ import { withLoad } from '@ln613/compose'
 import { Table } from '@ln613/ui/semantic'
 
 const Tournaments = ({ lookup, tournaments }) => (
-  <div class="p16 fv">
+  <div className="p16 fv">
     <h1>Tournaments</h1>
     <hr />
     <Table
@@ -17,7 +17,7 @@ const Tournaments = ({ lookup, tournaments }) => (
       link
     >
       <td key="id" hidden />
-      <td key="year" title="Y / M" class="wsn" />
+      <td key="year" title="Y / M" className="wsn" />
     </Table>
   </div>
 )

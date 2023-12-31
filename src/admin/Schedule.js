@@ -1,13 +1,13 @@
 import React from 'react'
 import { compose, lifecycle } from 'recompose'
-import { range, pick, find, isNil } from 'ramda'
+import { range, pick, find } from 'ramda'
 import { connect } from '@ln613/state'
 import { Button } from 'semantic-ui-react'
 import actions from 'utils/actions'
 import { scheduleSelector } from 'utils/selectors'
 import { TextBox, Table } from '@ln613/ui/semantic'
 import { Select } from '@ln613/ui'
-import { withLoad, withEdit, withParams, withMount } from '@ln613/compose'
+import { withLoad, withParams, withMount } from '@ln613/compose'
 import { withRouter } from 'react-router-dom'
 import { resultOptions } from 'utils'
 import { withSuccess } from 'utils/ui'
@@ -25,27 +25,27 @@ const single = (ms, ko) => (
       path={'schedule.matches[{i}].' + (ko ? 'games[0].result' : 'result')}
       select
       options={resultOptions}
-      class="result-select"
+      className="result-select"
     />
   </Table>
 )
 
 const teams = (tournament, schedule, history) =>
   range(0, 8).map(n => (
-    <div class="f aic">
-      <div class="pr8">Table {n + 1}: </div>
+    <div className="f aic">
+      <div className="pr8">Table {n + 1}: </div>
       <Select
         name={`schedule.matches[${n}].home`}
         options={tournament.teams}
         placeholder=""
       />
-      <div class="ph8">VS</div>
+      <div className="ph8">VS</div>
       <Select
         name={`schedule.matches[${n}].away`}
         options={tournament.teams}
         placeholder=""
       />
-      <div class="ph8"></div>
+      <div className="ph8"></div>
       <Button
         primary
         disabled={
@@ -90,7 +90,7 @@ const Schedule = ({
       {tournament.isSingle ? 'Round ' + schedule.id : schedule.date}
     </h1>
     <hr />
-    <div class="pv8 fs24 darkgreen">
+    <div className="pv8 fs24 darkgreen">
       {schedule.ko
         ? kos[Math.log2(schedule.ko)]
         : schedule.group

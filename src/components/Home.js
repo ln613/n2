@@ -17,15 +17,21 @@ const cards = [
 const num = [1, 1, 4, 8, 3, 3, 2, 4, 6, 4]
 
 const c1 = m => (
-  <div class={`fw pb16 ${m ? '' : 'ph8'}`}>
+  <div className={`fw pb16 ${m ? '' : 'ph8'}`}>
     {cards.map((c, i) =>
-      m ? c2(c, i, m) : <div class="f w20 p8">{c2(c, i, m)}</div>
+      m ? (
+        c2(c, i, m)
+      ) : (
+        <div key={i} className="f w20 p8">
+          {c2(c, i, m)}
+        </div>
+      )
     )}
   </div>
 )
 
 const D1 = ({ isMobile, children }) => (
-  <div class={`${isMobile ? '' : 'card'} fv w100`}>{children}</div>
+  <div className={`${isMobile ? '' : 'card'} fv w100`}>{children}</div>
 )
 
 const c2 = (c, i, m) => {
@@ -33,7 +39,7 @@ const c2 = (c, i, m) => {
   const c3 = (
     <ImageSlider n={num[i]} f={i} name={c} t={6} filter="c_fill,w_600,h_450" />
   )
-  const c4 = <div class="p8 fs18 tac">{c}</div>
+  const c4 = <div className="p8 fs18 tac">{c}</div>
 
   return m ? (
     <D1 isMobile={m}>
@@ -52,7 +58,7 @@ const yt = (s, m) => (
   <iframe
     title="home"
     src={s}
-    frameborder="0"
+    frameBorder="0"
     style={{ overflow: 'hidden', height: m ? '300px' : '100%', width: '100%' }}
     height={m ? '300px' : '100%'}
     width="100%"
@@ -61,7 +67,7 @@ const yt = (s, m) => (
 
 const Home = ({ isMobile }) => (
   <div>
-    <div class="p16">
+    <div className="p16">
       <h2>2023 December Butterfly Akber open & Team Challenge</h2>
       <div>
         Annual new year challenge! All participants and annual/monthly pass
@@ -77,10 +83,10 @@ const Home = ({ isMobile }) => (
         <a href="/docs/2023-U5000.pdf">Registration Form</a>
       </div>
       {/* <h2>VTTC Monthly Tournaments</h2>
-      <div class="news">
+      <div className="news">
         All new monthly tournaments series! Starting from Sep., every month at VTTC there will be a tournament of different type to meet the need of different players of all levels. In Sep. there will be a team event, Oct. will be singles and Nov. is round robin. Registration is now open. Please refer to the registration form for more detials.
       </div>
-      <div class="news" style={{paddingRight: '16px'}}>
+      <div className="news" style={{paddingRight: '16px'}}>
         全新理念, 全新设计. 为满足所有乒乓球迷浓厚的热情, 本中心推出一系列的比赛, 每月举办一场不同类型的比赛来满足不同球友的需求, 使得我们的比赛更加丰富多彩. 这里是9月和10月比赛的信息和报名表.
       </div>  
       <div><a href="/docs/2022 VTTC Monthly Teams Sep.pdf">9月团体赛报名表 (Sep. Teams Challenge Registration Form)</a></div>
@@ -93,10 +99,10 @@ const Home = ({ isMobile }) => (
       </div> */}
     </div>
 
-    <div class="p8"></div>
+    <div className="p8"></div>
     <ImageSlider n={3} t={6} fitHeight={!isMobile} />
 
-    <div class="p16">
+    <div className="p16">
       <h2>Introduction</h2>
       <div>
         Vancouver Table Tennis Club (VTTC) is one of the best table tennis club
