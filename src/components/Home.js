@@ -68,19 +68,20 @@ const yt = (s, m) => (
 const Home = ({ isMobile }) => (
   <div>
     <div className="p16">
-      <h2>2023 December Butterfly Akber open & Team Challenge</h2>
+      <h2>U3000 Double Team League</h2>
       <div>
-        Annual new year challenge! All participants and annual/monthly pass
-        holders will be eligible for the lucky draw!
+        Every 2 weeks starting from Feb 5th. Fund raising for future junior
+        players!
       </div>
       <div>
-        <a href="/docs/2023 December Butterfly Akber open & Team Challenge.pdf">
-          Registration Form
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfazcq1q2eKAn9SB4DKaFfa0x8f8U3wfdz24DdD-rCPn8iPGw/viewform">
+          Tournament Info / Online Registration
         </a>
       </div>
-      <h2>2023 Fall League with Golden Game!</h2>
       <div>
-        <a href="/docs/2023-U5000.pdf">Registration Form</a>
+        <a href="https://scheduler.leaguelobster.com/1518807/vttc-u3000-dtl/winter-spring-2024/">
+          Tournament Website
+        </a>
       </div>
       {/* <h2>VTTC Monthly Tournaments</h2>
       <div className="news">
