@@ -68,19 +68,14 @@ const yt = (s, m) => (
 const Home = ({ isMobile }) => (
   <div>
     <div className="p16">
-      <h2>U3000 Double Team League</h2>
+      <h2 style={{ color: 'gold' }}>U3000 Golden Team League</h2>
       <div>
-        Every 2 weeks starting from Feb 5th. Fund raising for future junior
+        Every 2 weeks starting from Feb 26th. Fund raising for future junior
         players!
       </div>
       <div>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfazcq1q2eKAn9SB4DKaFfa0x8f8U3wfdz24DdD-rCPn8iPGw/viewform">
           Tournament Info / Online Registration
-        </a>
-      </div>
-      <div>
-        <a href="https://scheduler.leaguelobster.com/1518807/vttc-u3000-dtl/winter-spring-2024/">
-          Tournament Website
         </a>
       </div>
       {/* <h2>VTTC Monthly Tournaments</h2>
