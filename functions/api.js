@@ -33,6 +33,7 @@ module.exports.handler = async (event, context) => {
     newgameid,
     folder,
     detail,
+    push,
     pusherChannel,
     pusherEvent,
     pusherData,
