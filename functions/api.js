@@ -14,7 +14,6 @@ const {
 } = require('./utils/db')
 const { res } = require('./utils')
 const { updatePlayerSex } = require('./bl/player')
-const pusher = require('./utils/pusher')
 
 module.exports.handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false
@@ -64,8 +63,6 @@ module.exports.handler = async (event, context) => {
   } else if (folder) {
     //r = fs.readdirSync(process.cwd());
     r = fs.writeFileSync(process.cwd() + '/tmp/1.txt', 'abc')
-  } else if (push) {
-    await pusher.trigger(pusherChannel, pusherEvent, JSON.parse(pusherData))
   } else if (test) {
     const p1 = await getById('players', 642)
     updatePlayerSex(p1)
