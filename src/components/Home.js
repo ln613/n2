@@ -74,8 +74,8 @@ const Home = ({ isMobile }) => (
         players!
       </div>
       <div>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfazcq1q2eKAn9SB4DKaFfa0x8f8U3wfdz24DdD-rCPn8iPGw/viewform">
-          Tournament Info / Online Registration
+        <a href="https://www.score7.io/goldenteamleague">
+          Results and Schedule
         </a>
       </div>
       {/* <h2>VTTC Monthly Tournaments</h2>
