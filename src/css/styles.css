@@ -202,3 +202,8 @@ td.result-select .visible.menu.transition {
 .wsn {
   white-space: nowrap;
 }
+
+#calendar td {
+  vertical-align: top;
+  padding: 1px;
+}

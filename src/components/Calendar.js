@@ -11,30 +11,34 @@ const bg = ['Green', 'Orange', 'Cornflowerblue']
 const tt = {
   Sun: {
     schedules: [
-      [0, '1:00', '11'],
-      [1, '2', '6'],
+      [0, '12:30pm', '12am'],
+      [1, '1:30pm', '6:30pm'],
     ],
   },
-  Mon: { schedules: [[0, '1:00', '11']] },
-  Tue: { schedules: [[0, '1:00', '6']] },
-  Wed: { schedules: [[0, '1:00', '11']] },
-  Thu: { schedules: [[0, '1:00', '6']] },
+  Mon: {
+    schedules: [
+      [0, '11am', '12am'],
+      [2, '7pm', '9:30pm'],
+    ],
+  },
+  Tue: { schedules: [[0, '11am', '6:30pm']] },
+  Wed: { schedules: [[0, '11am', '12am']] },
+  Thu: { schedules: [[0, '11am', '6:30pm']] },
   Fri: {
     schedules: [
-      [0, '1:00', '11'],
-      [2, '7:30', '9:30'],
+      [0, '11am', '12am'],
+      [2, '7:30pm', '9:30pm'],
     ],
   },
   Sat: {
     schedules: [
-      [0, '1:00', '6:30'],
-      [1, '6:30', '9:30'],
-      [0, '9:30', '11'],
+      [0, '11am', '12am'],
+      [1, '6:45pm', '9:45pm'],
     ],
   },
 }
-const sm13 = [[0, '1:00', '6']]
-const ssun3 = [[0, '3', '11']]
+// const sm13 = [[0, '1:00', '6']]
+const ssun3 = [[0, '2pm', '12am']]
 
 const getDates = () => {
   const s1 = moment().startOf('month')
@@ -52,9 +56,9 @@ const getDates = () => {
     .map(x => fromPairs(x.map(d => [d.format('ddd'), { date: d.date(), d }])))
     .map(x => mergeDeepLeft(x, tt))
   rs.forEach(r => {
-    Object.keys(r)
-      .filter(k => r[k].d.isSame(m1) || r[k].d.isSame(m3))
-      .forEach(k => (r[k].schedules = sm13))
+    // Object.keys(r)
+    //   .filter(k => r[k].d.isSame(m1) || r[k].d.isSame(m3))
+    //   .forEach(k => (r[k].schedules = sm13))
     Object.keys(r)
       .filter(k => r[k].d.isSame(sun3))
       .forEach(k => (r[k].schedules = ssun3.concat(drop(2, tt.Sun.schedules))))
@@ -85,7 +89,7 @@ const Calendar = ({ lookup, isMobile }) => (
             {x.schedules.map(s => (
               <div
                 className={`br4 mv4 white p4 ${bg[s[0]]}`}
-              >{`${s[1]} - ${s[2]} pm`}</div>
+              >{`${s[1]} - ${s[2]}`}</div>
             ))}
           </div>
         )}
