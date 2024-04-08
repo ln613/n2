@@ -68,7 +68,9 @@ const yt = (s, m) => (
 const Home = ({ isMobile }) => (
   <div>
     <div className="p16">
-      <h2 style={{ color: 'gold' }}>U3000 Golden Team League</h2>
+      <h2 style={{ color: 'red' }}>U2500 and U1000 Singles RR League</h2>
+      <div>Starting from May 3rd, 2024.</div>
+      <h2 style={{ color: 'gold' }}>U3200 Golden Team League</h2>
       <div>
         Every 2 weeks starting from Feb 26th. Fund raising for future junior
         players!
