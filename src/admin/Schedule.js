@@ -11,7 +11,7 @@ import { withLoad, withParams, withMount } from '@ln613/compose'
 import { withRouter } from 'react-router-dom'
 import { resultOptions } from 'utils'
 import { withSuccess } from 'utils/ui'
-import { kos } from 'utils'
+import { kos, tap } from 'utils'
 
 const single = (ms, ko) => (
   <Table
@@ -27,6 +27,24 @@ const single = (ms, ko) => (
       options={resultOptions}
       className="result-select"
     />
+  </Table>
+)
+
+const updown = (ms) => (
+  <Table
+    name="schedule"
+    data={(ms || []).map(
+      pick(['upDownGroup', 'round', 'player1', 'result', 'player2'])
+    )}
+  >
+    <td
+      key="result"
+      path={'schedule.matches[{i}].result'}
+      select
+      options={resultOptions}
+      className="result-select"
+    />
+    <td key="upDownGroup" title="Group" />
   </Table>
 )
 
@@ -99,10 +117,12 @@ const Schedule = ({
     </div>
     <TextBox name="schedule.date" />
     {tournament.isSingle
-      ? single(schedule.matches)
+      ? single(tap(schedule).matches)
+      : tournament.isUpDown
+      ? updown(tap(schedule).matches)
       : tournament.groups
       ? isSingleGroup(tournament)
-        ? single(schedule.matches, true)
+        ? single(tap(schedule).matches, true)
         : groups(
             find(x => x.id == id, tournament.schedules).matches,
             tournament.id,
@@ -117,7 +137,22 @@ const Schedule = ({
       <Button
         primary
         onClick={() =>
-          isSingleGroup(tournament)
+            tournament.isUpDown
+            ? putGroupMatch(
+                {
+                  games: schedule.matches.map(x => ({
+                    id: x.id,
+                    date: schedule.date,
+                    t1: +x.home,
+                    t2: +x.away,
+                    result: x.result,
+                    group: schedule.group,
+                    round: x.round,
+                  })),
+                },
+                { id: tournament.id, group: schedule.group }
+              )
+            : isSingleGroup(tournament)
             ? putGroupMatch(
                 {
                   games: schedule.matches.map(x => ({

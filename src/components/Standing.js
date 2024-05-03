@@ -6,6 +6,7 @@ import { standingSelector } from 'utils/selectors'
 import { withLoad, withParams } from '@ln613/compose'
 import { Table, withMobile, Ready } from '@ln613/ui/semantic'
 import TMenu from './TMenu'
+import { tap } from 'utils'
 
 const table = (n, d, isMobile, isGroup) => (
   <Table
@@ -28,6 +29,7 @@ const table = (n, d, isMobile, isGroup) => (
     <td key="losers" hidden />
     <td key="gw" title="GW" />
     <td key="gl" title="GL" />
+    <td key="date" hidden />
   </Table>
 )
 
@@ -56,11 +58,12 @@ const Standing = ({ standing, tournament, players, id, isMobile }) => (
         </Ready>
       ) : (
         <Ready on={[players, tournament]}>
-          {tournament.groups
+          {tournament.groups || tournament.isUpDown
             ? standing.map((s, i) => (
                 <div className="pt8" key={i}>
                   <div className="pv8 fs24 darkgreen">
-                    Group {s && s.length > 0 && s[0].group}
+                    {tournament.isUpDown ? `${s[0].date} ` : ''}Group{' '}
+                    {s && s.length > 0 && s[0].group}
                   </div>
                   {table(i + 1, s, isMobile, true)}
                 </div>

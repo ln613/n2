@@ -1,5 +1,5 @@
-const { is } = require('ramda')
-const {
+import { is } from 'ramda'
+import {
   connectDB,
   cdList,
   cdupload,
@@ -20,10 +20,10 @@ const {
   resetTeams,
   giant,
   rr2single,
-} = require('./utils/db')
-const { res, trynull, authorize } = require('./utils')
+} from './utils/db'
+import { res, trynull, authorize } from './utils'
 
-module.exports.handler = async (event, context) => {
+export const handler = async (event, context) => {
   if (event.httpMethod === 'OPTIONS') return res({})
 
   context.callbackWaitsForEmptyEventLoop = false

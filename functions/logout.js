@@ -1,3 +1,3 @@
-const { res } = require('./utils');
+import { res } from './utils';
 
-module.exports.handler = async event => { return res({ isAuthenticated: false }); }
+export const handler = async event => { return res({ isAuthenticated: false }); }

@@ -34,7 +34,19 @@ import {
   highlightSub,
   toSingleArray,
   toDateOnly,
+  tap,
+  groupMap,
 } from './'
+import {
+  homeResult,
+  awayResult,
+  selfResult,
+  oppoResult,
+  homeWin,
+  teamRank,
+  sortByRank as _sortByRank,
+  getUpDownMatchWithResult,
+} from '../bl/standing'
 
 const _form = s => s.form || {}
 const _filter = s => s.filter || {}
@@ -183,18 +195,6 @@ const getSinglePlayer = (id, ps) => {
   const p = findById(id)(ps)
   return `${p.rank}. ${p.name} (${p.tRating})`
 }
-const homeResult = r => +r.split(':')[0]
-const awayResult = r => +r.split(':')[1]
-const selfResult = (r, isHome) => (isHome ? homeResult : awayResult)(r)
-const oppoResult = (r, isHome) => (isHome ? awayResult : homeResult)(r)
-const homeWin = r => {
-  const rs = r.split(':')
-  return +rs[0] > +rs[1]
-}
-const awayWin = r => {
-  const rs = r.split(':')
-  return +rs[0] < +rs[1]
-}
 
 const tournament = createSelector(
   _tournament,
@@ -259,7 +259,9 @@ const tournament = createSelector(
     const schedules = (t.schedules || []).map(s => ({
       ...s,
       date: s.date,
-      matches: t.isSingle
+      matches: t.isUpDown
+        ? s.matches.map(m => getUpDownMatchWithResult(t, s, m, ps))
+        : t.isSingle
         ? s.matches
             .filter(
               m =>
@@ -378,113 +380,51 @@ const tournamentsWithYears = createSelector(tournaments, ts =>
 
 // const getPoints = (m, t, v) => (m[t] === v ? m[t + 'Points'] : 0)
 
-const dp = s => descend(prop(s ? 'gw' : 'points'))
-const at = ascend(prop('total'))
-const dw = descend(prop('w'))
-const dl = descend(prop('gw'))
-const al = ascend(prop('gl'))
-const dm = descend(prop('mw'))
-const am = ascend(prop('ml'))
-const da = descend(x => (x.total > 0 ? 1 : 0)) // absent rank last
+const standing = createSelector(tournament, teams, (t, ts) => {
+  const dates = pipe(
+    sortWith([descend(prop('date'))]),
+    map(x => x.date),
+    uniq
+  )(t.schedules || [])
 
-const standing = createSelector(tournament, teams, (tt, ts) => {
-  const st = (tt.isSingle ? tt.players : ts).map(t => {
-    const ms = unnest(
-      (tt.schedules || []).filter(s => !s.ko).map(s => s.matches)
-    ).filter(
-      m => (m.home === t.id || m.away === t.id) && m.result && m.result != '0:0'
-    )
-    const total = ms.length
-    const ws = ms.filter(
-      m =>
-        (m.home === t.id && homeWin(m.result)) ||
-        (m.away === t.id && awayWin(m.result))
-    )
-    const wn = ws.length
-    const ln = ms.length - wn
-    const d = wn - ln
-    const wpc = ((total && wn / total) * 100).toFixed(1) + '%'
-    const ps = sum(ms.map(m => selfResult(m.result, m.home == t.id)))
-    const ps1 = sum(ms.map(m => oppoResult(m.result, m.home == t.id)))
-    const s = {
-      [tt.isSingle ? 'player' : 'team']: t.name,
-      id: t.id,
-      total,
-      w: wn,
-      l: ln,
-      '+/-': d > 0 ? '+' + d : d,
-      'win %': wpc,
-      [tt.isSingle ? 'gw' : tt.groups ? 'mw' : 'points']: ps,
-      ml: ps1,
-      rank: t.rank,
-      group: t.group,
-    }
-    if (tt.isSingle) s.gl = ps1
-    s.losers = ws.map(m => (m.home === t.id ? m.away : m.home))
-    if (tt.groups) {
-      s.ml = ps1
-      s.gw = sum(
-        ms.map(m =>
-          sum(
-            m.games
-              .filter(g => g.result)
-              .map(g => selfResult(g.result, m.home == t.id))
+  const teamRanks = unnest(
+    (t.isSingle ? t.players : ts).map(tp => {
+      const ms = unnest(
+        (t.schedules || [])
+          .filter(s => !s.ko)
+          .map(s =>
+            s.matches.map(x => ({
+              ...x,
+              date: s.date,
+              result: x.result || '0:0',
+            }))
           )
-        )
-      )
-      s.gl = sum(
-        ms.map(m =>
-          sum(
-            m.games
-              .filter(g => g.result)
-              .map(g => oppoResult(g.result, m.home == t.id))
-          )
-        )
-      )
-    }
-    return s
-  })
+      ).filter(m => m.home === tp.id || m.away === tp.id)
 
-  const stg = pipe(groupBy(prop('group')), map(groupBy(prop('w'))))(st)
-  // 2-way tie in group, whoever wins rank higher
-  const de = descend(x => {
-    const stg1 = stg[x.group][x.w] || []
-    return stg1.length === 2
-      ? x.losers.indexOf(stg1[0].id === x.id ? stg1[1].id : stg1[0].id) > -1
-        ? 2
-        : 1
-      : 0
-  })
-  const p = pipe(
-    sortWith(
-      tt.isSingle
-        ? [dw, at, dp(1), al]
-        : tt.isGolden
-        ? [dw, at, dp(0), al]
-        : tt.groups
-        ? [da, dw, at, de, dm, am, dl, al]
-        : tt.isBestOfN
-        ? [
-            descend(x => +x['+/-']),
-            descend(x => +dropLast(1, x['win %'])),
-            dp(0),
-            am,
-          ]
-        : [dp(0), at, dw, am]
-    ),
-    addIndex('rank')
+      return t.isUpDown
+        ? dates.map(x =>
+            teamRank(
+              t,
+              tp,
+              ms.filter(y => y.date == x)
+            )
+          )
+        : teamRank(t, tp, ms)
+    })
   )
 
-  return tt.has2half
-    ? pipe(sortBy(prop('rank')), split2(tt.isCeil), map(p))(st)
-    : tt.teams && tt.teams.length > 0 && !isNil(tt.teams[0].group)
+  const sortByRank = _sortByRank(t)
+  const ss = t.isUpDown
     ? pipe(
-        groupBy(t => t.group),
-        toPairs,
-        map(x => x[1]),
-        map(p)
-      )(st)
-    : p(st)
+        sortWith([descend(prop('date')), ascend(prop('group'))]),
+        groupMap(x => `${x.date} - ${x.group}`, sortByRank)
+      )(teamRanks)
+    : t.has2half
+    ? pipe(sortBy(prop('rank')), split2(t.isCeil), map(sortByRank))(teamRanks)
+    : t.teams && t.teams.length > 0 && !isNil(t.teams[0].group)
+    ? groupMap(x => x.group, sortByRank)(teamRanks)
+    : sortByRank(teamRanks)
+  return tap(ss)
 })
 
 const ko = createSelector(tournament, t => {

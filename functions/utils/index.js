@@ -1,28 +1,26 @@
-const jwt = require('jsonwebtoken')
-const R = require('ramda')
-const axios = require('axios')
-const moment = require('moment')
+import jwt from 'jsonwebtoken'
+import { tap as _tap, isNil, append, sort as _sort, sortWith, descend, ascend, range, prop, insert, map, pipe, takeLast, sum, compose, splitEvery, unnest, last, xprod, take, curry, splitAt, find, is, fromPairs, nth } from 'ramda'
+import axios from 'axios'
+import moment from 'moment'
 
-const e = {}
+export const isDev = process.env.NODE_ENV === 'development'
 
-e.isDev = process.env.NODE_ENV === 'development'
+export const tap = x => _tap(console.log, isNil(x) ? 'null' : x)
 
-e.tap = x => R.tap(console.log, R.isNil(x) ? 'null' : x)
-
-e.serial = (arr, func) =>
+export const serial = (arr, func) =>
   arr.reduce(
     (promise, next) =>
-      promise.then(r => func(next).then(r1 => R.append(r1, r))),
+      promise.then(r => func(next).then(r1 => append(r1, r))),
     Promise.resolve([])
   )
 
-e.sort = R.sort((a, b) => a - b)
+export const sort = _sort((a, b) => a - b)
 
-e.sortDesc = R.sort((a, b) => b - a)
+export const sortDesc = _sort((a, b) => b - a)
 
-e.isOdd = n => n % 2 === 1
+export const isOdd = n => n % 2 === 1
 
-e.trynull = f => {
+export const trynull = f => {
   try {
     return f()
   } catch (e) {
@@ -30,9 +28,9 @@ e.trynull = f => {
   }
 }
 
-e.httpGet = url => axios.get(url).then(r => r.data)
+export const httpGet = url => axios.get(url).then(r => r.data)
 
-e.authorize = async token => {
+export const authorize = async token => {
   try {
     await jwt.verify(token, process.env.JWT_SECRET)
     return true
@@ -43,14 +41,14 @@ e.authorize = async token => {
 
 const rrCycle = (x, r, l) => (x < r ? x - r + l : x - r + 1)
 
-e.rrSchedule = (x, sorted, continuousId) => {
-  const l = sorted ? x : R.sortWith([R.descend(R.prop('rating'))], x)
-  if (e.isOdd(l.length)) l.push({ id: null })
-  const t1 = R.range(1, l.length)
-  const t2 = R.range(0, l.length / 2)
+export const rrSchedule = (x, sorted, continuousId) => {
+  const l = sorted ? x : sortWith([descend(prop('rating'))], x)
+  if (isOdd(l.length)) l.push({ id: null })
+  const t1 = range(1, l.length)
+  const t2 = range(0, l.length / 2)
   return t1.map((r, i) => {
     const l1 = t1.map(n => l[rrCycle(n, r, l.length)])
-    const l2 = R.insert(0, l[0], l1)
+    const l2 = insert(0, l[0], l1)
     return t2
       .map(n => ({
         round: i + 1,
@@ -65,14 +63,14 @@ e.rrSchedule = (x, sorted, continuousId) => {
   })
 }
 
-e.getTeamRating = (t, p3) =>
+export const getTeamRating = (t, p3) =>
   t.players
     ? t.players.length > 1
-      ? R.pipe(
-          R.map(x => +(x.isSub ? 0 : x.tRating || x.rating)),
-          e.sort,
-          R.takeLast(p3 ? 3 : 2),
-          R.sum
+      ? pipe(
+          map(x => +(x.isSub ? 0 : x.tRating || x.rating)),
+          sort,
+          takeLast(p3 ? 3 : 2),
+          sum
         )(t.players)
       : t.players.length === 1
       ? t.players[0].rating
@@ -84,11 +82,11 @@ const changeTable = (i, j, n, sids) => {
   return j === 0 ? j1 : j === j1 ? 0 : j
 }
 
-e.rrScheduleTeam = (teams, startDate, ids) => {
-  if (!ids) ids = R.range(1, Math.min(Math.floor(teams.length / 2) + 1, 7))
-  const sids = e.shuffle(R.range(0, ids.length))
+export const rrScheduleTeam = (teams, startDate, ids) => {
+  if (!ids) ids = range(1, Math.min(Math.floor(teams.length / 2) + 1, 7))
+  const sids = shuffle(range(0, ids.length))
 
-  return R.compose(
+  return compose(
     rs =>
       rs.map((w, i) => ({
         id: i + 1,
@@ -97,18 +95,18 @@ e.rrScheduleTeam = (teams, startDate, ids) => {
           m.id = ids[changeTable(i, j, ids.length, sids)]
           return m
         }),
-        date: e.toDateOnly(moment(startDate).add(i, 'week').toDate()),
+        date: toDateOnly(moment(startDate).add(i, 'week').toDate()),
       })),
-    R.splitEvery(ids.length),
-    R.unnest,
-    e.rrSchedule,
-    R.map(t => ({ ...t, rating: e.getTeamRating(t) }))
+    splitEvery(ids.length),
+    unnest,
+    rrSchedule,
+    map(t => ({ ...t, rating: getTeamRating(t) }))
   )(teams)
 }
 
-e.json2js = x =>
+export const json2js = x =>
   JSON.parse(x, (k, v) =>
-    R.takeLast(4, k).toLowerCase() === 'date' ? new Date(v) : v
+    takeLast(4, k).toLowerCase() === 'date' ? new Date(v) : v
   )
 
 const rdiff = [
@@ -134,10 +132,10 @@ const rdelta = [
 
 const rateDiff = (r1, r2) => {
   const n = rdelta.findIndex(x => x <= r1 - r2)
-  return n === -1 ? R.last(rdiff) : rdiff[n]
+  return n === -1 ? last(rdiff) : rdiff[n]
 }
 
-e.adjustRating = (g, im = true) => {
+export const adjustRating = (g, im = true) => {
   if (g.isDouble || !g.result || g.result === '0:0') {
     return g
   } else {
@@ -150,31 +148,31 @@ e.adjustRating = (g, im = true) => {
   }
 }
 
-e.newRating = (r, d) => Math.max(r + d, 100)
+export const newRating = (r, d) => Math.max(r + d, 100)
 
-e.sortTeam = (team, p3) =>
-  R.pipe(
-    R.map(t => [e.getTeamRating(t, p3), t]),
-    R.sortWith([R.descend(R.nth(0))]),
-    R.map(R.nth(1))
+export const sortTeam = (team, p3) =>
+  pipe(
+    map(t => [getTeamRating(t, p3), t]),
+    sortWith([descend(nth(0))]),
+    map(nth(1))
   )(team)
 
-e.numOfGroups = n => Math.pow(2, Math.floor(Math.log10(n / 3) / Math.log10(2)))
+export const numOfGroups = n => Math.pow(2, Math.floor(Math.log10(n / 3) / Math.log10(2)))
 
-e.group = (ts, nog) => {
+export const group = (ts, nog) => {
   const n = ts.length
-  const g = nog || e.numOfGroups(n)
+  const g = nog || numOfGroups(n)
   return ts.map((t, i) => {
     const l = Math.floor(i / g)
     const c = i % g
-    const group = e.isOdd(l) ? g - c : c + 1
+    const group = isOdd(l) ? g - c : c + 1
     return { ...t, group }
   })
 }
 
-e.gengames = (t, t1, t2) => {
-  const team1 = e.findById(t1)(t.teams)
-  const team2 = e.findById(t2)(t.teams)
+export const gengames = (t, t1, t2) => {
+  const team1 = findById(t1)(t.teams)
+  const team2 = findById(t2)(t.teams)
   const ps1 = team1.players.map(x => +x.id)
   const ps2 = team2.players.map(x => +x.id)
 
@@ -189,7 +187,7 @@ e.gengames = (t, t1, t2) => {
       [1, 2],
     ]
     const pm = ps => p23.map(x => [ps[x[0]], ps[x[1]]])
-    const gs1 = R.xprod(pm(ps1), pm(ps2)).map((x, n) => ({
+    const gs1 = xprod(pm(ps1), pm(ps2)).map((x, n) => ({
       id: n + 1,
       date: t.startDate,
       t1,
@@ -199,7 +197,7 @@ e.gengames = (t, t1, t2) => {
       p3: x[0][1],
       p4: x[1][1],
     }))
-    const gs2 = R.xprod(ps1, ps2).map((x, n) => ({
+    const gs2 = xprod(ps1, ps2).map((x, n) => ({
       id: n + 10,
       date: t.startDate,
       t1,
@@ -210,7 +208,7 @@ e.gengames = (t, t1, t2) => {
     return gs1.concat(gs2)
   }
 
-  return R.range(0, 5).map(n => ({
+  return range(0, 5).map(n => ({
     id: n + 1,
     date: t.startDate,
     t1,
@@ -222,10 +220,12 @@ e.gengames = (t, t1, t2) => {
   }))
 }
 
-e.toDateOnly = d =>
-  R.is(String, d)
-    ? R.take(10, d).replace(/\//g, '-')
+export const toDateOnly = d =>
+  is(String, d)
+    ? take(10, d).replace(/\//g, '-')
     : moment(d).add(8, 'hours').format('YYYY-MM-DD')
+
+export const nextNWeek = (n, dateString) => toDateOnly(moment(dateString).add(n, 'week').toDate())
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
@@ -235,68 +235,66 @@ const cors = {
     'GET,OPTIONS,POST,PUT,PATCH,DELETE,COPY,PURGE',
 }
 
-e.res = (body, code) => ({
+export const res = (body, code) => ({
   statusCode: code || 200,
   headers: {
-    ...(e.isDev ? cors : {}),
+    ...(isDev ? cors : {}),
     'Content-Type': 'application/json',
   },
   body: JSON.stringify(body),
 })
 
-e.res401 = () => e.res({ isAuthenticated: false }, 401)
+export const res401 = () => res({ isAuthenticated: false }, 401)
 
-e.resAuth = token => e.res({ isAuthenticated: true, token })
+export const resAuth = token => res({ isAuthenticated: true, token })
 
-e.policy = r => ({
+export const policy = r => ({
   principalId: process.env.PRINCIPALID,
   policyDocument: {
     Statement: [{ Action: 'execute-api:Invoke', Effect: 'Allow', Resource: r }],
   },
 })
 
-e.parseCookie = r =>
-  R.fromPairs((r.multiValueHeaders.cookie || []).map(c => c.split('=')))
+export const parseCookie = r =>
+  fromPairs((r.multiValueHeaders.cookie || []).map(c => c.split('=')))
 
-e.swap = R.curry((i1, i2, arr) => {
+export const swap = curry((i1, i2, arr) => {
   const t = arr[i1]
   arr[i1] = arr[i2]
   arr[i2] = t
 })
 
-e.shuffle = arr => {
+export const shuffle = arr => {
   let i1 = arr.length
   while (i1 !== 0) {
     i1--
     const i2 = Math.floor(Math.random() * i1)
-    e.swap(i1, i2, arr)
+    swap(i1, i2, arr)
   }
   return arr
 }
 
-e.sortBy = R.curry((o, arr) =>
-  R.sortWith(
-    R.is(String, o)
-      ? [R.ascend(R.prop(o))]
+export const sortBy = curry((o, arr) =>
+  sortWith(
+    is(String, o)
+      ? [ascend(prop(o))]
       : Object.entries(o).map(([k, v]) =>
-          (v ? R.descend : R.ascend)(R.prop(k))
+          (v ? descend : ascend)(prop(k))
         ),
     arr
   )
 )
 
-e.split2 = isCeil => arr =>
-  R.splitAt((isCeil ? Math.ceil : Math.floor)(arr.length / 2), arr)
+export const split2 = isCeil => arr =>
+  splitAt((isCeil ? Math.ceil : Math.floor)(arr.length / 2), arr)
 
-e.findByProp = R.curry((p, val, arr) => R.find(x => x[p] == val, arr || []))
-e.findById = e.findByProp('id')
-e.findByName = e.findByProp('name')
-e.getPropById = R.curry((p, id) => R.pipe(e.findById(id), R.prop(p)))
-e.getNameById = e.getPropById('name')
+export const findByProp = curry((p, val, arr) => find(x => x[p] == val, arr || []))
+export const findById = findByProp('id')
+export const findByName = findByProp('name')
+export const getPropById = curry((p, id) => pipe(findById(id), prop(p)))
+export const getNameById = getPropById('name')
 
-e.use =
+export const use =
   (...args) =>
   f =>
     f(...args)
-
-module.exports = e

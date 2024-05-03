@@ -1,5 +1,5 @@
-const fs = require('fs')
-const {
+import fs from 'fs'
+import {
   connectDB,
   get,
   getIdName,
@@ -11,11 +11,11 @@ const {
   getNewGameId,
   getDetail,
   update,
-} = require('./utils/db')
-const { res } = require('./utils')
-const { updatePlayerSex } = require('./bl/player')
+} from './utils/db'
+import { res } from './utils'
+import { updatePlayerSex } from '../src/bl/player'
 
-module.exports.handler = async (event, context) => {
+export const handler = async (event, context) => {
   context.callbackWaitsForEmptyEventLoop = false
   const {
     test,
@@ -67,6 +67,7 @@ module.exports.handler = async (event, context) => {
     const p1 = await getById('players', 642)
     updatePlayerSex(p1)
     update('players', p1)
+    r = p1
   }
 
   return res(r)

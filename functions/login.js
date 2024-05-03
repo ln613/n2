@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
-const { res, res401, resAuth, authorize } = require('./utils');
+import jwt from 'jsonwebtoken';
+import { res, res401, resAuth, authorize } from './utils';
 
-module.exports.handler = async event => {
+export const handler = async event => {
   if (event.httpMethod === 'OPTIONS') {
     return res();
   } else if (event.httpMethod === 'POST' && event.body) {

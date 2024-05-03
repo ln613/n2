@@ -24,6 +24,8 @@ import {
   splitAt,
   lensPath,
   reduce,
+  groupBy,
+  toPairs,
 } from 'ramda'
 import moment from 'moment'
 
@@ -221,6 +223,13 @@ export const shuffle = arr => {
   }
   return arr
 }
+export const groupMap = (key, fn) =>
+  pipe(
+    groupBy(key),
+    toPairs,
+    map(x => x[1]),
+    map(fn)
+  )
 
 // string
 

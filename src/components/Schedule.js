@@ -49,7 +49,7 @@ const Schedule = ({ tournament, id, isMobile }) => (
               {tournament.isSingle
                 ? 'Round ' + (i + 1)
                 : !isNil(s.group)
-                ? 'Group ' + s.group
+                ? `${tournament.isUpDown ? `${s.date} ` : ''}Group ${s.group}`
                 : s.ko
                 ? kos[Math.log2(s.ko)]
                 : s.date}
@@ -110,7 +110,7 @@ const mapMatches = (ms, t, isGroup, isKo) =>
           result:
             m.result === '0:0'
               ? ''
-              : (isGroup || isKo) && m.games.length === 1
+              : (isGroup || isKo) && (m.games || []).length === 1
               ? m.games[0].result
               : m.result,
           away: getNameById(m.away)(t.teams),

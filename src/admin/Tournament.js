@@ -136,8 +136,10 @@ export default compose(
   withProps(({ standing, t }) => ({
     canDisplaySchedule: !isEmpty(t.schedules),
     canGenerateSchedule:
-      !isEmpty(t.isSingle ? t.players : t.teams) && isEmpty(t.schedules),
+      !isEmpty(t.isSingle ? t.players : t.teams) &&
+      (t.isUpDown || isEmpty(t.schedules)),
     canGenerateSchedule2:
+      !t.isUpDown &&
       !t.has2half &&
       !isEmpty(t.teams) &&
       isNil(t.teams[0].group) &&
@@ -145,11 +147,12 @@ export default compose(
       !isEmpty(standing) &&
       standing.length > 2,
     canGenerateGroup:
-      !t.isSingle &&
-      !isEmpty(t.teams) &&
-      isNil(t.teams[0].group) &&
-      isEmpty(t.games) &&
-      isEmpty(t.schedules),
+      t.isUpDown ||
+      (!t.isSingle &&
+        !isEmpty(t.teams) &&
+        isNil(t.teams[0].group) &&
+        isEmpty(t.games) &&
+        isEmpty(t.schedules)),
     canGenerateKO:
       !isEmpty(t.teams) && !isNil(t.teams[0].group) && !isEmpty(t.schedules),
   })),
