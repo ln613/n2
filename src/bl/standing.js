@@ -129,15 +129,15 @@ export const sortByRank = t => ranks =>
     addIndex('rank')
   )(ranks)
 
-export const getUpDownMatchWithResult = (t, s, m, ps) => {
+export const getUpDownMatchWithResult = (t, s, m, ts) => {
   const gs = (t.games || []).filter(
     g =>
       g.date == s.date && g.group == s.group && g.t1 == m.home && g.t2 == m.away
   )
   return {
     ...m,
-    player1: ps ? getNameById(m.home)(ps) : m.home,
-    player2: ps ? getNameById(m.away)(ps) : m.away,
+    player1: ts ? getNameById(m.home)(ts) : m.home,
+    player2: ts ? getNameById(m.away)(ts) : m.away,
     result: gs.length > 0 ? gs[0].result : '',
   }
 }
