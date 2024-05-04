@@ -260,7 +260,7 @@ const tournament = createSelector(
       ...s,
       date: s.date,
       matches: t.isUpDown
-        ? s.matches.map(m => getUpDownMatchWithResult(t, s, m, ps))
+        ? s.matches.map(m => getUpDownMatchWithResult(t, s, m, ts))
         : t.isSingle
         ? s.matches
             .filter(
