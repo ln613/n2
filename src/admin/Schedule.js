@@ -12,6 +12,7 @@ import { withRouter } from 'react-router-dom'
 import { resultOptions } from 'utils'
 import { withSuccess } from 'utils/ui'
 import { kos, tap } from 'utils'
+import { toGame, findById } from '../utils'
 
 const single = (ms, ko) => (
   <Table
@@ -30,7 +31,7 @@ const single = (ms, ko) => (
   </Table>
 )
 
-const updown = (ms) => (
+const updown = ms => (
   <Table
     name="schedule"
     data={(ms || []).map(
@@ -100,6 +101,8 @@ const Schedule = ({
   postSchedule,
   putGroupMatch,
   id,
+  newGameId,
+  players,
   isLoading,
 }) => (
   <div>
@@ -137,20 +140,13 @@ const Schedule = ({
       <Button
         primary
         onClick={() =>
-            tournament.isUpDown
-            ? putGroupMatch(
-                {
-                  games: schedule.matches.map(x => ({
-                    id: x.id,
-                    date: schedule.date,
-                    t1: +x.home,
-                    t2: +x.away,
-                    result: x.result,
-                    group: schedule.group,
-                    round: x.round,
-                  })),
-                },
-                { id: tournament.id, group: schedule.group }
+          tournament.isUpDown
+            ? saveUpDown(
+                tournament,
+                schedule,
+                newGameId,
+                putGroupMatch,
+                players
               )
             : isSingleGroup(tournament)
             ? putGroupMatch(
@@ -185,6 +181,7 @@ export default compose(
       { path: 'schedule' }
     )
   ),
+  withMount(p => p.getNewGameId()),
   withSuccess(
     'schedule',
     () => alert('Saved'),
@@ -207,3 +204,33 @@ const fixResult = m => ({
   ...m,
   result: m.games.length === 1 ? m.games[0].result : m.result,
 })
+
+const saveUpDown = (
+  tournament,
+  schedule,
+  newGameId,
+  putGroupMatch,
+  players
+) => {
+  const gp = id => findById(+id)(tournament.teams).players[0].id
+  const gr = id => findById(gp(id))(players).rating
+  let id = newGameId
+  putGroupMatch(
+    {
+      games: schedule.matches
+        .map(x => ({
+          id: x.gid || ++id,
+          result: x.result,
+          group: schedule.group,
+          round: x.round,
+          match: x,
+          p1: gp(x.home),
+          p2: gp(x.away),
+          p1Rating: gr(x.home),
+          p2Rating: gr(x.away),
+        }))
+        .map(x => toGame(x, schedule, x.match)),
+    },
+    { id: tournament.id, group: schedule.group }
+  )
+}

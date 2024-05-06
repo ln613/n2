@@ -11,6 +11,13 @@ import {
 } from 'ramda'
 import { addIndex, getNameById, tap } from '../utils'
 
+export const upDownPoints = [
+  [200, 170, 145, 125, 110],
+  [180, 150, 125, 105, 90],
+  [160, 130, 105, 85, 70],
+  [140, 110, 85, 65, 50],
+]
+
 const dp = s => descend(prop(s ? 'gw' : 'points'))
 const at = ascend(prop('total'))
 const dw = descend(prop('w'))
@@ -115,6 +122,8 @@ export const sortByRank = t => ranks =>
         ? [dw, at, dp(1), al]
         : t.isGolden
         ? [dw, at, dp(0), al]
+        : t.isUpDown
+        ? [dp(0), at, dw, am, de(stg(ranks))]
         : t.groups
         ? [da, dw, at, de(stg(ranks)), dm, am, dl, al]
         : t.isBestOfN
@@ -134,10 +143,13 @@ export const getUpDownMatchWithResult = (t, s, m, ts) => {
     g =>
       g.date == s.date && g.group == s.group && g.t1 == m.home && g.t2 == m.away
   )
+  const g = gs.length > 0 ? gs[0] : {}
   return {
     ...m,
+    gid: g.id,
+    date: s.date,
     player1: ts ? getNameById(m.home)(ts) : m.home,
     player2: ts ? getNameById(m.away)(ts) : m.away,
-    result: gs.length > 0 ? gs[0].result : '',
+    result: g.result || '0:0',
   }
 }

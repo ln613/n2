@@ -20,21 +20,28 @@ const Schedules = ({ tournament, history, id, newId }) => (
     <Table
       name="schedules"
       link={x => `/admin/schedule/${id}/${x.id}`}
-      data={(tournament.schedules || []).map(x => ({
-        id: x.id || (isNil(x.group) ? '' : +x.group),
-        [tournament.isSingle
-          ? 'round'
-          : !tournament.isUpDown && (!isNil(x.group) || x.ko)
-          ? 'group'
-          : 'date']: tournament.isSingle
-          ? 'Round ' + x.id
-          : !tournament.isUpDown && !isNil(x.group)
-          ? 'Group ' + x.group
-          : x.ko
-          ? kos[Math.log2(x.ko)]
-          : x.date,
-        group: tournament.isUpDown ? x.group : null
-      }))}
+      data={(tournament.schedules || []).map(x => {
+        if (tournament.isUpDown)
+          return {
+            id: x.id,
+            date: x.date,
+            group: x.group,
+          }
+        return {
+          id: x.id || (isNil(x.group) ? '' : +x.group),
+          [tournament.isSingle
+            ? 'round'
+            : !isNil(x.group) || x.ko
+            ? 'group'
+            : 'date']: tournament.isSingle
+            ? 'Round ' + x.id
+            : !isNil(x.group)
+            ? 'Group ' + x.group
+            : x.ko
+            ? kos[Math.log2(x.ko)]
+            : x.date,
+        }
+      })}
     />
     <hr />
     <Button primary onClick={history.goBack}>

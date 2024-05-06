@@ -20,6 +20,7 @@ import {
   toPairs,
   is,
   uniq,
+  reverse,
 } from 'ramda'
 import { createSelector, mapStateWithSelectors } from '@ln613/state'
 import { Bold, Italic } from '@ln613/ui'
@@ -46,6 +47,7 @@ import {
   teamRank,
   sortByRank as _sortByRank,
   getUpDownMatchWithResult,
+  upDownPoints,
 } from '../bl/standing'
 
 const _form = s => s.form || {}
@@ -256,7 +258,7 @@ const tournament = createSelector(
         m.away = +m.away
       })
     )
-    const schedules = (t.schedules || []).map(s => ({
+    let schedules = (t.schedules || []).map(s => ({
       ...s,
       date: s.date,
       matches: t.isUpDown
@@ -327,6 +329,11 @@ const tournament = createSelector(
               }
             }),
     }))
+    schedules = sortWith(
+      t.isUpDown
+        ? [descend(prop('date')), ascend(prop('group'))]
+        : [ascend(prop('date'))]
+    )(schedules)
     return { ...t, teams, groups, players, schedules, games }
   }
 )
@@ -387,30 +394,32 @@ const standing = createSelector(tournament, teams, (t, ts) => {
     uniq
   )(t.schedules || [])
 
-  const teamRanks = unnest(
-    (t.isSingle ? t.players : ts).map(tp => {
-      const ms = unnest(
-        (t.schedules || [])
-          .filter(s => !s.ko)
-          .map(s =>
-            s.matches.map(x => ({
-              ...x,
-              date: s.date,
-              result: x.result || '0:0',
-            }))
-          )
-      ).filter(m => m.home === tp.id || m.away === tp.id)
-
-      return t.isUpDown
-        ? dates.map(x =>
-            teamRank(
-              t,
-              tp,
-              ms.filter(y => y.date == x)
+  const teamRanks = reverse(
+    unnest(
+      (t.isSingle ? t.players : ts).map(tp => {
+        const ms = unnest(
+          (t.schedules || [])
+            .filter(s => !s.ko)
+            .map(s =>
+              s.matches.map(x => ({
+                ...x,
+                date: s.date,
+                result: x.result || '0:0',
+              }))
             )
-          )
-        : teamRank(t, tp, ms)
-    })
+        ).filter(m => m.home === tp.id || m.away === tp.id)
+
+        return t.isUpDown
+          ? dates.map(x =>
+              teamRank(
+                t,
+                tp,
+                ms.filter(y => y.date == x)
+              )
+            )
+          : teamRank(t, tp, ms)
+      })
+    )
   )
 
   const sortByRank = _sortByRank(t)
@@ -424,7 +433,7 @@ const standing = createSelector(tournament, teams, (t, ts) => {
     : t.teams && t.teams.length > 0 && !isNil(t.teams[0].group)
     ? groupMap(x => x.group, sortByRank)(teamRanks)
     : sortByRank(teamRanks)
-  return tap(ss)
+  return ss
 })
 
 const ko = createSelector(tournament, t => {
@@ -448,13 +457,15 @@ const isPlayerSub = p => g => teams =>
   (isHomePlayer(p)(g) && findById(p.id)(findById(g.t1)(teams).players).isSub) ||
   (isAwayPlayer(p)(g) && findById(p.id)(findById(g.t2)(teams).players).isSub)
 
-const stats = createSelector(tournament, players, (t, ps) => {
+const stats = createSelector(tournament, players, standing, (t, ps, std) => {
   const teams = t.teams || []
+  std = unnest(std.filter(x => !Array.isArray(x) || x.some(y => y.total > 0)))
 
   const players = pipe(
     map(x =>
       x.players.map(p => ({
         ...p,
+        tid: x.id,
         isUpperDiv:
           x.rank <= (t.isCeil ? Math.ceil : Math.floor)(teams.length / 2),
       }))
@@ -463,6 +474,14 @@ const stats = createSelector(tournament, players, (t, ps) => {
     where(x => !x.isSub),
     uniqBy(x => +x.id)
   )(teams)
+
+  const sw = [
+    descend(x => +x['+/-']),
+    descend(x => +dropLast(1, x['win %'])),
+    descend(x => x.gw),
+    ascend(x => x.gl),
+  ]
+  if (t.isUpDown) sw.unshift(descend(x => x.pts))
 
   const st = pipe(
     map(p => {
@@ -484,6 +503,13 @@ const stats = createSelector(tournament, players, (t, ps) => {
       const dloses = dgs.filter(isPlayerLose(p))
       const dw = dwins.length
       const dl = dloses.length
+      const pts = t.isUpDown
+        ? sum(
+            std
+              .filter(x => x.id == p.tid)
+              .map(x => upDownPoints[x.group - 1][x.rank - 1])
+          )
+        : 0
       return {
         player: p.name || getNameById(p.id)(ps),
         mp: total,
@@ -495,14 +521,10 @@ const stats = createSelector(tournament, players, (t, ps) => {
         gl,
         dw,
         dl,
+        pts,
       }
     }),
-    sortWith([
-      descend(x => +x['+/-']),
-      descend(x => +dropLast(1, x['win %'])),
-      descend(x => x.gw),
-      ascend(x => x.gl),
-    ]),
+    sortWith(sw),
     addIndex('#')
   )
 
@@ -665,6 +687,7 @@ export const scheduleSelector = mapStateWithSelectors({
   tournament,
   schedule: form('schedule'),
   players,
+  newGameId,
   isLoading,
 })
 export const gameSelector = mapStateWithSelectors({

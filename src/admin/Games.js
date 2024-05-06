@@ -8,7 +8,7 @@ import { tournamentSelector } from 'utils/selectors'
 import { Table } from '@ln613/ui/semantic'
 import { withRouter } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
-import { toGame, resultOptions, findById, toAbsDate } from 'utils'
+import { toGame, resultOptions, findById, toAbsDate, tap } from 'utils'
 import { withSuccess } from 'utils/ui'
 
 const Games = p => (
@@ -76,7 +76,7 @@ export default compose(
   })),
   withProps(p => ({
     games: sortWith(
-      [p.tournament.groups ? ascend(prop('id')) : descend(prop('id'))],
+      [tap(p).tournament.groups ? ascend(prop('id')) : descend(prop('id'))],
       p.tournament.groups
         ? p.Match.games
         : (p.tournament.games || []).filter(

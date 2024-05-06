@@ -7,13 +7,14 @@ import { withLoad, withLoadForce, withParams } from '@ln613/compose'
 import { Table, withMobile } from '@ln613/ui/semantic'
 import TMenu from './TMenu'
 
-const table = (data, isMobile) => (
+const table = (data, isMobile, isUpDown) => (
   <Table name="stats" data={data} isMobile={isMobile}>
     <td key="mp" title="MP" />
     <td key="gw" title="GW" />
     <td key="gl" title="GL" />
     <td key="dw" title="DW" hidden />
     <td key="dl" title="DL" hidden />
+    <td key="pts" hidden={!isUpDown} />
   </Table>
 )
 
@@ -36,7 +37,7 @@ const Stats = ({ stats, tournament, id, isMobile }) => (
           {table(stats[1], isMobile)}
         </Fragment>
       ) : (
-        table(stats, isMobile)
+        table(stats, isMobile, tournament.isUpDown)
       )}
     </div>
   </div>

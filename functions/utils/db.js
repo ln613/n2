@@ -571,7 +571,13 @@ export const genUpDown = id =>
             flatten,
             uniq,
             map(id => teams.find(x => x.id == id)),
-            map(tp => teamRank(t, tp, ms)),
+            map(tp =>
+              teamRank(
+                t,
+                tp,
+                ms.filter(x => x.home == tp.id || x.away == tp.id)
+              )
+            ),
             sortByRank(t),
             map(r => teams.find(x => x.id == r.id))
           )(ms)
@@ -712,14 +718,17 @@ export const nogame = body => {
 export const resetTeams = body => {
   const id = +body.id
   return getById('tournaments', id).then(t => {
-    if (t.teams) {
-      t.teams.forEach(x => {
-        delete x.group
-        delete x.upDownGroup
-      })
-      t.schedules = []
-      t.games = []
+    if (body.upDownGroup == 1) {
+      t.teams.forEach(x => x.upDownGroup.pop())
       return update('tournaments', t)
+      // } else if (t.teams) {
+      //   t.teams.forEach(x => {
+      //     delete x.group
+      //     delete x.upDownGroup
+      //   })
+      //   t.schedules = []
+      //   t.games = []
+      //   return update('tournaments', t)
     } else {
       return 'N/A'
     }

@@ -41,7 +41,7 @@ const Schedule = ({ tournament, id, isMobile }) => (
       </div>
       <hr />
       {/* {(id == 96) && <Fragment><i>*The schedule for the 2nd round will be generated after all 1st round matches are finished.</i><hr/></Fragment>} */}
-      {sortWith([ascend(x => x.date)], tournament.schedules || [])
+      {(tournament.schedules || [])
         .filter(s => s.matches && s.matches.length > 0)
         .map((s, i) => (
           <div className="pt8" key={i}>
