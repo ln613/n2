@@ -68,8 +68,15 @@ const yt = (s, m) => (
 const Home = ({ isMobile }) => (
   <div>
     <div className="p16">
-      <h2 style={{ color: 'red' }}>U2500 and U1000 Singles RR League</h2>
-      <div>Starting from May 3rd, 2024.</div>
+      <h2 style={{ color: 'red' }}>
+        2024 BUTTERFLY AKBER OPEN & TEAM CHALLENGE
+      </h2>
+      <div>Jun 29, Jun 30, Jul 1</div>
+      <div>
+        <a href="/docs/2024 Akber open & Team Challenge.pdf">
+          Registration Form
+        </a>
+      </div>
       <h2 style={{ color: 'gold' }}>U3200 Golden Team League</h2>
       <div>
         Every 2 weeks starting from Feb 26th. Fund raising for future junior

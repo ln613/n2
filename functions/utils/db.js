@@ -793,6 +793,22 @@ export const groupmatch = (id, grp, body) =>
     }
   })
 
+export const upDownGames = (id, games) =>
+  getById('tournaments', id).then(t => {
+    if (t.schedules) {
+      const newResults = games.filter(g => g.result && g.result !== '0:0')
+      const newIds = newResults.map(g => g.id)
+      const oldGames = t.games.filter(g => !newIds.includes(g.id))
+      t.games = sortWith(
+        [descend(prop('date')), ascend(prop('group'))],
+        oldGames.concat(newResults)
+      )
+      return update('tournaments', t)
+    } else {
+      return 'N/A'
+    }
+  })
+
 export const getDetail = id =>
   getById('tournaments', id).then(t =>
     get('players').then(ps => {

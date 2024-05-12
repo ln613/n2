@@ -17,6 +17,7 @@ import {
   update,
   count,
   groupmatch,
+  upDownGames,
   resetTeams,
   giant,
   rr2single,
@@ -32,7 +33,7 @@ export const handler = async (event, context) => {
   const body = trynull(_ => JSON.parse(event.body))
   const method = event.httpMethod
 
- if (!(await authorize(event.headers.authorization)))
+  if (!(await authorize(event.headers.authorization)))
     return res({ isAuthenticated: false }, 401)
 
   await connectDB()
@@ -70,6 +71,8 @@ export const handler = async (event, context) => {
   } else if (method === 'PUT') {
     if (q.groupmatch) {
       r = await groupmatch(q.id, q.group, body)
+    } else if (q.updowngames) {
+      r = await upDownGames(q.id, body.games)
     } else if (q.doc && q.id && q.list) {
       r = await replaceList(q.doc, q.id, q.list, body)
     } else if (q.doc) {

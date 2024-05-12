@@ -100,6 +100,7 @@ const Schedule = ({
   putSchedule,
   postSchedule,
   putGroupMatch,
+  putUpDownGames,
   id,
   newGameId,
   players,
@@ -145,7 +146,7 @@ const Schedule = ({
                 tournament,
                 schedule,
                 newGameId,
-                putGroupMatch,
+                putUpDownGames,
                 players
               )
             : isSingleGroup(tournament)
@@ -192,6 +193,11 @@ export default compose(
     () => alert('Saved'),
     () => alert('Error happened!')
   ),
+  withSuccess(
+    'updowngames',
+    () => alert('Saved'),
+    () => alert('Error happened!')
+  ),
   lifecycle({
     componentWillUnmount: function () {
       this.props.setForm(null, { path: 'schedule' })
@@ -209,13 +215,13 @@ const saveUpDown = (
   tournament,
   schedule,
   newGameId,
-  putGroupMatch,
+  putUpDownGames,
   players
 ) => {
   const gp = id => findById(+id)(tournament.teams).players[0].id
   const gr = id => findById(gp(id))(players).rating
   let id = newGameId
-  putGroupMatch(
+  putUpDownGames(
     {
       games: schedule.matches
         .map(x => ({
@@ -231,6 +237,6 @@ const saveUpDown = (
         }))
         .map(x => toGame(x, schedule, x.match)),
     },
-    { id: tournament.id, group: schedule.group }
+    { id: tournament.id }
   )
 }

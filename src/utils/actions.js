@@ -104,8 +104,8 @@ export const actionData = {
     url: admin + 'groupmatch=1&id={id}&group={group}',
     methods: ['put'],
   },
-  upDownMatch: {
-    url: admin + 'groupmatch=1&id={id}&date={date}group={group}',
+  upDownGames: {
+    url: admin + 'updowngames=1&id={id}',
     methods: ['put'],
   },
   result: {
