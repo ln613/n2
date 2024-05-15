@@ -561,7 +561,7 @@ export const genUpDown = id =>
       let teams = t.teams
       if (len > 0) {
         const grps = pipe(
-          sortWith([descend(prop('date')), ascend(prop('group'))]),
+          sortWith([ascend(prop('date')), ascend(prop('group'))]),
           takeLast(4),
           map(s => s.matches.map(m => getUpDownMatchWithResult(t, s, m)))
         )(t.schedules)
