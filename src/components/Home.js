@@ -73,7 +73,7 @@ const Home = ({ isMobile }) => (
       </h2>
       <div>Jun 29, Jun 30, Jul 1</div>
       <div>
-        <a href="/docs/2024 Akber open & Team Challenge.pdf">
+        <a href="/docs/2024 Akber open & Team Challenge 4.pdf">
           Registration Form
         </a>
       </div>
