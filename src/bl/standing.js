@@ -123,7 +123,7 @@ export const sortByRank = t => ranks =>
         : t.isGolden
         ? [dw, at, dp(0), al]
         : t.isUpDown
-        ? [dp(0), at, dw, am, de(stg(ranks))]
+        ? [dw, at, dp(0), am, de(stg(ranks))]
         : t.groups
         ? [da, dw, at, de(stg(ranks)), dm, am, dl, al]
         : t.isBestOfN
