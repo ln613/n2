@@ -83,7 +83,7 @@ const Home = ({ isMobile }) => (
         players!
       </div>
       <div>
-        <a href="https://www.score7.io/goldenteamleague">
+        <a href="https://www.score7.io/tournaments/vttcu3200gtlstage2rr/overview">
           Results and Schedule
         </a>
       </div>
