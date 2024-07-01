@@ -721,14 +721,14 @@ export const resetTeams = body => {
     if (body.upDownGroup == 1) {
       t.teams.forEach(x => x.upDownGroup.pop())
       return update('tournaments', t)
-      // } else if (t.teams) {
-      //   t.teams.forEach(x => {
-      //     delete x.group
-      //     delete x.upDownGroup
-      //   })
-      //   t.schedules = []
-      //   t.games = []
-      //   return update('tournaments', t)
+    } else if (t.teams) {
+      t.teams.forEach(x => {
+        delete x.group
+        delete x.upDownGroup
+      })
+      t.schedules = []
+      t.games = []
+      return update('tournaments', t)
     } else {
       return 'N/A'
     }
