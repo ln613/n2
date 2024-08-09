@@ -384,8 +384,7 @@ export const genrr = body => {
     if (t.isSingle) {
       if (t.players && !t.schedules) {
         const s = rrSchedule(t.players, true)
-        return e
-          .update('tournaments', {
+        return update('tournaments', {
             id,
             schedules: s.map((x, i) => ({
               id: i + 1,
@@ -507,8 +506,7 @@ export const genrr = body => {
           mergeDeepWith((a, b) => (is(Array, a) ? concat(a, b) : a))
         )(s1, s2)
         const lastId = last(t.schedules).id
-        return e
-          .update('tournaments', {
+        return update('tournaments', {
             id,
             startDate2: sd,
             has2half: true,

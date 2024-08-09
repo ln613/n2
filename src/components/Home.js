@@ -68,7 +68,7 @@ const yt = (s, m) => (
 const Home = ({ isMobile }) => (
   <div>
     <div className="p16">
-      <h2 style={{ color: 'red' }}>
+      {/* <h2 style={{ color: 'red' }}>
         2024 BUTTERFLY AKBER OPEN & TEAM CHALLENGE
       </h2>
       <div>Jun 29, Jun 30, Jul 1</div>
@@ -76,14 +76,14 @@ const Home = ({ isMobile }) => (
         <a href="/docs/2024 Akber open & Team Challenge 5.pdf">
           Registration Form
         </a>
-      </div>
-      <h2 style={{ color: 'gold' }}>U3200 Golden Team League</h2>
-      <div>
+      </div> */}
+      <h2 style={{ color: 'gold' }}>VTTC Monday Mini Tourney Series</h2>
+      {/* <div>
         Every 2 weeks starting from Feb 26th. Fund raising for future junior
         players!
-      </div>
+      </div> */}
       <div>
-        <a href="https://www.score7.io/tournaments/vttcu3200gtlstage2rr/overview">
+        <a href="https://forms.gle/EZX716vMe8hBVKYTA">
           Results and Schedule
         </a>
       </div>
