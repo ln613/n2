@@ -68,25 +68,25 @@ const yt = (s, m) => (
 const Home = ({ isMobile }) => (
   <div>
     <div className="p16">
-      {/* <h2 style={{ color: 'red' }}>
-        2024 BUTTERFLY AKBER OPEN & TEAM CHALLENGE
+      <h2 style={{ color: 'red' }}>
+        2024 U-2500 League
       </h2>
-      <div>Jun 29, Jun 30, Jul 1</div>
+      <div>Starts Sep. 20</div>
       <div>
-        <a href="/docs/2024 Akber open & Team Challenge 5.pdf">
+        <a href="/docs/2024 VTTC Team League U2500 Sep 20.pdf">
           Registration Form
         </a>
-      </div> */}
-      <h2 style={{ color: 'gold' }}>VTTC Monday Mini Tourney Series</h2>
-      {/* <div>
+      </div>
+      {/* <h2 style={{ color: 'gold' }}>VTTC Monday Mini Tourney Series</h2>
+      <div>
         Every 2 weeks starting from Feb 26th. Fund raising for future junior
         players!
-      </div> */}
+      </div>
       <div>
         <a href="https://forms.gle/EZX716vMe8hBVKYTA">
           Results and Schedule
         </a>
-      </div>
+      </div> */}
       {/* <h2>VTTC Monthly Tournaments</h2>
       <div className="news">
         All new monthly tournaments series! Starting from Sep., every month at VTTC there will be a tournament of different type to meet the need of different players of all levels. In Sep. there will be a team event, Oct. will be singles and Nov. is round robin. Registration is now open. Please refer to the registration form for more detials.
