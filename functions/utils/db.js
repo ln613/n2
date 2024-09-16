@@ -286,8 +286,7 @@ export const updateRating = async body => {
   const pr =
     body || (await httpGet(`${process.env.GITHUB_DB}initialRatings.json`))
 
-  return e
-    .backup()
+  return backup()
     .then(o => {
       o.players.forEach(
         p =>
@@ -307,15 +306,18 @@ export const updateRating = async body => {
       const games = pipe(
         filter(t => !t.isSingle),
         map(t => {
+          console.log(t.name)
           const gs = t.games || []
           gs.forEach(
-            g =>
-              (g.round = isNil(g.group)
-                ? null
-                : find(
-                    m => m.home == g.t1 && m.away == g.t2,
-                    find(s => s.group == g.group, t.schedules).matches
-                  ).round)
+            g => {
+              if (!isNil(g.group)) {
+                const match = find(
+                  m => m.home == g.t1 && m.away == g.t2,
+                  find(s => s.group == g.group, t.schedules).matches
+                );
+                if (match) g.round = match.round
+              }
+            }
           )
           return gs.map(g => [
             g,
