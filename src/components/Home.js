@@ -68,15 +68,15 @@ const yt = (s, m) => (
 const Home = ({ isMobile }) => (
   <div>
     <div className="p16">
-      {/* <h2 style={{ color: 'red' }}>
-        2024 U-2500 League
+      <h2 style={{ color: 'red' }}>
+        2024 December Butterfly Akber open & Edmond Team Challenge
       </h2>
-      <div>Starts Sep. 20</div>
+      <div>Dec. 6, 7, 8</div>
       <div>
-        <a href="/docs/2024 VTTC Team League U2500 Sep 20.pdf">
+        <a href="/docs/2024 December Butterfly Akber open & Edmond Team Challenge.pdf">
           Registration Form
         </a>
-      </div> */}
+      </div>
       {/* <h2 style={{ color: 'gold' }}>VTTC Monday Mini Tourney Series</h2>
       <div>
         Every 2 weeks starting from Feb 26th. Fund raising for future junior
