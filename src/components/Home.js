@@ -77,6 +77,11 @@ const Home = ({ isMobile }) => (
           Registration Form
         </a>
       </div>
+      <div>
+        <a href="/docs/Lucky draw gift list 2024.pdf">
+          Lucky draw gift list
+        </a>
+      </div>
       {/* <h2 style={{ color: 'gold' }}>VTTC Monday Mini Tourney Series</h2>
       <div>
         Every 2 weeks starting from Feb 26th. Fund raising for future junior
