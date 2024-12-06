@@ -7,7 +7,7 @@ import { tournamentSelector } from 'utils/selectors'
 import { Table } from '@ln613/ui/semantic'
 import { withRouter } from 'react-router-dom'
 import { Button } from 'semantic-ui-react'
-import { sum } from 'ramda'
+import { sum, sortWith, descend } from 'ramda'
 
 const teamTable = (teams, id) => (
   <Table
