@@ -13,7 +13,8 @@ const teamTable = (teams, id) => (
   <Table
     name="teams"
     link={x => `/admin/team/${id}/${x.id}`}
-    data={(teams || []).map(x => ({
+    data={sortWith(
+      [descend(x => x['Combined Rating'])], (teams || []).map(x => ({
       id: x.id,
       name:
         x.name ||
@@ -23,7 +24,7 @@ const teamTable = (teams, id) => (
           ' / ' +
           (x.players[1].firstName + ' ' + x.players[1].lastName),
       'Combined Rating': sum(x.players.map(y => +y.tRating || +y.rating)),
-    }))}
+    })))}
   />
 )
 
