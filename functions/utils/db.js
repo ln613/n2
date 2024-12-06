@@ -726,8 +726,8 @@ export const resetTeams = body => {
         delete x.group
         delete x.upDownGroup
       })
-      t.schedules = []
-      t.games = []
+      delete t.schedules
+      delete t.games
       return update('tournaments', t)
     } else {
       return 'N/A'
