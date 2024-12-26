@@ -10,6 +10,7 @@ import {
   gengroup,
   nogame,
   changePlayer,
+  changeYears,
   addToList,
   add,
   replaceList,
@@ -86,6 +87,8 @@ export const handler = async (event, context) => {
       r = await updaterating()
     } else if (q.changeplayer) {
       r = await changePlayer(q.tid, q.p1, q.p2)
+    } else if (q.changeyear) {
+      r = await changeYears(q.tid, q.year)
     } else if (q.doc) {
       r = await update(q.doc, body)
     }

@@ -4,7 +4,7 @@ import { withMobile } from '@ln613/ui/semantic'
 
 const cards = [
   'https://www.youtube.com/embed/Bb1R3HeYcyA',
-  'https://www.youtube.com/embed/mrxmQ-fMn7Q',
+  'https://www.youtube.com/embed/24OJodq6Hj8',
   'News',
   'Court',
   'Club',
@@ -69,17 +69,12 @@ const Home = ({ isMobile }) => (
   <div>
     <div className="p16">
       <h2 style={{ color: 'red' }}>
-        2024 December Butterfly Akber open & Edmond Team Challenge
+        2025 New Year Cup
       </h2>
-      <div>Dec. 6, 7, 8</div>
+      <div>Dec. 28, 2024</div>
       <div>
-        <a href="/docs/2024 December Butterfly Akber open & Edmond Team Challenge.pdf">
+        <a href="/docs/2025 New Years Cup.pdf">
           Registration Form
-        </a>
-      </div>
-      <div>
-        <a href="/docs/Lucky draw gift list 2024.pdf">
-          Lucky draw gift list
         </a>
       </div>
       {/* <h2 style={{ color: 'gold' }}>VTTC Monday Mini Tourney Series</h2>

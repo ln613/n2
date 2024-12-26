@@ -841,3 +841,25 @@ const getUniqProp = (p, l) => {
   const ps = uniq(l.map(x => x[p]).filter(x => x))
   return ps.length === 1 ? ps[0] : null
 }
+
+export const changeYears = async (tid, year) => {
+  const t = await getById('tournaments', tid)
+  changeYear(t, year, 'startDate')
+  t.schedules.forEach(s => {
+    changeYear(s, year)
+    s.matches.forEach(m => {
+      m.games.forEach(g => {
+        changeYear(g, year)
+      })
+    })
+  })
+  t.games.forEach(g => {
+    changeYear(g, year)
+  })
+  await replace('tournaments', t)
+  return 'done'
+}
+
+const changeYear = (x, year, field = 'date') => {
+  x[field] = `${year}${x[field].slice(4)}`
+}

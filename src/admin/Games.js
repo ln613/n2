@@ -41,7 +41,7 @@ const Games = p => (
           ? null
           : x => `/admin/game/${p.T}/${p.S}/${p.M}/${x.id}`
       }
-      data={(p.games || []).map(pick(['id', 'player1', 'result', 'player2']))}
+      data={(tap(p.games) || []).map(pick(['id', 'gid', 'player1', 'result', 'player2']))}
     >
       {p.tournament.groups ? (
         <td
@@ -124,6 +124,7 @@ export default compose(
 
 const save = p => {
   const gs = p.formMatch.games.filter(g => g.result)
+  tap(gs)
   // const wins = gs.filter(g => +g.result[0] > +g.result[2]).length
   // const loses = gs.filter(g => +g.result[0] < +g.result[2]).length
   // if (p.formMatch.games.length === 5 && wins < 2 && loses < 2)

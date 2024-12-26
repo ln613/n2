@@ -99,7 +99,7 @@ export const adjustRating = g => {
 
 export const toGame = (g, s, m) => {
   const g0 = {
-    id: g.id,
+    id: g.gid || g.id,
     date: s.date,
     t1: +m.home,
     t2: +m.away,
