@@ -11,34 +11,34 @@ const bg = ['Green', 'Orange', 'Cornflowerblue']
 const tt = {
   Sun: {
     schedules: [
-      [0, '12:30pm', '12am'],
+      [0, '12:30pm', '11pm'],
       [1, '1:30pm', '6:30pm'],
     ],
   },
   Mon: {
     schedules: [
-      [0, '11am', '12am'],
+      [0, '11am', '11pm'],
       [2, '7pm', '9:30pm'],
     ],
   },
   Tue: { schedules: [[0, '11am', '6:30pm']] },
-  Wed: { schedules: [[0, '11am', '12am']] },
+  Wed: { schedules: [[0, '11am', '11pm']] },
   Thu: { schedules: [[0, '11am', '6:30pm']] },
   Fri: {
     schedules: [
-      [0, '11am', '12am'],
+      [0, '11am', '11pm'],
       [2, '7:30pm', '9:30pm'],
     ],
   },
   Sat: {
     schedules: [
-      [0, '11am', '12am'],
+      [0, '11am', '11pm'],
       [1, '6:45pm', '9:45pm'],
     ],
   },
 }
 // const sm13 = [[0, '1:00', '6']]
-const ssun3 = [[0, '2pm', '12am']]
+const ssun3 = [[0, '2pm', '11pm']]
 
 const getDates = () => {
   const s1 = moment().startOf('month')
