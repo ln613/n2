@@ -335,7 +335,7 @@ const tournament = createSelector(
         : [ascend(prop('date'))]
     )(schedules)
     schedules.forEach(s => s.matches.forEach(m => m.games.forEach(g => {
-      const g1 = t.games.find(tg => tg.isDouble == g.isDouble && tg.p1 == g.p1 && tg.p2 == g.p2 && (!tg.isDouble || (tg.p3 == g.p3 && tg.p4 == g.p4)) && (tg.ko ? tg.ko == s.ko : tg.group == s.group))
+      const g1 = (t.games || []).find(tg => tg.isDouble == g.isDouble && tg.p1 == g.p1 && tg.p2 == g.p2 && (!tg.isDouble || (tg.p3 == g.p3 && tg.p4 == g.p4)) && (tg.ko ? tg.ko == s.ko : tg.group == s.group))
       if (g1) g.gid = g1.id
     })))
     return { ...t, teams, groups, players, schedules, games }
