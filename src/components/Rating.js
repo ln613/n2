@@ -13,6 +13,9 @@ const Rating = ({ lookup, players }) => (
       <TextBox name="player" placeholder="Search player..." />
     </div>
     <div className="ui divider"></div>
+    <div className="">
+      For players who are inactive or haven't played any VTTC rating events over 6 months, VTTC reserves the right to adjust their ratings based on their actual levels.
+    </div>
     <Table name="rating" data={players} link>
       <td key="id" hidden />
       <td key="name" hidden />
