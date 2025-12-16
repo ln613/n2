@@ -14,7 +14,7 @@ const cards = [
   'Students',
   'VIP',
 ]
-const num = [1, 1, 7, 8, 3, 5, 2, 4, 6, 4]
+const num = [1, 1, 4, 8, 3, 5, 2, 6, 6, 4]
 
 const c1 = m => (
   <div className={`fw pb16 ${m ? '' : 'ph8'}`}>
