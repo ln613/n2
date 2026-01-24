@@ -77,7 +77,7 @@ const Home = ({ isMobile }) => (
           Registration Form
         </a>
       </div> */}
-      <h2>VTTC is awarded Center of Excellence 卓越贡献奖 2025-2026 by TTCAN!</h2>
+      <h2 style={{ color: 'red' }}>VTTC is awarded Center of Excellence 卓越贡献奖 2025-2026 by TTCAN!</h2>
       {/* <h2>本中心今年荣获卓越贡献奖</h2>
       <div>
         <a href="/docs/2023 April Butterfly Akber open & Team Challenge.pdf">
