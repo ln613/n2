@@ -77,26 +77,8 @@ const Home = ({ isMobile }) => (
           Registration Form
         </a>
       </div> */}
-      {/* <h2 style={{ color: 'gold' }}>VTTC Monday Mini Tourney Series</h2>
-      <div>
-        Every 2 weeks starting from Feb 26th. Fund raising for future junior
-        players!
-      </div>
-      <div>
-        <a href="https://forms.gle/EZX716vMe8hBVKYTA">
-          Results and Schedule
-        </a>
-      </div> */}
-      {/* <h2>VTTC Monthly Tournaments</h2>
-      <div className="news">
-        All new monthly tournaments series! Starting from Sep., every month at VTTC there will be a tournament of different type to meet the need of different players of all levels. In Sep. there will be a team event, Oct. will be singles and Nov. is round robin. Registration is now open. Please refer to the registration form for more detials.
-      </div>
-      <div className="news" style={{paddingRight: '16px'}}>
-        全新理念, 全新设计. 为满足所有乒乓球迷浓厚的热情, 本中心推出一系列的比赛, 每月举办一场不同类型的比赛来满足不同球友的需求, 使得我们的比赛更加丰富多彩. 这里是9月和10月比赛的信息和报名表.
-      </div>  
-      <div><a href="/docs/2022 VTTC Monthly Teams Sep.pdf">9月团体赛报名表 (Sep. Teams Challenge Registration Form)</a></div>
-      <div><a href="/docs/2022 VTTC Monthly Singles Oct.pdf">10月单打报名表 (Oct. Singles Registration Form)</a></div> */}
-      {/* <h2>2023 April Butterfly Akber Open & Team Challenge</h2>
+      <h2>VTTC is awarded Center of Excellence 卓越贡献奖 2025-2026 by TTCAN!</h2>
+      {/* <h2>本中心今年荣获卓越贡献奖</h2>
       <div>
         <a href="/docs/2023 April Butterfly Akber open & Team Challenge.pdf">
           Registration Form
