@@ -67,8 +67,8 @@ const yt = (s, m) => (
 
 const Home = ({ isMobile }) => (
   <div>
-    <div className="p16">
-      {/* <h2 style={{ color: 'red' }}>
+    {/* <div className="p16">
+      <h2 style={{ color: 'red' }}>
         2025 VTTC BUTTERFLY AKBER OPEN AND EDMOND TEAM CHALLENGE
       </h2>
       <div>Dec. 5,6,7, 2025</div>
@@ -76,14 +76,14 @@ const Home = ({ isMobile }) => (
         <a href="/docs/2025 VTTC BUTTERFLY AKBER OPEN AND EDMOND TEAM CHALLENGE.pdf">
           Registration Form
         </a>
-      </div> */}
+      </div>
       <h2>Closed for Renovation 装修停业两周 Feb 17 to Mar 2</h2>
-      {/* <div>
+      <div>
         <a href="/docs/2023 April Butterfly Akber open & Team Challenge.pdf">
           Registration Form
         </a>
-      </div> */}
-    </div>
+      </div>
+    </div> */}
 
     <div className="p8"></div>
     <ImageSlider n={3} t={6} fitHeight={!isMobile} />
