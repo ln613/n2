@@ -67,8 +67,8 @@ const yt = (s, m) => (
 
 const Home = ({ isMobile }) => (
   <div>
-    {/* <div className="p16">
-      <h2 style={{ color: 'red' }}>
+    <div className="p16">
+      {/* <h2 style={{ color: 'red' }}>
         2025 VTTC BUTTERFLY AKBER OPEN AND EDMOND TEAM CHALLENGE
       </h2>
       <div>Dec. 5,6,7, 2025</div>
@@ -82,8 +82,10 @@ const Home = ({ isMobile }) => (
         <a href="/docs/2023 April Butterfly Akber open & Team Challenge.pdf">
           Registration Form
         </a>
-      </div>
-    </div> */}
+      </div> */}
+      <h2>本场馆将于4月18日（周六）举办年度全国选拔赛，Drop-in将暂停开放一天</h2>
+      <h2>No drop-in on Sat, Apr 18, as we will be hosting the National Championship tryout</h2>
+    </div>
 
     <div className="p8"></div>
     <ImageSlider n={3} t={6} fitHeight={!isMobile} />
