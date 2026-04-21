@@ -82,9 +82,9 @@ const Home = ({ isMobile }) => (
         <a href="/docs/2023 April Butterfly Akber open & Team Challenge.pdf">
           Registration Form
         </a>
-      </div> */}
+      </div>
       <h2>本场馆将于4月18日（周六）举办年度全国选拔赛，Drop-in将暂停开放一天</h2>
-      <h2>No drop-in on Sat, Apr 18, as we will be hosting the National Championship tryout</h2>
+      <h2>No drop-in on Sat, Apr 18, as we will be hosting the National Championship tryout</h2> */}
     </div>
 
     <div className="p8"></div>
