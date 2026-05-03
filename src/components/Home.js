@@ -68,6 +68,15 @@ const yt = (s, m) => (
 const Home = ({ isMobile }) => (
   <div>
     <div className="p16">
+      <h2 style={{ color: 'red' }}>
+        2026 VTTC Vancouver Open
+      </h2>
+      <div>May 16,17,18, 2026</div>
+      <div>
+        <a href="/docs/2026-VTTC-Vancouver-Open-Entry-Form-1.pdf">
+          Registration Form
+        </a>
+      </div>
       {/* <h2 style={{ color: 'red' }}>
         2025 VTTC BUTTERFLY AKBER OPEN AND EDMOND TEAM CHALLENGE
       </h2>
