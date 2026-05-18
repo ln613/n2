@@ -69,11 +69,11 @@ const Home = ({ isMobile }) => (
   <div>
     <div className="p16">
       <h2 style={{ color: 'red' }}>
-        2026 VTTC Vancouver Open
+        2026 AKBER OPEN & JUDY TEAM CHALLENGE
       </h2>
-      <div>May 16,17,18, 2026</div>
+      <div>June 12,13,14, 2026</div>
       <div>
-        <a href="/docs/2026-VTTC-Vancouver-Open-Entry-Form-1.pdf">
+        <a href="/docs/2026  Akber open & JudyTeam Challenge.pdf">
           Registration Form
         </a>
       </div>
