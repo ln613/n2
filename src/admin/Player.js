@@ -4,11 +4,32 @@ import { find } from 'ramda'
 import { connect } from '@ln613/state'
 import { Button } from 'semantic-ui-react'
 import actions from 'utils/actions'
+import { isValidEmail, isValidCanadianPhone } from 'utils'
 import { playersSelector } from 'utils/selectors'
 import { TextBox } from '@ln613/ui/semantic'
 import { withLoad, withParams, withMount } from '@ln613/compose'
 import { withSuccess } from 'utils/ui'
 import { withRouter } from 'react-router-dom'
+
+const validatePlayer = (player) => {
+  const errors = []
+  if (player.email && !isValidEmail(player.email))
+    errors.push('Invalid email address')
+  if (player.phone && !isValidCanadianPhone(player.phone))
+    errors.push('Invalid Canadian phone number')
+  return errors
+}
+
+const savePlayer = (player, id, postPlayer, putPlayer) => {
+  const errors = validatePlayer(player)
+  if (errors.length > 0) {
+    alert(errors.join('\n'))
+    return
+  }
+  id[0] === '+'
+    ? postPlayer(toPlayer(player))
+    : putPlayer(toPlayer(player))
+}
 
 const Player = ({ player, putPlayer, postPlayer, id, history, isLoading }) => (
   <div>
@@ -21,17 +42,15 @@ const Player = ({ player, putPlayer, postPlayer, id, history, isLoading }) => (
     <TextBox name="player.lastName_ch" />
     <TextBox name="player.sex" />
     <TextBox name="player.rating" />
+    <TextBox name="player.email" />
+    <TextBox name="player.phone" />
     <hr />
     <Button primary onClick={history.goBack}>
       Back
     </Button>
     <Button
       primary
-      onClick={() =>
-        id[0] === '+'
-          ? postPlayer(toPlayer(player))
-          : putPlayer(toPlayer(player))
-      }
+      onClick={() => savePlayer(player, id, postPlayer, putPlayer)}
       disabled={isLoading}
     >
       Save
@@ -51,6 +70,8 @@ export default compose(
         lastName: '',
         sex: '',
         rating: '',
+        email: '',
+        phone: '',
       },
       { path: 'player' }
     )

@@ -20,7 +20,7 @@ const Players = ({ players, history, newId }) => (
     <hr />
     <Table
       name="players"
-      data={players.map(pick(['id', 'name', 'name_ch']))}
+      data={players.map(pick(['id', 'name', 'name_ch', 'email', 'phone']))}
       link={x => `/admin/players/${x.id}`}
     />
     <hr />

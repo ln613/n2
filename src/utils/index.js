@@ -298,3 +298,13 @@ export const diff = p =>
   differenceWith((a, b) =>
     isPrimitiveType(a) ? a === b : a[p || 'id'] === b[p || 'id']
   )
+
+// validation
+
+export const isValidEmail = email =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+
+export const isValidCanadianPhone = phone => {
+  const digits = phone.replace(/[\s\-().+]/g, '')
+  return /^(1)?[2-9]\d{2}[2-9]\d{6}$/.test(digits)
+}
