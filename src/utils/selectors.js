@@ -129,7 +129,7 @@ const filteredProducts = createSelector(
 const fullname = p => p.firstName + ' ' + p.lastName
 
 const namedPlayers = createSelector(_players, ps =>
-  ps.map(p => ({ ...p, name: fullname(p) }))
+  ps.map(p => ({ ...p, name: fullname(p), email: p.email || '', phone: p.phone || '' }))
 )
 
 const players = createSelector(namedPlayers, sortWith([ascend(prop('name'))]))
