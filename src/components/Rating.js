@@ -20,8 +20,12 @@ const Rating = ({ lookup, players }) => (
       <td key="id" hidden />
       <td key="name" hidden />
       <td key="firstName" title="First Name" />
+      <td key="firstName_ch" hidden />
       <td key="lastName" title="Last Name" />
+      <td key="lastName_ch" hidden />
       <td key="sex" title="Gender" />
+      <td key="email" hidden />
+      <td key="phone" hidden />
       <td key="text" hidden />
       <td key="value" hidden />
     </Table>
