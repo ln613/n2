@@ -68,32 +68,52 @@ const yt = (s, m) => (
 const Home = ({ isMobile }) => (
   <div>
     <div className="p16">
-      <h2 style={{ color: 'red' }}>
-        2026 AKBER OPEN & JUDY TEAM CHALLENGE
-      </h2>
-      <div>June 12,13,14, 2026</div>
-      <div>
-        <a href="/docs/2026  Akber open & JudyTeam Challenge.pdf">
-          Registration Form
-        </a>
+      <h2 style={{ color: 'red' }}>VTTC Goes Live</h2>
+      <div style={{ marginBottom: 8 }}>
+        We're excited to launch our new online platform with:
       </div>
-      {/* <h2 style={{ color: 'red' }}>
-        2025 VTTC BUTTERFLY AKBER OPEN AND EDMOND TEAM CHALLENGE
-      </h2>
-      <div>Dec. 5,6,7, 2025</div>
-      <div>
-        <a href="/docs/2025 VTTC BUTTERFLY AKBER OPEN AND EDMOND TEAM CHALLENGE.pdf">
-          Registration Form
-        </a>
+      <ul style={{ marginTop: 0, marginBottom: 12 }}>
+        <li>
+          <strong>Online registration.</strong> Sign up once and register for any
+          upcoming event without paperwork at the club.
+        </li>
+        <li>
+          <strong>Live scores from every table.</strong> Scheduling and live
+          scores are displayed at the club and online so everyone can follow
+          along in real time.
+        </li>
+        <li>
+          <strong>Real-time table assignments and match queue.</strong> Know
+          exactly when and where you play.
+        </li>
+      </ul>
+      <div style={{ marginBottom: 8 }}>
+        Before your next event, please:
       </div>
-      <h2>Closed for Renovation 装修停业两周 Feb 17 to Mar 2</h2>
+      <ol style={{ marginTop: 0, marginBottom: 12 }}>
+        <li style={{ marginBottom: 8 }}>
+          <strong>Sign up and register online.</strong>
+          <br />
+          If you've played at VTTC before and have an existing rating, you'll
+          find your name and current rating in the players dropdown during
+          sign-up — just select yourself, then enter and verify your email
+          address to claim the account.
+          <br />
+          If you run into any trouble during sign-up, please come to the club
+          and we will help you set it up.
+        </li>
+        <li>
+          <strong>Bring your phone on match day.</strong>
+          <br />
+          Players are now responsible for keeping score on their phones so
+          results can be reflected in real time across the club. Make sure your
+          device is charged before you arrive.
+        </li>
+      </ol>
       <div>
-        <a href="/docs/2023 April Butterfly Akber open & Team Challenge.pdf">
-          Registration Form
-        </a>
+        Thank you for being part of VTTC — we look forward to seeing you on the
+        tables.
       </div>
-      <h2>本场馆将于4月18日（周六）举办年度全国选拔赛，Drop-in将暂停开放一天</h2>
-      <h2>No drop-in on Sat, Apr 18, as we will be hosting the National Championship tryout</h2> */}
     </div>
 
     <div className="p8"></div>
